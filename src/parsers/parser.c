@@ -16,4 +16,5 @@ void	ft_parser(t_shell *shell, char *str, t_token **lst)
 {
 	*lst = ft_split_tokens(shell, str);
 	ft_tokenize(*lst);
+	ft_merge_tokens(shell, lst);
 }

@@ -37,14 +37,6 @@ static int	ft_get_token_end(char *str)
 	return (i);
 }
 
-static void	add_new_token(t_shell *shell, t_token **lst, char *str)
-{
-	t_token	*node;
-
-	node = ft_new_token(shell, str);
-	ft_add_token_last(lst, node);
-}
-
 t_token	*ft_split_tokens(t_shell *shell, char *str)
 {
 	t_token	*lst;
@@ -60,7 +52,7 @@ t_token	*ft_split_tokens(t_shell *shell, char *str)
 			i++;
 		end = ft_get_token_end(str + i);
 		content = ft_substr(shell, str, i, end);
-		add_new_token(shell, &lst, content);
+		ft_add_token_last(&lst, ft_new_token(shell, content));
 		i += end;
 		while (str[i] == ' ')
 			i++;

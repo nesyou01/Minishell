@@ -29,6 +29,7 @@
 # define STATUS_CODE 6
 # define FILE 7
 # define COMMAND 9
+# define ARGUMENT 10
 # define HERE_DOC_LIMITER 12
 # define PARENTHESES_START 113
 # define PARENTHESES_END 114
@@ -102,6 +103,7 @@ void		ft_add_node_start(t_node **lst, t_node *new);
 int			ft_node_parser(t_shell *shell, t_node **lst, t_token *token);
 t_node		*ft_to_tree(t_node *node);
 int			syntax_validator(t_token *token);
+void		ft_merge_tokens(t_shell *shell, t_token **token);
 
 
 #endif

@@ -31,6 +31,11 @@ static int	get_token_type_extra(t_token *token)
 	if (token->prev->type == OUT_REDIRECTER
 		|| token->prev->type == OUT_APPEND_REDIRECTER)
 		return (FILE);
+	if (token->prev->type == COMMAND
+		|| token->prev->type == ARGUMENT)
+		return (ARGUMENT);
+	if (!token->prev->prev->prev)
+		return (COMMAND);
 	return (UNKNOWN);
 }
 
