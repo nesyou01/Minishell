@@ -39,7 +39,7 @@ static int	ft_get_token_end(char *str)
 
 t_token	*ft_split_tokens(t_shell *shell, char *str)
 {
-	t_token	*lst;
+	t_token		*lst;
 	int			i;
 	int			end;
 	char		*content;

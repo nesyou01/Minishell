@@ -12,10 +12,13 @@
 
 #include "../../includes/minishell.h"
 
-void	ft_parser(t_shell *shell, char *str, t_token **lst)
+t_token	*ft_parser(t_shell *shell, char *str)
 {
-	*lst = ft_split_tokens(shell, str);
-	ft_tokenize(*lst);
-	ft_merge_tokens(shell, lst);
-	ft_merge_args_with_cmd(shell, *lst);
+	t_token	*token;
+
+	token = ft_split_tokens(shell, str);
+	ft_tokenize(token);
+	ft_merge_tokens(shell, &token);
+	ft_merge_args_with_cmd(shell, token);
+	return (token);
 }

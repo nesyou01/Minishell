@@ -17,28 +17,23 @@ void	minishell(t_shell *shell)
 	char		*str;
 	t_token		*token;
 	t_node		*node;
-	int			error;
 
-	error = 0;
-	token = NULL;
-	node = NULL;
 	while (!shell->exit)
 	{
-		node = NULL;
 		str = readline("\033[32mminishell >> \033[0m");
-		ft_parser(shell, str, &token);
-		error = syntax_validator(token);
-		// if (!error)
-		// 	error = ft_node_parser(&node, token);
-		if (!error)
+		token = ft_parser(shell, str);
+		if (!syntax_validator(token))
 		{
-			while (token)
+			node = ft_tokens_to_nodes(shell, token);
+			// ft_node_parser(shell, &node, token);
+			while (node)
 			{
-				printf("--> %s --> %d\n", token->content, token->type);
-				token = token->next;
+				printf("--> %s --> %d\n", node->content, node->type);
+				node = node->next;
 			}
+			// ft_to_tree(node);
 		}
-		// ft_to_tree(node);
+		// 
 		// while (node)
 		// {
 		// 	// printf("%s\n",  node->content);
