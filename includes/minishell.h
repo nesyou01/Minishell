@@ -44,10 +44,20 @@ typedef struct s_token
 	struct s_token	*prev;
 }	t_token;
 
+typedef struct s_file
+{
+	char			*path;
+	int				fd;
+	struct s_file	*next;
+}	t_file;
+
+
 typedef struct s_node
 {
 	char			*content;
 	int				type;
+	t_file			*in;
+	t_file			*out;
 	int				taken;
 	struct s_node	*next;
 	struct s_node	*r_node;
@@ -66,6 +76,7 @@ typedef struct s_shell
 	t_env	*env;
 	int		exit;
 	t_list	*garbage;
+	t_file	*file;
 }	t_shell;
 
 
@@ -106,6 +117,7 @@ int			syntax_validator(t_token *token);
 void		ft_merge_tokens(t_shell *shell, t_token **token);
 void		ft_merge_args_with_cmd(t_shell *shell, t_token *token);
 t_node		*ft_tokens_to_nodes(t_shell *shell, t_token *token);
+t_file		*get_file_or_add(t_shell *shell, char *path);
 
 
 #endif

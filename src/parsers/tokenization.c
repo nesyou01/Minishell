@@ -44,9 +44,9 @@ static int	get_token_type(t_token *token)
 	if (!ft_strcmp(token->content, "|"))
 		return (PIPE);
 	if (!ft_strcmp(token->content, ">"))
-		return (IN_REDIRECTER);
-	if (!ft_strcmp(token->content, "<"))
 		return (OUT_REDIRECTER);
+	if (!ft_strcmp(token->content, "<"))
+		return (IN_REDIRECTER);
 	if (!ft_strcmp(token->content, "<<"))
 		return (HERE_DOC);
 	if (!ft_strcmp(token->content, ">>"))

@@ -4,7 +4,7 @@ SRC = src/minishell.c src/utils/utils.c src/built_ins/env.c src/utils/malloc_uti
 		src/parsers/parser.c src/parsers/tokens.c src/parsers/tokenization.c src/parsers/node.c \
 		src/parsers/token_utils.c src/parsers/node_utils.c src/parsers/tree.c src/parsers/syntax.c \
 		src/helpers/clean.c src/utils/ft_strdup.c src/utils/ft_strjoin.c src/utils/ft_substr.c \
-		src/parsers/tokens2.c src/parsers/node2.c
+		src/parsers/tokens2.c src/parsers/node2.c src/parsers/file.c
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
 CFLAGS =

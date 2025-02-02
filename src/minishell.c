@@ -28,22 +28,16 @@ void	minishell(t_shell *shell)
 			// ft_node_parser(shell, &node, token);
 			while (node)
 			{
-				printf("--> %s --> %d\n", node->content, node->type);
+				if (node->in)
+					printf("<< %s", node->in->path);
+				printf(" %s ", node->content);
+				if (node->out)
+					printf(">> %s", node->out->path);
+				printf("\n");
 				node = node->next;
 			}
 			// ft_to_tree(node);
 		}
-		// 
-		// while (node)
-		// {
-		// 	// printf("%s\n",  node->content);
-		// 	if (node->type >= 100)
-		// 		printf("%s <-%s -> %s\n", node->l_node->content, node->content, node->r_node->content);
-		// 	// else
-		// 	// 	printf("%s\n", node->content);
-		// 	node = node->next;
-		// }
-		
 	}
 }
 

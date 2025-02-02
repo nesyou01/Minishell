@@ -18,6 +18,7 @@ void	env_init(t_shell *shell, char **env)
 	if (!env)
 		return ;
 	shell->garbage = NULL;
+	shell->file = NULL;
 	shell->env = ft_parse_env(shell, *env, NULL);
 	env++;
 	while (*env)
