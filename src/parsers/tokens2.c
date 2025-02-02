@@ -1,18 +1,12 @@
 #include "../../includes/minishell.h"
 
-static void	unlink_token(t_token **token)
+static void	unlink_token(t_token *token)
 {
 	t_token	*prev;
 	t_token	*next;
 
-	prev = (*token)->prev;
-	next = (*token)->next;
-	if (!prev)
-	{
-		next->prev = NULL;
-		*token = next;
-		return ;
-	}
+	prev = token->prev;
+	next = token->next;
 	prev->next = next;
 	if (next)
 		next->prev = prev;
@@ -50,7 +44,7 @@ static void	merge_cmds(t_shell *shell, t_token **current)
 		else
 			str = ft_strdup(shell, (*current)->content);
 		tmp = (*current)->next;
-		unlink_token(current);
+		unlink_token(*current);
 		*current = tmp;
 	}
 	if (str)
@@ -68,5 +62,23 @@ void	ft_merge_tokens(t_shell *shell, t_token **token)
 			merge_cmds(shell, &tmp);
 		else
 			tmp = tmp->next;
+	}
+}
+
+void	ft_merge_args_with_cmd(t_shell *shell, t_token *token)
+{
+	char	*args;
+	t_token	*tmp;
+
+	while (token)
+	{
+		if (token->type == ARGUMENT)
+		{
+			args = token->content;
+			tmp = token->prev;
+			unlink_token(token);
+			add_to_last_cmd(shell, tmp, args);
+		}
+		token = token->next;
 	}
 }

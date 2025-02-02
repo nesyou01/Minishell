@@ -104,6 +104,7 @@ int			ft_node_parser(t_shell *shell, t_node **lst, t_token *token);
 t_node		*ft_to_tree(t_node *node);
 int			syntax_validator(t_token *token);
 void		ft_merge_tokens(t_shell *shell, t_token **token);
+void		ft_merge_args_with_cmd(t_shell *shell, t_token *token);
 
 
 #endif
