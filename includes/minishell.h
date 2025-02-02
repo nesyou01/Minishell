@@ -51,7 +51,6 @@ typedef struct s_file
 	struct s_file	*next;
 }	t_file;
 
-
 typedef struct s_node
 {
 	char			*content;
@@ -60,6 +59,7 @@ typedef struct s_node
 	t_file			*out;
 	int				taken;
 	struct s_node	*next;
+	struct s_node	*prev;
 	struct s_node	*r_node;
 	struct s_node	*l_node;
 }	t_node;
@@ -118,6 +118,7 @@ void		ft_merge_tokens(t_shell *shell, t_token **token);
 void		ft_merge_args_with_cmd(t_shell *shell, t_token *token);
 t_node		*ft_tokens_to_nodes(t_shell *shell, t_token *token);
 t_file		*get_file_or_add(t_shell *shell, char *path);
+int			is_redirection(t_token *token);
 
 
 #endif

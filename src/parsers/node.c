@@ -1,12 +1,5 @@
 #include "../../includes/minishell.h"
 
-static int	is_redirection(t_token *token)
-{
-	return (token->type == OUT_REDIRECTER
-			|| token->type == IN_REDIRECTER
-			|| token->type == OUT_APPEND_REDIRECTER);
-}
-
 static void	set_in_or_out(t_shell *shell, t_file **in, t_file **out, t_token *token)
 {
 	if (token->prev->type == IN_REDIRECTER)
@@ -17,6 +10,37 @@ static void	set_in_or_out(t_shell *shell, t_file **in, t_file **out, t_token *to
 		*out = get_file_or_add(shell, token->content);
 }
 
+static t_node	*new_node(t_shell *shell, t_token *token, t_file *in, t_file *out)
+{
+	t_node	*tmp;
+
+	tmp = ft_new_node(shell, token);
+	tmp->in = in;
+	tmp->out = out;
+	return (tmp);
+}
+
+static void	reset_io(t_file **in, t_file **out)
+{
+	*in = NULL;
+	*out = NULL;
+}
+
+static void	set_io_for_last_cmd(t_node *node, t_file *in, t_file *out)
+{
+	while (node)
+	{
+		if (node->taken >= 100)
+			break ;
+		if (node->type == COMMAND)
+		{
+			node->in = in;
+			node->out = out;
+		}
+		node = node->prev;
+	}
+}
+
 t_node	*ft_tokens_to_nodes(t_shell *shell, t_token *token)
 {
 	t_node	*node;
@@ -24,27 +48,28 @@ t_node	*ft_tokens_to_nodes(t_shell *shell, t_token *token)
 	t_file	*in;
 	t_file	*out;
 
-	in = NULL;
-	out = NULL;
+	reset_io(&in, &out);
 	node = NULL;
 	while (token)
 	{
 		if (!is_redirection(token))
 		{
 			if (token->type == FILE)
-				set_in_or_out(shell, &in, &out, token);
-			else if (token->type == COMMAND)
 			{
-				tmp = ft_new_node(shell, token);
-				tmp->in = in;
-				tmp->out = out;
-				ft_add_node_last(&node, tmp);
+				set_in_or_out(shell, &in, &out, token);
+				set_io_for_last_cmd(node, in, out);
 			}
+			else if (token->type == COMMAND)
+				ft_add_node_last(&node, new_node(shell, token, in, out));
 			else
 			{
-				out = NULL;
-				node = NULL;
+				reset_io(&in, &out);
 				ft_add_node_last(&node, ft_new_node(shell, token));
+			}
+			if (token->type >= 100)
+			{
+				in = NULL;
+				out = NULL;
 			}
 		}
 		token = token->next;

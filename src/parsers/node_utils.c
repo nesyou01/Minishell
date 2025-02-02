@@ -33,6 +33,7 @@ void	ft_add_node_start(t_node **lst, t_node *new)
 		*lst = new;
 		return ;
 	}
+	(*lst)->prev = new;
 	new->next = *lst;
 	*lst = new;
 }
@@ -45,6 +46,7 @@ t_node	*ft_new_node(t_shell *shell, t_token *token)
 	list->content = ft_strdup(shell, token->content);
 	list->type = token->type;
 	list->next = NULL;
+	list->prev = NULL;
 	list->l_node = NULL;
 	list->r_node = NULL;
 	list->taken = 0;
@@ -61,4 +63,5 @@ void	ft_add_node_last(t_node **lst, t_node *new)
 	if (!last)
 		return (ft_add_node_start(lst, new));
 	last->next = new;
+	new->prev = last;
 }
