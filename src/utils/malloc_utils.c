@@ -18,6 +18,6 @@ void	*ft_malloc(t_shell *shell, size_t size)
 	garbage = ft_lstnew(result);
 	if (!garbage)
 		return (free(result), malloc_error(shell), NULL);
-	ft_lstadd_back(&(shell->garbage), garbage);
+	ft_lstadd_front(&(shell->garbage), garbage);
 	return (result);
 }

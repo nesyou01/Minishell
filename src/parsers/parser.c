@@ -12,16 +12,8 @@
 
 #include "../../includes/minishell.h"
 
-int	ft_parser(t_shell *shell, char *str, t_token **lst)
+void	ft_parser(t_shell *shell, char *str, t_token **lst)
 {
-	int			error;
-
-	error = 0;
-	*lst = ft_split_tokens(str, &error);
-	if (error)
-		return (error);
-	error = ft_tokenize(*lst);
-	if (error)
-		return (error);
-	return (0);
+	*lst = ft_split_tokens(shell, str);
+	ft_tokenize(*lst);
 }

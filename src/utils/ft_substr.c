@@ -25,8 +25,6 @@ char	*ft_substr(t_shell *shell, char const *s, unsigned int start, size_t len)
 	if (startlen < len)
 		len = startlen;
 	result = (char *) ft_malloc (shell, (len + 1) * sizeof(char));
-	if (!result)
-		return (NULL);
 	ft_strlcpy(result, s + start, len + 1);
 	return (result);
 }

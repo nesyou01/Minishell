@@ -42,8 +42,6 @@ t_node	*ft_new_node(t_shell *shell, t_token *token)
 	t_node	*list;
 
 	list = (t_node *) ft_malloc(shell, sizeof(t_node));
-	if (!list)
-		return (NULL);
 	list->content = ft_strdup(shell, token->content);
 	list->type = token->type;
 	list->next = NULL;

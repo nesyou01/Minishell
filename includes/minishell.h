@@ -71,7 +71,6 @@ typedef struct s_shell
 void		minishell(t_shell *shell);
 void		env_init(t_shell *shell, char **env);
 
-void		free_lst(char **lst);
 void		ft_env(t_shell *shell);
 void		ft_exit(t_shell *shell);
 void		ft_unset(t_shell *shell, char *var);
@@ -90,8 +89,8 @@ char		*ft_strjoin(t_shell *shell, char const *s1, char const *s2);
 char		*ft_substr(t_shell *shell, char const *s, unsigned int start, size_t len);
 
 // PARSING
-int			ft_parser(t_shell *shell, char *str, t_token **lst);
-t_token		*ft_split_tokens(char *str, int *error);
+void		ft_parser(t_shell *shell, char *str, t_token **lst);
+t_token		*ft_split_tokens(t_shell *shell, char *str);
 int			ft_tokenize(t_token *lst);
 void		ft_add_token_last(t_token **lst, t_token *new);
 t_token		*ft_new_token(t_shell *shell, char	*content);

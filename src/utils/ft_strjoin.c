@@ -29,8 +29,6 @@ char	*ft_strjoin(t_shell *shell, char const *s1, char const *s2)
 	s2len = ft_strlen(s2);
 	dstsize = s1len + s2len + 1;
 	result = (char *) ft_malloc(shell, dstsize);
-	if (!result)
-		return (NULL);
 	ft_strlcpy(result, s1, s1len + 1);
 	ft_strlcat(result, s2, dstsize);
 	return (result);

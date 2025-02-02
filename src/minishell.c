@@ -26,9 +26,8 @@ void	minishell(t_shell *shell)
 	{
 		node = NULL;
 		str = readline("\033[32mminishell >> \033[0m");
-		error = ft_parser(shell, str, &token);
-		if (!error)
-			error = syntax_validator(token);
+		ft_parser(shell, str, &token);
+		error = syntax_validator(token);
 		// if (!error)
 		// 	error = ft_node_parser(&node, token);
 		if (!error)

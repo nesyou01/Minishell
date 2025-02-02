@@ -18,15 +18,3 @@ void	ft_perror(char *str)
 	ft_putstr_fd(str, 2);
 	ft_putstr_fd("\n", 2);
 }
-
-void	free_lst(char **lst)
-{
-	int		i;
-
-	if (!lst)
-		return ;
-	i = 0;
-	while (lst[i])
-		free(lst[i++]);
-	free(lst);
-}

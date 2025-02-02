@@ -21,8 +21,6 @@ char	*ft_strdup(t_shell *shell, const char *s1)
 	i = 0;
 	size = ft_strlen(s1);
 	result = (char *) ft_malloc(shell, (size + 1) * sizeof(char));
-	if (!result)
-		return (NULL);
 	while (i < size)
 	{
 		result[i] = s1[i];

@@ -30,8 +30,6 @@ char	*ft_get_env_key(t_shell *shell, char *str)
 
 	size = get_key_size(str);
 	result = (char *) ft_malloc(shell, (size + 1) * sizeof(char));
-	if (!result)
-		return (NULL);
 	i = 0;
 	while (i < size)
 	{
@@ -48,8 +46,6 @@ t_env	*ft_parse_env(t_shell *shell, char *str, char *key)
 	char	*value;
 
 	result = (t_env *) ft_malloc(shell, sizeof(t_env));
-	if (!result)
-		return (NULL);
 	value = ft_strchr(str, '=');
 	if (value)
 		result->value = ft_strdup(shell, value + 1);

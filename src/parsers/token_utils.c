@@ -43,8 +43,6 @@ t_token	*ft_new_token(t_shell *shell, char	*content)
 	t_token	*list;
 
 	list = (t_token *) ft_malloc(shell, sizeof(t_token));
-	if (!list)
-		return (NULL);
 	list->content = content;
 	list->type = UNKNOWN;
 	list->next = NULL;
