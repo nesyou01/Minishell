@@ -20,18 +20,18 @@ void	ft_export(t_shell *shell, char *var)
 
 	if (!var)
 		return (ft_env(shell));
-	key = ft_get_env_key(var);
+	key = ft_get_env_key(shell, var);
 	if (!key)
 		return ;
 	env = ft_get_env(shell->env, key);
 	if (!env)
-		ft_last_env(shell->env)->next = ft_parse_env(var, key);
+		ft_last_env(shell->env)->next = ft_parse_env(shell, var, key);
 	else
 	{
 		value = ft_strchr(var, '=');
 		free(env->value);
 		if (value)
-			env->value = ft_strdup(value + 1);
+			env->value = ft_strdup(shell, value + 1);
 		else
 			env->value = NULL;
 	}

@@ -44,7 +44,7 @@ static void	par_handler(t_node **op, t_node **cmd)
 	*op = tmp;
 }
 
-static void	ft_op_handler(t_token *token, t_node**op, t_node **cmd)
+static void	ft_op_handler(t_shell *shell, t_token *token, t_node**op, t_node **cmd)
 {
 	if (*op)
 	{
@@ -54,7 +54,7 @@ static void	ft_op_handler(t_token *token, t_node**op, t_node **cmd)
 		else if (token->type == PARENTHESES_END)
 			return (par_handler(op, cmd));
 	}
-	ft_add_node_start(op, ft_new_node(token));
+	ft_add_node_start(op, ft_new_node(shell, token));
 }
 
 static void	move_lst(t_node **a, t_node **b)
@@ -69,7 +69,7 @@ static void	move_lst(t_node **a, t_node **b)
 	}
 }
 
-int	ft_node_parser(t_node **lst, t_token *token)
+int	ft_node_parser(t_shell *shell, t_node **lst, t_token *token)
 {
 	t_node	*op;
 	t_node	*cmd;
@@ -79,9 +79,9 @@ int	ft_node_parser(t_node **lst, t_token *token)
 	while (token)
 	{
 		if (token->type >= 100)
-			ft_op_handler(token, &op, &cmd);
+			ft_op_handler(shell, token, &op, &cmd);
 		else
-			ft_add_node_start(&cmd, ft_new_node(token));
+			ft_add_node_start(&cmd, ft_new_node(shell, token));
 		token = token->next;
 	}
 	move_lst(&op, &cmd);

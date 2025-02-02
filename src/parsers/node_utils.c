@@ -37,14 +37,14 @@ void	ft_add_node_start(t_node **lst, t_node *new)
 	*lst = new;
 }
 
-t_node	*ft_new_node(t_token *token)
+t_node	*ft_new_node(t_shell *shell, t_token *token)
 {
 	t_node	*list;
 
-	list = (t_node *) malloc(sizeof(t_node));
+	list = (t_node *) ft_malloc(shell, sizeof(t_node));
 	if (!list)
 		return (NULL);
-	list->content = ft_strdup(token->content);
+	list->content = ft_strdup(shell, token->content);
 	list->type = token->type;
 	list->next = NULL;
 	list->l_node = NULL;

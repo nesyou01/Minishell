@@ -38,11 +38,11 @@ void	ft_add_token_start(t_token **lst, t_token *new)
 	*lst = new;
 }
 
-t_token	*ft_new_token(char	*content)
+t_token	*ft_new_token(t_shell *shell, char	*content)
 {
 	t_token	*list;
 
-	list = (t_token *) malloc(sizeof(t_token));
+	list = (t_token *) ft_malloc(shell, sizeof(t_token));
 	if (!list)
 		return (NULL);
 	list->content = content;

@@ -17,11 +17,12 @@ void	env_init(t_shell *shell, char **env)
 	shell->env = NULL;
 	if (!env)
 		return ;
-	shell->env = ft_parse_env(*env, NULL);
+	shell->garbage = NULL;
+	shell->env = ft_parse_env(shell, *env, NULL);
 	env++;
 	while (*env)
 	{
-		ft_last_env(shell->env)->next = ft_parse_env(*env, NULL);
+		ft_last_env(shell->env)->next = ft_parse_env(shell, *env, NULL);
 		env++;
 	}
 }

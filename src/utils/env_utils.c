@@ -22,14 +22,14 @@ static size_t	get_key_size(char *str)
 	return (size);
 }
 
-char	*ft_get_env_key(char *str)
+char	*ft_get_env_key(t_shell *shell, char *str)
 {
 	size_t	size;
 	size_t	i;
 	char	*result;
 
 	size = get_key_size(str);
-	result = (char *) malloc((size + 1) * sizeof(char));
+	result = (char *) ft_malloc(shell, (size + 1) * sizeof(char));
 	if (!result)
 		return (NULL);
 	i = 0;
@@ -42,19 +42,19 @@ char	*ft_get_env_key(char *str)
 	return (result);
 }
 
-t_env	*ft_parse_env(char *str, char *key)
+t_env	*ft_parse_env(t_shell *shell, char *str, char *key)
 {
 	t_env	*result;
 	char	*value;
 
-	result = (t_env *) malloc(sizeof(t_env));
+	result = (t_env *) ft_malloc(shell, sizeof(t_env));
 	if (!result)
 		return (NULL);
 	value = ft_strchr(str, '=');
 	if (value)
-		result->value = ft_strdup(value + 1);
+		result->value = ft_strdup(shell, value + 1);
 	if (!key)
-		result->key = ft_get_env_key(str);
+		result->key = ft_get_env_key(shell, str);
 	else
 		result->key = key;
 	result->next = NULL;

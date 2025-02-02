@@ -64,6 +64,7 @@ typedef struct s_shell
 {
 	t_env	*env;
 	int		exit;
+	t_list	*garbage;
 }	t_shell;
 
 
@@ -76,27 +77,32 @@ void		ft_exit(t_shell *shell);
 void		ft_unset(t_shell *shell, char *var);
 void		ft_export(t_shell *shell, char *var);
 
-t_env		*ft_parse_env(char *str, char *key);
+t_env		*ft_parse_env(t_shell *shell, char *str, char *key);
 t_env		*ft_last_env(t_env *env);
 t_env		*ft_get_env(t_env *env, char *key);
-char		*ft_get_env_key(char *str);
+char		*ft_get_env_key(t_shell *shell, char *str);
 
+void		ft_perror(char *str);
+void		ft_clean_all(t_shell *shell);
+void		*ft_malloc(t_shell *shell, size_t size);
+char		*ft_strdup(t_shell *shell, const char *s1);
+char		*ft_strjoin(t_shell *shell, char const *s1, char const *s2);
+char		*ft_substr(t_shell *shell, char const *s, unsigned int start, size_t len);
 
 // PARSING
 int			ft_parser(t_shell *shell, char *str, t_token **lst);
 t_token		*ft_split_tokens(char *str, int *error);
 int			ft_tokenize(t_token *lst);
 void		ft_add_token_last(t_token **lst, t_token *new);
-t_token		*ft_new_token(char	*content);
+t_token		*ft_new_token(t_shell *shell, char	*content);
 int			ft_strcmp(char *s1, char *s2);
 void		ft_add_token_start(t_token **lst, t_token *new);
 void		ft_add_node_last(t_node **lst, t_node *new);
-t_node		*ft_new_node(t_token *token);
+t_node		*ft_new_node(t_shell *shell,t_token *token);
 void		ft_add_node_start(t_node **lst, t_node *new);
-int			ft_node_parser(t_node **lst, t_token *token);
+int			ft_node_parser(t_shell *shell, t_node **lst, t_token *token);
 t_node		*ft_to_tree(t_node *node);
 int			syntax_validator(t_token *token);
-void		ft_perror(char *str);
 
 
 #endif

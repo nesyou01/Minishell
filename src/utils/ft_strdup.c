@@ -1,28 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_calloc.c                                        :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 20:06:42 by ylagmah           #+#    #+#             */
-/*   Updated: 2024/11/13 12:41:51 by ylagmah          ###   ########.fr       */
+/*   Created: 2024/10/24 20:12:20 by ylagmah           #+#    #+#             */
+/*   Updated: 2024/11/12 21:04:32 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../../includes/minishell.h"
 
-void	*ft_calloc(size_t count, size_t size)
+char	*ft_strdup(t_shell *shell, const char *s1)
 {
-	void	*result;
+	char	*result;
+	size_t	size;
+	size_t	i;
 
-	if (count == 0 || size == 0)
-		return (malloc(0));
-	if (((count * size) / count) != size)
+	i = 0;
+	size = ft_strlen(s1);
+	result = (char *) ft_malloc(shell, (size + 1) * sizeof(char));
+	if (!result)
 		return (NULL);
-	result = (void *)malloc(count * size);
-	if (result == NULL)
-		return (NULL);
-	ft_bzero(result, count * size);
+	while (i < size)
+	{
+		result[i] = s1[i];
+		i++;
+	}
+	result[i] = '\0';
 	return (result);
 }
