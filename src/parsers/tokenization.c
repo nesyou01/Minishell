@@ -20,6 +20,19 @@ static int	is_new_cmd(t_token *token)
 		|| token->prev->type == OR_OR);
 }
 
+static int	is_first_cmd(t_token *token)
+{
+	while (token)
+	{
+		if (token->type == COMMAND)
+			return (0);
+		if (token->type >= 100)
+			return (1);
+		token = token->prev;
+	}
+	return (1);
+}
+
 static int	get_token_type_extra(t_token *token)
 {
 	if (is_new_cmd(token))
@@ -34,7 +47,7 @@ static int	get_token_type_extra(t_token *token)
 	if (token->prev->type == COMMAND
 		|| token->prev->type == ARGUMENT)
 		return (ARGUMENT);
-	if (!token->prev->prev->prev)
+	if (is_first_cmd(token))
 		return (COMMAND);
 	return (UNKNOWN);
 }
