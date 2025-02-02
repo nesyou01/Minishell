@@ -1,5 +1,3 @@
-
-
 #include "../../includes/minishell.h"
 
 static int	ft_get_quote_end(char *str, char quote, int start)
@@ -20,15 +18,6 @@ static int	ft_get_quote_end(char *str, char quote, int start)
 	return (i);
 }
 
-static int	ft_same_token(char *first, char *str, int i)
-{
-	if (first)
-		return (str[i] && str[i] != ' '
-		&& (!ft_strchr(SEPECIAL_CHARS, str[i]) == !first));
-	return ((str[i] && str[i] == ' ')
-		|| (!ft_strchr(SEPECIAL_CHARS, str[i]) == !first));
-}
-
 static int	ft_get_token_end(char *str)
 {
 	int		i;
@@ -36,7 +25,8 @@ static int	ft_get_token_end(char *str)
 
 	i = 0;
 	first = ft_strchr(SEPECIAL_CHARS, *str);
-	while (ft_same_token(first, str, i))
+	while (str[i] && str[i] != ' '
+		&& (!ft_strchr(SEPECIAL_CHARS, str[i]) == !first))
 	{
 		if (str[i] == '\'')
 			return (ft_get_quote_end(str, '\'', i));
@@ -72,6 +62,8 @@ t_token	*ft_split_tokens(t_shell *shell, char *str)
 		content = ft_substr(shell, str, i, end);
 		add_new_token(shell, &lst, content);
 		i += end;
+		while (str[i] == ' ')
+			i++;
 	}
 	return (lst);
 }
