@@ -21,11 +21,11 @@ t_node	*ft_parser(t_shell *shell, char *str)
 	ft_tokenize(token);
 	ft_merge_tokens(shell, &token);
 	ft_merge_args_with_cmd(shell, token);
-	while (token)
-	{
-		printf("--> %s -- %d\n", token->content, token->type);
-		token = token->next;
-	}
+	// while (token)
+	// {
+	// 	printf("--> %s -- %d\n", token->content, token->type);
+	// 	token = token->next;
+	// }
 	
 	if (!syntax_validator(token))
 	{

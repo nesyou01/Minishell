@@ -38,11 +38,23 @@ static int	is_valid_quotes(char *str)
 
 int	syntax_validator(t_token *token)
 {
+	int	par;
+
+	par = 0;
 	while (token)
 	{
+		if (token->type == PARENTHESES_START)
+			par++;
+		else if (token->type == PARENTHESES_END)
+			par--;
 		if (!is_valid_quotes(token->content))
 			return (ft_perror("unclosed quotes"), 1);
+		if (token->type == PARENTHESES_START
+			&& (!token->next || token->next->type == PARENTHESES_END))
+			return (ft_perror("expected command after '('"), 1);
 		token = token->next;
 	}
+	if (par != 0)
+		return (ft_perror("syntax error"), 1);
 	return (0);
 }
