@@ -25,24 +25,18 @@ void	minishell(t_shell *shell)
 		if (!syntax_validator(token))
 		{
 			node = ft_tokens_to_nodes(shell, token);
-			//ls1 && ls < in > out 
-			// ft_node_parser(shell, &node, token);
-			// while (token)
-			// {
-			// 	printf("---> %s -- %d\n", token->content, token->type);
-			// 	token = token->next;
-			// }
+			ft_node_parser(shell, &node);
+			// ft_to_tree(node);
 			while (node)
 			{
-				if (node->in)
-					printf("<< %s", node->in->path);
+				// if (node->in)
+					// printf("<< %s", node->in->path);
 				printf(" %s ", node->content);
-				if (node->out)
-					printf(">> %s", node->out->path);
+				// if (node->out)
+				// 	printf(">> %s", node->out->path);
 				printf("\n");
 				node = node->next;
 			}
-			// ft_to_tree(node);
 		}
 	}
 }

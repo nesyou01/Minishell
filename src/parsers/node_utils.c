@@ -53,6 +53,23 @@ t_node	*ft_new_node(t_shell *shell, t_token *token)
 	return (list);
 }
 
+t_node	*ft_dup_node(t_shell *shell, t_node *node)
+{
+	t_node	*list;
+
+	list = (t_node *) ft_malloc(shell, sizeof(t_node));
+	list->content = ft_strdup(shell, node->content);
+	list->type = node->type;
+	list->next = NULL;
+	list->prev = NULL;
+	list->in = node->in;
+	list->out = node->out;
+	list->l_node = NULL;
+	list->r_node = NULL;
+	list->taken = 0;
+	return (list);
+}
+
 void	ft_add_node_last(t_node **lst, t_node *new)
 {
 	t_node	*last;

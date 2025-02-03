@@ -111,7 +111,7 @@ void		ft_add_token_start(t_token **lst, t_token *new);
 void		ft_add_node_last(t_node **lst, t_node *new);
 t_node		*ft_new_node(t_shell *shell,t_token *token);
 void		ft_add_node_start(t_node **lst, t_node *new);
-void		ft_node_parser(t_shell *shell, t_node **lst, t_token *token);
+void		ft_node_parser(t_shell *shell, t_node **node);
 t_node		*ft_to_tree(t_node *node);
 int			syntax_validator(t_token *token);
 void		ft_merge_tokens(t_shell *shell, t_token **token);
@@ -119,6 +119,7 @@ void		ft_merge_args_with_cmd(t_shell *shell, t_token *token);
 t_node		*ft_tokens_to_nodes(t_shell *shell, t_token *token);
 t_file		*get_file_or_add(t_shell *shell, char *path);
 int			is_redirection(t_token *token);
+t_node		*ft_dup_node(t_shell *shell, t_node *node);
 
 
 #endif
