@@ -28,6 +28,8 @@ static int	ft_get_token_end(char *str)
 	while (str[i] && str[i] != ' '
 		&& (!ft_strchr(SEPECIAL_CHARS, str[i]) == !first))
 	{
+		if (str[i] == '(' || str[i] == ')')
+			return (1);
 		if (str[i] == '\'')
 			return (ft_get_quote_end(str, '\'', i));
 		if (str[i] == '"')

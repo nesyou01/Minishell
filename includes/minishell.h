@@ -101,7 +101,7 @@ char		*ft_strjoin(t_shell *shell, char const *s1, char const *s2);
 char		*ft_substr(t_shell *shell, char const *s, unsigned int start, size_t len);
 
 // PARSING
-t_token		*ft_parser(t_shell *shell, char *str);
+t_node		*ft_parser(t_shell *shell, char *str);
 t_token		*ft_split_tokens(t_shell *shell, char *str);
 int			ft_tokenize(t_token *lst);
 void		ft_add_token_last(t_token **lst, t_token *new);

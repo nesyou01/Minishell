@@ -6,4 +6,3 @@ int	is_redirection(t_token *token)
 			|| token->type == IN_REDIRECTER
 			|| token->type == OUT_APPEND_REDIRECTER);
 }
-
