@@ -44,14 +44,20 @@ int	syntax_validator(t_token *token)
 	while (token)
 	{
 		if (token->type == PARENTHESES_START)
+		{
+			if (!token->next || token->next->type == PARENTHESES_END)
+				return (ft_perror("expected command after '('"), 1);
 			par++;
+		}
 		else if (token->type == PARENTHESES_END)
+		{
+			if (token->next 
+				&& (token->next->type != AND_AND || token->next->type != OR_OR))
+				return (ft_perror("expected &&/|| after ')'"), 1);
 			par--;
+		}
 		if (!is_valid_quotes(token->content))
 			return (ft_perror("unclosed quotes"), 1);
-		if (token->type == PARENTHESES_START
-			&& (!token->next || token->next->type == PARENTHESES_END))
-			return (ft_perror("expected command after '('"), 1);
 		token = token->next;
 	}
 	if (par != 0)
