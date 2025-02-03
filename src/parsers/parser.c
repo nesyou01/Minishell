@@ -12,26 +12,24 @@
 
 #include "../../includes/minishell.h"
 
-t_node	*ft_parser(t_shell *shell, char *str)
+t_cmd	*ft_parser(t_shell *shell, char *str)
 {
 	t_token	*token;
-	t_node	*node;
+	t_cmd	*cmd;
 
+	cmd = ft_malloc(shell, sizeof(t_cmd));
+	cmd->in = NULL;
+	cmd->out = NULL;
+	cmd->node = NULL;
 	token = ft_split_tokens(shell, str);
 	ft_tokenize(token);
 	ft_merge_tokens(shell, &token);
 	ft_merge_args_with_cmd(shell, token);
-	// while (token)
-	// {
-	// 	printf("--> %s -- %d\n", token->content, token->type);
-	// 	token = token->next;
-	// }
-	
 	if (!syntax_validator(token))
 	{
-		node = ft_tokens_to_nodes(shell, token);
-		ft_node_parser(shell, &node);
-		ft_to_tree(node);
+		ft_tokens_to_nodes(shell, token, cmd);
+		ft_node_parser(shell, &(cmd->node));
+		ft_to_tree(cmd->node);
 	}
-	return (node);
+	return (cmd);
 }

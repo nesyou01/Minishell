@@ -70,15 +70,16 @@ t_node	*ft_dup_node(t_shell *shell, t_node *node)
 	return (list);
 }
 
-void	ft_add_node_last(t_node **lst, t_node *new)
+t_node	*ft_add_node_last(t_node **lst, t_node *new)
 {
 	t_node	*last;
 
 	if (!new || !lst)
-		return ;
+		return (NULL);
 	last = ft_last_node(*lst);
 	if (!last)
-		return (ft_add_node_start(lst, new));
+		return (ft_add_node_start(lst, new), new);
 	last->next = new;
 	new->prev = last;
+	return (new);
 }

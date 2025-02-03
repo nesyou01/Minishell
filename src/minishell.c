@@ -15,12 +15,12 @@
 void	minishell(t_shell *shell)
 {
 	char		*str;
-	t_node		*node;
+	t_cmd		*cmd;
 
 	while (!shell->exit)
 	{
 		str = readline("\033[32mminishell >> \033[0m");
-		node = ft_parser(shell, str);
+		cmd = ft_parser(shell, str);
 	}
 }
 
