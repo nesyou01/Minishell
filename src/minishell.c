@@ -25,7 +25,7 @@ void	minishell(t_shell *shell)
 		if (!syntax_validator(token))
 		{
 			node = ft_tokens_to_nodes(shell, token);
-			//ls < in > out 
+			//ls1 && ls < in > out 
 			// ft_node_parser(shell, &node, token);
 			// while (token)
 			// {

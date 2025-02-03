@@ -30,7 +30,7 @@ static void	set_io_for_last_cmd(t_node *node, t_file *in, t_file *out)
 {
 	while (node)
 	{
-		if (node->taken >= 100)
+		if (node->type >= 100)
 			break ;
 		if (node->type == COMMAND)
 		{
@@ -50,6 +50,7 @@ t_node	*ft_tokens_to_nodes(t_shell *shell, t_token *token)
 
 	reset_io(&in, &out);
 	node = NULL;
+	tmp = NULL;
 	while (token)
 	{
 		if (!is_redirection(token))
@@ -57,14 +58,18 @@ t_node	*ft_tokens_to_nodes(t_shell *shell, t_token *token)
 			if (token->type == FILE)
 			{
 				set_in_or_out(shell, &in, &out, token);
-				set_io_for_last_cmd(node, in, out);
+				set_io_for_last_cmd(tmp, in, out);
 			}
 			else if (token->type == COMMAND)
-				ft_add_node_last(&node, new_node(shell, token, in, out));
+			{
+				tmp = new_node(shell, token, in, out);
+				ft_add_node_last(&node, tmp);
+			}
 			else
 			{
 				reset_io(&in, &out);
-				ft_add_node_last(&node, ft_new_node(shell, token));
+				tmp = ft_new_node(shell, token);
+				ft_add_node_last(&node, tmp);
 			}
 			if (token->type >= 100)
 			{
