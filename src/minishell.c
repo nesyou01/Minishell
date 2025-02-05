@@ -20,7 +20,9 @@ void	minishell(t_shell *shell)
 	while (!shell->exit)
 	{
 		str = readline("\033[32mminishell >> \033[0m");
+		ft_add_garbage(shell, str);
 		cmd = ft_parser(shell, str);
+		ft_clean_all(shell);
 	}
 }
 

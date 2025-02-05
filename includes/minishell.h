@@ -86,7 +86,6 @@ typedef struct s_cmd
 	t_node			*node;
 }	t_cmd;
 
-
 void		minishell(t_shell *shell);
 void		env_init(t_shell *shell, char **env);
 
@@ -106,6 +105,7 @@ void		*ft_malloc(t_shell *shell, size_t size);
 char		*ft_strdup(t_shell *shell, const char *s1);
 char		*ft_strjoin(t_shell *shell, char const *s1, char const *s2);
 char		*ft_substr(t_shell *shell, char const *s, unsigned int start, size_t len);
+void		ft_add_garbage(t_shell *shell, void *ptr);
 
 // PARSING
 t_cmd		*ft_parser(t_shell *shell, char *str);
