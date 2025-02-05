@@ -32,7 +32,4 @@ void	ft_unset(t_shell *shell, char *var)
 		tmp = tmp->next;
 	old = tmp->next;
 	tmp->next = tmp->next->next;
-	free(old->key);
-	free(old->value);
-	free(old);
 }

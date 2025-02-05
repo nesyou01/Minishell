@@ -38,10 +38,7 @@ static void	par_handler(t_node **op, t_node **cmd)
 		ft_add_node_start(cmd, *op);
 		*op = tmp;
 	}
-	tmp = (*op)->next;
-	free((*op)->content);
-	free(*op);
-	*op = tmp;
+	*op = (*op)->next;
 }
 
 static void	ft_op_handler(t_shell *shell, t_node *node, t_node**op, t_node **cmd)

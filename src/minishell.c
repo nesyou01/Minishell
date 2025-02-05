@@ -24,7 +24,6 @@ void	minishell(t_shell *shell)
 		if (ft_strcmp(str, "exit") == 0)
 			break ;
 		cmd = ft_parser(shell, str);
-		ft_clean_all(shell);
 	}
 	ft_clean_all(shell);
 }

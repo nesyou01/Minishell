@@ -29,7 +29,6 @@ void	ft_export(t_shell *shell, char *var)
 	else
 	{
 		value = ft_strchr(var, '=');
-		free(env->value);
 		if (value)
 			env->value = ft_strdup(shell, value + 1);
 		else
