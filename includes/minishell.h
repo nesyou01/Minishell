@@ -86,7 +86,6 @@ typedef struct s_cmd
 	t_node			*node;
 }	t_cmd;
 
-void		minishell(t_shell *shell);
 void		env_init(t_shell *shell, char **env);
 
 void		ft_env(t_shell *shell);

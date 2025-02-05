@@ -1,13 +1,13 @@
 NAME = minishell
 SRC = src/minishell.c src/utils/utils.c src/built_ins/env.c src/utils/malloc_utils.c \
 		src/built_ins/exit.c src/init.c src/utils/env_utils.c src/built_ins/export.c src/built_ins/unset.c \
-		src/parsers/parser.c src/parsers/tokens.c src/parsers/tokenization.c src/parsers/node.c \
-		src/parsers/token_utils.c src/parsers/node_utils.c src/parsers/tree.c src/parsers/syntax.c \
+		src/parser/parser.c src/parser/tokens.c src/parser/tokenization.c src/parser/node.c \
+		src/parser/token_utils.c src/parser/node_utils.c src/parser/tree.c src/parser/syntax.c \
 		src/helpers/clean.c src/utils/ft_strdup.c src/utils/ft_strjoin.c src/utils/ft_substr.c \
-		src/parsers/tokens2.c src/parsers/node2.c src/parsers/file.c src/parsers/parse_utils.c
+		src/parser/tokens2.c src/parser/node2.c src/parser/file.c src/parser/parse_utils.c
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
-CFLAGS =
+CFLAGS = -g -fsanitize=address
 #  -Wall -Werror -Wextra
 LIBFT = libs/libft/libft.a
 HEADERS = includes/minishell.h
