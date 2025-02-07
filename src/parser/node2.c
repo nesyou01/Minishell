@@ -20,8 +20,8 @@ static void	or_and_handler(t_shell *shell,
 
 	op_type = (*op)->type;
 	if (op_type == PIPE
-		|| (node->type == AND_AND && op_type == OR_OR)
-		|| (node->type == OR_OR && op_type == AND_AND))
+		|| (node->type == AND && op_type == OR)
+		|| (node->type == OR && op_type == AND))
 	{
 		tmp = (*op)->next;
 		ft_add_node_start(cmd, ft_dup_node(shell, *op));
@@ -47,7 +47,7 @@ static void	ft_op_handler(t_shell *shell,
 {
 	if (*op)
 	{
-		if (node->type == OR_OR || node->type == AND_AND
+		if (node->type == OR || node->type == AND
 			|| node->type == PIPE)
 			or_and_handler(shell, node, op, cmd);
 		else if (node->type == PARENTHESES_END)

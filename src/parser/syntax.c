@@ -53,7 +53,7 @@ int	syntax_validator(t_token *token)
 		else if (token->type == PARENTHESES_END)
 		{
 			if (token->next
-				&& (token->next->type != AND_AND || token->next->type != OR_OR))
+				&& (token->next->type != AND || token->next->type != OR))
 				return (ft_perror("expected &&/|| after ')'"), 1);
 			par--;
 		}

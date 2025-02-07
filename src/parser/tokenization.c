@@ -16,8 +16,8 @@ static int	is_new_cmd(t_token *token)
 {
 	return (!token->prev || token->prev->type == PIPE
 		|| token->prev->type == PARENTHESES_START
-		|| token->prev->type == AND_AND
-		|| token->prev->type == OR_OR);
+		|| token->prev->type == AND
+		|| token->prev->type == OR);
 }
 
 static int	is_first_cmd(t_token *token)
@@ -71,9 +71,9 @@ static int	get_token_type(t_token *token)
 	if (!ft_strcmp(token->content, ")"))
 		return (PARENTHESES_END);
 	if (!ft_strcmp(token->content, "&&"))
-		return (AND_AND);
+		return (AND);
 	if (!ft_strcmp(token->content, "||"))
-		return (OR_OR);
+		return (OR);
 	return (get_token_type_extra(token));
 }
 
