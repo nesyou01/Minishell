@@ -127,5 +127,9 @@ void		ft_tokens_to_nodes(t_shell *shell, t_token *token, t_cmd *cmd);
 t_file		*get_file_or_add(t_shell *shell, char *path);
 int			is_redirection(t_token *token);
 t_node		*ft_dup_node(t_shell *shell, t_node *node);
+void		ft_prepare_cmd(t_shell *shell, t_node *node);
+
+// EX
+int			ft_execute(t_shell *shell, t_node *node);
 
 #endif
