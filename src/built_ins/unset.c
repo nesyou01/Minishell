@@ -15,7 +15,6 @@
 void	ft_unset(t_shell *shell, char *var)
 {
 	t_env	*tmp;
-	t_env	*old;
 
 	if (!var || !shell->env)
 		return ;
@@ -30,6 +29,5 @@ void	ft_unset(t_shell *shell, char *var)
 	}
 	while (ft_strcmp(tmp->next->key, var))
 		tmp = tmp->next;
-	old = tmp->next;
 	tmp->next = tmp->next->next;
 }

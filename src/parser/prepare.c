@@ -2,8 +2,6 @@
 
 void	ft_prepare_cmd(t_shell *shell, t_node *node)
 {
-	char	*op;
-
 	if (!node)
 		return ;
 	if (node->type >= 100)

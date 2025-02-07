@@ -79,9 +79,6 @@ static int	get_token_type(t_token *token)
 
 int	ft_tokenize(t_token *lst)
 {
-	t_token	*head;
-
-	head = NULL;
 	while (lst)
 	{
 		lst->type = get_token_type(lst);
