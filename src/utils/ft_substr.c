@@ -12,7 +12,8 @@
 
 #include "../../includes/minishell.h"
 
-char	*ft_substr(t_shell *shell, char const *s, unsigned int start, size_t len)
+char	*ft_substr(t_shell *shell, char const *s,
+	unsigned int start, size_t len)
 {
 	char	*result;
 	size_t	startlen;

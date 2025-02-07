@@ -56,7 +56,8 @@ void	ft_tokens_to_nodes(t_shell *shell, t_token *token, t_cmd *cmd)
 				set_io_for_last_cmd(tmp, cmd);
 			}
 			else if (token->type == COMMAND)
-				tmp = ft_add_node_last(&(cmd->node), new_node(shell, token, cmd));
+				tmp = ft_add_node_last(&(cmd->node),
+						new_node(shell, token, cmd));
 			else
 			{
 				reset_io(cmd);

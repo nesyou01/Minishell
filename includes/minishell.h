@@ -38,26 +38,26 @@
 
 typedef struct s_token
 {
-	char			*content;
 	int				type;
+	char			*content;
 	struct s_token	*next;
 	struct s_token	*prev;
 }	t_token;
 
 typedef struct s_file
 {
-	char			*path;
 	int				fd;
+	char			*path;
 	struct s_file	*next;
 }	t_file;
 
 typedef struct s_node
 {
-	char			*content;
 	int				type;
+	int				taken;
+	char			*content;
 	t_file			*in;
 	t_file			*out;
-	int				taken;
 	struct s_node	*next;
 	struct s_node	*prev;
 	struct s_node	*r_node;
@@ -73,8 +73,8 @@ typedef struct s_env
 
 typedef struct s_shell
 {
-	t_env	*env;
 	int		exit;
+	t_env	*env;
 	t_list	*garbage;
 	t_file	*file;
 }	t_shell;
@@ -103,7 +103,8 @@ void		ft_clean_all(t_shell *shell);
 void		*ft_malloc(t_shell *shell, size_t size);
 char		*ft_strdup(t_shell *shell, const char *s1);
 char		*ft_strjoin(t_shell *shell, char const *s1, char const *s2);
-char		*ft_substr(t_shell *shell, char const *s, unsigned int start, size_t len);
+char		*ft_substr(t_shell *shell,
+				char const *s, unsigned int start, size_t len);
 void		ft_add_garbage(t_shell *shell, void *ptr);
 
 // PARSING
@@ -115,7 +116,7 @@ t_token		*ft_new_token(t_shell *shell, char	*content);
 int			ft_strcmp(char *s1, char *s2);
 void		ft_add_token_start(t_token **lst, t_token *new);
 t_node		*ft_add_node_last(t_node **lst, t_node *new);
-t_node		*ft_new_node(t_shell *shell,t_token *token);
+t_node		*ft_new_node(t_shell *shell, t_token *token);
 void		ft_add_node_start(t_node **lst, t_node *new);
 void		ft_node_parser(t_shell *shell, t_node **node);
 t_node		*ft_to_tree(t_node *node);
@@ -126,6 +127,5 @@ void		ft_tokens_to_nodes(t_shell *shell, t_token *token, t_cmd *cmd);
 t_file		*get_file_or_add(t_shell *shell, char *path);
 int			is_redirection(t_token *token);
 t_node		*ft_dup_node(t_shell *shell, t_node *node);
-
 
 #endif

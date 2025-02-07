@@ -12,7 +12,7 @@ static void	unlink_token(t_token *token)
 		next->prev = prev;
 }
 
-static void add_to_last_cmd(t_shell *shell, t_token *current, char *str)
+static void	add_to_last_cmd(t_shell *shell, t_token *current, char *str)
 {
 	while (current)
 	{

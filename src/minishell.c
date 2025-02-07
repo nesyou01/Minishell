@@ -22,7 +22,6 @@ static void	minishell(t_shell *shell)
 		str = readline("\033[32mminishell >> \033[0m");
 		ft_add_garbage(shell, str);
 		cmd = ft_parser(shell, str);
-
 	}
 	ft_clean_all(shell);
 }
@@ -31,8 +30,9 @@ int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
 
-	(void) argc;
 	(void) argv;
+	if (argc != 1)
+		return (ft_perror("usage => ./minishell"), 1);
 	env_init(&shell, env);
 	shell.exit = 0;
 	minishell(&shell);

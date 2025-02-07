@@ -12,7 +12,8 @@
 
 #include "../../includes/minishell.h"
 
-static void	or_and_handler(t_shell *shell, t_node *node, t_node **op, t_node **cmd)
+static void	or_and_handler(t_shell *shell,
+	t_node *node, t_node **op, t_node **cmd)
 {
 	int		op_type;
 	t_node	*tmp;
@@ -41,7 +42,8 @@ static void	par_handler(t_node **op, t_node **cmd)
 	*op = (*op)->next;
 }
 
-static void	ft_op_handler(t_shell *shell, t_node *node, t_node**op, t_node **cmd)
+static void	ft_op_handler(t_shell *shell,
+	t_node *node, t_node**op, t_node **cmd)
 {
 	if (*op)
 	{

@@ -14,7 +14,7 @@
 
 static int	is_valid_quotes(char *str)
 {
-	char c;
+	char	c;
 
 	if (!str)
 		return (1);
@@ -30,7 +30,8 @@ static int	is_valid_quotes(char *str)
 				str++;
 			else
 				return (0);
-		} else
+		}
+		else
 			str++;
 	}
 	return (1);
@@ -51,7 +52,7 @@ int	syntax_validator(t_token *token)
 		}
 		else if (token->type == PARENTHESES_END)
 		{
-			if (token->next 
+			if (token->next
 				&& (token->next->type != AND_AND || token->next->type != OR_OR))
 				return (ft_perror("expected &&/|| after ')'"), 1);
 			par--;
