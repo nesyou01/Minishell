@@ -6,4 +6,9 @@ void	ft_execute(t_shell *shell, t_node *node)
 	if (!node)
 		return ;
 	// TODO
+	while (node)
+	{
+		printf("--> %s\n", node->content);
+		node = node->next;
+	}
 }

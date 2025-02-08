@@ -25,11 +25,11 @@ t_cmd	*ft_parser(t_shell *shell, char *str)
 	ft_tokenize(token);
 	ft_merge_tokens(shell, &token);
 	ft_merge_args_with_cmd(shell, token);
-	if (!syntax_validator(token))
-	{
-		ft_tokens_to_nodes(shell, token, cmd);
-		ft_node_parser(shell, &(cmd->node));
-		ft_to_tree(cmd->node);
-	}
+	if (syntax_validator(token))
+		return (NULL);
+	ft_tokens_to_nodes(shell, token, cmd);
+	ft_remove_quotes(shell, cmd->node);
+	ft_node_parser(shell, &(cmd->node));
+	ft_to_tree(cmd->node);
 	return (cmd);
 }
