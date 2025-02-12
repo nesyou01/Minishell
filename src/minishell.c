@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:32 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/01/31 15:09:43 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:14:07 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ static void	minishell(t_shell *shell)
 		str = readline("\033[32mminishell >> \033[0m");
 		ft_add_garbage(shell, str);
 		cmd = ft_parser(shell, str);
-		ft_execute(shell, cmd->node);
+		if (cmd)
+			ft_execute(shell, cmd->node);
 	}
 	ft_clean_all(shell);
 }
