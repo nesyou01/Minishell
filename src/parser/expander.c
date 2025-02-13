@@ -5,12 +5,10 @@ static int	get_var_end(char *s)
 	int	i;
 
 	i = 1;
-	while (s[i])
-	{
-		if (!ft_isalnum(s[i + 1]))
-			return (i);
+	while (s[i] && ft_isalnum(s[i]))
 		i++;
-	}
+	if (s[i])
+		i--;
 	return (i);
 }
 
@@ -48,9 +46,9 @@ static void expand_all(t_shell *shell, t_node *node)
 			start = ft_substr(shell, node->content, 0, i);
 		else
 			start = NULL;
-		i = get_var_end(node->content) + 1;
+		i = get_var_end(sign);
 		env = ft_get_env(shell->env, ft_substr(shell, sign, 1, i));
-		end = ft_substr(shell, sign, i, ft_strlen(sign));
+		end = ft_substr(shell, sign, i + 1, ft_strlen(sign));
 		node->content = join_all(shell, start, env, end);
 		sign = ft_strchr(node->content, '$');
 	}

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 11:01:16 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/13 11:06:56 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ t_env	*ft_get_env(t_env *env, char *key)
 {
 	t_env	*tmp;
 
+	printf("----> |%s|\n", key);
 	tmp = env;
 	while (tmp && ft_strcmp(tmp->key, key) != 0)
 		tmp = tmp->next;
