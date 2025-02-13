@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:38 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/01/24 11:34:39 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/13 16:31:33 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	ft_export(t_shell *shell, char *var)
 {
 	t_env	*env;
+	t_env	*last;
 	char	*key;
 	char	*value;
 
@@ -25,7 +26,10 @@ void	ft_export(t_shell *shell, char *var)
 		return ;
 	env = ft_get_env(shell->env, key);
 	if (!env)
-		ft_last_env(shell->env)->next = ft_parse_env(shell, var, key);
+	{
+		last = ft_last_env(shell->env);
+		last->next = ft_parse_env(shell, var, key);
+	}
 	else
 	{
 		value = ft_strchr(var, '=');

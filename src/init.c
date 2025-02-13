@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:36 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 14:40:55 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/13 16:30:35 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void	env_init(t_shell *shell, char **env)
 {
+	t_env	*last;
+
 	shell->env = NULL;
 	if (!env)
 		return ;
@@ -24,7 +26,8 @@ void	env_init(t_shell *shell, char **env)
 	env++;
 	while (*env)
 	{
-		ft_last_env(shell->env)->next = ft_parse_env(shell, *env, NULL);
+		last = ft_last_env(shell->env);
+		last->next = ft_parse_env(shell, *env, NULL);
 		env++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:20:58 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 14:30:38 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/13 16:29:13 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void	ft_remove_quotes(t_shell *shell, t_node *node)
 	size_t	c_count;
 	char	*result;
 	size_t	x;
-
 
 	c = first_quote(node->content);
 	if (c == -1)

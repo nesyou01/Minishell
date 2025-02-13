@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   expander.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/02/13 16:29:27 by ylagmah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 static int	get_var_end(char *s)
@@ -25,9 +37,7 @@ static char	*join_all(t_shell *shell, char *s1, t_env *env, char *s3)
 	char	*result;
 
 	if (env)
-	{
 		result = ft_strjoin(shell, s1, env->value);
-	}
 	else
 		result = s1;
 	result = ft_strjoin(shell, result, s3);
@@ -54,7 +64,7 @@ static char	*expand_var(t_shell *shell, t_node *node, char *sign)
 	return (join_all(shell, start, env, end));
 }
 
-static void expand_all(t_shell *shell, t_node *node)
+static void	expand_all(t_shell *shell, t_node *node)
 {
 	char			*sign;
 
