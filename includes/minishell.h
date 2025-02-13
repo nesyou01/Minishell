@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/12 15:27:32 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:32:06 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,7 +128,7 @@ t_file		*get_file_or_add(t_shell *shell, char *path);
 int			is_redirection(t_token *token);
 t_node		*ft_dup_node(t_shell *shell, t_node *node);
 void		ft_expander(t_shell *shell, t_node *node);
-void		ft_expand_quotes(t_shell *shell, t_node *node);
+void		ft_remove_quotes(t_shell *shell, t_node *node);
 
 // EX
 void		ft_execute(t_shell *shell, t_node *node);

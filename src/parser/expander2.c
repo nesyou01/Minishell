@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:20:58 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/12 15:26:47 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/12 15:32:06 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static size_t	quotes_count(char *str, char c)
 	return (c_count);
 }
 
-void	ft_expand_quotes(t_shell *shell, t_node *node)
+void	ft_remove_quotes(t_shell *shell, t_node *node)
 {
 	size_t	i;
 	char	c;
