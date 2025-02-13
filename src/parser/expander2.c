@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/12 15:20:58 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/12 15:32:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:30:38 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void	ft_remove_quotes(t_shell *shell, t_node *node)
 	x = 0;
 	i = 0;
 	result = ft_malloc(shell, ft_strlen(node->content) - c_count + 1);
-	while (node->content[i])
+	while (node->content[i] && node->content[i] != '$')
 	{
 		if (node->content[i] != c)
 			result[x++] = node->content[i];

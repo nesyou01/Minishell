@@ -61,6 +61,7 @@ static void expand_all(t_shell *shell, t_node *node)
 	sign = node->content;
 	while (sign)
 	{
+		ft_remove_quotes(shell, node);
 		sign = ft_strchr(sign, '$');
 		if (!sign)
 			return ;
@@ -78,7 +79,6 @@ void	ft_expander(t_shell *shell, t_node *node)
 {
 	while (node)
 	{
-		ft_remove_quotes(shell, node);
 		expand_all(shell, node);
 		node = node->next;
 	}
