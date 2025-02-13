@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/12 15:32:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:44:29 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ typedef struct s_shell
 {
 	int		exit;
 	t_env	*env;
-	t_list	*garbage;
+	t_list	*globale_garbage;
+	t_list	*cmd_garbage;
 	t_file	*file;
 }	t_shell;
 
@@ -105,7 +106,9 @@ char		*ft_strdup(t_shell *shell, const char *s1);
 char		*ft_strjoin(t_shell *shell, char const *s1, char const *s2);
 char		*ft_substr(t_shell *shell,
 				char const *s, unsigned int start, size_t len);
-void		ft_add_garbage(t_shell *shell, void *ptr);
+void		ft_add_garbage(t_list **head, t_shell *shell, void *ptr);
+void		*ft_malloc_globale(t_shell *shell, size_t size);
+char		*ft_strdup_globale(t_shell *shell, const char *s1);
 
 // PARSING
 t_cmd		*ft_parser(t_shell *shell, char *str);
@@ -118,6 +121,7 @@ void		ft_add_token_start(t_token **lst, t_token *new);
 t_node		*ft_add_node_last(t_node **lst, t_node *new);
 t_node		*ft_new_node(t_shell *shell, t_token *token);
 void		ft_add_node_start(t_node **lst, t_node *new);
+void		ft_clean_cmd(t_shell *shell);
 void		ft_node_parser(t_shell *shell, t_node **node);
 t_node		*ft_to_tree(t_node *node);
 int			syntax_validator(t_token *token);

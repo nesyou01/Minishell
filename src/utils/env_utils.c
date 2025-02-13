@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 11:14:34 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/13 14:44:37 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ char	*ft_get_env_key(t_shell *shell, char *str)
 	char	*result;
 
 	size = get_key_size(str);
-	result = (char *) ft_malloc(shell, (size + 1) * sizeof(char));
+	result = (char *) ft_malloc_globale(shell, (size + 1) * sizeof(char));
 	i = 0;
 	while (i < size)
 	{
@@ -45,10 +45,10 @@ t_env	*ft_parse_env(t_shell *shell, char *str, char *key)
 	t_env	*result;
 	char	*value;
 
-	result = (t_env *) ft_malloc(shell, sizeof(t_env));
+	result = (t_env *) ft_malloc_globale(shell, sizeof(t_env));
 	value = ft_strchr(str, '=');
 	if (value)
-		result->value = ft_strdup(shell, value + 1);
+		result->value = ft_strdup_globale(shell, value + 1);
 	if (!key)
 		result->key = ft_get_env_key(shell, str);
 	else

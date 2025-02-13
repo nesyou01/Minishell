@@ -13,10 +13,18 @@ static void	clear_garbage(t_list *garbage)
 	}
 }
 
+void	ft_clean_cmd(t_shell *shell)
+{
+	if (shell->cmd_garbage)
+		clear_garbage(shell->cmd_garbage);
+	shell->cmd_garbage = NULL;
+}
+
 void	ft_clean_all(t_shell *shell)
 {
 	// TODO: close fds
-	if (shell->garbage)
-		clear_garbage(shell->garbage);
-	shell->garbage = NULL;
+	ft_clean_cmd(shell);
+	if (shell->globale_garbage)
+		clear_garbage(shell->globale_garbage);
+	shell->globale_garbage = NULL;
 }
