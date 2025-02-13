@@ -5,8 +5,16 @@ static int	get_var_end(char *s)
 	int	i;
 
 	i = 1;
-	while (s[i] && ft_isalnum(s[i]))
-		i++;
+	if (ft_isdigit(s[i]))
+	{
+		while (s[i] && ft_isdigit(s[i]))
+			i++;
+	}
+	else
+	{
+		while (s[i] && ft_isalnum(s[i]))
+			i++;
+	}
 	if (s[i])
 		i--;
 	return (i);
@@ -26,31 +34,43 @@ static char	*join_all(t_shell *shell, char *s1, t_env *env, char *s3)
 	return (result);
 }
 
-static void expand_all(t_shell *shell, t_node *node)
+static char	*expand_var(t_shell *shell, t_node *node, char *sign)
 {
-	char			*sign;
 	size_t			total;
 	char			*start;
 	t_env			*env;
 	char			*end;
 	size_t			i;
 
-	sign = ft_strchr(node->content, '$');
-	if (!sign)
-		return ;
+	total = ft_strlen(node->content);
+	i = total - ft_strlen(sign);
+	if (i)
+		start = ft_substr(shell, node->content, 0, i);
+	else
+		start = NULL;
+	i = get_var_end(sign);
+	env = ft_get_env(shell->env, ft_substr(shell, sign, 1, i));
+	end = ft_substr(shell, sign, i + 1, ft_strlen(sign));
+	return (join_all(shell, start, env, end));
+}
+
+static void expand_all(t_shell *shell, t_node *node)
+{
+	char			*sign;
+
+	sign = node->content;
 	while (sign)
 	{
-		total = ft_strlen(node->content);
-		i = total - ft_strlen(sign);
-		if (i)
-			start = ft_substr(shell, node->content, 0, i);
+		sign = ft_strchr(sign, '$');
+		if (!sign)
+			return ;
+		if (ft_isalnum(sign[1]))
+		{
+			node->content = expand_var(shell, node, sign);
+			sign = node->content;
+		}
 		else
-			start = NULL;
-		i = get_var_end(sign);
-		env = ft_get_env(shell->env, ft_substr(shell, sign, 1, i));
-		end = ft_substr(shell, sign, i + 1, ft_strlen(sign));
-		node->content = join_all(shell, start, env, end);
-		sign = ft_strchr(node->content, '$');
+			sign++;
 	}
 }
 
