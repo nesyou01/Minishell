@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/14 13:47:29 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/14 13:53:14 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ int	syntax_validator(t_token *token)
 		}
 		else if (token->type == PARENTHESES_END)
 		{
-			if (!token->next || token->next->type != AND || token->next->type != OR)
+			if (!token->next
+				|| (token->next->type != AND && token->next->type != OR))
 				return (ft_perror("expected &&/|| after ')'"), 1);
 			par--;
 		}
