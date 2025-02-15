@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:32 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:21:44 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/15 12:57:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static void	minishell(t_shell *shell)
 {
 	char		*str;
-	t_cmd		*cmd;
+	t_execute		*cmd;
 
 	while (!shell->exit)
 	{

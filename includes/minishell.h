@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 14:44:29 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/15 12:57:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,12 +80,12 @@ typedef struct s_shell
 	t_file	*file;
 }	t_shell;
 
-typedef struct s_cmd
+typedef struct s_execute
 {
 	t_file			*in;
 	t_file			*out;
 	t_node			*node;
-}	t_cmd;
+}	t_execute;
 
 void		env_init(t_shell *shell, char **env);
 
@@ -111,7 +111,7 @@ void		*ft_malloc_globale(t_shell *shell, size_t size);
 char		*ft_strdup_globale(t_shell *shell, const char *s1);
 
 // PARSING
-t_cmd		*ft_parser(t_shell *shell, char *str);
+t_execute		*ft_parser(t_shell *shell, char *str);
 t_token		*ft_split_tokens(t_shell *shell, char *str);
 int			ft_tokenize(t_token *lst);
 void		ft_add_token_last(t_token **lst, t_token *new);
@@ -127,7 +127,7 @@ t_node		*ft_to_tree(t_node *node);
 int			syntax_validator(t_token *token);
 void		ft_merge_tokens(t_shell *shell, t_token **token);
 void		ft_merge_args_with_cmd(t_shell *shell, t_token *token);
-void		ft_tokens_to_nodes(t_shell *shell, t_token *token, t_cmd *cmd);
+void		ft_tokens_to_nodes(t_shell *shell, t_token *token, t_execute *cmd);
 t_file		*get_file_or_add(t_shell *shell, char *path);
 int			is_redirection(t_token *token);
 t_node		*ft_dup_node(t_shell *shell, t_node *node);

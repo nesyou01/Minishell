@@ -6,13 +6,13 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:27:09 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/15 12:57:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	set_in_or_out(t_shell *shell, t_cmd *cmd, t_token *token)
+static void	set_in_or_out(t_shell *shell, t_execute *cmd, t_token *token)
 {
 	if (token->prev->type == IN_REDIRECTER)
 		cmd->in = get_file_or_add(shell, token->content);
@@ -22,7 +22,7 @@ static void	set_in_or_out(t_shell *shell, t_cmd *cmd, t_token *token)
 		cmd->out = get_file_or_add(shell, token->content);
 }
 
-static t_node	*new_node(t_shell *shell, t_token *token, t_cmd *cmd)
+static t_node	*new_node(t_shell *shell, t_token *token, t_execute *cmd)
 {
 	t_node	*tmp;
 
@@ -32,13 +32,13 @@ static t_node	*new_node(t_shell *shell, t_token *token, t_cmd *cmd)
 	return (tmp);
 }
 
-static void	reset_io(t_cmd *cmd)
+static void	reset_io(t_execute *cmd)
 {
 	cmd->in = NULL;
 	cmd->out = NULL;
 }
 
-static void	set_io_for_last_cmd(t_node *node, t_cmd *cmd)
+static void	set_io_for_last_cmd(t_node *node, t_execute *cmd)
 {
 	while (node)
 	{
@@ -53,7 +53,7 @@ static void	set_io_for_last_cmd(t_node *node, t_cmd *cmd)
 	}
 }
 
-void	ft_tokens_to_nodes(t_shell *shell, t_token *token, t_cmd *cmd)
+void	ft_tokens_to_nodes(t_shell *shell, t_token *token, t_execute *cmd)
 {
 	t_node	*tmp;
 

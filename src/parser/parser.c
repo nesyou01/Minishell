@@ -6,18 +6,18 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:11:18 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:27:19 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/15 12:57:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_cmd	*ft_parser(t_shell *shell, char *str)
+t_execute	*ft_parser(t_shell *shell, char *str)
 {
 	t_token	*token;
-	t_cmd	*cmd;
+	t_execute	*cmd;
 
-	cmd = ft_malloc(shell, sizeof(t_cmd));
+	cmd = ft_malloc(shell, sizeof(t_execute));
 	cmd->in = NULL;
 	cmd->out = NULL;
 	cmd->node = NULL;
