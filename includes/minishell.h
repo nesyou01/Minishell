@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/15 12:57:57 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/15 13:14:15 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,12 @@ typedef struct s_execute
 	t_node			*node;
 }	t_execute;
 
+typedef struct s_command
+{
+	char	**argv;
+	char	*cmd;
+}	t_command;
+
 void		env_init(t_shell *shell, char **env);
 
 void		ft_env(t_shell *shell);
@@ -109,6 +115,7 @@ char		*ft_substr(t_shell *shell,
 void		ft_add_garbage(t_list **head, t_shell *shell, void *ptr);
 void		*ft_malloc_globale(t_shell *shell, size_t size);
 char		*ft_strdup_globale(t_shell *shell, const char *s1);
+char		**ft_split(t_shell *shell, char const *s, char c);
 
 // PARSING
 t_execute		*ft_parser(t_shell *shell, char *str);
@@ -133,6 +140,7 @@ int			is_redirection(t_token *token);
 t_node		*ft_dup_node(t_shell *shell, t_node *node);
 void		ft_expander(t_shell *shell, t_node *node);
 void		ft_remove_quotes(t_shell *shell, t_node *node);
+t_command	*ft_parse_command(t_shell *shell, t_node *node);
 
 // EX
 void		ft_execute(t_shell *shell, t_node *node);
