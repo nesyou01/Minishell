@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/15 13:14:15 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/16 12:08:05 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void		ft_add_garbage(t_list **head, t_shell *shell, void *ptr);
 void		*ft_malloc_globale(t_shell *shell, size_t size);
 char		*ft_strdup_globale(t_shell *shell, const char *s1);
 char		**ft_split(t_shell *shell, char const *s, char c);
+size_t		ft_safe_strlen(char *str);
 
 // PARSING
 t_execute		*ft_parser(t_shell *shell, char *str);
@@ -139,8 +140,9 @@ t_file		*get_file_or_add(t_shell *shell, char *path);
 int			is_redirection(t_token *token);
 t_node		*ft_dup_node(t_shell *shell, t_node *node);
 void		ft_expander(t_shell *shell, t_node *node);
-void		ft_remove_quotes(t_shell *shell, t_node *node);
 t_command	*ft_parse_command(t_shell *shell, t_node *node);
+char		*ft_expand_all_vars(t_shell *shell,	char *str);
+int			get_var_end(char *s);
 
 // EX
 void		ft_execute(t_shell *shell, t_node *node);

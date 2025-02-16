@@ -6,82 +6,88 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:29:27 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/16 12:16:22 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	get_var_end(char *s)
+static int	expand_var(t_shell *shell, t_node *node, int start)
 {
-	int	i;
+	int		end;
+	char	*var;
+	char	*expanded;
+	char	*start_str;
+	char	*end_str;
 
-	i = 1;
-	if (ft_isdigit(s[i]))
-	{
-		while (s[i] && ft_isdigit(s[i]))
-			i++;
-	}
+	if (!start)
+		start_str = NULL;
 	else
-	{
-		while (s[i] && ft_isalnum(s[i]))
-			i++;
-	}
-	if (s[i])
-		i--;
-	return (i);
+		start_str = ft_substr(shell, node->content, 0, start);
+	end = get_var_end(node->content + start) + 1;
+	var = ft_substr(shell, node->content, start, end);
+	expanded = ft_expand_all_vars(shell, var);
+	end_str = ft_substr(shell, node->content, end, ft_strlen(node->content) - end);
+	node->content = ft_strjoin(shell, ft_strjoin(shell, start_str, expanded), end_str);
+	return (1);
 }
 
-static char	*join_all(t_shell *shell, char *s1, t_env *env, char *s3)
+static int	remove_double_quotes(t_shell *shell, t_node *node, int start)
 {
+	char	*start_str;
+	char	*end;
 	char	*result;
+	char	*middle;
+	char	*expanded;
 
-	if (env)
-		result = ft_strjoin(shell, s1, env->value);
+	if (!start)
+		start_str = NULL;
 	else
-		result = s1;
-	result = ft_strjoin(shell, result, s3);
-	return (result);
+		start_str = ft_substr(shell, node->content, 0, start);
+	end = ft_strchr(node->content + start + 1, '"');
+	if (end)
+		end++;
+	middle = ft_substr(shell, node->content, start + 1,
+		ft_safe_strlen(node->content) - ft_safe_strlen(start_str) - ft_safe_strlen(end) - 2);
+	expanded = ft_expand_all_vars(shell, middle);
+	node->content = ft_strjoin(shell, ft_strjoin(shell, start_str, expanded), end);
+	return (ft_safe_strlen(expanded));
 }
 
-static char	*expand_var(t_shell *shell, t_node *node, char *sign)
+static int	remove_single_quotes(t_shell *shell, t_node *node, int start)
 {
-	size_t			total;
-	char			*start;
-	t_env			*env;
-	char			*end;
-	size_t			i;
+	char	*start_str;
+	char	*end;
+	char	*middle;
 
-	total = ft_strlen(node->content);
-	i = total - ft_strlen(sign);
-	if (i)
-		start = ft_substr(shell, node->content, 0, i);
+	if (!start)
+		start_str = NULL;
 	else
-		start = NULL;
-	i = get_var_end(sign);
-	env = ft_get_env(shell->env, ft_substr(shell, sign, 1, i));
-	end = ft_substr(shell, sign, i + 1, ft_strlen(sign));
-	return (join_all(shell, start, env, end));
+		start_str = ft_substr(shell, node->content, 0, start);
+	end = ft_strchr(node->content + start + 1, '\'');
+	if (end)
+		end++;
+	middle = ft_substr(shell, node->content, start + 1,
+		ft_safe_strlen(node->content) - ft_safe_strlen(start_str) - ft_safe_strlen(end) - 2);
+	node->content = ft_strjoin(shell, ft_strjoin(shell, start_str, middle), end);
+	return (ft_safe_strlen(middle));
 }
 
 static void	expand_all(t_shell *shell, t_node *node)
 {
-	char			*sign;
+	int	i;
 
-	sign = node->content;
-	while (sign)
+	i = 0;
+	while (node->content[i])
 	{
-		ft_remove_quotes(shell, node);
-		sign = ft_strchr(sign, '$');
-		if (!sign)
-			return ;
-		if (ft_isalnum(sign[1]))
-		{
-			node->content = expand_var(shell, node, sign);
-			sign = node->content;
-		}
+		if (node->content[i] == '\"')
+			i += remove_double_quotes(shell, node, i);
+		else if (node->content[i] == '\'')
+			i += remove_single_quotes(shell, node, i);
+		else if (node->content[i] == '$')
+			i += expand_var(shell, node, i);
 		else
-			sign++;
+			i++;
 	}
 }
 
