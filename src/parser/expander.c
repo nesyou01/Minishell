@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/16 13:56:03 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/16 14:05:50 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,10 @@ static int	expand_var(t_shell *shell, t_node *node, int start)
 	end = get_var_end(node->content + start) + start + 1;
 	var = ft_substr(shell, node->content, start, end - start);
 	expanded = ft_expand_all_vars(shell, var);
-	end_str = ft_substr(shell, node->content, end, ft_strlen(node->content) - end);
-	node->content = ft_strjoin(shell, ft_strjoin(shell, start_str, expanded), end_str);
+	end_str = ft_substr(shell, node->content, end,
+			ft_strlen(node->content) - end);
+	node->content = ft_strjoin(shell,
+			ft_strjoin(shell, start_str, expanded), end_str);
 	return (ft_safe_strlen(expanded));
 }
 
@@ -48,9 +50,11 @@ static int	remove_double_quotes(t_shell *shell, t_node *node, int start)
 	if (end)
 		end++;
 	middle = ft_substr(shell, node->content, start + 1,
-		ft_safe_strlen(node->content) - ft_safe_strlen(start_str) - ft_safe_strlen(end) - 2);
+			ft_safe_strlen(node->content) - ft_safe_strlen(start_str)
+			- ft_safe_strlen(end) - 2);
 	expanded = ft_expand_all_vars(shell, middle);
-	node->content = ft_strjoin(shell, ft_strjoin(shell, start_str, expanded), end);
+	node->content = ft_strjoin(shell,
+			ft_strjoin(shell, start_str, expanded), end);
 	return (ft_safe_strlen(expanded));
 }
 
@@ -68,8 +72,10 @@ static int	remove_single_quotes(t_shell *shell, t_node *node, int start)
 	if (end)
 		end++;
 	middle = ft_substr(shell, node->content, start + 1,
-		ft_safe_strlen(node->content) - ft_safe_strlen(start_str) - ft_safe_strlen(end) - 2);
-	node->content = ft_strjoin(shell, ft_strjoin(shell, start_str, middle), end);
+			ft_safe_strlen(node->content)
+			- ft_safe_strlen(start_str) - ft_safe_strlen(end) - 2);
+	node->content = ft_strjoin(shell,
+			ft_strjoin(shell, start_str, middle), end);
 	return (ft_safe_strlen(middle));
 }
 
