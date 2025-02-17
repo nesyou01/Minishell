@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 10:26:15 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 10:50:18 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
+# include <dirent.h>
 # include "../libs/libft/libft.h"
 
 # define SEPECIAL_CHARS "<>|&() "
@@ -117,6 +118,8 @@ void		*ft_malloc_globale(t_shell *shell, size_t size);
 char		*ft_strdup_globale(t_shell *shell, const char *s1);
 char		**ft_split(t_shell *shell, char const *s, char c);
 size_t		ft_safe_strlen(char *str);
+char		*ft_get_env_value(t_shell *shell, char *key);
+
 
 // PARSING
 t_execute		*ft_parser(t_shell *shell, char *str);
@@ -142,7 +145,8 @@ t_node		*ft_dup_node(t_shell *shell, t_node *node);
 t_command	*ft_parse_command(t_shell *shell, t_node *node);
 char		*ft_expand_all_vars(t_shell *shell,	char *str);
 int			get_var_end(char *s);
-void		ft_expand_node_vars(t_shell *shell, t_node *node);
+int			ft_expand_node_vars(t_shell *shell, t_node *node);
+int			ft_expand_wildcards(t_shell *shell, t_node *node, int start);
 
 // EX
 void		ft_execute(t_shell *shell, t_node *node);

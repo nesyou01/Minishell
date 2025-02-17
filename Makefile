@@ -6,7 +6,7 @@ SRC = src/minishell.c src/utils/utils.c src/built_ins/env.c src/utils/malloc_uti
 		src/helpers/clean.c src/utils/ft_strdup.c src/utils/ft_strjoin.c src/utils/ft_substr.c \
 		src/parser/tokens2.c src/parser/node2.c src/parser/file.c src/parser/parse_utils.c \
 		src/parser/expander.c src/execution/execute.c src/parser/command.c src/utils/str_utils.c \
-		src/utils/ft_split.c src/parser/expand_vars.c
+		src/utils/ft_split.c src/parser/expand_vars.c src/parser/expand_wildcards.c src/utils/env_utils2.c
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
 CFLAGS =

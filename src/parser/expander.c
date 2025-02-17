@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 10:26:08 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 10:46:37 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,27 @@ static int	remove_single_quotes(t_shell *shell, t_node *node, int start)
 	return (ft_safe_strlen(middle));
 }
 
-void	ft_expand_node_vars(t_shell *shell, t_node *node)
+int	ft_expand_node_vars(t_shell *shell, t_node *node)
 {
 	int	i;
+	int	x;
 
 	i = 0;
 	while (node->content[i])
 	{
 		if (node->content[i] == '\"')
-			i += remove_double_quotes(shell, node, i);
+			x = remove_double_quotes(shell, node, i);
 		else if (node->content[i] == '\'')
-			i += remove_single_quotes(shell, node, i);
+			x = remove_single_quotes(shell, node, i);
 		else if (node->content[i] == '$')
-			i += expand_var(shell, node, i);
+			x = expand_var(shell, node, i);
+		else if (node->content[i] == '*')
+			x = ft_expand_wildcards(shell, node, i);
 		else
-			i++;
+			x = 1;
+		if (x < 0)
+			return (1);
+		i += x;
 	}
+	return (0);
 }

@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   execute.c                                          :+:      :+:    :+:   */
+/*   env_utils2.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/13 16:28:05 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 10:30:10 by ylagmah          ###   ########.fr       */
+/*   Created: 2025/01/24 11:35:15 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/02/17 10:50:12 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_execute(t_shell *shell, t_node *node)
+char	*ft_get_env_value(t_shell *shell, char *key)
 {
-	(void) shell;
-	if (!node)
-		return ;
-	// TODO
-	while (node)
-	{
-		ft_expand_node_vars(shell, node);
-		printf("--> %s -- %d\n", node->content, node->type);
-		node = node->next;
-	}
+	t_env	*env;
+
+	env = ft_get_env(shell->env, key);
+	if (!env)
+		return (NULL);
+	return (env->value);
 }
