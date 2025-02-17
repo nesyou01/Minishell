@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:36 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:30:35 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 17:05:19 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void	env_init(t_shell *shell, char **env)
 		return ;
 	shell->cmd_garbage = NULL;
 	shell->globale_garbage = NULL;
-	shell->file = NULL;
 	shell->env = ft_parse_env(shell, *env, NULL);
 	env++;
 	while (*env)

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 13:15:08 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 17:05:02 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ typedef struct s_file
 {
 	int				fd;
 	char			*path;
-	struct s_file	*next;
 }	t_file;
 
 typedef struct s_node
@@ -79,7 +78,6 @@ typedef struct s_shell
 	t_env	*env;
 	t_list	*globale_garbage;
 	t_list	*cmd_garbage;
-	t_file	*file;
 }	t_shell;
 
 typedef struct s_execute
@@ -141,7 +139,7 @@ int			syntax_validator(t_token *token);
 void		ft_merge_tokens(t_shell *shell, t_token **token);
 void		ft_merge_args_with_cmd(t_shell *shell, t_token *token);
 void		ft_tokens_to_nodes(t_shell *shell, t_token *token, t_execute *cmd);
-t_file		*get_file_or_add(t_shell *shell, char *path);
+t_file		*ft_new_file(t_shell *shell, char *path);
 int			is_redirection(t_token *token);
 t_node		*ft_dup_node(t_shell *shell, t_node *node);
 t_command	*ft_parse_command(t_shell *shell, t_node *node);

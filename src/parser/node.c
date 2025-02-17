@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 13:17:13 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 17:05:29 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,13 @@
 static void	set_in_or_out(t_shell *shell, t_execute *cmd, t_token *token)
 {
 	if (token->prev->type == IN_REDIRECTER)
-		cmd->in = get_file_or_add(shell, token->content);
+		cmd->in = ft_new_file(shell, token->content);
 	else if (token->prev->type == OUT_REDIRECTER)
-		cmd->out = get_file_or_add(shell, token->content);
+		cmd->out = ft_new_file(shell, token->content);
 	else if (token->prev->type == OUT_APPEND_REDIRECTER)
-		cmd->out = get_file_or_add(shell, token->content);
+		cmd->out = ft_new_file(shell, token->content);
 	else if (token->prev->type == HERE_DOC)
 		cmd->here_doc = cmd->here_doc;
-	
 }
 
 static t_node	*new_node(t_shell *shell, t_token *token, t_execute *cmd)
