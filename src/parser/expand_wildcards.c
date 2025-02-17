@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/17 10:33:36 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 11:32:27 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 17:38:22 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,23 @@ static char	*sub_str_until(t_shell *shell, char *str, char c)
 	return (ft_substr(shell, str, 0, until + 1));
 }
 
-static int	ft_matches(char *str, char *filter)
+static int	ft_matches(char *str, char *filter, int from)
 {
+	size_t	f_len;
+	int		s;
+
 	if (!filter)
 		return (1);
+	if (from == 0)
+		return (ft_strnstr(str, filter, ft_strlen(filter)) != NULL);
+	if (from == 2)
+	{
+		f_len = ft_strlen(filter);
+		s = ft_strlen(str) - f_len;
+		if (s <= 0)
+			return (0);
+		return (ft_strnstr(str + s, filter, f_len) != NULL);
+	}
 	return (ft_strnstr(str, filter, ft_strlen(str)) != NULL);
 }
 
@@ -42,7 +55,7 @@ static char	*read_dir(t_shell *shell, DIR *dir, char *filter)
 		dr = readdir(dir);
 		if (!dr)
 			break ;
-		if (dr->d_name[0] != '.' && ft_matches(dr->d_name, filter))
+		if (dr->d_name[0] != '.' && ft_matches(dr->d_name, filter, 2))
 		{
 			if (str)
 				str = ft_strjoin(shell, str, " ");
