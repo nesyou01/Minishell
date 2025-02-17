@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:11:18 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/16 14:05:58 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 10:26:22 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ t_execute	*ft_parser(t_shell *shell, char *str)
 	if (syntax_validator(token))
 		return (NULL);
 	ft_tokens_to_nodes(shell, token, cmd);
-	ft_expander(shell, cmd->node);
 	ft_node_parser(shell, &(cmd->node));
 	ft_to_tree(cmd->node);
 	return (cmd);

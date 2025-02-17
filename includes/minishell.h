@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/16 12:08:05 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 10:26:15 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,10 +139,10 @@ void		ft_tokens_to_nodes(t_shell *shell, t_token *token, t_execute *cmd);
 t_file		*get_file_or_add(t_shell *shell, char *path);
 int			is_redirection(t_token *token);
 t_node		*ft_dup_node(t_shell *shell, t_node *node);
-void		ft_expander(t_shell *shell, t_node *node);
 t_command	*ft_parse_command(t_shell *shell, t_node *node);
 char		*ft_expand_all_vars(t_shell *shell,	char *str);
 int			get_var_end(char *s);
+void		ft_expand_node_vars(t_shell *shell, t_node *node);
 
 // EX
 void		ft_execute(t_shell *shell, t_node *node);

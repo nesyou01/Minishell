@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/16 14:05:50 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 10:26:08 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ static int	remove_single_quotes(t_shell *shell, t_node *node, int start)
 	return (ft_safe_strlen(middle));
 }
 
-static void	expand_all(t_shell *shell, t_node *node)
+void	ft_expand_node_vars(t_shell *shell, t_node *node)
 {
 	int	i;
 
@@ -94,14 +94,5 @@ static void	expand_all(t_shell *shell, t_node *node)
 			i += expand_var(shell, node, i);
 		else
 			i++;
-	}
-}
-
-void	ft_expander(t_shell *shell, t_node *node)
-{
-	while (node)
-	{
-		expand_all(shell, node);
-		node = node->next;
 	}
 }
