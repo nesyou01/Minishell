@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:11:18 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 10:26:22 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 13:15:26 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_execute	*ft_parser(t_shell *shell, char *str)
 	cmd->in = NULL;
 	cmd->out = NULL;
 	cmd->node = NULL;
+	cmd->here_doc = NULL;
 	token = ft_split_tokens(shell, str);
 	ft_tokenize(token);
 	ft_merge_tokens(shell, &token);

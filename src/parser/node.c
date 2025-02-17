@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/15 12:57:57 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 13:17:13 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,9 @@ static void	set_in_or_out(t_shell *shell, t_execute *cmd, t_token *token)
 		cmd->out = get_file_or_add(shell, token->content);
 	else if (token->prev->type == OUT_APPEND_REDIRECTER)
 		cmd->out = get_file_or_add(shell, token->content);
+	else if (token->prev->type == HERE_DOC)
+		cmd->here_doc = cmd->here_doc;
+	
 }
 
 static t_node	*new_node(t_shell *shell, t_token *token, t_execute *cmd)
@@ -36,6 +39,7 @@ static void	reset_io(t_execute *cmd)
 {
 	cmd->in = NULL;
 	cmd->out = NULL;
+	cmd->here_doc = NULL;
 }
 
 static void	set_io_for_last_cmd(t_node *node, t_execute *cmd)
@@ -60,9 +64,9 @@ void	ft_tokens_to_nodes(t_shell *shell, t_token *token, t_execute *cmd)
 	tmp = NULL;
 	while (token)
 	{
-		if (!is_redirection(token))
+		if (!is_redirection(token) && token->type != HERE_DOC)
 		{
-			if (token->type == FILE)
+			if (token->type == FILE || token->type == HERE_DOC_LIMITER)
 			{
 				set_in_or_out(shell, cmd, token);
 				set_io_for_last_cmd(tmp, cmd);

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:22 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:27:11 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 13:12:21 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ t_node	*ft_new_node(t_shell *shell, t_token *token)
 	list->l_node = NULL;
 	list->r_node = NULL;
 	list->taken = 0;
+	list->here_doc = NULL;
 	return (list);
 }
 

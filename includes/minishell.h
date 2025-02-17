@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 13:00:02 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 13:15:08 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ typedef struct s_node
 	int				type;
 	int				taken;
 	char			*content;
+	char			*here_doc;
 	t_file			*in;
 	t_file			*out;
 	struct s_node	*next;
@@ -85,6 +86,7 @@ typedef struct s_execute
 {
 	t_file			*in;
 	t_file			*out;
+	char			*here_doc;
 	t_node			*node;
 }	t_execute;
 
