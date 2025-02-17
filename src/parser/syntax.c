@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/14 13:53:14 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/17 13:06:03 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,23 @@ static int	is_valid_quotes(char *str)
 	}
 	return (1);
 }
+static int	parentheses_checker(t_token *token, int *par)
+{
+	if (token->type == PARENTHESES_START)
+	{
+		if (!token->next || token->next->type == PARENTHESES_END)
+			return (ft_perror("expected command after '('"), 1);
+		(*par)++;
+	}
+	else if (token->type == PARENTHESES_END)
+	{
+		if (!token->next
+			|| (token->next->type != AND && token->next->type != OR))
+			return (ft_perror("expected &&/|| after ')'"), 1);
+		(*par)--;
+	}
+	return (0);
+}
 
 int	syntax_validator(t_token *token)
 {
@@ -44,19 +61,13 @@ int	syntax_validator(t_token *token)
 	par = 0;
 	while (token)
 	{
-		if (token->type == PARENTHESES_START)
+		if (is_redirection(token))
 		{
-			if (!token->next || token->next->type == PARENTHESES_END)
-				return (ft_perror("expected command after '('"), 1);
-			par++;
+			if (token->next && token->next->type != FILE && token->next->type != HERE_DOC_LIMITER)
+				return (ft_perror("syntax error"), 1);
 		}
-		else if (token->type == PARENTHESES_END)
-		{
-			if (!token->next
-				|| (token->next->type != AND && token->next->type != OR))
-				return (ft_perror("expected &&/|| after ')'"), 1);
-			par--;
-		}
+		else if (parentheses_checker(token, &par))
+			return (1);
 		if (!is_valid_quotes(token->content))
 			return (ft_perror("unclosed quotes"), 1);
 		token = token->next;
