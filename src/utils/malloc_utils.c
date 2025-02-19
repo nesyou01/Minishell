@@ -6,11 +6,23 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:26:29 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:26:30 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/19 18:08:27 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+static t_list	*ft_new_garbage(void *content)
+{
+	t_list	*new;
+
+	new = malloc(sizeof(t_list));
+	if (!new)
+		return (NULL);
+	new->content = content;
+	new->next = NULL;
+	return (new);
+}
 
 static void	malloc_error(t_shell *shell)
 {
@@ -23,7 +35,7 @@ void	ft_add_garbage(t_list **head, t_shell *shell, void *ptr)
 {
 	t_list	*garbage;
 
-	garbage = ft_lstnew(ptr);
+	garbage = ft_new_garbage(ptr);
 	if (!garbage)
 	{
 		free(ptr);

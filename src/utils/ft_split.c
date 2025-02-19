@@ -5,79 +5,71 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 12:08:03 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/15 13:09:35 by ylagmah          ###   ########.fr       */
+/*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/02/19 18:10:38 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static size_t	split_size(char const *s, char c)
+static int	ft_get_quote_end(char *str, char quote, int start)
 {
-	size_t	i;
-	size_t	size;
+	int	i;
+	int	quotes;
 
-	size = 1;
-	i = 0;
-	while (s[i] && s[i] == c)
-		i++;
-	if (!s[i])
-		return (0);
-	while (s[i])
+	quotes = 1;
+	i = start + quotes;
+	while (str[i])
 	{
-		if (s[i] == c)
-		{
-			while (s[i] == c)
-				i++;
-			if (s[i])
-				size++;
-		}
-		else
+		if (str[i] == quote)
+			quotes++;
+		if (quotes % 2 == 0 && ft_strchr(SEPECIAL_CHARS, str[i]))
+			break ;
+		i++;
+	}
+	return (i);
+}
+
+static int	ft_get_token_end(char *str)
+{
+	int		i;
+	char	*first;
+
+	i = 0;
+	first = ft_strchr(SEPECIAL_CHARS, *str);
+	while (str[i] && str[i] != ' '
+		&& (!ft_strchr(SEPECIAL_CHARS, str[i]) == !first))
+	{
+		if (str[i] == '(' || str[i] == ')')
+			return (1);
+		if (str[i] == '\'')
+			return (ft_get_quote_end(str, '\'', i));
+		if (str[i] == '"')
+			return (ft_get_quote_end(str, '"', i));
+		i++;
+	}
+	return (i);
+}
+
+t_list	*ft_split(t_shell *shell, char *str)
+{
+	t_list		*lst;
+	int			i;
+	int			end;
+	char		*content;
+
+	i = 0;
+	lst = NULL;
+	while (str[i])
+	{
+		while (str[i] == ' ')
+			i++;
+		end = ft_get_token_end(str + i);
+		content = ft_substr(shell, str, i, end);
+		ft_lstadd_back(&lst, ft_lstnew(shell, content));
+		i += end;
+		while (str[i] == ' ')
 			i++;
 	}
-	return (size);
-}
-
-static char	*split_to_c(t_shell *shell, char const *s, char c)
-{
-	size_t	ri;
-	char	*result;
-	size_t	len;
-
-	len = 0;
-	while (s[len] && s[len] != c)
-		len++;
-	ri = 0;
-	result = (char *) ft_malloc (shell, len + 1);
-	while (*s && *s != c)
-	{
-		result[ri] = *s;
-		ri++;
-		s++;
-	}
-	result[ri] = '\0';
-	return (result);
-}
-
-char	**ft_split(t_shell *shell, char const *s, char c)
-{
-	char	**result;
-	size_t	ri;
-	size_t	size;
-
-	if (!s)
-		return (NULL);
-	ri = 0;
-	size = split_size(s, c);
-	result = (char **) ft_malloc(shell, sizeof(char *) * (size + 1));
-	while (ri++ < size)
-	{
-		while (*s && *s == c)
-			s++;
-		result[ri - 1] = split_to_c(shell, s, c);
-		while (*s && *s != c)
-			s++;
-	}
-	result[ri - 1] = NULL;
-	return (result);
+	return (lst);
 }
