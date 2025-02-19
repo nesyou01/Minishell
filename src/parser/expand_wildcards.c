@@ -6,72 +6,79 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/19 20:04:26 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/19 20:17:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	match(const char *str, const char *pattern)
+static int	ft_match(const char *str, const char *pattern)
 {
 	if (!*pattern && !*str)
 		return (1);
 	if (*pattern == '*') {
 		while (*str) {
-			if (match(str, pattern + 1))
+			if (ft_match(str, pattern + 1))
 				return (1);
 			str++;
 		}
-		return (match(str, pattern + 1));
+		return (ft_match(str, pattern + 1));
 	}
 	if (*pattern == *str)
-		return (match(str + 1, pattern + 1));
+		return (ft_match(str + 1, pattern + 1));
 	return (0);
 }
 
-static t_list	*read_dir(t_shell *shell, DIR *dir)
+static char	*read_dir(t_shell *shell, DIR *dir, char *pattern)
 {
-	t_list			*list;
-	t_list			*node;
+	char			*str;
  	struct dirent	*dr;
 
-	list = NULL;
+	str = NULL;
  	while (1)
 	{
 		dr = readdir(dir);
 		if (!dr)
 			break ;
-		if (dr->d_name[0] != '.')
+		if (dr->d_name[0] != '.' && ft_match(dr->d_name, pattern))
 		{
-			node = ft_lstnew(shell, dr->d_name);
-			ft_lstadd_back(&list, node);
+			if (str)
+				str = ft_strjoin(shell, str, " ");
+			str = ft_strjoin(shell, str, dr->d_name);
 		}
 	}
-	return (list);
+	return (str);
 }
 
-static int	ft_expand_wildcards(t_shell *shell, t_node *node)
+static int	ft_expand_wildcards(t_shell *shell, t_list *item)
 {
 	t_list	*list;
 	DIR		*dir;
 
 	dir = opendir(ft_get_env_value(shell, "PWD"));
  	if (!dir)
-		return (ft_perror("Cannot open dir!"), -1);
-	list = read_dir(shell, dir);
-	return (1);
+		return (ft_perror("Cannot open dir!"), 2);
+	item->content = read_dir(shell, dir, item->content);
+	return (item->content == NULL);
 }
 
 int	ft_wildcard_handler(t_shell *shell, t_node *node)
 {
 	t_list	*lst;
 	t_list	*head;
+	int		result;
 
 	lst = ft_split(shell, node->content);
 	head = lst;
 	while (lst)
 	{
 		ft_expand_list_item(shell, lst);
+		if (ft_strchr(lst->content, '*'))
+		{
+			result = ft_expand_wildcards(shell, lst);
+			if (result)
+				return (result);
+		}
 		lst = lst->next;
 	}
 	node->content = ft_join_all(shell, head);
