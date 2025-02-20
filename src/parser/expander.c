@@ -6,106 +6,123 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/19 19:56:23 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 15:10:47 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_expand_var(t_shell *shell, char **content, int start)
+static int	expand_var(t_shell *shell, t_node *node, int start)
 {
 	int		end;
 	char	*var;
 	char	*expanded;
 	char	*start_str;
 	char	*end_str;
-	char	*str;
+	size_t	len;
 
-	str = *content;
 	if (!start)
 		start_str = NULL;
 	else
-		start_str = ft_substr(shell, str, 0, start);
-	end = get_var_end(str + start) + start + 1;
-	var = ft_substr(shell, str, start, end - start);
+		start_str = ft_substr(shell, node->content, 0, start);
+	end = get_var_end(node->content + start) + start + 1;
+	var = ft_substr(shell, node->content, start, end - start);
 	expanded = ft_expand_all_vars(shell, var);
-	end_str = ft_substr(shell, str, end,
-			ft_strlen(str) - end);
-	*content = ft_strjoin(shell,
+	end_str = ft_substr(shell, node->content, end,
+			ft_strlen(node->content) - end);
+	node->content = ft_strjoin(shell,
 			ft_strjoin(shell, start_str, expanded), end_str);
-	return (ft_safe_strlen(expanded));
+	len = ft_safe_strlen(expanded);
+	node->filter = ft_strjoin(shell, node->filter, ft_repeat(shell, len, '1'));
+	return (len);
 }
 
-int	ft_remove_double_quotes(t_shell *shell, char **content, int start)
+static int	remove_double_quotes(t_shell *shell, t_node *node, int start)
 {
 	char	*start_str;
 	char	*end;
 	char	*result;
 	char	*middle;
 	char	*expanded;
-	char	*str;
+	size_t	len;
 
-	str = *content;
 	if (!start)
 		start_str = NULL;
 	else
-		start_str = ft_substr(shell, str, 0, start);
-	end = ft_strchr(str + start + 1, '"');
+		start_str = ft_substr(shell, node->content, 0, start);
+	end = ft_strchr(node->content + start + 1, '"');
 	if (end)
 		end++;
-	middle = ft_substr(shell, str, start + 1,
-			ft_safe_strlen(str) - ft_safe_strlen(start_str)
+	middle = ft_substr(shell, node->content, start + 1,
+			ft_safe_strlen(node->content) - ft_safe_strlen(start_str)
 			- ft_safe_strlen(end) - 2);
 	expanded = ft_expand_all_vars(shell, middle);
-	*content = ft_strjoin(shell,
+	node->content = ft_strjoin(shell,
 			ft_strjoin(shell, start_str, expanded), end);
-	return (ft_safe_strlen(expanded));
+	len = ft_safe_strlen(expanded);
+	node->filter = ft_strjoin(shell, node->filter, ft_repeat(shell, len, '0'));
+	return (len);
 }
 
-int	ft_remove_single_quotes(t_shell *shell, char **content, int start)
+static int	remove_single_quotes(t_shell *shell, t_node *node, int start)
 {
 	char	*start_str;
 	char	*end;
 	char	*middle;
-	char	*str;
+	size_t	len;
 
-	str = *content;
 	if (!start)
 		start_str = NULL;
 	else
-		start_str = ft_substr(shell, str, 0, start);
-	end = ft_strchr(str + start + 1, '\'');
+		start_str = ft_substr(shell, node->content, 0, start);
+	end = ft_strchr(node->content + start + 1, '\'');
 	if (end)
 		end++;
-	middle = ft_substr(shell, str, start + 1,
-			ft_safe_strlen(str)
+	middle = ft_substr(shell, node->content, start + 1,
+			ft_safe_strlen(node->content)
 			- ft_safe_strlen(start_str) - ft_safe_strlen(end) - 2);
-	*content = ft_strjoin(shell,
+	node->content = ft_strjoin(shell,
 			ft_strjoin(shell, start_str, middle), end);
-	return (ft_safe_strlen(middle));
+	len = ft_safe_strlen(middle);
+	node->filter = ft_strjoin(shell, node->filter, ft_repeat(shell, len, '0'));
+	return (len);
 }
 
-int	ft_expand_node_vars(t_shell *shell, t_node *node)
+static int	expand_node_vars(t_shell *shell, t_node *node)
 {
 	int		i;
 	int		x;
 
 	i = 0;
-	if (ft_strchr(node->content, '*'))
-		return (ft_wildcard_handler(shell, node));
+	node->filter = NULL;
 	while (node->content[i])
 	{
 		if (node->content[i] == '"')
-			x = ft_remove_double_quotes(shell, &(node->content), i);
+			i += remove_double_quotes(shell, node, i);
 		else if (node->content[i] == '\'')
-			x = ft_remove_single_quotes(shell, &(node->content), i);
+			i += remove_single_quotes(shell, node, i);
 		else if (node->content[i] == '$')
-			x = ft_expand_var(shell, &(node->content), i);
+			i += expand_var(shell, node, i);
 		else
-			x = 1;
-		if (x < 0)
-			return (1);
-		i += x;
+		{
+			if (node->content[i] == '*')
+				node->filter = ft_strjoin(shell, node->filter, "2");
+			else if (node->content[i] == ' ')
+				node->filter = ft_strjoin(shell, node->filter, " ");
+			else
+				node->filter = ft_strjoin(shell, node->filter, "0");
+			i++;
+		}
 	}
+	return (0);
+}
+
+int	ft_expand_node_vars(t_shell *shell, t_node *node)
+{
+	if (expand_node_vars(shell, node))
+		return (1);
+	// printf("==> %s\n", node->filter);
+	if (ft_strchr(node->filter, '2'))
+		return (ft_wildcard_handler(shell, node));
 	return (0);
 }

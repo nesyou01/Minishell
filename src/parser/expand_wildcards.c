@@ -6,39 +6,39 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 11:18:17 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 16:20:17 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	ft_match(const char *str, const char *pattern)
+static int	ft_match(char *str, char *pattern, char *filter)
 {
 	if (!*pattern && !*str)
 		return (1);
-	if (*pattern == '*') {
+	if (*filter == '2') {
 		while (*str) {
-			if (ft_match(str, pattern + 1))
+			if (ft_match(str, pattern + 1, filter + 1))
 				return (1);
 			str++;
 		}
-		return (ft_match(str, pattern + 1));
+		return (ft_match(str, pattern + 1, filter + 1));
 	}
 	if (*pattern == *str)
-		return (ft_match(str + 1, pattern + 1));
+		return (ft_match(str + 1, pattern + 1, filter + 1));
 	return (0);
 }
 
-static int	ft_match_pattern(char *file, char *pattern)
+static int	ft_match_pattern(char *file, char *pattern, char *filter)
 {
 	if (*file == '.' && *pattern != '.')
 		return (0);
 	if (!ft_strcmp(file, ".") || !ft_strcmp(file, ".."))
 		return (0);
-	return (ft_match(file, pattern));
+	return (ft_match(file, pattern, filter));
 }
 
-static char	*read_dir(t_shell *shell, DIR *dir, char *pattern)
+static char	*read_dir(t_shell *shell, DIR *dir, char *pattern, char *filter)
 {
 	char			*str;
  	struct dirent	*dr;
@@ -49,7 +49,7 @@ static char	*read_dir(t_shell *shell, DIR *dir, char *pattern)
 		dr = readdir(dir);
 		if (!dr)
 			break ;
-		if (ft_match_pattern(dr->d_name, pattern))
+		if (ft_match_pattern(dr->d_name, pattern, filter))
 		{
 			if (str)
 				str = ft_strjoin(shell, str, " ");
@@ -59,37 +59,65 @@ static char	*read_dir(t_shell *shell, DIR *dir, char *pattern)
 	return (str);
 }
 
-static int	ft_expand_wildcards(t_shell *shell, t_list *item)
+static char	*ft_expand_wildcard(t_shell *shell, char *pattern, char *filter)
 {
-	t_list	*list;
+	char	*result;
 	DIR		*dir;
 
 	dir = opendir(ft_get_env_value(shell, "PWD"));
  	if (!dir)
-		return (ft_perror("Cannot open dir!"), 2);
-	item->content = read_dir(shell, dir, item->content);
-	return (item->content == NULL);
+		return (ft_perror("Cannot open dir!"), NULL);
+	result = read_dir(shell, dir, pattern, filter);
+ 	if (!result)
+		ft_perror("No matches!!");
+	return (result);
+}
+
+static int	get_pattern_start(t_shell *shell, t_node *node, int i)
+{
+	int		start;
+	char	*widlcard;
+
+	widlcard = ft_strchr(node->filter + i, '2');
+	if (!widlcard)
+		return (-1);
+	start = ft_strlen(node->filter) - ft_strlen(widlcard);
+	while (start)
+	{
+		if (node->filter[start - 1] == ' ')
+			break ;
+		start--;
+	}
+	return (start);
 }
 
 int	ft_wildcard_handler(t_shell *shell, t_node *node)
 {
-	t_list	*lst;
-	t_list	*head;
-	int		result;
+	int		start;
+	int		len;
+	char	*pattern;
+	char	*filter;
+	char	*result;
+	char	*start_str;
+	char	*end_str;
 
-	lst = ft_split(shell, node->content);
-	head = lst;
-	while (lst)
+	start = 0;
+	len = 0;
+	while (1)
 	{
-		ft_expand_list_item(shell, lst);
-		if (ft_strchr(lst->content, '*'))
-		{
-			result = ft_expand_wildcards(shell, lst);
-			if (result)
-				return (result);
-		}
-		lst = lst->next;
+		start = get_pattern_start(shell, node, start + len);
+		if (start < 0)
+			break ;
+		len = ft_index_of(node->content + start, ' ');
+		pattern = ft_substr(shell, node->content, start, len);
+		filter = ft_substr(shell, node->filter, start, len);
+		printf("====> %s\n", pattern);
+		printf("====> %s\n", filter);
+		result = ft_expand_wildcard(shell, pattern, filter);
+		start_str = ft_substr(shell, node->content, 0, start);
+		end_str = ft_substr(shell, node->content, start + len, ft_strlen(node->content + start + len));
+		start_str = ft_strjoin(shell, start_str, result);
+		node->content = ft_strjoin(shell, start_str, end_str);
 	}
-	node->content = ft_join_all(shell, head);
 	return (0);
 }
