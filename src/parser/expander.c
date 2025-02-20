@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 15:10:47 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:45:28 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -121,8 +121,7 @@ int	ft_expand_node_vars(t_shell *shell, t_node *node)
 {
 	if (expand_node_vars(shell, node))
 		return (1);
-	// printf("==> %s\n", node->filter);
-	if (ft_strchr(node->filter, '2'))
+	if (ft_strchr(node->content, '*'))
 		return (ft_wildcard_handler(shell, node));
 	return (0);
 }

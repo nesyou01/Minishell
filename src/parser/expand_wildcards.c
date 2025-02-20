@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 17:28:26 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 18:03:24 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,6 @@ static int	ft_match(char *str, char *pattern, char *filter)
 static int	ft_match_pattern(char *file, char *pattern, char *filter)
 {
 	if (*file == '.' && *pattern != '.')
-		return (0);
-	if (!ft_strcmp(file, ".") || !ft_strcmp(file, ".."))
 		return (0);
 	return (ft_match(file, pattern, filter));
 }
@@ -118,6 +116,35 @@ static int	expand_widlcard(t_shell *shell, t_node *node)
 	return (0);
 }
 
+static void	retokenize(t_node *node)
+{
+	int		i;
+	char	c;
+
+	i = 0;
+	while (node->content[i])
+	{
+		if (node->filter[i] == '1')
+		{
+			if (node->content[i] == '\'' || node->content[i] == '"')
+			{
+				c = node->content[i];
+				node->filter[i++] = '0';
+				while (node->filter[i] && node->filter[i] != c)
+					node->filter[i++] = '0';
+				continue ;
+			}
+			else if (node->content[i] == ' ')
+					node->filter[i] = ' ';
+			else if (node->content[i] == '*')
+					node->filter[i] = '2';
+			else
+				node->filter[i] = '0';
+		}
+		i++;
+	}
+}
+
 int	ft_wildcard_handler(t_shell *shell, t_node *node)
 {
 	int	result;
@@ -125,5 +152,12 @@ int	ft_wildcard_handler(t_shell *shell, t_node *node)
 	result = 0;
 	while (!result && ft_strchr(node->filter, '2'))
 		result = expand_widlcard(shell, node);
+	if (result)
+		return (result);
+	if (ft_strchr(node->filter, '1'))
+	{
+		retokenize(node);
+		ft_wildcard_handler(shell, node);
+	}
 	return (result);
 }
