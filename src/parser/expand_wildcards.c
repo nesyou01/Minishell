@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 16:20:17 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 17:28:26 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,12 +73,12 @@ static char	*ft_expand_wildcard(t_shell *shell, char *pattern, char *filter)
 	return (result);
 }
 
-static int	get_pattern_start(t_shell *shell, t_node *node, int i)
+static int	get_pattern_start(t_shell *shell, t_node *node)
 {
 	int		start;
 	char	*widlcard;
 
-	widlcard = ft_strchr(node->filter + i, '2');
+	widlcard = ft_strchr(node->filter, '2');
 	if (!widlcard)
 		return (-1);
 	start = ft_strlen(node->filter) - ft_strlen(widlcard);
@@ -91,7 +91,7 @@ static int	get_pattern_start(t_shell *shell, t_node *node, int i)
 	return (start);
 }
 
-int	ft_wildcard_handler(t_shell *shell, t_node *node)
+static int	expand_widlcard(t_shell *shell, t_node *node)
 {
 	int		start;
 	int		len;
@@ -101,23 +101,29 @@ int	ft_wildcard_handler(t_shell *shell, t_node *node)
 	char	*start_str;
 	char	*end_str;
 
-	start = 0;
-	len = 0;
-	while (1)
-	{
-		start = get_pattern_start(shell, node, start + len);
-		if (start < 0)
-			break ;
-		len = ft_index_of(node->content + start, ' ');
-		pattern = ft_substr(shell, node->content, start, len);
-		filter = ft_substr(shell, node->filter, start, len);
-		printf("====> %s\n", pattern);
-		printf("====> %s\n", filter);
-		result = ft_expand_wildcard(shell, pattern, filter);
-		start_str = ft_substr(shell, node->content, 0, start);
-		end_str = ft_substr(shell, node->content, start + len, ft_strlen(node->content + start + len));
-		start_str = ft_strjoin(shell, start_str, result);
-		node->content = ft_strjoin(shell, start_str, end_str);
-	}
+	start = get_pattern_start(shell, node);
+	len = ft_index_of(node->content + start, ' ');
+	pattern = ft_substr(shell, node->content, start, len);
+	filter = ft_substr(shell, node->filter, start, len);
+	result = ft_expand_wildcard(shell, pattern, filter);
+	start_str = ft_substr(shell, node->content, 0, start);
+	end_str = ft_substr(shell, node->content, start + len, ft_strlen(node->content + start + len));
+	start_str = ft_strjoin(shell, start_str, result);
+	node->content = ft_strjoin(shell, start_str, end_str);
+	start_str = ft_substr(shell, node->filter, 0, start);
+	end_str = ft_substr(shell, node->filter, start + len, ft_strlen(node->filter + start + len));
+	result = ft_repeat(shell, ft_strlen(result), '0');
+	start_str = ft_strjoin(shell, start_str, result);
+	node->filter = ft_strjoin(shell, start_str, end_str);
 	return (0);
+}
+
+int	ft_wildcard_handler(t_shell *shell, t_node *node)
+{
+	int	result;
+
+	result = 0;
+	while (!result && ft_strchr(node->filter, '2'))
+		result = expand_widlcard(shell, node);
+	return (result);
 }
