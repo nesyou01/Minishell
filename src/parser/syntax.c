@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 13:06:03 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:41:48 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ int	syntax_validator(t_token *token)
 	par = 0;
 	while (token)
 	{
-		if (is_redirection(token))
+		if (is_redirection(token) || token->type == HERE_DOC)
 		{
-			if (token->next && token->next->type != FILE && token->next->type != HERE_DOC_LIMITER)
+			if (!token->next || (token->next->type != FILE && token->next->type != HERE_DOC_LIMITER))
 				return (ft_perror("syntax error"), 1);
 		}
 		else if (parentheses_checker(token, &par))
