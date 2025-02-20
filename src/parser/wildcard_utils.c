@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 20:19:05 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 20:25:44 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:28:21 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@ char	*ft_join_all(t_shell *shell, t_list *item)
 	size_t	i;
 	size_t	j;
 
+	if (!item)
+		return (NULL);
 	i = 0;
 	j = 0;
 	result = ft_malloc(shell, join_len(item) * sizeof(char));

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 20:25:52 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:31:03 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,8 @@ static int	expand_widlcard(t_shell *shell, t_node *node)
 	pattern = ft_substr(shell, node->content, start, len);
 	filter = ft_substr(shell, node->filter, start, len);
 	result = ft_expand_wildcard(shell, pattern, filter);
+	if (!result)
+		return (1);
 	start_str = ft_substr(shell, node->content, 0, start);
 	end_str = ft_substr(shell, node->content, start + len, ft_strlen(node->content + start + len));
 	start_str = ft_strjoin(shell, start_str, result);
