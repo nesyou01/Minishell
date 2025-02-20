@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/19 20:17:57 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 11:18:17 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,15 @@ static int	ft_match(const char *str, const char *pattern)
 	return (0);
 }
 
+static int	ft_match_pattern(char *file, char *pattern)
+{
+	if (*file == '.' && *pattern != '.')
+		return (0);
+	if (!ft_strcmp(file, ".") || !ft_strcmp(file, ".."))
+		return (0);
+	return (ft_match(file, pattern));
+}
+
 static char	*read_dir(t_shell *shell, DIR *dir, char *pattern)
 {
 	char			*str;
@@ -40,7 +49,7 @@ static char	*read_dir(t_shell *shell, DIR *dir, char *pattern)
 		dr = readdir(dir);
 		if (!dr)
 			break ;
-		if (dr->d_name[0] != '.' && ft_match(dr->d_name, pattern))
+		if (ft_match_pattern(dr->d_name, pattern))
 		{
 			if (str)
 				str = ft_strjoin(shell, str, " ");
