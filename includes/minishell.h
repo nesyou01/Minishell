@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 15:21:02 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:26:03 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -124,9 +124,8 @@ t_list		*ft_lstnew(t_shell *shell, void *content);
 char		*ft_repeat(t_shell *shell, size_t len, char c);
 int			ft_index_of(char *str, char c);
 
-
 // PARSING
-t_execute		*ft_parser(t_shell *shell, char *str);
+t_execute	*ft_parser(t_shell *shell, char *str);
 t_token		*ft_split_tokens(t_shell *shell, char *str);
 int			ft_tokenize(t_token *lst);
 void		ft_add_token_last(t_token **lst, t_token *new);
@@ -151,7 +150,8 @@ char		*ft_expand_all_vars(t_shell *shell,	char *str);
 int			get_var_end(char *s);
 int			ft_wildcard_handler(t_shell *shell, t_node *node);
 int			ft_expand_node_vars(t_shell *shell, t_node *node);
-
+char		*ft_join_all(t_shell *shell, t_list *item);
+void		ft_sort(t_list *lst);
 // EX
 void		ft_execute(t_shell *shell, t_node *node);
 

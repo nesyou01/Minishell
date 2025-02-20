@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 18:03:24 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/20 20:25:52 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,23 +38,20 @@ static int	ft_match_pattern(char *file, char *pattern, char *filter)
 
 static char	*read_dir(t_shell *shell, DIR *dir, char *pattern, char *filter)
 {
-	char			*str;
+	t_list			*lst;
  	struct dirent	*dr;
 
-	str = NULL;
+	lst = NULL;
  	while (1)
 	{
 		dr = readdir(dir);
 		if (!dr)
 			break ;
 		if (ft_match_pattern(dr->d_name, pattern, filter))
-		{
-			if (str)
-				str = ft_strjoin(shell, str, " ");
-			str = ft_strjoin(shell, str, dr->d_name);
-		}
+			ft_lstadd_back(&lst, ft_lstnew(shell, dr->d_name));
 	}
-	return (str);
+	ft_sort(lst);
+	return (ft_join_all(shell, lst));
 }
 
 static char	*ft_expand_wildcard(t_shell *shell, char *pattern, char *filter)
