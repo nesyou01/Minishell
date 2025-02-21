@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:28:05 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/21 15:25:02 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/21 15:36:39 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ void	ft_execute(t_shell *shell, t_execute *exe)
 	{
 		if (ft_expand_node_vars(shell, node))
 			return ;
+		printf("%s\n", node->filter);
 		lst = ft_split(shell, node->content, node->filter);
 		while (lst)
 		{
@@ -32,6 +33,7 @@ void	ft_execute(t_shell *shell, t_execute *exe)
 		node = node->next;
 	}
 }
+
 // printf("--> %s(%d) [input: ", node->content, node->type);
 // 		while (node->in)
 // 		{

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/21 15:19:47 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/21 15:48:42 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	ft_match_pattern(char *file, char *pattern, char *filter)
 	return (ft_match(file, pattern, filter));
 }
 
-static char	*read_dir(t_shell *shell, DIR *dir, char *pattern, char *filter)
+static t_list	*read_dir(t_shell *shell, DIR *dir, char *pattern, char *filter)
 {
 	t_list			*lst;
  	struct dirent	*dr;
@@ -51,12 +51,12 @@ static char	*read_dir(t_shell *shell, DIR *dir, char *pattern, char *filter)
 			ft_lstadd_back(&lst, ft_lstnew(shell, dr->d_name));
 	}
 	ft_sort(lst);
-	return (ft_join_all(shell, lst));
+	return (lst);
 }
 
-static char	*ft_expand_wildcard(t_shell *shell, char *pattern, char *filter)
+static t_list	*ft_expand_wildcard(t_shell *shell, char *pattern, char *filter)
 {
-	char	*result;
+	t_list	*result;
 	DIR		*dir;
 
 	dir = opendir(ft_get_env_value(shell, "PWD"));
@@ -86,13 +86,28 @@ static int	get_pattern_start(t_node *node)
 	return (start);
 }
 
+static char	*build_wildcard_pattern(t_shell *shell, t_list *lst)
+{
+	char	*str;
+
+	str = NULL;
+	while (lst)
+	{
+		str = ft_strjoin(shell, str, ft_repeat(shell, ft_safe_strlen(lst->content), '0'));
+		if (lst->next)
+			str = ft_strjoin(shell, str, " ");
+		lst = lst->next;
+	}
+	return (str);
+}
+
 static int	expand_widlcard(t_shell *shell, t_node *node)
 {
 	int		start;
 	int		len;
 	char	*pattern;
 	char	*filter;
-	char	*result;
+	t_list	*result;
 	char	*start_str;
 	char	*end_str;
 
@@ -105,12 +120,11 @@ static int	expand_widlcard(t_shell *shell, t_node *node)
 		return (1);
 	start_str = ft_substr(shell, node->content, 0, start);
 	end_str = ft_substr(shell, node->content, start + len, ft_strlen(node->content + start + len));
-	start_str = ft_strjoin(shell, start_str, result);
+	start_str = ft_strjoin(shell, start_str, ft_join_all(shell, result));
 	node->content = ft_strjoin(shell, start_str, end_str);
 	start_str = ft_substr(shell, node->filter, 0, start);
 	end_str = ft_substr(shell, node->filter, start + len, ft_strlen(node->filter + start + len));
-	result = ft_repeat(shell, ft_strlen(result), '0');
-	start_str = ft_strjoin(shell, start_str, result);
+	start_str = ft_strjoin(shell, start_str, build_wildcard_pattern(shell, result));
 	node->filter = ft_strjoin(shell, start_str, end_str);
 	return (0);
 }
