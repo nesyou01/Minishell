@@ -15,8 +15,7 @@ NAME		=	libft.a
 AR			=	ar -rcs
 CC			=	cc
 RM			=	rm -f
-CFLAGS		=	-Wall -Wextra -Werror 
-# -g -fsanitize=address
+CFLAGS		=	-Wall -Wextra -Werror -g -fsanitize=address
 
 ${NAME}:		${OBJS} ${BONUS_OBJS}
 

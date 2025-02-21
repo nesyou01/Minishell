@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/21 10:32:07 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/21 14:27:16 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef struct s_file
 {
 	int				fd;
 	char			*path;
+	struct s_file	*next;
 }	t_file;
 
 typedef struct s_node
@@ -57,7 +58,7 @@ typedef struct s_node
 	int				taken;
 	char			*content;
 	char			*filter;
-	char			*here_doc;
+	t_file			*here_doc;
 	t_file			*in;
 	t_file			*out;
 	struct s_node	*next;
@@ -85,7 +86,7 @@ typedef struct s_execute
 {
 	t_file			*in;
 	t_file			*out;
-	char			*here_doc;
+	t_file			*here_doc;
 	t_node			*node;
 }	t_execute;
 
@@ -136,7 +137,7 @@ t_node		*ft_add_node_last(t_node **lst, t_node *new);
 t_node		*ft_new_node(t_shell *shell, t_token *token);
 void		ft_add_node_start(t_node **lst, t_node *new);
 void		ft_clean_cmd(t_shell *shell);
-void		ft_node_parser(t_shell *shell, t_node **node);
+void		ft_tree_builder(t_shell *shell, t_node **node);
 t_node		*ft_to_tree(t_node *node);
 int			syntax_validator(t_token *token);
 void		ft_merge_tokens(t_shell *shell, t_token **token);
@@ -153,7 +154,10 @@ int			ft_expand_node_vars(t_shell *shell, t_node *node);
 char		*ft_join_all(t_shell *shell, t_list *item);
 int			ft_isvalid_var(char c);
 void		ft_sort(t_list *lst);
+t_file		*ft_add_file_last(t_file **lst, t_file *new);
+t_file		*ft_last_file(t_file *lst);
+
 // EX
-void		ft_execute(t_shell *shell, t_node *node);
+void		ft_execute(t_shell *shell, t_execute *exe);
 
 #endif

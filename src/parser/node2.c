@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:56 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:27:59 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/21 10:58:44 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static void	move_lst(t_node **a, t_node **b)
 	}
 }
 
-void	ft_node_parser(t_shell *shell, t_node **node)
+void	ft_tree_builder(t_shell *shell, t_node **node)
 {
 	t_node	*op;
 	t_node	*cmd;
@@ -87,4 +87,5 @@ void	ft_node_parser(t_shell *shell, t_node **node)
 	}
 	move_lst(&op, &cmd);
 	*node = cmd;
+	ft_to_tree(cmd);
 }
