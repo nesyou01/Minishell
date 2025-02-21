@@ -6,27 +6,24 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/16 12:07:57 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/21 10:39:07 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int	ft_isvalid_var(char c)
+{
+	return (ft_isalnum(c) || c == '_');
+}
 
 int	get_var_end(char *s)
 {
 	int	i;
 
 	i = 1;
-	if (ft_isdigit(s[i]))
-	{
-		while (s[i] && ft_isdigit(s[i]))
-			i++;
-	}
-	else
-	{
-		while (s[i] && ft_isalnum(s[i]))
-			i++;
-	}
+	while (s[i] && ft_isvalid_var(s[i]))
+		i++;
 	if (s[i])
 		i--;
 	return (i);
@@ -74,7 +71,7 @@ char	*ft_expand_all_vars(t_shell *shell,	char *str)
 		sign = ft_strchr(sign, '$');
 		if (!sign)
 			return (str);
-		if (ft_isalnum(sign[1]))
+		if (!ft_isdigit(sign[1]) && ft_isvalid_var(sign[1]))
 		{
 			str = expand_var(shell, str, sign);
 			sign = str;

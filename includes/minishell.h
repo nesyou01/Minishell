@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 20:26:03 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/21 10:32:07 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,6 +151,7 @@ int			get_var_end(char *s);
 int			ft_wildcard_handler(t_shell *shell, t_node *node);
 int			ft_expand_node_vars(t_shell *shell, t_node *node);
 char		*ft_join_all(t_shell *shell, t_list *item);
+int			ft_isvalid_var(char c);
 void		ft_sort(t_list *lst);
 // EX
 void		ft_execute(t_shell *shell, t_node *node);
