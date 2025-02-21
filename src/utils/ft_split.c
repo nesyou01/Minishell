@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/19 18:10:38 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/21 15:24:50 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static int	ft_get_token_end(char *str)
 	return (i);
 }
 
-t_list	*ft_split(t_shell *shell, char *str)
+t_list	*ft_split(t_shell *shell, char *str, char *pattern)
 {
 	t_list		*lst;
 	int			i;
