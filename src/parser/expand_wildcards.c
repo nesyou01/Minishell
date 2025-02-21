@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 20:31:03 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/21 15:19:47 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static char	*ft_expand_wildcard(t_shell *shell, char *pattern, char *filter)
 	return (result);
 }
 
-static int	get_pattern_start(t_shell *shell, t_node *node)
+static int	get_pattern_start(t_node *node)
 {
 	int		start;
 	char	*widlcard;
@@ -96,7 +96,7 @@ static int	expand_widlcard(t_shell *shell, t_node *node)
 	char	*start_str;
 	char	*end_str;
 
-	start = get_pattern_start(shell, node);
+	start = get_pattern_start(node);
 	len = ft_index_of(node->content + start, ' ');
 	pattern = ft_substr(shell, node->content, start, len);
 	filter = ft_substr(shell, node->filter, start, len);

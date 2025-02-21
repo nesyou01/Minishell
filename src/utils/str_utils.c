@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:12:30 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 15:20:51 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/21 15:19:33 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ size_t	ft_safe_strlen(char *str)
 char	*ft_repeat(t_shell *shell, size_t len, char c)
 {
 	char	*result;
-	int		i;
+	size_t	i;
 
 	result = ft_malloc(shell, (len + 1) * sizeof(char));
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/21 14:27:16 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/21 15:19:07 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ typedef struct s_execute
 
 typedef struct s_command
 {
-	char	**argv;
+	t_list	*argv;
 	char	*cmd;
 }	t_command;
 
