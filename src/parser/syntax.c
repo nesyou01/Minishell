@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/20 20:41:48 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/22 13:09:27 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ static int	parentheses_checker(t_token *token, int *par)
 	}
 	else if (token->type == PARENTHESES_END)
 	{
-		if (!token->next
-			|| (token->next->type != AND && token->next->type != OR))
-			return (ft_perror("expected &&/|| after ')'"), 1);
+		// if (!token->next
+		// 	|| (token->next->type != AND && token->next->type != OR))
+		// 	return (ft_perror("expected &&/|| after ')'"), 1);
 		(*par)--;
 	}
 	return (0);
