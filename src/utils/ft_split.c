@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/21 15:51:37 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/23 08:46:37 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,13 +62,13 @@ t_list	*ft_split(t_shell *shell, char *str, char *pattern)
 	lst = NULL;
 	while (str[i])
 	{
-		while (str[i] == ' ')
+		while (pattern[i] == ' ')
 			i++;
 		end = ft_get_token_end(pattern + i);
 		content = ft_substr(shell, str, i, end);
 		ft_lstadd_back(&lst, ft_lstnew(shell, content));
 		i += end;
-		while (str[i] == ' ')
+		while (pattern[i] == ' ')
 			i++;
 	}
 	return (lst);
