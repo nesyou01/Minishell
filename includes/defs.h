@@ -64,19 +64,17 @@ typedef struct s_shell
 	t_list	*cmd_garbage;
 }	t_shell;
 
-typedef struct s_execute
-{
-	t_file			*in;
-	t_file			*out;
-	t_file			*here_doc;
-	t_node			*node;
-}	t_execute;
-
 typedef struct s_command
 {
 	t_list	*argv;
 	char	*cmd;
 }	t_command;
 
+typedef struct s_io
+{
+	t_file	*here_doc;
+	t_file	*in;
+	t_file	*out;
+}	t_io;
 
 #endif

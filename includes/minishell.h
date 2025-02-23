@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/23 08:55:01 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/23 09:12:22 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char		*ft_repeat(t_shell *shell, size_t len, char c);
 int			ft_index_of(char *str, char c);
 
 // PARSING
-t_execute	*ft_parser(t_shell *shell, char *str);
+t_node		*ft_parser(t_shell *shell, char *str);
 t_token		*ft_split_tokens(t_shell *shell, char *str);
 int			ft_tokenize(t_token *lst);
 void		ft_add_token_last(t_token **lst, t_token *new);
@@ -65,7 +65,7 @@ t_node		*ft_to_tree(t_node *node);
 int			syntax_validator(t_token *token);
 void		ft_merge_tokens(t_shell *shell, t_token **token);
 void		ft_merge_args_with_cmd(t_shell *shell, t_token *token);
-void		ft_tokens_to_nodes(t_shell *shell, t_token *token, t_execute *cmd);
+t_node		*ft_tokens_to_nodes(t_shell *shell, t_token *token);
 t_file		*ft_new_file(t_shell *shell, char *path);
 int			is_redirection(t_token *token);
 t_node		*ft_dup_node(t_shell *shell, t_node *node);
@@ -81,6 +81,6 @@ t_file		*ft_add_file_last(t_file **lst, t_file *new);
 t_file		*ft_last_file(t_file *lst);
 
 // EX
-void		ft_execute(t_shell *shell, t_execute *exe);
+void		ft_execute(t_shell *shell, t_node *node);
 
 #endif
