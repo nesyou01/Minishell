@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/23 09:12:22 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/23 10:53:13 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ int			ft_isvalid_var(char c);
 void		ft_sort(t_list *lst);
 t_file		*ft_add_file_last(t_file **lst, t_file *new);
 t_file		*ft_last_file(t_file *lst);
+void		ft_retokenize(t_node *node);
 
 // EX
 void		ft_execute(t_shell *shell, t_node *node);

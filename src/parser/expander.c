@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/21 15:17:31 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/23 10:53:20 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,9 +117,17 @@ static int	expand_node_vars(t_shell *shell, t_node *node)
 
 int	ft_expand_node_vars(t_shell *shell, t_node *node)
 {
-	if (expand_node_vars(shell, node))
+	int	fail;
+
+	fail = expand_node_vars(shell, node);
+	if (fail)
 		return (1);
 	if (ft_strchr(node->content, '*'))
-		return (ft_wildcard_handler(shell, node));
-	return (0);
+		fail = ft_wildcard_handler(shell, node);
+	if (ft_strchr(node->filter, '1'))
+	{
+		ft_retokenize(node);
+		fail = ft_wildcard_handler(shell, node);
+	}
+	return (fail);
 }

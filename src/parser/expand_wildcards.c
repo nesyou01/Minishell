@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/22 13:07:53 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/23 10:53:05 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,7 +136,7 @@ static int	is_quote_and_has_end(char *str)
 	return (ft_strchr(str + 1, *str) != NULL);
 }
 
-static void	retokenize(t_node *node)
+void	ft_retokenize(t_node *node)
 {
 	int		i;
 	char	c;
@@ -172,12 +172,5 @@ int	ft_wildcard_handler(t_shell *shell, t_node *node)
 	result = 0;
 	while (!result && ft_strchr(node->filter, '2'))
 		result = expand_widlcard(shell, node);
-	if (result)
-		return (result);
-	if (ft_strchr(node->filter, '1'))
-	{
-		retokenize(node);
-		ft_wildcard_handler(shell, node);
-	}
 	return (result);
 }
