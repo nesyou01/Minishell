@@ -18,6 +18,7 @@
 # define PARENTHESES_END 114
 # define AND 115
 # define OR 116
+# define EMPTY_CMD 21
 
 typedef struct s_token
 {
