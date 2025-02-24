@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/30 14:33:22 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/21 10:57:23 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/24 20:04:20 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,9 @@ t_node	*ft_to_tree(t_node *node)
 {
 	if (!node)
 		return (NULL);
-	if (node->type >= 100)
+	if (node->type == SUB_SHELL)
+		node->l_node = ft_to_tree(ft_get_first_not_taken(node->next));
+	else if (node->type >= 100)
 	{
 		node->r_node = ft_to_tree(ft_get_first_not_taken(node->next));
 		node->l_node = ft_to_tree(ft_get_first_not_taken(node->next));
