@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/24 20:23:22 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/24 20:47:34 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,30 @@ static int	is_valid_quotes(char *str)
 	return (1);
 }
 
+static int	is_valid_parentheses(t_token *token)
+{
+	if (token->type != PARENTHESES_START)
+		return (1);
+	return (!token->prev || token->prev->type >= 100);
+}
+
+static int	is_valid_cmd_start(t_token *token)
+{
+	if (!token->prev)
+		return (token->type < 100);
+	if (token->prev->type >= 100)
+		return (token->type < 100);
+	return (1);
+}
+
 int	syntax_validator(t_token *token)
 {
 	while (token)
 	{
 		if (!is_valid_quotes(token->content))
-			return (ft_perror("unclosed quotes"), 1);
+			return (ft_perror("Unclosed quotes"), 1);
+		if (!is_valid_parentheses(token) || !is_valid_cmd_start(token))
+			return (ft_perror("Syntax error!"), 1);
 		token = token->next;
 	}
 	return (0);
