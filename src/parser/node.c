@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/23 09:25:17 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:19:31 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ t_node	*ft_tokens_to_nodes(t_shell *shell, t_token *token)
 		if((!token->next || token->next->type >= 100) && !tmp)
 			ft_add_node_last(&head, new_node(shell,
 					ft_new_token(shell, ft_strdup(shell, "")), &io));
-		if (token->type >= 100)
+		if (token->type >= 100 && token->type != PARENTHESES_END)
 			tmp = NULL;
 		token = token->next;
 	}
