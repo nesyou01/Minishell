@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 14:40:45 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:08:58 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ void		ft_retokenize(t_node *node);
 
 // EX
 void		execute_tree(t_shell *shell, t_node *node);
-void		execute_commande(t_shell *shell, t_node *node);
+void		execute_builtin(t_shell *shell, t_node *node);
+void		execute_external(t_shell *shell, t_node *node);
 void		execute_pipe(t_shell *shell, t_node *node);
 void		execute_and(t_shell *shell, t_node *node);
 void		execute_or(t_shell *shell, t_node *node);
