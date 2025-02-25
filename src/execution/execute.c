@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:28:05 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/23 10:54:13 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/25 10:04:08 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,15 @@ void	ft_execute(t_shell *shell, t_node *node)
 	{
 		if (ft_expand_node_vars(shell, node))
 			return ;
-		printf("|%s\n", node->content);
+		// if (node->type != COMMAND)
+		// {
+			// if (node->l_node)
+			// 	printf("%s <===", node->l_node->content);
+			printf(" %s - %d", node->content, node->type);
+			// if (node->r_node)
+			// 	printf("===> %s", node->l_node->content);
+			printf("\n");
+		// }
 		node = node->next;
 	}
 }

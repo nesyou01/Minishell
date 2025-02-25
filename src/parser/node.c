@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/23 09:25:17 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/25 10:11:56 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,16 @@ static void	redirection_handler(t_shell *shell, t_token *token, t_io *io)
 		ft_add_file_last(&(io->here_doc), ft_new_file(shell, next));
 }
 
+static void	add_empty_node(t_node **head, t_shell *shell, t_io *io)
+{
+	t_node	*node;
+
+	node = new_node(shell,
+			ft_new_token(shell, ft_strdup(shell, "")), io);
+	node->type = EMPTY_CMD;
+	ft_add_node_last(head, node);
+}
+
 t_node	*ft_tokens_to_nodes(t_shell *shell, t_token *token)
 {
 	t_node	*head;
@@ -79,9 +89,8 @@ t_node	*ft_tokens_to_nodes(t_shell *shell, t_token *token)
 			set_io_to_node(tmp, &io);
 		}
 		if((!token->next || token->next->type >= 100) && !tmp)
-			ft_add_node_last(&head, new_node(shell,
-					ft_new_token(shell, ft_strdup(shell, "")), &io));
-		if (token->type >= 100)
+			add_empty_node(&head, shell, &io);
+		if (token->type >= 100 && token->type != PARENTHESES_END)
 			tmp = NULL;
 		token = token->next;
 	}

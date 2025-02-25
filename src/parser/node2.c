@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:56 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/21 10:58:44 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/24 16:26:06 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	or_and_handler(t_shell *shell,
 	}
 }
 
-static void	par_handler(t_node **op, t_node **cmd)
+static void	par_end_handler(t_shell *shell, t_node **op, t_node **cmd, t_node *node)
 {
 	t_node	*tmp;
 
@@ -39,6 +39,9 @@ static void	par_handler(t_node **op, t_node **cmd)
 		ft_add_node_start(cmd, *op);
 		*op = tmp;
 	}
+	tmp = ft_dup_node(shell, node);
+	tmp->type = SUB_SHELL;
+	ft_add_node_start(cmd, tmp);
 	*op = (*op)->next;
 }
 
@@ -51,7 +54,7 @@ static void	ft_op_handler(t_shell *shell,
 			|| node->type == PIPE)
 			or_and_handler(shell, node, op, cmd);
 		else if (node->type == PARENTHESES_END)
-			return (par_handler(op, cmd));
+			return (par_end_handler(shell, op, cmd, node));
 	}
 	ft_add_node_start(op, ft_dup_node(shell, node));
 }

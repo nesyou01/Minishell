@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/23 08:51:56 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:10:20 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ t_token	*ft_split_tokens(t_shell *shell, char *str)
 	{
 		while (str[i] == ' ')
 			i++;
+		if (!str[i])
+			break ;
 		end = ft_get_token_end(str + i);
 		content = ft_substr(shell, str, i, end);
 		ft_add_token_last(&lst, ft_new_token(shell, content));

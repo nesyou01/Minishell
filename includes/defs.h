@@ -19,6 +19,7 @@
 # define AND 115
 # define OR 116
 # define EMPTY_CMD 21
+# define SUB_SHELL 22
 
 typedef struct s_token
 {
