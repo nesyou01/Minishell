@@ -3,17 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/23 10:53:13 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/25 14:40:45 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
+# include <unistd.h>//for write, execve, read,
+# include <stdlib.h>//malloc
+# include <sys/wait.h>//wait
+# include <fcntl.h>//for system call open,
+# include <sys/types.h>//pid_t
+# include <stdio.h>//perror && printf
+
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <dirent.h>
@@ -82,6 +88,11 @@ t_file		*ft_last_file(t_file *lst);
 void		ft_retokenize(t_node *node);
 
 // EX
-void		ft_execute(t_shell *shell, t_node *node);
+void		execute_tree(t_shell *shell, t_node *node);
+void		execute_commande(t_shell *shell, t_node *node);
+void		execute_pipe(t_shell *shell, t_node *node);
+void		execute_and(t_shell *shell, t_node *node);
+void		execute_or(t_shell *shell, t_node *node);
+void		execute_subshell(t_shell *shell, t_node *node);
 
 #endif
