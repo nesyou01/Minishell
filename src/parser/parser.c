@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:11:18 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 14:46:11 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/25 15:07:51 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ t_node	*ft_parser(t_shell *shell, char *str)
 
 	token = parse_all(shell, str);
 	last = ft_last_token(token);
-	if (last->type == PIPE || last->type == AND || last->type == OR)
+	if (last && (last->type == PIPE || last->type == AND || last->type == OR))
 		read_and_merge(shell, token, last);
 	ft_merge_args_with_cmd(shell, token);
 	if (syntax_validator(token))
