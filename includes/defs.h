@@ -42,6 +42,7 @@ typedef struct s_node
 	int				taken;
 	char			*content;
 	char			*filter;
+	char			**argv;// Array of arguments (e.g., ["ls", "-l", NULL]) or  using the struct t_commande
 	t_file			*here_doc;
 	t_file			*in;
 	t_file			*out;
