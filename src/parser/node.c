@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 10:11:56 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/26 07:42:01 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,15 +49,17 @@ static t_node	*new_node(t_shell *shell, t_token *token, t_io *io)
 
 static void	redirection_handler(t_shell *shell, t_token *token, t_io *io)
 {
-	char	*next;
+	t_node	*next;
 
-	next = token->next->content;
+	next = ft_new_node(shell, token->next);
+	if (ft_expand_node_vars(shell, next))
+		return ;
 	if (token->type == IN_REDIRECTER)
-		ft_add_file_last(&(io->in), ft_new_file(shell, next));
+		ft_add_file_last(&(io->in), ft_new_file(shell, next->content));
 	else if (token->type == OUT_REDIRECTER)
-		ft_add_file_last(&(io->out), ft_new_file(shell, next));
+		ft_add_file_last(&(io->out), ft_new_file(shell, next->content));
 	else
-		ft_add_file_last(&(io->here_doc), ft_new_file(shell, next));
+		ft_add_file_last(&(io->here_doc), ft_new_file(shell, next->content));
 }
 
 static void	add_empty_node(t_node **head, t_shell *shell, t_io *io)
