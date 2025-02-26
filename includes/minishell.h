@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 14:33:04 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/26 00:31:02 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ char		*ft_get_env_value(t_shell *shell, char *key);
 t_list		*ft_lstnew(t_shell *shell, void *content);
 char		*ft_repeat(t_shell *shell, size_t len, char c);
 int			ft_index_of(char *str, char c);
+void		ft_add_cmd_garbage(t_shell *shell, void *ptr);
 
 // PARSING
 t_node		*ft_parser(t_shell *shell, char *str);
@@ -62,7 +63,7 @@ void		ft_add_node_start(t_node **lst, t_node *new);
 void		ft_clean_cmd(t_shell *shell);
 void		ft_tree_builder(t_shell *shell, t_node **node);
 t_node		*ft_to_tree(t_node *node);
-int			syntax_validator(t_token *token);
+int			syntax_validator(t_shell *shell, t_token *token);
 void		ft_merge_tokens(t_shell *shell, t_token **token);
 void		ft_merge_args_with_cmd(t_shell *shell, t_token *token);
 t_node		*ft_tokens_to_nodes(t_shell *shell, t_token *token);
@@ -81,6 +82,8 @@ t_file		*ft_add_file_last(t_file **lst, t_file *new);
 t_file		*ft_last_file(t_file *lst);
 void		ft_retokenize(t_node *node);
 t_token		*ft_last_token(t_token *lst);
+int			here_doc_handler(t_shell *shell, t_token *token);
+void		ft_remove_quotes(t_shell *shell, t_node *node);
 
 // EX
 void		ft_execute(t_shell *shell, t_node *node);

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/24 20:27:20 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/26 00:30:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,29 @@ static int	expand_node_vars(t_shell *shell, t_node *node)
 		}
 	}
 	return (0);
+}
+
+void	ft_remove_quotes(t_shell *shell, t_node *node)
+{
+	int		i;
+
+	i = 0;
+	node->filter = NULL;
+	while (node->content[i])
+	{
+		if (node->content[i] == '"')
+			i += remove_double_quotes(shell, node, i);
+		else if (node->content[i] == '\'')
+			i += remove_single_quotes(shell, node, i);
+		else
+		{
+			if (node->content[i] == ' ')
+				node->filter = ft_strjoin(shell, node->filter, " ");
+			else
+				node->filter = ft_strjoin(shell, node->filter, "0");
+			i++;
+		}
+	}
 }
 
 int	ft_expand_node_vars(t_shell *shell, t_node *node)

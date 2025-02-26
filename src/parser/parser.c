@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:11:18 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 15:09:52 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/26 00:09:19 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ static void	read_and_merge(t_shell *shell, t_token *head, t_token *last)
 	str = readline(">");
 	if (!str)
 		return ;
+	ft_add_cmd_garbage(shell, str);
 	new = parse_all(shell, str);
 	last->next = new;
 }
@@ -45,7 +46,7 @@ t_node	*ft_parser(t_shell *shell, char *str)
 	if (last && (last->type == PIPE || last->type == AND || last->type == OR))
 		read_and_merge(shell, token, last);
 	ft_merge_args_with_cmd(shell, token);
-	if (syntax_validator(token))
+	if (syntax_validator(shell, token))
 		return (NULL);
 	node = ft_tokens_to_nodes(shell, token);
 	ft_tree_builder(shell, &node);
