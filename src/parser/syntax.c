@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 23:23:10 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/26 00:07:03 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,20 @@ static int	is_valid_quotes(char *str)
 	return (1);
 }
 
-int	syntax_validator(t_token *token)
+int	syntax_validator(t_shell *shell, t_token *token)
 {
 	while (token)
 	{
 		if (!is_valid_quotes(token->content))
 			return (ft_perror("Unclosed quotes"), 1);
+		if (token->type == HERE_DOC
+			&& (!token->next || token->next->type != HERE_DOC_LIMITER))
+				return (ft_perror("Syntax error near <<"), 1);
+		if (token->type == HERE_DOC_LIMITER)
+		{
+			if (here_doc_handler(shell, token))
+				return (ft_perror(NULL), 1);
+		}
 		token = token->next;
 	}
 	return (0);
