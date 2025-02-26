@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:32 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 19:42:48 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/02/26 11:16:31 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,11 @@ void	execute_tree(t_shell *shell, t_node *node)
 	if (!node)
 		return;
 	if (node->in)// Handle redirections
-		handle_input_redirection(node->in);//todo
+		handle_input_redirection(node->in);
 	if (node->out)
-		handle_output_redirection(node->out);//todo
+		handle_output_redirection(node->out);
 	if (node->here_doc)
-		handle_here_doc(node->here_doc);//todo
+		handle_here_doc(node->here_doc);
 	if (node->type == COMMAND)
 	{
 		if (is_builtin(node->content))
@@ -30,11 +30,11 @@ void	execute_tree(t_shell *shell, t_node *node)
 			execute_external(shell, node);
 	}
 	else if (node->type == PIPE)
-		execute_pipe(shell, node);
+		execute_pipe(shell, node);//todo
 	else if (node->type == AND || node->type == OR)
-		execute_logical(shell, node);
-	else if (node->type == PARENTHESES_START)
-		execute_subshell(shell, node);
+		execute_logical(shell, node);//todo
+	else if (node->type == SUB_SHELL)
+		execute_subshell(shell, node);//todo
 }
 
 static void	minishell(t_shell *shell)
