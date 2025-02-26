@@ -32,6 +32,7 @@ typedef struct s_token
 typedef struct s_file
 {
 	int				fd;
+	int				type_out_redirect;
 	char			*path;
 	struct s_file	*next;
 }	t_file;
