@@ -6,13 +6,19 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/26 00:31:02 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:40:20 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
+
+# include <unistd.h>//for write, execve, read,
+# include <stdlib.h>//malloc
+# include <sys/wait.h>//wait
+# include <fcntl.h>//for system call open,
+# include <sys/types.h>//pid_t
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -67,7 +73,7 @@ int			syntax_validator(t_shell *shell, t_token *token);
 void		ft_merge_tokens(t_shell *shell, t_token **token);
 void		ft_merge_args_with_cmd(t_shell *shell, t_token *token);
 t_node		*ft_tokens_to_nodes(t_shell *shell, t_token *token);
-t_file		*ft_new_file(t_shell *shell, char *path);
+t_file		*ft_new_file(t_shell *shell, t_token *token);
 int			is_redirection(t_token *token);
 t_node		*ft_dup_node(t_shell *shell, t_node *node);
 t_command	*ft_parse_command(t_shell *shell, t_node *node);

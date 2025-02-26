@@ -24,6 +24,7 @@
 typedef struct s_token
 {
 	int				type;
+	int				fd;
 	char			*content;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -32,6 +33,7 @@ typedef struct s_token
 typedef struct s_file
 {
 	int				fd;
+	int				type_out_redirect;
 	char			*path;
 	struct s_file	*next;
 }	t_file;
@@ -42,7 +44,6 @@ typedef struct s_node
 	int				taken;
 	char			*content;
 	char			*filter;
-	t_file			*here_doc;
 	t_file			*in;
 	t_file			*out;
 	struct s_node	*next;
@@ -74,7 +75,6 @@ typedef struct s_command
 
 typedef struct s_io
 {
-	t_file	*here_doc;
 	t_file	*in;
 	t_file	*out;
 }	t_io;

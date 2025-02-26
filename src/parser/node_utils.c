@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:22 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/23 09:21:08 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:36:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,7 @@ t_node	*ft_new_node(t_shell *shell, t_token *token)
 	list->r_node = NULL;
 	list->in = NULL;
 	list->out = NULL;
-	list->here_doc = NULL;
 	list->taken = 0;
-	list->here_doc = NULL;
 	return (list);
 }
 
@@ -76,7 +74,6 @@ t_node	*ft_dup_node(t_shell *shell, t_node *node)
 	list->prev = NULL;
 	list->in = node->in;
 	list->out = node->out;
-	list->here_doc = node->here_doc;
 	list->l_node = NULL;
 	list->r_node = NULL;
 	list->taken = 0;
