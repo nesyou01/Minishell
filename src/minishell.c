@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:32 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/26 11:16:31 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/02/26 15:38:47 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	execute_tree(t_shell *shell, t_node *node)
 			execute_external(shell, node);
 	}
 	else if (node->type == PIPE)
-		execute_pipe(shell, node);//todo
+		execute_pipe(shell, node);
 	else if (node->type == AND || node->type == OR)
 		execute_logical(shell, node);//todo
 	else if (node->type == SUB_SHELL)

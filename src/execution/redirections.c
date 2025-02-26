@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:56:46 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/02/26 11:18:02 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/02/26 14:01:56 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,4 @@ void	handle_here_doc(t_file *heredoc)
 	close(fd_tmp);
 	if (dup2(heredoc->fd, STDIN_FILENO) == -1)
 		(close(heredoc->fd), ft_error("failed dup2 input !"));
-	// close(heredoc->fd); //we needed open !
 }

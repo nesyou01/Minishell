@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/02/26 09:54:12 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/02/26 18:55:52 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	execute_builtin(t_shell *shell, t_node *node)
 void	execute_external(t_shell *shell, t_node *node)
 {
 	pid_t	pid;
+	char	*path;
 
 	pid = fork();
 
@@ -57,6 +58,9 @@ void	execute_external(t_shell *shell, t_node *node)
 	{
 		//spliting my node i think , I just realized that !
 		//before pass execve, it important to check the cmd if valid or pass an path of executable !
+		path = ft_get_path(shell->env, node->content);//todo
+		if(!path)
+			ft_error("commande not found !");
 		if (execve(node->content, node->argv, shell->env))
 			ft_error("problem with execution the commande !");
 	}
