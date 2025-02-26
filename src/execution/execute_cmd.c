@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/02/25 20:18:20 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/02/26 09:54:12 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,35 +43,6 @@ void	execute_builtin(t_shell *shell, t_node *node)
 		ft_env(shell);
 	else if (ft_strcmp(node->content, "exit") == 0)
 		ft_exit(shell);
-}
-
-void	hadele_redirections(t_node *node)
-{
-	int	fd;
-
-	if (node->in)
-	{
-		fd = open(node->in->path, O_RDONLY);
-		if (fd < 0)
-			ft_error("failed open !");
-		if (dup2(fd, STDIN_FILENO) == -1)
-			(close(fd), ft_error("failed dup input !"));
-		close(fd);
-	}
-	if (node->out)
-	{
-		fd = open(node->out->path, O_WRONLY | O_CREAT | O_TRUNC, 0644);
-		if (fd < 0)
-			ft_error("failed open !");
-		if (dup2(fd, STDOUT_FILENO) == -1)
-			(close(fd), ft_error("failed dup input !"));
-		close(fd);
-	}
-	if (node->here_doc)
-	{
-		//HERDOC
-		//fd = open(node->here_doc->path, )
-	}
 }
 
 void	execute_external(t_shell *shell, t_node *node)
