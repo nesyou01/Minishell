@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:19:27 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/02/26 13:08:12 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:30:08 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ static void	left_child(t_shell *shell, t_node *node, int *pipe_fd)
 		(close(pipe_fd[1]), ft_error("failed output dup2 !"));
 	close(pipe_fd[1]);
 	execute_tree(shell, node->l_node);
-	exit(EXIT_SUCCESS);//the child processes after calling execute_tree is a safety measure
+	//exit(EXIT_SUCCESS);//the child processes after calling execute_tree is a safety measure
+	exit(node->exit_status);
 }
 
 static void	right_child(t_shell *shell, t_node *node, int *pipe_fd)
@@ -29,7 +30,8 @@ static void	right_child(t_shell *shell, t_node *node, int *pipe_fd)
 		(close(pipe_fd[0]), ft_error("failed output dup2 !"));
 	close(pipe_fd[0]);
 	execute_tree(shell, node->r_node);
-	exit(EXIT_SUCCESS);
+	//exit(EXIT_SUCCESS);
+	exit(node->exit_status);
 }
 
 void	execute_pipe(t_shell *shell, t_node *node)
