@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/28 20:58:45 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/28 21:03:45 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ static int	is_valid_parentheses(t_token *token)
 	if (token->type == PARENTHESES_START)
 		return (token->next && (token->next->type == COMMAND
 			|| is_redirection(token->next) || token->next->type == HERE_DOC));
+	if (token->type == PARENTHESES_END)
+		return (!token->next || (token->next->type != PARENTHESES_START
+			&& token->next->type != COMMAND));
 	return (1);
 }
 
@@ -55,7 +58,7 @@ int	syntax_validator(t_shell *shell, t_token *token)
 			&& (!token->next || token->next->type != HERE_DOC_LIMITER))
 				return (ft_perror("Syntax error near <<"), 1);
 		if (!is_valid_parentheses(token))
-				return (ft_perror("Syntax error near ("), 1);
+				return (ft_perror("Syntax error!"), 1);
 		if (token->type == HERE_DOC_LIMITER)
 		{
 			if (here_doc_handler(shell, token))
