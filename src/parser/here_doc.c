@@ -11,13 +11,12 @@ static char	*remove_quotes(t_shell *shell, t_token *token)
 
 static int	ft_pipe(int fds[2])
 {
-	fds[1] = open(".tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
+	fds[1] = open("/tmp/.heredoc_tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fds[1] == -1)
 		return (1);
-	fds[0] = open(".tmp", O_RDONLY);
+	fds[0] = open("/tmp/.heredoc_tmp", O_RDONLY);
 	if (fds[0] == -1)
 		return (close(fds[1]), 1);
-	// remove /tmp/.heredoc_tmp but we can work with him when my process in life!
 	unlink("/tmp/.heredoc_tmp");
 	return (0);
 }
