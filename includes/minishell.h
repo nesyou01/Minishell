@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/26 16:40:20 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/01 22:28:37 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,5 +93,6 @@ void		ft_remove_quotes(t_shell *shell, t_node *node);
 
 // EX
 void		ft_execute(t_shell *shell, t_node *node);
+char		**ft_get_all_env(t_shell *shell);
 
 #endif
