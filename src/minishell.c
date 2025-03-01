@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:32 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/26 15:38:47 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/02/27 16:18:36 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@ void	execute_tree(t_shell *shell, t_node *node)
 		handle_input_redirection(node->in);
 	if (node->out)
 		handle_output_redirection(node->out);
-	if (node->here_doc)
-		handle_here_doc(node->here_doc);
+	// if (node->here_doc)
+	// 	handle_here_doc(node->here_doc);
 	if (node->type == COMMAND)
 	{
 		if (is_builtin(node->content))
