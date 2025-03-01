@@ -6,11 +6,11 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:56:46 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/02/27 16:21:33 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/01 12:30:11 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	handle_input_redirections(t_file *in)
 {

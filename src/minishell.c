@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:32 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/27 16:18:36 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/01 12:31:51 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ void	execute_tree(t_shell *shell, t_node *node)
 	if (!node)
 		return;
 	if (node->in)// Handle redirections
-		handle_input_redirection(node->in);
+		handle_input_redirections(node->in);
 	if (node->out)
-		handle_output_redirection(node->out);
+		handle_output_redirections(node->out);
 	// if (node->here_doc)
 	// 	handle_here_doc(node->here_doc);
 	if (node->type == COMMAND)
@@ -32,9 +32,9 @@ void	execute_tree(t_shell *shell, t_node *node)
 	else if (node->type == PIPE)
 		execute_pipe(shell, node);
 	else if (node->type == AND || node->type == OR)
-		execute_logical(shell, node);//todo
+		execute_logical(shell, node);
 	else if (node->type == SUB_SHELL)
-		execute_subshell(shell, node);//todo
+		execute_subshell(shell, node);
 }
 
 static void	minishell(t_shell *shell)

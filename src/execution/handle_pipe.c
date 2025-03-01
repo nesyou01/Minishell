@@ -6,11 +6,11 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:19:27 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/01 10:42:02 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/01 12:25:20 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 static void	left_child(t_shell *shell, t_node *node, int *pipe_fd)
 {
