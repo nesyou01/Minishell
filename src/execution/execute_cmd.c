@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/01 12:31:19 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/01 15:00:19 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int	is_builtin(char *cmd)
 {
 	if (ft_strcmp(cmd, "cd") == 0)
 		return (1);
-	if (!ft_strcmp(cmd, "echo"))//|| !ft_strcmp(cmd, "echo -n")
+	if (!ft_strcmp(cmd, "echo"))
 		return (1);
 	if (ft_strcmp(cmd, "export") == 0)
 		return (1);
@@ -33,7 +33,7 @@ void	execute_builtin(t_shell *shell, t_node *node)
 {
 	if (ft_strcmp(node->content, "cd") == 0)
 		ft_cd(shell, node);
-	else if (!ft_strcmp(node->content, "echo"))// || !ft_strcmp(cmd, "echo -n")
+	else if (!ft_strcmp(node->content, "echo"))
 		ft_echo(shell, node);
 	else if (ft_strcmp(node->content, "export") == 0)
 		ft_export(shell, node);
