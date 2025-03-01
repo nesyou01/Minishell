@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:19:27 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/02/27 16:30:08 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/01 10:42:02 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,4 +54,6 @@ void	execute_pipe(t_shell *shell, t_node *node)
 		right_child(shell, node, pipe_fd);
 	close(pipe_fd[1]);
 	close(pipe_fd[0]);
+	waitpid(pid_left, NULL, 0);
+	waitpid(pid_right, NULL, 0);
 }

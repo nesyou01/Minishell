@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/26 18:08:35 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/02/27 15:06:22 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,5 @@ void		handle_here_doc(t_file *heredoc);
 void		handle_input_redirections(t_file *in);
 void		handle_output_redirections(t_file *out);
 void		execute_logical(t_shell *shell, t_node *node);
+void		execute_subshell(t_shell *shell, t_node *node);
 #endif
