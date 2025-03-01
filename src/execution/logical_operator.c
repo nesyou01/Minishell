@@ -6,11 +6,11 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:16:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/02/27 16:38:30 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/01 12:25:07 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	execute_logical(t_shell *shell, t_node *node)
 {
