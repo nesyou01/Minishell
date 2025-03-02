@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:19:27 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/01 15:05:36 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/02 15:14:57 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	left_child(t_shell *shell, t_node *node, int *pipe_fd)
 		(close(pipe_fd[1]), ft_error("failed output dup2 !"));
 	close(pipe_fd[1]);
 	execute_tree(shell, node->l_node);
-	//exit(EXIT_SUCCESS);//the child processes after calling execute_tree is a safety measure
-	exit(node->exit_status);
+	exit(EXIT_SUCCESS);//the child processes after calling execute_tree is a safety measure
+	// exit(node->exit_status);
 }
 
 static void	right_child(t_shell *shell, t_node *node, int *pipe_fd)
@@ -30,8 +30,8 @@ static void	right_child(t_shell *shell, t_node *node, int *pipe_fd)
 		(close(pipe_fd[0]), ft_error("failed output dup2 !"));
 	close(pipe_fd[0]);
 	execute_tree(shell, node->r_node);
-	//exit(EXIT_SUCCESS);
-	exit(node->exit_status);
+	exit(EXIT_SUCCESS);
+	// exit(node->exit_status);
 }
 
 void	execute_pipe(t_shell *shell, t_node *node)
@@ -54,6 +54,8 @@ void	execute_pipe(t_shell *shell, t_node *node)
 		right_child(shell, node, pipe_fd);
 	close(pipe_fd[1]);
 	close(pipe_fd[0]);
-	waitpid(pid_left, NULL, 0);
-	waitpid(pid_right, NULL, 0);
+	waitpid(pid_left, &node->exit_status, 0);
+	waitpid(pid_right, &node->exit_status, 0);
+	if (WIFEXITED(node->exit_status))
+		node->exit_status = WEXITSTATUS(node->exit_status);
 }

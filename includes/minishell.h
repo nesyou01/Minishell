@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/01 12:31:38 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/01 21:48:43 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,9 @@ t_file		*ft_add_file_last(t_file **lst, t_file *new);
 t_file		*ft_last_file(t_file *lst);
 void		ft_retokenize(t_node *node);
 
+//ERROR
+void	ft_error(char *msg);
+
 // EX
 void		execute_tree(t_shell *shell, t_node *node);
 int			is_builtin(char *cmd);
@@ -101,4 +104,5 @@ void		handle_input_redirections(t_file *in);
 void		handle_output_redirections(t_file *out);
 void		execute_logical(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
+char		*ft_get_path(t_shell *shell, t_env *env, char *content);
 #endif

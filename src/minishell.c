@@ -6,11 +6,17 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:32 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/01 12:31:51 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/02 15:08:58 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	ft_error(char *msg)//void	ft_error(t_shell *shell, char *msg)
+{
+	perror(msg);
+	exit(1);
+}
 
 void	execute_tree(t_shell *shell, t_node *node)
 {
@@ -24,9 +30,9 @@ void	execute_tree(t_shell *shell, t_node *node)
 	// 	handle_here_doc(node->here_doc);
 	if (node->type == COMMAND)
 	{
-		if (is_builtin(node->content))
-			execute_builtin(shell, node);
-		else
+		// if (is_builtin(node->content))
+		// 	execute_builtin(shell, node);
+		// else
 			execute_external(shell, node);
 	}
 	else if (node->type == PIPE)
