@@ -9,7 +9,7 @@ SRC = src/minishell.c src/utils/utils.c src/built_ins/env.c src/utils/malloc_uti
 		src/utils/ft_split.c src/parser/expand_vars.c src/parser/expand_wildcards.c src/utils/env_utils2.c \
 		src/utils/lst_utils.c src/parser/wildcard_utils.c \
 		src/execution/execute.c      src/execution/handle_pipe.c       src/execution/logical_operator.c \
-		src/execution/execute_cmd.c       src/execution/handle_subshell.c   src/execution/redirections.c
+		src/execution/execute_cmd.c       src/execution/handle_subshell.c   src/execution/redirections.c src/execution/cmd_utils.c
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
 CFLAGS =  -g -fsanitize=address
