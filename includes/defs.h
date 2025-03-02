@@ -63,7 +63,7 @@ typedef struct s_env
 
 typedef struct s_shell
 {
-	char	**envp;//just for testing the env !
+	char	**envp;//just for testing the env
 	int		exit;
 	t_env	*env;
 	t_list	*globale_garbage;
