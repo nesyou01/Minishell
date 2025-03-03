@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:32 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/02 15:08:58 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:07:52 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,10 @@ static void	minishell(t_shell *shell)
 		ft_add_garbage(&(shell->cmd_garbage), shell, str);
 		node = ft_parser(shell, str);
 		if (node)
+		{
+			// ft_execute(shell, node);
 			execute_tree(shell, node);//todo->
+		}
 		ft_clean_cmd(shell);
 	}
 	ft_clean_all(shell);

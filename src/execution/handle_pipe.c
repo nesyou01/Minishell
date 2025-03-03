@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:19:27 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/02 15:14:57 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:36:55 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,10 @@ static void	right_child(t_shell *shell, t_node *node, int *pipe_fd)
 
 void	execute_pipe(t_shell *shell, t_node *node)
 {
-	int	pipe_fd[2];
-	int	pid_left;
-	int	pid_right;
+	int		pipe_fd[2];
+	pid_t	pid_left;
+	pid_t	pid_right;
+	int		l_status, r_status;
 
 	if (pipe(pipe_fd) == -1)
 		ft_error("failed pipe !");
@@ -48,14 +49,14 @@ void	execute_pipe(t_shell *shell, t_node *node)
 	if (!pid_left)
 		left_child(shell, node, pipe_fd);
 	pid_right = fork();
-	if (pid_left == -1)
+	if (pid_right == -1)
 		(close(pipe_fd[1]), close(pipe_fd[0]), ft_error("failed fork !"));
-	if (pid_right)
+	if (!pid_right)
 		right_child(shell, node, pipe_fd);
-	close(pipe_fd[1]);
-	close(pipe_fd[0]);
-	waitpid(pid_left, &node->exit_status, 0);
-	waitpid(pid_right, &node->exit_status, 0);
-	if (WIFEXITED(node->exit_status))
-		node->exit_status = WEXITSTATUS(node->exit_status);
+	(close(pipe_fd[1]), close(pipe_fd[0]));
+	(waitpid(pid_left, &l_status, 0), waitpid(pid_right, &r_status, 0));
+	if (WIFEXITED(r_status))
+		node->exit_status = WEXITSTATUS(r_status);
+	else
+		node->exit_status = 1;
 }

@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 14:16:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/02 15:39:35 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/03 15:50:37 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,12 @@
 // 	}
 // }
 
-
 void	execute_logical(t_shell *shell, t_node *node)
 {
 	int	l_status;
 	int	r_status;
 
-	if (!node || !node->l_node || !node->r_node)
+	if(!node || !node->l_node || !node->r_node)
 		return ;
 	execute_tree(shell, node->l_node);
 	l_status = node->l_node->exit_status;
