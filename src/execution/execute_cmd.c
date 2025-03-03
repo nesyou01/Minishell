@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/02 15:26:53 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/03 16:13:48 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	execute_external(t_shell *shell, t_node *node)
 		if (!path)
 			ft_error("commande not found !");
 		/*-------------*/
-		node->argv = malloc(3 * sizeof(char *));
+		node->argv = malloc(2 * sizeof(char *));
 		node->argv[0] = node->content;
 		// node->argv[1] = ft_strdup(shell, "-l");
 		node->argv[1] = NULL;
