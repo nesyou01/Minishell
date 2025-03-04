@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/02 17:10:29 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:47:17 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ void	ft_error(char *msg);
 
 //Test content of node !
 // void	ft_execute(t_shell *shell, t_node *node);
+char	**ft_split_(char const *s, char c);
 
 // EX
 void		execute_tree(t_shell *shell, t_node *node);

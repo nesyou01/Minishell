@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/02 11:45:27 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/04 13:46:43 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ static char	**free_2_dim(char **strs, size_t index)
 	return (NULL);
 }
 
-static char	**ft_split_(char const *s, char c)
+char	**ft_split_(char const *s, char c)
 {
 	size_t	words;
 	char	**strs;
