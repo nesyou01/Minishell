@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/03 16:13:48 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/04 14:02:17 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,32 +45,6 @@ int	is_builtin(char *cmd)
 // 		ft_exit(shell);
 // }
 
-// void	execute_external(t_shell *shell, t_node *node)
-// {
-// 	pid_t	pid;
-// 	char	*path;
-
-// 	pid = fork();
-
-// 	if (pid == -1)
-// 		ft_error("failed fork !");
-// 	if (pid == 0)
-// 	{
-// 		//spliting my node i think , I just realized that !
-// 		//before pass execve, it important to check the cmd if valid or pass an path of executable !
-// 		path = ft_get_path(shell, shell->env, node->content);
-// 		printf("%s", path);
-// 		if(!path)
-// 			ft_error("commande not found !");
-// 		char **s = malloc(2 * sizeof(char *));
-// 		s[0] = ft_strdup(shell, "ls");
-// 		s[1] = NULL;
-// 		if (execve(path, s, NULL) == -1)//create a function of (node->argv)
-// 			ft_error("problem with execution the commande !");
-// 	}
-// 	//maybe handling somthing in parent process!
-// }
-
 
 void	execute_external(t_shell *shell, t_node *node)
 {
@@ -88,15 +62,12 @@ void	execute_external(t_shell *shell, t_node *node)
 	}
 	else if (!pid)
 	{
-		path = ft_get_path(shell, shell->env, node->content);
+		node->argv = ft_split_(node->content, ' ');
+		if (!node->argv || !node->argv[0])
+			ft_error("commande not found !");
+		path = ft_get_path(shell, shell->env, node->argv[0]);
 		if (!path)
 			ft_error("commande not found !");
-		/*-------------*/
-		node->argv = malloc(2 * sizeof(char *));
-		node->argv[0] = node->content;
-		// node->argv[1] = ft_strdup(shell, "-l");
-		node->argv[1] = NULL;
-		/*-------------*/
 		if (execve(path, node->argv, shell->envp) == -1)
 		{
 			perror("minishell: execve, commande not found !");
