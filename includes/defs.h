@@ -42,6 +42,7 @@ typedef struct s_node
 {
 	int				type;
 	int				taken;
+	int				quotes_expanded;
 	char			*content;
 	char			*filter;
 	t_file			*in;
