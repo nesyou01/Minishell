@@ -1,19 +1,14 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 14:33:04 by ylagmah          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <stdio.h>
+# include <unistd.h>//for write, execve, read,
+# include <stdlib.h>//malloc
+# include <sys/wait.h>//wait
+# include <fcntl.h>//for system call open,
+# include <sys/types.h>//pid_t
+# include <stdio.h>//perror && printf
+
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <dirent.h>
@@ -82,7 +77,26 @@ t_file		*ft_last_file(t_file *lst);
 void		ft_retokenize(t_node *node);
 t_token		*ft_last_token(t_token *lst);
 
-// EX
-void		ft_execute(t_shell *shell, t_node *node);
+//ERROR
+void	ft_error(char *msg);
 
+//Test content of node !
+// void	ft_execute(t_shell *shell, t_node *node);
+char	**ft_split_(char const *s, char c);
+
+// EX
+void		execute_tree(t_shell *shell, t_node *node);
+int			is_builtin(char *cmd);
+void		execute_builtin(t_shell *shell, t_node *node);
+void		execute_external(t_shell *shell, t_node *node);
+void		execute_pipe(t_shell *shell, t_node *node);
+void		execute_and(t_shell *shell, t_node *node);
+void		execute_or(t_shell *shell, t_node *node);
+void		execute_subshell(t_shell *shell, t_node *node);
+void		handle_here_doc(t_file *heredoc);
+void		handle_input_redirections(t_file *in);
+void		handle_output_redirections(t_file *out);
+void		execute_logical(t_shell *shell, t_node *node);
+void		execute_subshell(t_shell *shell, t_node *node);
+char		*ft_get_path(t_shell *shell, t_env *env, char *content);
 #endif
