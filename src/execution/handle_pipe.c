@@ -1,0 +1,60 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   handle_pipe.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/02/26 11:19:27 by ael-gady          #+#    #+#             */
+/*   Updated: 2025/03/04 19:51:38 by ael-gady         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "../../includes/minishell.h"
+
+static void	left_child(t_shell *shell, t_node *node, int *pipe_fd)
+{
+	close(pipe_fd[0]);
+	if (dup2(pipe_fd[1], STDOUT_FILENO) == -1)
+		(close(pipe_fd[1]), ft_error("failed output dup2 !"));
+	close(pipe_fd[1]);
+	execute_tree(shell, node->l_node);
+	exit(EXIT_SUCCESS);
+}
+
+static void	right_child(t_shell *shell, t_node *node, int *pipe_fd)
+{
+	close(pipe_fd[1]);
+	if (dup2(pipe_fd[0], STDIN_FILENO) == -1)
+		(close(pipe_fd[0]), ft_error("failed output dup2 !"));
+	close(pipe_fd[0]);
+	execute_tree(shell, node->r_node);
+	exit(EXIT_SUCCESS);
+}
+
+void	execute_pipe(t_shell *shell, t_node *node)
+{
+	int		pipe_fd[2];
+	pid_t	pid_left;
+	pid_t	pid_right;
+	int		l_status, r_status;
+
+	if (pipe(pipe_fd) == -1)
+		ft_error("failed pipe !");
+	pid_left = fork();
+	if (pid_left == -1)
+		(close(pipe_fd[1]), close(pipe_fd[0]), ft_error("failed fork !"));
+	if (!pid_left)
+		left_child(shell, node, pipe_fd);
+	pid_right = fork();
+	if (pid_right == -1)
+		(close(pipe_fd[1]), close(pipe_fd[0]), ft_error("failed fork !"));
+	if (!pid_right)
+		right_child(shell, node, pipe_fd);
+	(close(pipe_fd[1]), close(pipe_fd[0]));
+	(waitpid(pid_left, &l_status, 0), waitpid(pid_right, &r_status, 0));
+	if (WIFEXITED(r_status))
+		node->exit_status = WEXITSTATUS(r_status);
+	else
+		node->exit_status = 1;
+}

@@ -3,30 +3,30 @@
 /*                                                        :::      ::::::::   */
 /*   execute.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:28:05 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 10:04:08 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/02 17:12:08 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_execute(t_shell *shell, t_node *node)
-{
-	while (node)
-	{
-		if (ft_expand_node_vars(shell, node))
-			return ;
-		// if (node->type != COMMAND)
-		// {
-			// if (node->l_node)
-			// 	printf("%s <===", node->l_node->content);
-			printf(" %s - %d", node->content, node->type);
-			// if (node->r_node)
-			// 	printf("===> %s", node->l_node->content);
-			printf("\n");
-		// }
-		node = node->next;
-	}
-}
+// void	ft_execute(t_shell *shell, t_node *node)
+// {
+// 	while (node)
+// 	{
+// 		if (ft_expand_node_vars(shell, node))
+// 			return ;
+// 		// if (node->type != COMMAND)
+// 		// {
+// 			// if (node->l_node)
+// 			// 	printf("%s <===", node->l_node->content);
+// 			printf(" %s - %d", node->content, node->type);
+// 			// if (node->r_node)
+// 			// 	printf("===> %s", node->l_node->content);
+// 			printf("\n");
+// 		// }
+// 		node = node->next;
+// 	}
+// }
