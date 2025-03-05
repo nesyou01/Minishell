@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:26:29 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/19 18:08:27 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/26 00:01:03 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,11 @@ void	ft_add_garbage(t_list **head, t_shell *shell, void *ptr)
 		return ;
 	}
 	ft_lstadd_front(head, garbage);
+}
+
+void	ft_add_cmd_garbage(t_shell *shell, void *ptr)
+{
+	ft_add_garbage(&(shell->cmd_garbage), shell, ptr);
 }
 
 void	*ft_malloc(t_shell *shell, size_t size)

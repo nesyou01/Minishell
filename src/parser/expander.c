@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/24 20:27:20 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/04 00:56:01 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static int	remove_double_quotes(t_shell *shell, t_node *node, int start)
 	char	*expanded;
 	size_t	len;
 
+	node->quotes_expanded = 1;
 	if (!start)
 		start_str = NULL;
 	else
@@ -115,6 +116,29 @@ static int	expand_node_vars(t_shell *shell, t_node *node)
 	return (0);
 }
 
+void	ft_remove_quotes(t_shell *shell, t_node *node)
+{
+	int		i;
+
+	i = 0;
+	node->filter = NULL;
+	while (node->content[i])
+	{
+		if (node->content[i] == '"')
+			i += remove_double_quotes(shell, node, i);
+		else if (node->content[i] == '\'')
+			i += remove_single_quotes(shell, node, i);
+		else
+		{
+			if (node->content[i] == ' ')
+				node->filter = ft_strjoin(shell, node->filter, " ");
+			else
+				node->filter = ft_strjoin(shell, node->filter, "0");
+			i++;
+		}
+	}
+}
+
 int	ft_expand_node_vars(t_shell *shell, t_node *node)
 {
 	int	fail;
@@ -129,5 +153,7 @@ int	ft_expand_node_vars(t_shell *shell, t_node *node)
 		ft_retokenize(node);
 		fail = ft_wildcard_handler(shell, node);
 	}
+	if (!node->content[0] && !node->quotes_expanded)
+		node->content = NULL;
 	return (fail);
 }

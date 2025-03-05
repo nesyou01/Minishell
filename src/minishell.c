@@ -1,14 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 11:35:32 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/03 16:07:52 by ael-gady         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
+
 
 #include "../includes/minishell.h"
 
@@ -53,7 +43,7 @@ static void	minishell(t_shell *shell)
 		str = readline("\033[32mminishell >> \033[0m");
 		if (!str)
 			break ;
-		ft_add_garbage(&(shell->cmd_garbage), shell, str);
+		ft_add_cmd_garbage(shell, str);
 		node = ft_parser(shell, str);
 		if (node)
 		{

@@ -6,19 +6,19 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:02 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/21 14:24:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/26 17:21:33 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_file	*ft_new_file(t_shell *shell, char *path)
+t_file	*ft_new_file(t_shell *shell, t_token *token)
 {
 	t_file	*file;
 
 	file = (t_file *) ft_malloc(shell, sizeof(t_file));
-	file->path = path;
-	file->fd = -1;
+	file->path = token->content;
+	file->fd = token->fd;
 	file->next = NULL;
 	return (file);
 }
