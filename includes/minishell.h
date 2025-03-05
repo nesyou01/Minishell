@@ -1,14 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/04 13:47:17 by ael-gady         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
 
 #ifndef MINISHELL_H
 # define MINISHELL_H
@@ -86,6 +75,7 @@ void		ft_sort(t_list *lst);
 t_file		*ft_add_file_last(t_file **lst, t_file *new);
 t_file		*ft_last_file(t_file *lst);
 void		ft_retokenize(t_node *node);
+t_token		*ft_last_token(t_token *lst);
 
 //ERROR
 void	ft_error(char *msg);

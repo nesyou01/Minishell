@@ -6,13 +6,13 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:22 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:27:24 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/25 14:33:15 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static t_token	*ft_lst_token(t_token *lst)
+t_token	*ft_last_token(t_token *lst)
 {
 	t_token	*tmp;
 
@@ -56,7 +56,7 @@ void	ft_add_token_last(t_token **lst, t_token *new)
 
 	if (!new || !lst)
 		return ;
-	last = ft_lst_token(*lst);
+	last = ft_last_token(*lst);
 	if (!last)
 		return (ft_add_token_start(lst, new));
 	last->next = new;
