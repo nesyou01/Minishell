@@ -1,0 +1,28 @@
+---------------------------------------------------------------------------
+
+bash-3.2$ echo $SHLVL
+3
+bash-3.2$ exit ajshdfaslf
+exit
+bash: exit: ajshdfaslf: numeric argument required
+bash-3.2$ echo $SHLVL
+2
+bash-3.2$ bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ exit 123213 12312
+exit
+bash: exit: too many arguments
+bash-3.2$ echo $SHLVL
+3
+bash-3.2$ exit asdhbajkdh 123
+exit
+bash: exit: asdhbajkdh: numeric argument required
+bash-3.2$ echo $SHLVL
+2
+bash-3.2$ 
+
+-----------------------------------------------------------------------------
+

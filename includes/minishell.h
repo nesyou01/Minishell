@@ -1,18 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/21 13:10:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/01 22:28:37 by ylagmah          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #ifndef MINISHELL_H
 # define MINISHELL_H
-
 
 # include <unistd.h>//for write, execve, read,
 # include <stdlib.h>//malloc
@@ -91,8 +78,26 @@ t_token		*ft_last_token(t_token *lst);
 int			here_doc_handler(t_shell *shell, t_token *token);
 void		ft_remove_quotes(t_shell *shell, t_node *node);
 
-// EX
-void		ft_execute(t_shell *shell, t_node *node);
-char		**ft_get_all_env(t_shell *shell);
 
+void	ft_error(char *msg);
+
+//Test content of node !
+// void	ft_execute(t_shell *shell, t_node *node);
+char	**ft_split_(char const *s, char c);
+
+// EX
+void		execute_tree(t_shell *shell, t_node *node);
+int			is_builtin(char *cmd);
+void		execute_builtin(t_shell *shell, t_node *node);
+void		execute_external(t_shell *shell, t_node *node);
+void		execute_pipe(t_shell *shell, t_node *node);
+void		execute_and(t_shell *shell, t_node *node);
+void		execute_or(t_shell *shell, t_node *node);
+void		execute_subshell(t_shell *shell, t_node *node);
+void		handle_here_doc(t_file *heredoc);
+void		handle_input_redirections(t_file *in);
+void		handle_output_redirections(t_file *out);
+void		execute_logical(t_shell *shell, t_node *node);
+void		execute_subshell(t_shell *shell, t_node *node);
+char		*ft_get_path(t_shell *shell, t_env *env, char *content);
 #endif
