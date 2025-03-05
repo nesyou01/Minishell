@@ -74,7 +74,8 @@ typedef struct s_shell
 
 typedef struct s_command
 {
-	t_list	*argv;
+	char	**argv;
+	char	**envp;
 	char	*cmd;
 }	t_command;
 

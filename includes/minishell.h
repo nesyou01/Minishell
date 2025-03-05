@@ -34,13 +34,15 @@ char		*ft_substr(t_shell *shell,
 void		ft_add_garbage(t_list **head, t_shell *shell, void *ptr);
 void		*ft_malloc_globale(t_shell *shell, size_t size);
 char		*ft_strdup_globale(t_shell *shell, const char *s1);
-t_list		*ft_split(t_shell *shell, char *str, char *pattern);
+t_list		*ft_split_node(t_shell *shell, t_node *node);
 size_t		ft_safe_strlen(char *str);
 char		*ft_get_env_value(t_shell *shell, char *key);
 t_list		*ft_lstnew(t_shell *shell, void *content);
 char		*ft_repeat(t_shell *shell, size_t len, char c);
 int			ft_index_of(char *str, char c);
 void		ft_add_cmd_garbage(t_shell *shell, void *ptr);
+char		**ft_get_all_env(t_shell *shell);
+char		**ft_lst_to_array(t_shell *shell, t_list *lst);
 
 // PARSING
 t_node		*ft_parser(t_shell *shell, char *str);
