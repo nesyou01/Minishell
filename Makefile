@@ -12,8 +12,7 @@ SRC = src/minishell.c src/utils/utils.c src/built_ins/env.c src/utils/malloc_uti
 		src/execution/execute_cmd.c       src/execution/handle_subshell.c   src/execution/redirections.c src/execution/cmd_utils.c
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
-CFLAGS =  -g -fsanitize=address
-#  -Wall -Werror -Wextra
+CFLAGS =  #-g -fsanitize=address #  -Wall -Werror -Wextra
 LIBFT = libs/libft/libft.a
 HEADERS = includes/minishell.h
 

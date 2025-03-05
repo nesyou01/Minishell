@@ -6,8 +6,8 @@
 # define UNKNOWN -1
 # define OUT_REDIRECTER 1
 # define IN_REDIRECTER 2
-# define HERE_DOC 3
-# define OUT_APPEND_REDIRECTER 4
+# define HERE_DOC 3 
+# define OUT_APPEND_REDIRECTER 4 
 # define PIPE 105
 # define STATUS_CODE 6
 # define FILE 7
@@ -18,7 +18,7 @@
 # define PARENTHESES_END 114
 # define AND 115
 # define OR 116
-# define EMPTY_CMD 21
+# define EMPTY_CMD 21 
 # define SUB_SHELL 22
 
 typedef struct s_token

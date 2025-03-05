@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/04 14:02:17 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/05 18:02:36 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	is_builtin(char *cmd)
 // void	execute_builtin(t_shell *shell, t_node *node)
 // {
 // 	if (ft_strcmp(node->content, "cd") == 0)
-// 		ft_cd(shell, node);
+// 		ft_cd(shell, node); 
 // 	else if (!ft_strcmp(node->content, "echo"))
 // 		ft_echo(shell, node);
 // 	else if (ft_strcmp(node->content, "export") == 0)
@@ -45,14 +45,13 @@ int	is_builtin(char *cmd)
 // 		ft_exit(shell);
 // }
 
-
+/* I should handle the cases of tr ' ' '\n' and  echo "hello world" */
 void	execute_external(t_shell *shell, t_node *node)
 {
 	pid_t	pid;
 	int		status;
 	char	*path;
 
-	//(void)shell;
 	pid = fork();
 	if (pid == -1)
 	{
