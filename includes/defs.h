@@ -6,8 +6,8 @@
 # define UNKNOWN -1
 # define OUT_REDIRECTER 1
 # define IN_REDIRECTER 2
-# define HERE_DOC 3
-# define OUT_APPEND_REDIRECTER 4
+# define HERE_DOC 3 
+# define OUT_APPEND_REDIRECTER 4 
 # define PIPE 105
 # define STATUS_CODE 6
 # define FILE 7
@@ -18,7 +18,7 @@
 # define PARENTHESES_END 114
 # define AND 115
 # define OR 116
-# define EMPTY_CMD 21
+# define EMPTY_CMD 21 
 # define SUB_SHELL 22
 
 typedef struct s_token
@@ -45,6 +45,9 @@ typedef struct s_node
 	int				quotes_expanded;
 	char			*content;
 	char			*filter;
+	int				exit_status;//add this attribute for setting the process shell's exit status
+	char			**argv;// Array of arguments (e.g., ["ls", "-l", NULL]) or  using the struct t_commande
+	t_file			*here_doc;
 	t_file			*in;
 	t_file			*out;
 	struct s_node	*next;
@@ -62,6 +65,7 @@ typedef struct s_env
 
 typedef struct s_shell
 {
+	char	**envp;//just for testing the env
 	int		exit;
 	t_env	*env;
 	t_list	*globale_garbage;
