@@ -24,6 +24,7 @@
 typedef struct s_token
 {
 	int				type;
+	int				fd;
 	char			*content;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -41,6 +42,7 @@ typedef struct s_node
 {
 	int				type;
 	int				taken;
+	int				quotes_expanded;
 	char			*content;
 	char			*filter;
 	int				exit_status;//add this attribute for setting the process shell's exit status
@@ -78,7 +80,6 @@ typedef struct s_command
 
 typedef struct s_io
 {
-	t_file	*here_doc;
 	t_file	*in;
 	t_file	*out;
 }	t_io;

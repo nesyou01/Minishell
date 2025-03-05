@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 14:50:00 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/28 21:03:45 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,28 +39,31 @@ static int	is_valid_quotes(char *str)
 
 static int	is_valid_parentheses(t_token *token)
 {
-	if (token->type != PARENTHESES_START)
-		return (1);
-	return (!token->prev || token->prev->type >= 100);
+	if (token->type == PARENTHESES_START)
+		return (token->next && (token->next->type == COMMAND
+			|| is_redirection(token->next) || token->next->type == HERE_DOC));
+	if (token->type == PARENTHESES_END)
+		return (!token->next || (token->next->type != PARENTHESES_START
+			&& token->next->type != COMMAND));
+	return (1);
 }
 
-static int	is_valid_redirection(t_token *token)
-{
-	if (!is_redirection(token) && token->type != HERE_DOC)
-		return (1);
-	return (token->next && (token->next->type == FILE || token->next->type == HERE_DOC_LIMITER));
-}
-
-int	syntax_validator(t_token *token)
+int	syntax_validator(t_shell *shell, t_token *token)
 {
 	while (token)
 	{
 		if (!is_valid_quotes(token->content))
 			return (ft_perror("Unclosed quotes"), 1);
-		if (!is_valid_parentheses(token)
-			|| !is_valid_redirection(token)
-			|| !token->next && (token->type == PIPE || token->type == AND || token->type == OR))
-			return (ft_perror("Syntax error!"), 1);
+		if (token->type == HERE_DOC
+			&& (!token->next || token->next->type != HERE_DOC_LIMITER))
+				return (ft_perror("Syntax error near <<"), 1);
+		if (!is_valid_parentheses(token))
+				return (ft_perror("Syntax error!"), 1);
+		if (token->type == HERE_DOC_LIMITER)
+		{
+			if (here_doc_handler(shell, token))
+				return (ft_perror(NULL), 1);
+		}
 		token = token->next;
 	}
 	return (0);

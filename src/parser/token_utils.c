@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:22 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 14:33:15 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/02/26 16:39:06 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ t_token	*ft_new_token(t_shell *shell, char	*content)
 	list = (t_token *) ft_malloc(shell, sizeof(t_token));
 	list->content = content;
 	list->type = UNKNOWN;
+	list->fd = -1;
 	list->next = NULL;
 	list->prev = NULL;
 	return (list);
