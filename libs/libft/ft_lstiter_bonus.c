@@ -3,20 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lstiter_bonus.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tchevrie <tchevrie@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 17:09:25 by tchevrie          #+#    #+#             */
-/*   Updated: 2022/10/05 05:07:42 by tchevrie         ###   ########.fr       */
+/*   Created: 2024/10/25 15:06:35 by ylagmah           #+#    #+#             */
+/*   Updated: 2024/11/01 15:47:08 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_lstiter(t_list *lst, void (*f)(void *))
+void	ft_lstiter(t_list	*lst, void (*f)(void *))
 {
-	while (lst && f)
+	t_list	*tmp;
+
+	if (!lst || !f)
+		return ;
+	tmp = lst;
+	while (tmp)
 	{
-		f(lst->content);
-		lst = lst->next;
+		f(tmp->content);
+		tmp = tmp->next;
 	}
 }
