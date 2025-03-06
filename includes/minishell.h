@@ -12,6 +12,7 @@
 # include <readline/history.h>
 # include <dirent.h>
 # include "./defs.h"
+# include <string.h>//for strerror
 
 void		env_init(t_shell *shell, char **env);
 
@@ -82,6 +83,7 @@ void		ft_remove_quotes(t_shell *shell, t_node *node);
 
 
 void	ft_error(char *msg);
+void	ft_perror(const char *msg);
 
 //Test content of node !
 // void	ft_execute(t_shell *shell, t_node *node);

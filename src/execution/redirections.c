@@ -37,17 +37,7 @@
 // 	close(fd);
 // }
 
-static void	ft_perror(const char *msg)
-{
-	if (msg && *msg)
-	{
-		write(2, msg, ft_strlen(msg));
-		write(2, ": ", 2);
-	}
-	if (errno != 0)
-		write(2, strerror(errno), ft_strlen(strerror(errno)));
-	write(2, "\n", 1);
-}
+
 
 int	open_file(t_file *io)
 {
