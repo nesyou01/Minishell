@@ -1,5 +1,3 @@
-
-
 #include "../includes/minishell.h"
 
 void	ft_error(char *msg)//void	ft_error(t_shell *shell, char *msg)
@@ -49,10 +47,7 @@ static void	minishell(t_shell *shell)
 		ft_add_cmd_garbage(shell, str);
 		node = ft_parser(shell, str);
 		if (node)
-		{
-			// ft_execute(shell, node);
-			execute_tree(shell, node);//todo->
-		}
+			execute_tree(shell, node);
 		ft_clean_cmd(shell);
 	}
 	ft_clean_all(shell);

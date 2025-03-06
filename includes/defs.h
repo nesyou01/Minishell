@@ -48,8 +48,6 @@ typedef struct s_node
 	int				exit_status;//add this attribute for setting the process shell's exit status
 	char			**argv;// Array of arguments (e.g., ["ls", "-l", NULL]) or  using the struct t_commande
 	t_file			*io;
-	t_file			*in;
-	t_file			*out;
 	struct s_node	*next;
 	struct s_node	*prev;
 	struct s_node	*r_node;
@@ -78,11 +76,5 @@ typedef struct s_command
 	char	**envp;
 	char	*cmd;
 }	t_command;
-
-typedef struct s_io
-{
-	t_file	*in;
-	t_file	*out;
-}	t_io;
 
 #endif

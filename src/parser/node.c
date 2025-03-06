@@ -6,34 +6,24 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/05 21:30:46 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/06 02:15:52 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void	reset_io(t_io *io)
-{
-	io->in = NULL;
-	io->out = NULL;
-}
-
-static void set_io_to_node(t_node *node, t_io *io)
+static void set_io_to_node(t_node *node, t_file **io)
 {
 	if (!node)
 		return ;
-	if (node->in)
-		ft_last_file(node->in)->next = io->in;
+	if (node->io)
+		ft_last_file(node->io)->next = *io;
 	else
-		node->in = io->in;
-	if (node->out)
-		ft_last_file(node->out)->next = io->out;
-	else
-		node->out = io->out;
-	reset_io(io);
+		node->io = *io;
+	*io = NULL;
 }
 
-static t_node	*new_node(t_shell *shell, t_token *token, t_io *io)
+static t_node	*new_node(t_shell *shell, t_token *token, t_file **io)
 {
 	t_node	*tmp;
 
@@ -42,7 +32,7 @@ static t_node	*new_node(t_shell *shell, t_token *token, t_io *io)
 	return (tmp);
 }
 
-static int	redirection_handler(t_shell *shell, t_token *token, t_io *io)
+static int	redirection_handler(t_shell *shell, t_token *token, t_file **io)
 {
 	t_node	*next;
 	t_list	*lst;
@@ -58,14 +48,12 @@ static int	redirection_handler(t_shell *shell, t_token *token, t_io *io)
 		return (ft_perror("ambiguous redirect"), 1);
 	file = ft_new_file(shell, token->next);
 	file->path = next->content;
-	if (token->type == IN_REDIRECTER)
-		ft_add_file_last(&(io->in), file);
-	else
-		ft_add_file_last(&(io->out), file);
+	file->type = token->type;
+	ft_add_file_last(io, file);
 	return (0);
 }
 
-static void	add_empty_node(t_node **head, t_shell *shell, t_io *io)
+static void	add_empty_node(t_node **head, t_shell *shell, t_file **io)
 {
 	t_node	*node;
 
@@ -79,11 +67,11 @@ t_node	*ft_tokens_to_nodes(t_shell *shell, t_token *token)
 {
 	t_node	*head;
 	t_node	*tmp;
-	t_io	io;
+	t_file	*io;
 
 	tmp = NULL;
+	io = NULL;
 	head = NULL;
-	reset_io(&io);
 	while (token)
 	{
 		if (token->type == COMMAND || token->type >= 100)
