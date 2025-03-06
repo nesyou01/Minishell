@@ -33,7 +33,7 @@ typedef struct s_token
 typedef struct s_file
 {
 	int				fd;
-	int				type_out_redirect;
+	int				type;
 	char			*path;
 	struct s_file	*next;
 }	t_file;
@@ -47,7 +47,7 @@ typedef struct s_node
 	char			*filter;
 	int				exit_status;//add this attribute for setting the process shell's exit status
 	char			**argv;// Array of arguments (e.g., ["ls", "-l", NULL]) or  using the struct t_commande
-	t_file			*here_doc;
+	t_file			*io;
 	t_file			*in;
 	t_file			*out;
 	struct s_node	*next;
@@ -65,8 +65,8 @@ typedef struct s_env
 
 typedef struct s_shell
 {
-	char	**envp;//just for testing the env
 	int		exit;
+	char	**envp;
 	t_env	*env;
 	t_list	*globale_garbage;
 	t_list	*cmd_garbage;

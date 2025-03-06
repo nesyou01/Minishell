@@ -6,6 +6,7 @@
 # include <sys/wait.h>//wait
 # include <fcntl.h>//for system call open,
 # include <sys/types.h>//pid_t
+# include <errno.h>//for errno
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>

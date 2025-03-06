@@ -1,0 +1,12 @@
+Makefile
+file2
+file3
+includes
+libs
+list.txt
+minishell
+minishell_
+out
+output
+src
+testat
