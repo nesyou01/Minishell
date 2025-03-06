@@ -11,13 +11,12 @@ void	ft_error(char *msg)//void	ft_error(t_shell *shell, char *msg)
 void	execute_tree(t_shell *shell, t_node *node)
 {
 	if (!node)
-		return;
+		return ;
+
 	if (node->in)// Handle redirections
 		handle_input_redirections(node->in);
 	if (node->out)
 		handle_output_redirections(node->out);
-	// if (node->here_doc)
-	// 	handle_here_doc(node->here_doc);
 	if (node->type == COMMAND)
 	{
 		// if (is_builtin(node->content))
@@ -46,10 +45,7 @@ static void	minishell(t_shell *shell)
 		ft_add_cmd_garbage(shell, str);
 		node = ft_parser(shell, str);
 		if (node)
-		{
-			// ft_execute(shell, node);
-			execute_tree(shell, node);//todo->
-		}
+			execute_tree(shell, node);
 		ft_clean_cmd(shell);
 	}
 	ft_clean_all(shell);
