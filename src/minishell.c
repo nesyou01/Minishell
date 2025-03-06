@@ -12,12 +12,15 @@ void	execute_tree(t_shell *shell, t_node *node)
 {
 	if (!node)
 		return;
-	if (node->in)// Handle redirections
-		handle_input_redirections(node->in);
-	if (node->out)
-		handle_output_redirections(node->out);
-	// if (node->here_doc)
-	// 	handle_here_doc(node->here_doc);
+	// if (node->in)// Handle redirections ------------->     int	handle_redirections(t_file *io)     <-------------
+	// 	handle_input_redirections(node->in);
+	// if (node->out)
+	// 	handle_output_redirections(node->out);// Handle redirections ------------->     int	handle_redirections(t_file *io)     <-------------
+	if (node->io && !handle_redirections(node->io))
+	{
+		node->exit_status = 1;
+		return;
+	}
 	if (node->type == COMMAND)
 	{
 		// if (is_builtin(node->content))
