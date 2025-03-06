@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 09:56:46 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/06 00:19:18 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/06 02:15:41 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,9 @@ void	handle_output_redirections(t_file *out)
 	if (!out || !out->path)
 		return ;
 	// i need maybe a flag to check the type of redirection!
-	if (out->type_out_redirect == OUT_APPEND_REDIRECTER)
+	if (out->type == OUT_APPEND_REDIRECTER)
 		flags = (O_WRONLY | O_CREAT | O_APPEND);//Append
-	else if (out->type_out_redirect == OUT_REDIRECTER)//Overwrite file
+	else if (out->type == OUT_REDIRECTER)//Overwrite file
 		flags = (O_WRONLY | O_CREAT | O_TRUNC);
 	// after solve problem of type, open file with flag!
 	fd = open(out->path, flags, 0644);// behavior of bash set files permission (rw-r--r--)

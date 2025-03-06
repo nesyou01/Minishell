@@ -13,10 +13,10 @@ void	execute_tree(t_shell *shell, t_node *node)
 	if (!node)
 		return ;
 
-	if (node->in)// Handle redirections
-		handle_input_redirections(node->in);
-	if (node->out)
-		handle_output_redirections(node->out);
+	// if (node->in)// Handle redirections
+	// 	handle_input_redirections(node->in);
+	// if (node->out)
+	// 	handle_output_redirections(node->out);
 	if (node->type == COMMAND)
 	{
 		// if (is_builtin(node->content))
