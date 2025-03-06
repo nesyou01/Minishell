@@ -32,7 +32,7 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 		return (1);
 	has_quote = ft_strchr(token->content, '\'') || ft_strchr(token->content, '"');
 	token->prev->type = IN_REDIRECTER;
-	token->prev->fd = fds[0];
+	token->fd = fds[0];
 	limiter = remove_quotes(shell, token);
 	while (1)
 	{

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:22 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/04 00:55:55 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/06 02:11:04 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,7 @@ t_node	*ft_new_node(t_shell *shell, t_token *token)
 	list->prev = NULL;
 	list->l_node = NULL;
 	list->r_node = NULL;
-	list->in = NULL;
-	list->out = NULL;
+	list->io = NULL;
 	list->taken = 0;
 	list->quotes_expanded = 0;
 	return (list);
@@ -74,8 +73,7 @@ t_node	*ft_dup_node(t_shell *shell, t_node *node)
 	list->quotes_expanded = node->quotes_expanded;
 	list->next = NULL;
 	list->prev = NULL;
-	list->in = node->in;
-	list->out = node->out;
+	list->io = node->io;
 	list->l_node = NULL;
 	list->r_node = NULL;
 	list->quotes_expanded = node->quotes_expanded;
