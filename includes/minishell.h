@@ -25,7 +25,6 @@ t_env		*ft_last_env(t_env *env);
 t_env		*ft_get_env(t_env *env, char *key);
 char		*ft_get_env_key(t_shell *shell, char *str);
 
-void		ft_perror(char *str);
 void		ft_clean_all(t_shell *shell);
 void		*ft_malloc(t_shell *shell, size_t size);
 char		*ft_strdup(t_shell *shell, const char *s1);
@@ -97,9 +96,7 @@ void		execute_pipe(t_shell *shell, t_node *node);
 void		execute_and(t_shell *shell, t_node *node);
 void		execute_or(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
-void		handle_here_doc(t_file *heredoc);
-void		handle_input_redirections(t_file *in);
-void		handle_output_redirections(t_file *out);
+int			handle_redirections(t_file *io);
 void		execute_logical(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
 char		*ft_get_path(t_shell *shell, t_env *env, char *content);
