@@ -30,52 +30,52 @@ int	redirect_fd(int old_fd, int new_fd)
 	return (1);
 }
 
-void	restore_tty_fds(int *tty_fd)
-{
-	if (dup2(tty_fd[0], STDIN_FILENO) == -1)
-	{
-		(close(tty_fd[0]), close(tty_fd[1]), close(tty_fd[2]));
-		ft_perror("failed to restore tty fd !");
-		return ;
-	}
-	if (dup2(tty_fd[1], STDOUT_FILENO) == -1)
-	{
-		(close(tty_fd[0]), close(tty_fd[1]), close(tty_fd[2]));
-		ft_perror("failed to restore tty fd !");
-		return ;
-	}
-	if (dup2(tty_fd[2], STDERR_FILENO) == -1)
-	{
-		(close(tty_fd[0]), close(tty_fd[1]), close(tty_fd[2]));
-		ft_perror("failed to restore tty fd !");
-		return ;
-	}
-	close(tty_fd[0]);
-	close(tty_fd[1]);
-	close(tty_fd[2]);
-}
+// void	restore_tty_fds(int *tty_fd)
+// {
+// 	if (dup2(tty_fd[0], STDIN_FILENO) == -1)
+// 	{
+// 		(close(tty_fd[0]), close(tty_fd[1]), close(tty_fd[2]));
+// 		ft_perror("failed to restore tty fd !");
+// 		return ;
+// 	}
+// 	if (dup2(tty_fd[1], STDOUT_FILENO) == -1)
+// 	{
+// 		(close(tty_fd[0]), close(tty_fd[1]), close(tty_fd[2]));
+// 		ft_perror("failed to restore tty fd !");
+// 		return ;
+// 	}
+// 	if (dup2(tty_fd[2], STDERR_FILENO) == -1)
+// 	{
+// 		(close(tty_fd[0]), close(tty_fd[1]), close(tty_fd[2]));
+// 		ft_perror("failed to restore tty fd !");
+// 		return ;
+// 	}
+// 	close(tty_fd[0]);
+// 	close(tty_fd[1]);
+// 	close(tty_fd[2]);
+// }
 
-int	save_tty_fds(int *tty_fd)
-{
-	tty_fd[0] = dup(0);
-	if (tty_fd[0] == -1)
-		return (ft_perror("failed to save tty fd !"), 0);
-	tty_fd[1] = dup(1);
-	if (tty_fd[1] == -1)
-	{
-		close(tty_fd[0]);
-		ft_perror("failed to save tty fd !");
-		return(0);
-	}
-	tty_fd[2] = dup(2);
-	if (tty_fd[2] == -1)
-	{
-		(close(tty_fd[0]), close(tty_fd[1]));
-		ft_perror("failed to save tty fd !");
-		return(0);
-	}
-	return (1);
-}
+// int	save_tty_fds(int *tty_fd)
+// {
+// 	tty_fd[0] = dup(0);
+// 	if (tty_fd[0] == -1)
+// 		return (ft_perror("failed to save tty fd !"), 0);
+// 	tty_fd[1] = dup(1);
+// 	if (tty_fd[1] == -1)
+// 	{
+// 		close(tty_fd[0]);
+// 		ft_perror("failed to save tty fd !");
+// 		return(0);
+// 	}
+// 	tty_fd[2] = dup(2);
+// 	if (tty_fd[2] == -1)
+// 	{
+// 		(close(tty_fd[0]), close(tty_fd[1]));
+// 		ft_perror("failed to save tty fd !");
+// 		return(0);
+// 	}
+// 	return (1);
+// }
 
 // int	handle_redirections(t_file *io)
 // {
@@ -106,7 +106,10 @@ int	handle_redirections(t_file *io)
 
 	while (io)
 	{
-		fd = open_file(io);
+		if (io->fd == -1)
+			fd = open_file(io);
+		else
+			fd = io->fd;
 		if (fd == -1)
 			return (0);
 		if ((io->type == IN_REDIRECTER && !redirect_fd(fd, STDIN_FILENO))

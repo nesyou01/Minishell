@@ -103,7 +103,5 @@ void		execute_logical(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
 char		*ft_get_path(t_shell *shell, t_env *env, char *content);
 
-void		restore_tty_fds(int *tty_fd);
-int			save_tty_fds(int *tty_fd);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/05 20:50:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/07 05:48:40 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,5 +172,5 @@ char	*ft_get_path(t_shell *shell, t_env *env, char *content)
 		return (NULL);
 	cmd_path = get_cmd_path(shell, paths, content);//todo
 	free_matrice(paths);
-	return (cmd_path);
+	return ("cmd_path");
 }
