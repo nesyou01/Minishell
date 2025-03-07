@@ -8,7 +8,6 @@ void	ft_error(char *msg)//void	ft_error(t_shell *shell, char *msg)
 
 void	restore_tty(t_fd_tty *tty)
 {
-	printf("%d \n", tty->fd0);
 	if (dup2(tty->fd0, 0) == -1)
 	{
 		ft_error("failed to restore stdin");
@@ -27,7 +26,6 @@ void	restore_tty(t_fd_tty *tty)
 		(close(tty->fd0), close(tty->fd1), close(tty->fd2));
 		return ;
 	}
-	(close(tty->fd0), close(tty->fd1), close(tty->fd2));
 }
 
 void	execute_tree(t_shell *shell, t_node *node)
@@ -83,9 +81,10 @@ static void	minishell(t_shell *shell)
 		node = ft_parser(shell, str);
 		if (node)
 			execute_tree(shell, node);
-		// restore_tty(&shell->tty);
+		restore_tty(&shell->tty);
 		ft_clean_cmd(shell);
 	}
+	(close(shell->tty.fd0), close(shell->tty.fd1), close(shell->tty.fd2));
 	ft_clean_all(shell);
 }
 
@@ -99,5 +98,6 @@ int	main(int argc, char **argv, char **env)
 	env_init(&shell, env);
 	shell.exit = 0;
 	minishell(&shell);
+	printf("%d\n", shell.tty.fd0);
 	return (0);
 }
