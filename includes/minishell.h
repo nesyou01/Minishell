@@ -82,8 +82,9 @@ int			here_doc_handler(t_shell *shell, t_token *token);
 void		ft_remove_quotes(t_shell *shell, t_node *node);
 
 
-void	ft_error(char *msg);
-void	ft_perror(char *msg);
+void		ft_error(char *msg);
+void		ft_perror(char *msg);
+void		ft_perror2(char *msg, char *end);
 
 //Test content of node !
 // void	ft_execute(t_shell *shell, t_node *node);
