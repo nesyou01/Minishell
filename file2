@@ -1,15 +1,3 @@
-Makefile
-dirlist
-f1
-f2
-fil2
-file
-file1
-file2
-includes
-libs
-list.txt
-minishell
-minishell_
-src
-testat
+Makefile        includes        minishell       testat
+dirlist         libs            minishell_
+file2           list.txt        src

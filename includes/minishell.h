@@ -83,7 +83,7 @@ void		ft_remove_quotes(t_shell *shell, t_node *node);
 
 
 void	ft_error(char *msg);
-void	ft_perror(const char *msg);
+void	ft_perror(char *msg);
 
 //Test content of node !
 // void	ft_execute(t_shell *shell, t_node *node);
@@ -102,4 +102,8 @@ int			handle_redirections(t_file *io);
 void		execute_logical(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
 char		*ft_get_path(t_shell *shell, t_env *env, char *content);
+
+void		restore_tty_fds(int *tty_fd);
+int			save_tty_fds(int *tty_fd);
+
 #endif

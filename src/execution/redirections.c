@@ -1,44 +1,5 @@
 #include "../../includes/minishell.h"
 
-// void	handle_input_redirections(t_file *in)//bash-3.2$  ls > out33 > out44
-// {
-// 	int fd;
-// 	if (!in || !in->path)
-// 		return ;
-// 	if (in->fd != -1)
-// 		fd = in->fd;
-// 	else
-// 		fd = open(in->path, O_RDONLY);
-// 	if (fd == -1)
-// 		ft_error("open failed !");
-// 	if (dup2(fd, STDIN_FILENO) == -1)
-// 		(close(fd), ft_perror("dup2 input failed !"));
-// 	close(fd);
-// }
-
-// void	handle_output_redirections(t_file *out)//fix 
-// {
-// 	int	fd;
-// 	int	flags;
-
-// 	if (!out)
-// 		return ;
-// 	// i need maybe a flag to check the type of redirection!
-// 	if (out->type_out_redirect == OUT_APPEND_REDIRECTER)
-// 		flags = (O_WRONLY | O_CREAT | O_APPEND);//Append
-// 	else if (out->type_out_redirect == OUT_REDIRECTER)//Overwrite file
-// 		flags = (O_WRONLY | O_CREAT | O_TRUNC);
-// 	// after solve problem of type, open file with flag!
-// 	fd = open(out->path, flags, 0644);// behavior of bash set files permission (rw-r--r--)
-// 	if (fd == -1)
-// 		ft_error("open output failed !");
-// 	if (dup2(fd, STDOUT_FILENO) == -1)
-// 		(close(fd), ft_error("failed dup2 output !"));
-// 	close(fd);
-// }
-
-
-
 int	open_file(t_file *io)
 {
 	int	fd;
@@ -68,6 +29,76 @@ int	redirect_fd(int old_fd, int new_fd)
 	close(old_fd);
 	return (1);
 }
+
+void	restore_tty_fds(int *tty_fd)
+{
+	if (dup2(tty_fd[0], STDIN_FILENO) == -1)
+	{
+		(close(tty_fd[0]), close(tty_fd[1]), close(tty_fd[2]));
+		ft_perror("failed to restore tty fd !");
+		return ;
+	}
+	if (dup2(tty_fd[1], STDOUT_FILENO) == -1)
+	{
+		(close(tty_fd[0]), close(tty_fd[1]), close(tty_fd[2]));
+		ft_perror("failed to restore tty fd !");
+		return ;
+	}
+	if (dup2(tty_fd[2], STDERR_FILENO) == -1)
+	{
+		(close(tty_fd[0]), close(tty_fd[1]), close(tty_fd[2]));
+		ft_perror("failed to restore tty fd !");
+		return ;
+	}
+	close(tty_fd[0]);
+	close(tty_fd[1]);
+	close(tty_fd[2]);
+}
+
+int	save_tty_fds(int *tty_fd)
+{
+	tty_fd[0] = dup(0);
+	if (tty_fd[0] == -1)
+		return (ft_perror("failed to save tty fd !"), 0);
+	tty_fd[1] = dup(1);
+	if (tty_fd[1] == -1)
+	{
+		close(tty_fd[0]);
+		ft_perror("failed to save tty fd !");
+		return(0);
+	}
+	tty_fd[2] = dup(2);
+	if (tty_fd[2] == -1)
+	{
+		(close(tty_fd[0]), close(tty_fd[1]));
+		ft_perror("failed to save tty fd !");
+		return(0);
+	}
+	return (1);
+}
+
+// int	handle_redirections(t_file *io)
+// {
+// 	int	fd;
+// 	int	tty_fd[3];
+
+// 	if (!save_tty_fds(tty_fd))
+// 		return (0);
+// 	while (io)
+// 	{
+// 		fd = open_file(io);
+// 		if (fd == -1)
+// 			return (restore_tty_fds(tty_fd), 0);
+// 		if (io->type == IN_REDIRECTER && !redirect_fd(fd, STDIN_FILENO))
+// 			return (restore_tty_fds(tty_fd), 0);
+// 		else if((io->type == OUT_REDIRECTER || io->type == OUT_APPEND_REDIRECTER)
+// 			&& !redirect_fd(fd, STDOUT_FILENO))
+// 			return (restore_tty_fds(tty_fd), 0);
+// 		io = io->next;
+// 	}
+// 	restore_tty_fds(tty_fd);
+// 	return (1);
+// }
 
 int	handle_redirections(t_file *io)
 {
