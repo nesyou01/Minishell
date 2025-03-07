@@ -53,7 +53,7 @@ void	execute_tree(t_shell *shell, t_node *node)
 	restore_tty(&shell->tty);
 }
 
-void	initialise_tty(t_fd_tty *tty)
+static void	initialise_tty(t_fd_tty *tty)
 {
 	tty->fd0 = dup(0);
 	if (tty->fd0 == -1)
