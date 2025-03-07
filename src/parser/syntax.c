@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/28 21:03:45 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/07 23:33:54 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,15 @@ static int	is_valid_parentheses(t_token *token)
 	return (1);
 }
 
+static int	is_valid_operator(t_token *token)
+{
+	if (token->type < 100 || token->type == PARENTHESES_START
+		|| token->type == PARENTHESES_END)
+		return (1);
+	return (token->prev && token->prev->type != PIPE
+		&& token->prev->type != AND && token->prev->type != OR);
+}
+
 int	syntax_validator(t_shell *shell, t_token *token)
 {
 	while (token)
@@ -57,7 +66,7 @@ int	syntax_validator(t_shell *shell, t_token *token)
 		if (token->type == HERE_DOC
 			&& (!token->next || token->next->type != HERE_DOC_LIMITER))
 				return (ft_perror("Syntax error near <<"), 1);
-		if (!is_valid_parentheses(token))
+		if (!is_valid_parentheses(token) || !is_valid_operator(token))
 				return (ft_perror("Syntax error!"), 1);
 		if (token->type == HERE_DOC_LIMITER)
 		{
