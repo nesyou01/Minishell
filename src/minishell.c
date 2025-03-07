@@ -98,6 +98,5 @@ int	main(int argc, char **argv, char **env)
 	env_init(&shell, env);
 	shell.exit = 0;
 	minishell(&shell);
-	printf("%d\n", shell.tty.fd0);
 	return (0);
 }
