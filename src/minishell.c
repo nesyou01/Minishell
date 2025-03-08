@@ -36,9 +36,10 @@ static void	minishell(t_shell *shell)
 		if (!str)
 			break;
 		ft_add_cmd_garbage(shell, str);
-		node = ft_parser(shell, str);
+		node = ft_parser(shell, &str);
 		if (node)
 			execute_tree(shell, node);
+		add_history(str);
 		ft_clean_cmd(shell);
 	}
 	ft_clean_all(shell);
