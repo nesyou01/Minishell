@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/08 00:01:11 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/08 20:32:39 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,8 @@ void	execute_external(t_shell *shell, t_node *node)
 	}
 	else if (!pid)
 	{
+		if (node->io && !handle_redirections(node->io))
+			exit(1);
 		if (!node->content)
 			exit(0);
 		node->argv = ft_split_(node->content, ' ');
