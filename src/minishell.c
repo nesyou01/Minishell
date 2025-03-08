@@ -50,7 +50,8 @@ void	execute_tree(t_shell *shell, t_node *node)
 		execute_logical(shell, node);
 	else if (node->type == SUB_SHELL)
 		execute_subshell(shell, node);
-	restore_tty(&shell->tty);
+	if (node->io)
+		restore_tty(&shell->tty);
 }
 
 static void	initialise_tty(t_fd_tty *tty)
