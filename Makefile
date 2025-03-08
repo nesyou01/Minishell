@@ -16,10 +16,11 @@ CC = cc
 CFLAGS =  #-g -fsanitize=address #-Wall -Werror -Wextra
 LIBFT = libs/libft/libft.a
 HEADERS = includes/minishell.h includes/defs.h
+READLINE = mnt/homes/ylagmah/.brew/opt/readline
 
 
 ${NAME}: ${LIBFT} ${SRC_OBJS}
-	${CC} ${CFLAGS} ${SRC_OBJS} ${LIBFT} -l readline -o ${NAME}
+	${CC} ${CFLAGS} ${SRC_OBJS} ${LIBFT} -o ${NAME} -l readline -L ${READLINE}/lib
 
 
 all: ${NAME}
@@ -28,7 +29,7 @@ ${LIBFT}:
 	@make -C libs/libft all
 
 src/%.o: src/%.c ${HEADERS}
-	${CC} ${CFLAGS} -c $< -o $@
+	${CC} ${CFLAGS} -c $< -o $@ -I ${READLINE}/include
 
 
 clean:

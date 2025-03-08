@@ -1,11 +1,5 @@
 #include "../includes/minishell.h"
 
-void	ft_error(char *msg)//void	ft_error(t_shell *shell, char *msg)
-{
-	perror(msg);
-	exit(1);
-}
-
 void	execute_tree(t_shell *shell, t_node *node)
 {
 	if (!node)
