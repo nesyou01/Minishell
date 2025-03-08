@@ -80,6 +80,7 @@ void		ft_retokenize(t_node *node);
 t_token		*ft_last_token(t_token *lst);
 int			here_doc_handler(t_shell *shell, t_token *token);
 void		ft_remove_quotes(t_shell *shell, t_node *node);
+int			ft_repeat_count(t_token *head, int type);
 
 
 void		ft_error(char *msg);

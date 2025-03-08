@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:11:18 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/07 23:34:10 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/07 23:59:42 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,13 @@ static void	read_and_merge(t_shell *shell, t_token *head, t_token *last)
 	last->next = new;
 }
 
+static int	should_merge(t_token *last, t_token *head)
+{
+	return ((ft_repeat_count(head, PARENTHESES_START)
+		!= ft_repeat_count(head, PARENTHESES_END)
+		|| (last->type == PIPE || last->type == AND || last->type == OR)));
+}
+
 t_node	*ft_parser(t_shell *shell, char *str)
 {
 	t_token		*token;
@@ -45,11 +52,13 @@ t_node	*ft_parser(t_shell *shell, char *str)
 	if (syntax_validator(shell, token))
 		return (NULL);
 	last = ft_last_token(token);
-	if (last && (last->type == PIPE || last->type == AND || last->type == OR))
+	if (last && should_merge(last, token))
 		read_and_merge(shell, token, last);
 	ft_merge_args_with_cmd(shell, token);
 	if (syntax_validator(shell, token))
 		return (NULL);
+	if (ft_repeat_count(token, PARENTHESES_START) != ft_repeat_count(token, PARENTHESES_END))
+		return (ft_perror2("syntax error near", "EOF"), NULL);
 	node = ft_tokens_to_nodes(shell, token);
 	ft_tree_builder(shell, &node);
 	return (node);
