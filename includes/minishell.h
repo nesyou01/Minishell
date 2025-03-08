@@ -46,7 +46,7 @@ char		**ft_get_all_env(t_shell *shell);
 char		**ft_lst_to_array(t_shell *shell, t_list *lst);
 
 // PARSING
-t_node		*ft_parser(t_shell *shell, char *str);
+t_node		*ft_parser(t_shell *shell, char **str);
 t_token		*ft_split_tokens(t_shell *shell, char *str);
 int			ft_tokenize(t_token *lst);
 void		ft_add_token_last(t_token **lst, t_token *new);
