@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/28 21:03:45 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/07 23:46:05 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,23 @@ static int	is_valid_parentheses(t_token *token)
 	return (1);
 }
 
+static int	is_valid_operator(t_token *token)
+{
+	if (token->type < 100 || token->type == PARENTHESES_START
+		|| token->type == PARENTHESES_END)
+		return (1);
+	return (token->prev && token->prev->type != PIPE
+		&& token->prev->type != AND && token->prev->type != OR);
+}
+
+static int	is_valid_file(t_token *token)
+{
+	if (token->type != HERE_DOC && !is_redirection(token))
+		return (1);
+	return (token->next && (token->next->type == FILE
+		|| token->next->type == HERE_DOC_LIMITER));
+}
+
 int	syntax_validator(t_shell *shell, t_token *token)
 {
 	while (token)
@@ -56,13 +73,13 @@ int	syntax_validator(t_shell *shell, t_token *token)
 			return (ft_perror("Unclosed quotes"), 1);
 		if (token->type == HERE_DOC
 			&& (!token->next || token->next->type != HERE_DOC_LIMITER))
-				return (ft_perror("Syntax error near <<"), 1);
-		if (!is_valid_parentheses(token))
-				return (ft_perror("Syntax error!"), 1);
+				return (ft_perror2("Syntax error near", "<<"), 1);
+		if (!is_valid_parentheses(token) || !is_valid_operator(token) || !is_valid_file(token))
+				return (ft_perror2("Syntax error near", token->content), 1);
 		if (token->type == HERE_DOC_LIMITER)
 		{
 			if (here_doc_handler(shell, token))
-				return (ft_perror(NULL), 1);
+				return (ft_perror("here_doc failed!"), 1);
 		}
 		token = token->next;
 	}

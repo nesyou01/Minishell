@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_subshell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:04:14 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/03 17:51:07 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/08 00:07:34 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	execute_subshell(t_shell *shell, t_node *node)
 	pid_t	pid;
 	int		status;
 
-	if (!node || !node->l_node || !node->r_node)
+	if (!node || !node->l_node)
 		return ;
 	pid = fork();
 	if (pid == -1)

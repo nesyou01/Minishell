@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/07 05:48:40 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/07 20:40:02 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,10 +167,9 @@ char	*ft_get_path(t_shell *shell, t_env *env, char *content)
 	if (!full_path)
 		return (NULL);
 	paths = ft_split_(full_path, ':');//split of libft !!
-	// free(full_path);
 	if (!paths)
 		return (NULL);
 	cmd_path = get_cmd_path(shell, paths, content);//todo
 	free_matrice(paths);
-	return ("cmd_path");
+	return (cmd_path);
 }

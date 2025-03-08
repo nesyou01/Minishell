@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:22 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/26 16:39:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/07 23:54:08 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,12 +64,16 @@ void	ft_add_token_last(t_token **lst, t_token *new)
 	new->prev = last;
 }
 
-int	ft_strcmp(char *s1, char *s2)
+int	ft_repeat_count(t_token *head, int type)
 {
-	int		i;
+	int	count;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
-		i++;
-	return (s1[i] - s2[i]);
+	count = 0;
+	while (head)
+	{
+		if (head->type == type)
+			count++;
+		head = head->next;
+	}
+	return (count);
 }

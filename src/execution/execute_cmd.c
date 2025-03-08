@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/05 18:02:36 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/08 00:01:11 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	execute_external(t_shell *shell, t_node *node)
 	int		status;
 	char	*path;
 
+	ft_expand_node_vars(shell, node);
 	pid = fork();
 	if (pid == -1)
 	{
@@ -61,6 +62,8 @@ void	execute_external(t_shell *shell, t_node *node)
 	}
 	else if (!pid)
 	{
+		if (!node->content)
+			exit(0);
 		node->argv = ft_split_(node->content, ' ');
 		if (!node->argv || !node->argv[0])
 			ft_error("commande not found !");
