@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/09 21:57:08 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/09 23:48:19 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,21 +51,20 @@ void	exec_child(t_shell *shell, t_node *node)
 	char		*path;
 
 	if (node->io && !handle_redirections(node->io))
-		exit(1);
+		ft_exit(shell, node, EXIT_FAILURE);
 	p_cmd = ft_parse_command(shell, node);
 	if (!p_cmd || !p_cmd->argv[0])
-		exit(0);
+		ft_exit(shell, node, EXIT_SUCCESS);
 	path = ft_get_fullpath(p_cmd, shell);
 	if (!path)
 	{
 		ft_perror("command not found!");
-		exit(127);
+		ft_exit(shell, node, 127);
 	}
 	if (execve(path, p_cmd->argv, p_cmd->envp) == -1)
 	{
 		ft_perror("minishell: execve failed");
-		free(path);
-		exit(127);
+		ft_exit(shell, node, 127);
 	}
 }
 
@@ -80,7 +79,7 @@ void	execute_external(t_shell *shell, t_node *node)
 	{
 		perror("minishell: failed fork");
 		node->exit_status = 1;
-		exit(1);
+		ft_exit(shell, node, EXIT_FAILURE);
 	}
 	if (!pid)
 		exec_child(shell, node);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:26:29 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/09 21:36:40 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/09 23:50:24 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static void	malloc_error(t_shell *shell)
 {
 	ft_clean_all(shell, NULL);
 	ft_perror("Malloc failed!!!");
-	exit(123);
+	exit(1);
 }
 
 void	ft_add_garbage(t_list **head, t_shell *shell, void *ptr)
