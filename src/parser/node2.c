@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:56 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/24 16:26:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/09 21:32:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,4 +91,13 @@ void	ft_tree_builder(t_shell *shell, t_node **node)
 	move_lst(&op, &cmd);
 	*node = cmd;
 	ft_to_tree(cmd);
+}
+
+t_node	*ft_head_node(t_node *node)
+{
+	if (!node)
+		return (NULL);
+	while (node->prev)
+		node = node->prev;
+	return (node);
 }

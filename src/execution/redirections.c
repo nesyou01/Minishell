@@ -15,6 +15,7 @@ int	open_file(t_file *io)
 	fd = open(io->path, flags, 0644);
 	if (fd == -1)
 		ft_perror(io->path);
+	io->fd = fd;
 	return (fd);
 }
 

@@ -35,9 +35,9 @@ static void	minishell(t_shell *shell)
 			execute_tree(shell, node);
 		if (*str)
 			add_history(str);
-		ft_clean_cmd(shell);
+		ft_clean_cmd(shell, node);
 	}
-	ft_clean_all(shell);
+	ft_clean_all(shell, NULL);
 }
 
 int	main(int argc, char **argv, char **env)
