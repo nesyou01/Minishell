@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/05 21:47:11 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/09 21:48:45 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,7 +155,7 @@ int	ft_expand_node_vars(t_shell *shell, t_node *node)
 		ft_retokenize(node);
 		fail = ft_wildcard_handler(shell, node);
 	}
-	if (!node->content[0] && !node->quotes_expanded)
+	if (!node->content[0] && node->quotes_expanded)
 		node->content = NULL;
 	return (fail);
 }
