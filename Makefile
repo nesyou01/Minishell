@@ -8,8 +8,9 @@ SRC = src/minishell.c src/utils/utils.c src/built_ins/env.c src/utils/malloc_uti
 		src/parser/expander.c src/parser/command.c src/utils/str_utils.c \
 		src/utils/ft_split.c src/parser/expand_vars.c src/parser/expand_wildcards.c src/utils/env_utils2.c \
 		src/utils/lst_utils.c src/parser/wildcard_utils.c src/parser/here_doc.c src/parser/env_utils.c \
-		 src/execution/handle_pipe.c       src/execution/logical_operator.c \
-		src/execution/execute_cmd.c       src/execution/handle_subshell.c   src/execution/redirections.c src/execution/cmd_utils.c
+		src/execution/handle_pipe.c       src/execution/logical_operator.c \
+		src/execution/execute_cmd.c       src/execution/handle_subshell.c   src/execution/redirections.c src/execution/cmd_utils.c \
+		src/signals.c
 
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
