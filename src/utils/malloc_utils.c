@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:26:29 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/26 00:01:03 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/09 21:36:40 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ static t_list	*ft_new_garbage(void *content)
 
 static void	malloc_error(t_shell *shell)
 {
-	ft_clean_all(shell);
+	ft_clean_all(shell, NULL);
 	ft_perror("Malloc failed!!!");
 	exit(123);
 }

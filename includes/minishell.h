@@ -18,7 +18,6 @@
 void		env_init(t_shell *shell, char **env);
 
 void		ft_env(t_shell *shell);
-void		ft_exit(t_shell *shell);
 void		ft_unset(t_shell *shell, char *var);
 void		ft_export(t_shell *shell, char *var);
 
@@ -27,7 +26,7 @@ t_env		*ft_last_env(t_env *env);
 t_env		*ft_get_env(t_env *env, char *key);
 char		*ft_get_env_key(t_shell *shell, char *str);
 
-void		ft_clean_all(t_shell *shell);
+void		ft_clean_all(t_shell *shell, t_node *node);
 void		*ft_malloc(t_shell *shell, size_t size);
 char		*ft_strdup(t_shell *shell, const char *s1);
 char		*ft_strjoin(t_shell *shell, char const *s1, char const *s2);
@@ -45,6 +44,7 @@ int			ft_index_of(char *str, char c);
 void		ft_add_cmd_garbage(t_shell *shell, void *ptr);
 char		**ft_get_all_env(t_shell *shell);
 char		**ft_lst_to_array(t_shell *shell, t_list *lst);
+void		ft_exit(t_shell *shell, t_node *node, int status);
 
 // PARSING
 t_node		*ft_parser(t_shell *shell, char **str);
@@ -57,7 +57,7 @@ void		ft_add_token_start(t_token **lst, t_token *new);
 t_node		*ft_add_node_last(t_node **lst, t_node *new);
 t_node		*ft_new_node(t_shell *shell, t_token *token);
 void		ft_add_node_start(t_node **lst, t_node *new);
-void		ft_clean_cmd(t_shell *shell);
+void		ft_clean_cmd(t_shell *shell, t_node *node);
 void		ft_tree_builder(t_shell *shell, t_node **node);
 t_node		*ft_to_tree(t_node *node);
 int			syntax_validator(t_shell *shell, t_token *token);
@@ -82,6 +82,7 @@ t_token		*ft_last_token(t_token *lst);
 int			here_doc_handler(t_shell *shell, t_token *token);
 void		ft_remove_quotes(t_shell *shell, t_node *node);
 int			ft_repeat_count(t_token *head, int type);
+t_node		*ft_head_node(t_node *node);
 
 
 void		ft_error(char *msg);
@@ -110,7 +111,7 @@ void		execute_subshell(t_shell *shell, t_node *node);
 char		*ft_get_path(t_shell *shell, t_env *env, char *content);
 
 
-char	*ft_get_fullpath(t_command *p_cmd, t_shell *shell);
+char		*ft_get_fullpath(t_command *p_cmd, t_shell *shell);
 char		*get_cmd_path(t_shell *shell, char **paths, char *cmd);
 void		free_matrice(char **free_me);
 

@@ -53,5 +53,5 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 		ft_putstr_fd(str, fds[1]);
 		ft_putstr_fd("\n", fds[1]);
 	}
-	return (0);
+	return (close(fds[1]), 0);
 }
