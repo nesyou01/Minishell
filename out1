@@ -1,8 +1,90 @@
-Makefile
-includes
-libs
-minishell
-out
-out1
-src
 /mnt/homes/ael-gady/Desktop/merge_minishell
+/mnt/homes/ael-gady/Desktop/merge_minishell
+       8       8      53
+       8       8      53
+---------------------------------------------------------------
+char	*get_path_from_env(t_shell *shell, char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			return (ft_strdup(shell, envp[i] + 5));
+		i++;
+	}
+	return (NULL);
+}
+
+char	*ft_get_fullpath(t_command *p_cmd, t_shell *shell)
+{
+	char	*path;
+	char	*env_path;
+	char	**paths;
+
+	if (!ft_strncmp(p_cmd->cmd, "./", 2) || !ft_strncmp(p_cmd->cmd, "/", 1))
+	{
+		if (!access(p_cmd->cmd, X_OK))
+			return (p_cmd->cmd);
+		return (NULL);
+	}
+	env_path = get_path_from_env(shell, p_cmd->envp);
+	if (!env_path)
+		return (NULL);
+	paths = ft_split_(env_path, ':');
+	free(env_path);
+	if (!paths)
+		return (NULL);
+	path = get_cmd_path(shell, paths, p_cmd->cmd);
+	free_matrice(paths);
+	return (path);
+}
+
+void	execute_external(t_shell *shell, t_node *node)
+{
+	t_command	*p_cmd;
+	pid_t		pid;
+	int			status;
+	char		*path;
+
+	ft_expand_node_vars(shell, node);
+	pid = fork();
+	if (pid == -1)
+	{
+		perror("minishell: failed fork");
+		node->exit_status = 1;
+		exit(1);
+	}
+	if (!pid)
+	{
+		p_cmd = ft_parse_command(shell, node);
+		if (!p_cmd)
+			exit(1);
+		if (node->io && !handle_redirections(node->io))
+			exit(1);
+		path = ft_get_fullpath(p_cmd, shell);//todo
+		if (!path)
+			ft_error("commande not found !");
+		if (execve(path, p_cmd->argv, p_cmd->envp) == -1)
+		{
+			perror("minishell: execve, commande not found !");
+			free(path);
+			exit(1);
+		}
+	}
+	else
+	{
+		if (waitpid(pid, &status, 0) == -1)
+		{
+			perror("minishell: waitpid");
+			node->exit_status = 1;
+			return;
+		}
+		if (WIFEXITED(status))
+			node->exit_status = WEXITSTATUS(status);
+		else
+			node->exit_status = 1;
+	}
+}
+------------------------------------------------------

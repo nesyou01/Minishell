@@ -1,6 +1,9 @@
-  PID TTY           TIME CMD
-19229 ttys001    0:01.08 /bin/zsh -il
-33527 ttys001    0:00.00 ./minishell
-33827 ttys001    0:00.00 ./minishell
-30112 ttys006    0:00.31 /bin/zsh -il
-31301 ttys006    0:00.02 bash
+ls
+/bin/ls 
+Makefile
+includes
+libs
+minishell
+out
+out1
+src
