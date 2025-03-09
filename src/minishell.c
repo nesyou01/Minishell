@@ -49,6 +49,7 @@ int	main(int argc, char **argv, char **env)
 		return (ft_perror("usage => ./minishell"), 1);
 	env_init(&shell, env);
 	shell.exit = 0;
+	signals_listener(&shell);
 	minishell(&shell);
 	return (0);
 }
