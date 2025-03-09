@@ -1,28 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   command.c                                          :+:      :+:    :+:   */
+/*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/02/15 13:02:38 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/08 23:48:22 by ael-gady         ###   ########.fr       */
+/*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
+/*   Updated: 2025/03/09 03:23:15 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-t_command	*ft_parse_command(t_shell *shell, t_node *node)
+int	ft_cd(t_shell *shell, t_command *parse_cmd)
 {
-	t_command	*result;
-	char		**argv;
+	char	*dir;
 
-	if (node->type != COMMAND)
-		return (NULL);
-	argv = ft_lst_to_array(shell, ft_split_node(shell, node));
-	result = ft_malloc(shell, sizeof(t_command));
-	result->envp = ft_get_all_env(shell);
-	result->argv = argv;
-	result->cmd = argv[0];
-	return (result);
+	dir = parse_cmd->argv[1];
+	if (!dir || ft_strcmp(dir, "~"))
+		dir = getenv("HOME");
+	if(chdir(dir) == -1)
+	{
+		perror("failed chdir ! ");
+		return (1);//failed
+	}
+	return (0);
 }

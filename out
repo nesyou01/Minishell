@@ -1,6 +1,13 @@
+Makefile
+includes
+libs
+minishell
+out
+output
+src
+testat
   PID TTY           TIME CMD
-19229 ttys001    0:01.08 /bin/zsh -il
-33527 ttys001    0:00.00 ./minishell
-33827 ttys001    0:00.00 ./minishell
-30112 ttys006    0:00.31 /bin/zsh -il
-31301 ttys006    0:00.02 bash
+31282 ttys001    0:00.77 /bin/zsh -il
+40564 ttys001    0:00.00 ./minishell
+35723 ttys003    0:00.55 /bin/zsh -il
+35801 ttys003    0:00.01 bash
