@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/09 03:28:25 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:36:28 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,11 @@ void	exec_child(t_shell *shell, t_node *node)
 	t_command	*p_cmd;
 	char		*path;
 
-	p_cmd = ft_parse_command(shell, node);
-	if (!p_cmd)
-		exit(1);
 	if (node->io && !handle_redirections(node->io))
 		exit(1);
+	p_cmd = ft_parse_command(shell, node);
+	if (!p_cmd || !p_cmd->argv[0])
+		exit(0);
 	path = ft_get_fullpath(p_cmd, shell);
 	if (!path)
 	{

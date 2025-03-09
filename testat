@@ -1,11 +1,19 @@
 ---------------------------------------------------------
 minishell >> > file
-
+problem !!!
 ---------------------------------------------------------
 minishell >> < file
 minishell >> 
+problem !!
 ---------------------------------------------------------
 bash-3.2$ ( < kkkkkk )
 bash: kkkkkk: No such file or directory
 bash-3.2$ 
 ---------------------------------------------------------
+// Add handling for command sequences in execute_tree
+else if (node->type == SEQUENCE) {
+	execute_tree(shell, node->l_node);
+	execute_tree(shell, node->r_node);
+}
+
+Test with (echo hello; echo world) and check if both commands run.

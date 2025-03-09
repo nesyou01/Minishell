@@ -1,4 +1,3 @@
-       8
 Makefile
 includes
 libs
@@ -7,3 +6,8 @@ out
 output
 src
 testat
+  PID TTY           TIME CMD
+31282 ttys001    0:00.77 /bin/zsh -il
+40564 ttys001    0:00.00 ./minishell
+35723 ttys003    0:00.55 /bin/zsh -il
+35801 ttys003    0:00.01 bash
