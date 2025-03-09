@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/09 00:29:04 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/09 00:42:38 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,44 +44,6 @@ int	is_builtin(char *cmd)
 // 	else if (ft_strcmp(node->content, "exit") == 0)
 // 		ft_exit(shell);
 // }
-
-char	*get_path_from_env(t_shell *shell, char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			return (ft_strdup(shell, envp[i] + 5));
-		i++;
-	}
-	return (NULL);
-}
-
-char	*ft_get_fullpath(t_command *p_cmd, t_shell *shell)
-{
-	char	*path;
-	char	*env_path;
-	char	**paths;
-
-	if (!ft_strncmp(p_cmd->cmd, "./", 2) || !ft_strncmp(p_cmd->cmd, "/", 1))
-	{
-		if (!access(p_cmd->cmd, X_OK))
-			return (p_cmd->cmd);
-		return (NULL);
-	}
-	env_path = get_path_from_env(shell, p_cmd->envp);
-	if (!env_path)
-		return (NULL);
-	paths = ft_split_(env_path, ':');
-	free(env_path);
-	if (!paths)
-		return (NULL);
-	path = get_cmd_path(shell, paths, p_cmd->cmd);
-	free_matrice(paths);
-	return (path);
-}
 
 void	exec_child(t_shell *shell, t_node *node)
 {

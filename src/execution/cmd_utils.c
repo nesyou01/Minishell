@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/07 20:40:02 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/09 00:44:57 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -136,10 +136,10 @@ char	*get_cmd_path(t_shell *shell, char **paths, char *cmd)
 	i = 0;
 	while (paths[i])
 	{
-		tmp = ft_strjoin(shell, paths[i], "/");// ft_strjoin of libft!!
+		tmp = ft_strjoin(shell, paths[i], "/");
 		if (!tmp)
 			return (NULL);
-		executable = ft_strjoin(shell, tmp, cmd);// same thing ft_strjoin of libft !
+		executable = ft_strjoin(shell, tmp, cmd);
 		// free(tmp);
 		if(!executable)
 			return (NULL);
@@ -151,25 +151,40 @@ char	*get_cmd_path(t_shell *shell, char **paths, char *cmd)
 	return (NULL);
 }
 
-char	*ft_get_path(t_shell *shell, t_env *env, char *content)
+char	*get_path_from_env(t_shell *shell, char **envp)
 {
-	char	**paths;
-	char	*full_path;
-	char	*cmd_path;
+	int	i;
 
-	if (!ft_strncmp(content, "./", 2) || !ft_strncmp(content, "/", 1))
+	i = 0;
+	while (envp[i])
 	{
-		if (!access(content, X_OK))
-			return (content);
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			return (ft_strdup(shell, envp[i] + 5));
+		i++;
+	}
+	return (NULL);
+}
+
+char	*ft_get_fullpath(t_command *p_cmd, t_shell *shell)
+{
+	char	*path;
+	char	*env_path;
+	char	**paths;
+
+	if (!ft_strncmp(p_cmd->cmd, "./", 2) || !ft_strncmp(p_cmd->cmd, "/", 1))
+	{
+		if (!access(p_cmd->cmd, X_OK))
+			return (p_cmd->cmd);
 		return (NULL);
 	}
-	full_path = getenv("PATH=");//create a function based by t_env !!
-	if (!full_path)
+	env_path = get_path_from_env(shell, p_cmd->envp);
+	if (!env_path)
 		return (NULL);
-	paths = ft_split_(full_path, ':');//split of libft !!
+	paths = ft_split_(env_path, ':');
+	free(env_path);
 	if (!paths)
 		return (NULL);
-	cmd_path = get_cmd_path(shell, paths, content);//todo
+	path = get_cmd_path(shell, paths, p_cmd->cmd);
 	free_matrice(paths);
-	return (cmd_path);
+	return (path);
 }
