@@ -1,9 +1,9 @@
-ls
-/bin/ls 
+       8
 Makefile
 includes
 libs
 minishell
 out
-out1
+output
 src
+testat

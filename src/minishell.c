@@ -10,6 +10,11 @@ void	execute_tree(t_shell *shell, t_node *node)
 {
 	if (!node)
 		return;
+	// if (node->io && !handle_redirections(node->io))
+	// {
+	// 	node->exit_status = 1;
+	// 	return;
+	// }
 	if (node->type == COMMAND)
 	{
 		// if (is_builtin(node->content))
