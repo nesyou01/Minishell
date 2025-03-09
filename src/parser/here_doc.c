@@ -21,6 +21,12 @@ static int	ft_pipe(int fds[2])
 	return (0);
 }
 
+static void	convert_here_doc(t_token *token)
+{
+	token->prev->type = IN_REDIRECTER;
+	token->type = FILE;
+}
+
 int	here_doc_handler(t_shell *shell, t_token *token)
 {
 	char	*str;
@@ -31,7 +37,7 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 	if (ft_pipe(fds))
 		return (1);
 	has_quote = ft_strchr(token->content, '\'') || ft_strchr(token->content, '"');
-	token->prev->type = IN_REDIRECTER;
+	convert_here_doc(token);
 	token->fd = fds[0];
 	limiter = remove_quotes(shell, token);
 	while (1)
