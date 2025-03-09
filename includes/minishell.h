@@ -110,4 +110,8 @@ void		execute_subshell(t_shell *shell, t_node *node);
 char		*ft_get_path(t_shell *shell, t_env *env, char *content);
 
 
+char	*ft_get_fullpath(t_command *p_cmd, t_shell *shell);
+char		*get_cmd_path(t_shell *shell, char **paths, char *cmd);
+void		free_matrice(char **free_me);
+
 #endif
