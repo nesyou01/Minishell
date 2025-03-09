@@ -13,6 +13,7 @@
 # include <dirent.h>
 # include "./defs.h"
 # include <string.h>//for strerror
+# include <signal.h>//for strerror
 
 void		env_init(t_shell *shell, char **env);
 
@@ -86,6 +87,9 @@ int			ft_repeat_count(t_token *head, int type);
 void		ft_error(char *msg);
 void		ft_perror(char *msg);
 void		ft_perror2(char *msg, char *end);
+
+
+void		signals_listener(t_shell *shell);
 
 //Test content of node !
 // void	ft_execute(t_shell *shell, t_node *node);
