@@ -13,6 +13,7 @@
 # include <dirent.h>
 # include "./defs.h"
 # include <string.h>//for strerror
+# include <signal.h>//for strerror
 
 void		env_init(t_shell *shell, char **env);
 
@@ -46,7 +47,7 @@ char		**ft_get_all_env(t_shell *shell);
 char		**ft_lst_to_array(t_shell *shell, t_list *lst);
 
 // PARSING
-t_node		*ft_parser(t_shell *shell, char *str);
+t_node		*ft_parser(t_shell *shell, char **str);
 t_token		*ft_split_tokens(t_shell *shell, char *str);
 int			ft_tokenize(t_token *lst);
 void		ft_add_token_last(t_token **lst, t_token *new);
@@ -86,6 +87,9 @@ int			ft_repeat_count(t_token *head, int type);
 void		ft_error(char *msg);
 void		ft_perror(char *msg);
 void		ft_perror2(char *msg, char *end);
+
+
+void		signals_listener(t_shell *shell);
 
 //Test content of node !
 // void	ft_execute(t_shell *shell, t_node *node);
