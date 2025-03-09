@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:26 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/08 22:03:45 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/09 23:17:22 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,8 @@ void	ft_perror(char *msg)
 	if (msg && *msg)
 	{
 		ft_putstr_fd(msg, 2);
-		ft_putstr_fd(": ", 2);
+		ft_putstr_fd("\n", 2);
 	}
-	if (errno != 0)
-	{
-		error = strerror(errno);
-		if (error)
-			ft_putstr_fd(error, 2);
-	}
-	ft_putstr_fd("\n", 2);
 }
 
 void	ft_perror2(char *msg, char *end)

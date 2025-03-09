@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/09 00:44:57 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/09 23:16:55 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,7 +170,8 @@ char	*ft_get_fullpath(t_command *p_cmd, t_shell *shell)
 	char	*path;
 	char	*env_path;
 	char	**paths;
-
+	if (!p_cmd->cmd[0])
+		return (NULL);
 	if (!ft_strncmp(p_cmd->cmd, "./", 2) || !ft_strncmp(p_cmd->cmd, "/", 1))
 	{
 		if (!access(p_cmd->cmd, X_OK))
