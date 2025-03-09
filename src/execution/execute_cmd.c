@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/08 20:32:39 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/09 20:36:28 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,34 @@ int	is_builtin(char *cmd)
 // 		ft_exit(shell);
 // }
 
-/* I should handle the cases of tr ' ' '\n' and  echo "hello world" */
+void	exec_child(t_shell *shell, t_node *node)
+{
+	t_command	*p_cmd;
+	char		*path;
+
+	if (node->io && !handle_redirections(node->io))
+		exit(1);
+	p_cmd = ft_parse_command(shell, node);
+	if (!p_cmd || !p_cmd->argv[0])
+		exit(0);
+	path = ft_get_fullpath(p_cmd, shell);
+	if (!path)
+	{
+		ft_perror("command not found!");
+		exit(127);
+	}
+	if (execve(path, p_cmd->argv, p_cmd->envp) == -1)
+	{
+		ft_perror("minishell: execve failed");
+		free(path);
+		exit(127);
+	}
+}
+
 void	execute_external(t_shell *shell, t_node *node)
 {
 	pid_t	pid;
 	int		status;
-	char	*path;
 
 	ft_expand_node_vars(shell, node);
 	pid = fork();
@@ -60,32 +82,15 @@ void	execute_external(t_shell *shell, t_node *node)
 		node->exit_status = 1;
 		exit(1);
 	}
-	else if (!pid)
-	{
-		if (node->io && !handle_redirections(node->io))
-			exit(1);
-		if (!node->content)
-			exit(0);
-		node->argv = ft_split_(node->content, ' ');
-		if (!node->argv || !node->argv[0])
-			ft_error("commande not found !");
-		path = ft_get_path(shell, shell->env, node->argv[0]);
-		if (!path)
-			ft_error("commande not found !");
-		if (execve(path, node->argv, shell->envp) == -1)
-		{
-			perror("minishell: execve, commande not found !");
-			free(path);
-			exit(1);
-		}
-	}
+	if (!pid)
+		exec_child(shell, node);
 	else
 	{
 		if (waitpid(pid, &status, 0) == -1)
 		{
-			perror("minishell: waitpid");
+			perror("minishell: failed waitpid");
 			node->exit_status = 1;
-			return;
+			return ;
 		}
 		if (WIFEXITED(status))
 			node->exit_status = WEXITSTATUS(status);
@@ -93,3 +98,4 @@ void	execute_external(t_shell *shell, t_node *node)
 			node->exit_status = 1;
 	}
 }
+
