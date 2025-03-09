@@ -70,7 +70,6 @@ typedef struct s_env
 typedef struct s_shell
 {
 	int			exit;
-	char		**envp;
 	// t_fd_tty	tty;
 	t_env		*env;
 	t_list		*globale_garbage;
