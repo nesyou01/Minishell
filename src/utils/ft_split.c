@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/09 22:00:01 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/09 23:14:21 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,18 +62,16 @@ t_list	*ft_split_node(t_shell *shell, t_node *node)
 	lst = NULL;
 	if (!node->content)
 		return (NULL);
-	if (!node->content[i])
-		return (ft_lstadd_back(&lst, ft_lstnew(shell, node->content)), lst);
-	while (node->content[i])
+	while (1)
 	{
-		while (node->filter[i] == ' ')
+		if (node->filter[i] == ' ')
 			i++;
 		end = ft_get_token_end(node->filter + i);
 		content = ft_substr(shell, node->content, i, end);
 		ft_lstadd_back(&lst, ft_lstnew(shell, content));
 		i += end;
-		while (node->filter[i] == ' ')
-			i++;
+		if (!node->filter[i])
+			break ;
 	}
 	return (lst);
 }
