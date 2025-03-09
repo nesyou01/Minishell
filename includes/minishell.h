@@ -45,6 +45,7 @@ void		ft_add_cmd_garbage(t_shell *shell, void *ptr);
 char		**ft_get_all_env(t_shell *shell);
 char		**ft_lst_to_array(t_shell *shell, t_list *lst);
 void		ft_exit(t_shell *shell, t_node *node, int status);
+char		**ft_split(t_shell *shell, char const *s, char c);
 
 // PARSING
 t_node		*ft_parser(t_shell *shell, char **str);
@@ -91,10 +92,6 @@ void		ft_perror2(char *msg, char *end);
 
 
 void		signals_listener(t_shell *shell);
-
-//Test content of node !
-// void	ft_execute(t_shell *shell, t_node *node);
-char	**ft_split_(char const *s, char c);
 
 // EX
 void		execute_tree(t_shell *shell, t_node *node);
