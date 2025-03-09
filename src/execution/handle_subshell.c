@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:04:14 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/09 20:17:19 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/09 23:49:25 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	execute_subshell(t_shell *shell, t_node *node)
 	if (pid == 0)
 	{
 		if (node->io && !handle_redirections(node->io))
-			exit(1);
+			ft_exit(shell, node, EXIT_FAILURE);
 		execute_tree(shell, node->l_node);
-		exit(node->exit_status);
+		ft_exit(shell, node, node->exit_status);
 	}
 	else
 	{
