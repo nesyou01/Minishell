@@ -81,6 +81,7 @@ int			here_doc_handler(t_shell *shell, t_token *token);
 void		ft_remove_quotes(t_shell *shell, t_node *node);
 int			ft_repeat_count(t_token *head, int type);
 t_node		*ft_head_node(t_node *node);
+int			ft_is_valid_key(char *str);
 
 
 void		ft_error(t_shell *shell, t_node *node, char *msg, int status);
@@ -111,6 +112,7 @@ char		*get_cmd_path(t_shell *shell, char **paths, char *cmd);
 
 
 int			ft_echo(t_shell *shell, t_command *cmd);
-void		ft_export(t_shell *shell, t_command *cmd);
+int			ft_export(t_shell *shell, t_command *cmd);
+int			ft_unset(t_shell *shell, t_command *cmd);
 
 #endif
