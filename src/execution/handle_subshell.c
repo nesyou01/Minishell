@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_subshell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:04:14 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/09 23:49:25 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/10 00:13:43 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	execute_subshell(t_shell *shell, t_node *node)
 	}
 	pid = fork();
 	if (pid == -1)
-		ft_error("failed fork !");
+		ft_error(shell, node, "failed fork !", 17);
 	if (pid == 0)
 	{
 		if (node->io && !handle_redirections(node->io))

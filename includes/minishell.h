@@ -86,7 +86,7 @@ int			ft_repeat_count(t_token *head, int type);
 t_node		*ft_head_node(t_node *node);
 
 
-void		ft_error(char *msg);
+void		ft_error(t_shell *shell, t_node *node, char *msg, int status);
 void		ft_perror(char *msg);
 void		ft_perror2(char *msg, char *end);
 

@@ -13,5 +13,5 @@ void	signals_listener(t_shell *shell)
 	rl_catch_signals = 0;
 	if (signal(SIGINT, on_new_prompt) == SIG_ERR
 		|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		ft_error("signal failed");
+		ft_error(shell, NULL, "signal failed", 99);
 }
