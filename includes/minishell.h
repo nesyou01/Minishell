@@ -110,6 +110,8 @@ char		*ft_get_path(t_shell *shell, t_env *env, char *content);
 
 char		*ft_get_fullpath(t_command *p_cmd, t_shell *shell);
 char		*get_cmd_path(t_shell *shell, char **paths, char *cmd);
-void		free_matrice(char **free_me);
+
+
+int			ft_echo(t_shell *shell, t_command *cmd);
 
 #endif
