@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:26 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/09 23:51:09 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/10 00:09:41 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,8 +37,8 @@ void	ft_perror2(char *msg, char *end)
 	ft_putstr_fd("\n", 2);
 }
 
-void	ft_error(char *msg)//void	ft_error(t_shell *shell, char *msg)
+void	ft_error(t_shell *shell, t_node *node, char *msg, int status)
 {
 	perror(msg);
-	exit(1);
+	ft_exit(shell, node, 1);
 }
