@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 10:50:12 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/10 23:34:24 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,4 +20,20 @@ char	*ft_get_env_value(t_shell *shell, char *key)
 	if (!env)
 		return (NULL);
 	return (env->value);
+}
+
+static int is_all_alnum(char *str)
+{
+	while (*str)
+	{
+		if (!ft_isalnum(*str) && *str != '_')
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
+int	ft_is_valid_key(char *str)
+{
+	return (str && *str && is_all_alnum(str) && (ft_isalpha(*str) || *str == '_'));
 }

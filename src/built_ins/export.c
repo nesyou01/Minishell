@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:38 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/10 23:25:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/10 23:34:38 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,22 +25,6 @@ static void	print_env(t_shell *shell)
 			printf("declare -x %s\n", env->key);
 		env = env->next;
 	}
-}
-
-static int is_all_alnum(char *str)
-{
-	while (*str)
-	{
-		if (!ft_isalnum(*str) && *str != '_')
-			return (0);
-		str++;
-	}
-	return (1);
-}
-
-static int	is_valid_key(char *str)
-{
-	return (str && *str && is_all_alnum(str) && (ft_isalpha(*str) || *str == '_'));
 }
 
 static int	is_concat(char *key_value)
@@ -79,20 +63,21 @@ static void	set_env(t_shell *shell, char *key, char *key_value)
 	}
 }
 
-void	ft_export(t_shell *shell, t_command *cmd)
+int	ft_export(t_shell *shell, t_command *cmd)
 {
 	char	*key;
 	char	*key_value;
 
 	key_value = cmd->argv[1];
 	if (!key_value)
-		return (print_env(shell));
+		return (print_env(shell), 1);
 	if (*key_value == '-' && key_value[1])
-		return (ft_perror2("invalid options", key_value));
+		return (ft_perror2("invalid options", key_value), 1);
 	key = ft_get_env_key(shell, key_value);
-	if (!is_valid_key(key))
-		return (ft_perror2("invalid identifier", key));
+	if (!ft_is_valid_key(key))
+		return (ft_perror2("invalid identifier", key), 1);
 	set_env(shell, key, key_value);
 	if (key_value && cmd->argv[2])
-		ft_perror2("invalid identifier", cmd->argv[2]);
+		return (ft_perror2("invalid identifier", cmd->argv[2]), 1);
+	return (0);
 }
