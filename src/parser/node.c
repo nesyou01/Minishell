@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/06 02:15:52 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/10 04:31:25 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,10 @@ static int	redirection_handler(t_shell *shell, t_token *token, t_file **io)
 	if (ft_expand_node_vars(shell, next))
 		return (1);
 	lst = ft_split_node(shell, next);
-	if (!lst)
-		return (ft_perror("No such file or directory"), 1);
-	if (lst->next)
-		return (ft_perror("ambiguous redirect"), 1);
 	file = ft_new_file(shell, token->next);
 	file->path = next->content;
 	file->type = token->type;
+	file->is_ambiguous = !next || lst->next;
 	ft_add_file_last(io, file);
 	return (0);
 }

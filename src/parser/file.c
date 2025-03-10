@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:02 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/06 23:52:31 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/10 04:31:09 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ t_file	*ft_new_file(t_shell *shell, t_token *token)
 	file = (t_file *) ft_malloc(shell, sizeof(t_file));
 	file->path = token->content;
 	file->fd = token->fd;
+	file->is_ambiguous = 0;
 	file->type = token->prev->type;
 	file->next = NULL;
 	return (file);

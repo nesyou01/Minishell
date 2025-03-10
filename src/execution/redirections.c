@@ -6,6 +6,8 @@ int	open_file(t_file *io)
 	int	flags;
 
 	flags = 0;
+	if (io->is_ambiguous)
+		return (ft_perror("ambiguous redirect"), -1);
 	if (io->type == OUT_APPEND_REDIRECTER)
 		flags = O_WRONLY | O_CREAT | O_APPEND;
 	else if (io->type == OUT_REDIRECTER)
@@ -13,9 +15,9 @@ int	open_file(t_file *io)
 	else if (io->type == IN_REDIRECTER)
 		flags = O_RDONLY;
 	fd = open(io->path, flags, 0644);
+	io->fd = fd;
 	if (fd == -1)
 		ft_perror("minishell: No such file or directory");
-	io->fd = fd;
 	return (fd);
 }
 

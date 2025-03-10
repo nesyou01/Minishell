@@ -34,6 +34,7 @@ typedef struct s_file
 {
 	int				fd;
 	int				type;
+	int				is_ambiguous; // try this in bash: > *
 	char			*path;
 	struct s_file	*next;
 }	t_file;
