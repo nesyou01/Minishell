@@ -14,7 +14,7 @@ int	open_file(t_file *io)
 		flags = O_RDONLY;
 	fd = open(io->path, flags, 0644);
 	if (fd == -1)
-		ft_perror(io->path);
+		ft_perror("minishell: No such file or directory");
 	io->fd = fd;
 	return (fd);
 }
