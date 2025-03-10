@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/17 10:49:46 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/10 23:10:48 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static size_t	get_key_size(char *str)
 	size_t	size;
 
 	size = 0;
-	while (str[size] && str[size] != '=')
+	while (str[size] && !ft_strchr("+=", str[size]))
 		size++;
 	return (size);
 }

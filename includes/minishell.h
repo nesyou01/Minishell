@@ -17,9 +17,6 @@
 
 void		env_init(t_shell *shell, char **env);
 
-void		ft_env(t_shell *shell);
-void		ft_unset(t_shell *shell, char *var);
-void		ft_export(t_shell *shell, char *var);
 
 t_env		*ft_parse_env(t_shell *shell, char *str, char *key);
 t_env		*ft_last_env(t_env *env);
@@ -89,6 +86,7 @@ t_node		*ft_head_node(t_node *node);
 void		ft_error(t_shell *shell, t_node *node, char *msg, int status);
 void		ft_perror(char *msg);
 void		ft_perror2(char *msg, char *end);
+char		*ft_strjoin_globale(t_shell *shell, char const *s1, char const *s2);
 
 
 void		signals_listener(t_shell *shell);
@@ -113,5 +111,6 @@ char		*get_cmd_path(t_shell *shell, char **paths, char *cmd);
 
 
 int			ft_echo(t_shell *shell, t_command *cmd);
+void		ft_export(t_shell *shell, t_command *cmd);
 
 #endif
