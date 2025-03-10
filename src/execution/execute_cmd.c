@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/10 00:32:35 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/10 23:26:52 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,6 +72,7 @@ void	execute_external(t_shell *shell, t_node *node)
 {
 	pid_t	pid;
 	int		status;
+	t_command	*p_cmd;
 
 	ft_expand_node_vars(shell, node);
 	pid = fork();
