@@ -17,3 +17,8 @@ else if (node->type == SEQUENCE) {
 }
 
 Test with (echo hello; echo world) and check if both commands run.
+---------------------------------------------------------
+(ps >> out ) && (ls | wc) && ls | grep lib
+####$__kithanga___hna !!!
+
+---------------------------------------------------------
