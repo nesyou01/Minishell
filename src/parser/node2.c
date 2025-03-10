@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:56 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/09 21:32:57 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/10 20:56:28 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ static void	move_lst(t_node **a, t_node **b)
 	while (*a)
 	{
 		tmp = (*a)->next;
+		(*a)->prev = NULL;
 		ft_add_node_start(b, *a);
 		*a = tmp;
 	}
