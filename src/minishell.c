@@ -26,7 +26,7 @@ static void	minishell(t_shell *shell)
 
 	while (!shell->exit)
 	{
-		str = readline("\033[32mminishell >> \033[0m");
+		str = readline("minishell $> ");
 		if (!str)
 			break;
 		ft_add_cmd_garbage(shell, str);
