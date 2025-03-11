@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/11 04:43:21 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/11 05:28:52 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	is_directory(char *path)
 	return (0);
 }
 
-static char	*check_absolute_or_relative(char *cmd)
+static char	*check_absolute_or_relative(t_shell *shell , t_node *node, char *cmd)
 {
 	if (!ft_strcmp(cmd, ".") || !ft_strcmp(cmd, "..") || !ft_strncmp(cmd, "./", 2) || !ft_strncmp(cmd, "/", 1))
 	{
@@ -30,7 +30,7 @@ static char	*check_absolute_or_relative(char *cmd)
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": is a directory\n", 2);
-			return (NULL);//ft_exit(shell, node, 126);
+			ft_exit(shell, node, 126);
 		}
 		if (!access(cmd, X_OK | F_OK))
 			return (cmd);
@@ -76,7 +76,7 @@ char	*get_path_from_env(t_shell *shell, char **envp)
 	return (NULL);
 }
 
-char	*ft_get_fullpath(t_command *p_cmd, t_shell *shell)
+char	*ft_get_fullpath(t_shell *shell, t_node *node, t_command *p_cmd)
 {
 	char	*path;
 	char	*env_path;
@@ -84,7 +84,7 @@ char	*ft_get_fullpath(t_command *p_cmd, t_shell *shell)
 
 	if (!p_cmd->cmd[0])
 		return (NULL);
-	path = check_absolute_or_relative(p_cmd->cmd);
+	path = check_absolute_or_relative(shell, node, p_cmd->cmd);
 	if (path)
 		return (path);
 	env_path = get_path_from_env(shell, p_cmd->envp);

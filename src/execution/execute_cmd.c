@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/11 03:20:43 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/11 05:30:17 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,15 @@ void	exec_child(t_shell *shell, t_node *node)
 	p_cmd = ft_parse_command(shell, node);
 	if (!p_cmd || !p_cmd->argv[0])
 		ft_exit(shell, node, EXIT_SUCCESS);
-	path = ft_get_fullpath(p_cmd, shell);
+	handle_dot_command(shell, node, p_cmd);
+	double_dot_cmd(shell, node, p_cmd);
+	path = ft_get_fullpath(shell, node, p_cmd);
 	if (!path)
 	{
 		if (!is_directory(p_cmd->cmd))
 			ft_perror("command not found!");
 		ft_exit(shell, node, 127);
 	}
-	handle_dot_command(shell, node, p_cmd);
-	double_dot_cmd(shell, node, p_cmd);
 	exec_command(shell, node, path, p_cmd);
 }
 
