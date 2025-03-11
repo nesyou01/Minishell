@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/10 23:55:47 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/11 03:20:43 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	is_builtin(char *cmd)
 {
-	if (ft_strcmp(cmd, "cd") == 0)
+	if (!ft_strcmp(cmd, "cd"))
 		return (1);
 	if (!ft_strcmp(cmd, "echo"))
 		return (1);
-	if (ft_strcmp(cmd, "export") == 0)
+	if (!ft_strcmp(cmd, "export"))
 		return (1);
-	if (ft_strcmp(cmd, "unset") == 0)
+	if (!ft_strcmp(cmd, "unset"))
 		return (1);
-	if (ft_strcmp(cmd, "env") == 0)
+	if (!ft_strcmp(cmd, "env"))
 		return (1);
-	if (ft_strcmp(cmd, "exit") == 0)
+	if (!ft_strcmp(cmd, "exit"))
 		return (1);
 	return (0);
 }
@@ -45,6 +45,41 @@ int	is_builtin(char *cmd)
 // 		ft_exit(shell);
 // }
 
+static void	handle_dot_command(t_shell *shell, t_node *node, t_command *p_cmd)
+{
+	if (!ft_strcmp(p_cmd->cmd, "."))
+	{
+		if (!p_cmd->argv[1])
+		{
+			ft_putstr_fd("minishell: .: filename argument required\n", 2);
+			ft_putstr_fd(".: usage: . filename [arguments]\n", 2);
+			ft_exit(shell, node, 2);
+		}
+		ft_exit(shell, node, EXIT_SUCCESS);
+	}
+}
+
+static void	double_dot_cmd(t_shell *shell, t_node *node, t_command *p_cmd)
+{
+	if (!ft_strcmp(p_cmd->cmd, ".."))
+	{
+		ft_putstr_fd("minishell: ..: command not found\n", 2);
+		ft_exit(shell, node, 127);
+	}
+}
+
+static void	exec_command(t_shell *shell, t_node *node, char *path,
+						t_command *p_cmd)
+{
+	if (!path)
+		ft_exit(shell, node, 127);
+	if (execve(path, p_cmd->argv, p_cmd->envp) == -1)
+	{
+		ft_perror("minishell: execve failed");
+		ft_exit(shell, node, 127);
+	}
+}
+
 void	exec_child(t_shell *shell, t_node *node)
 {
 	t_command	*p_cmd;
@@ -58,14 +93,13 @@ void	exec_child(t_shell *shell, t_node *node)
 	path = ft_get_fullpath(p_cmd, shell);
 	if (!path)
 	{
-		ft_perror("command not found!");
+		if (!is_directory(p_cmd->cmd))
+			ft_perror("command not found!");
 		ft_exit(shell, node, 127);
 	}
-	if (execve(path, p_cmd->argv, p_cmd->envp) == -1)
-	{
-		ft_perror("minishell: execve failed");
-		ft_exit(shell, node, 127);
-	}
+	handle_dot_command(shell, node, p_cmd);
+	double_dot_cmd(shell, node, p_cmd);
+	exec_command(shell, node, path, p_cmd);
 }
 
 void	execute_external(t_shell *shell, t_node *node)
