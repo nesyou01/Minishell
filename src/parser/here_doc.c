@@ -42,7 +42,7 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 	limiter = remove_quotes(shell, token);
 	while (1)
 	{
-		str = readline("here_doc> ");
+		str = ft_readline(shell, "here_doc> ", 1);
 		if (!str)
 			break ;
 		ft_add_cmd_garbage(shell, str);

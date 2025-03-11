@@ -90,7 +90,8 @@ void		ft_perror2(char *msg, char *end);
 char		*ft_strjoin_globale(t_shell *shell, char const *s1, char const *s2);
 
 
-void		signals_listener(t_shell *shell);
+void		signals_listener(t_shell *shell, int here_doc);
+char		*ft_readline(t_shell *shell, const char *str, int here_doc);
 
 // EX
 void		execute_tree(t_shell *shell, t_node *node);
