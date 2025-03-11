@@ -26,7 +26,7 @@ static void	minishell(t_shell *shell)
 
 	while (!shell->exit)
 	{
-		str = readline("minishell $> ");
+		str = ft_readline(shell, "minishell $> ", 0);
 		if (!str)
 			break;
 		ft_add_cmd_garbage(shell, str);
@@ -49,7 +49,6 @@ int	main(int argc, char **argv, char **env)
 		return (ft_perror("usage => ./minishell"), 1);
 	env_init(&shell, env);
 	shell.exit = 0;
-	signals_listener(&shell);
 	minishell(&shell);
 	return (0);
 }
