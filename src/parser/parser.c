@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:11:18 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/11 02:39:05 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/11 23:50:59 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	read_and_merge(t_shell *shell, t_token *head, t_token *last, char **
 	char	*str;
 	t_token	*new;
 
-	str = ft_readline(shell, "> ", 1);
+	str = readline("> ");
 	if (!str)
 		return ;
 	ft_add_cmd_garbage(shell, str);
