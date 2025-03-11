@@ -1,46 +1,9 @@
-       8
-  PID TTY           TIME CMD
-13512 ttys002    0:00.14 -zsh
- 1880 ttys010    0:00.06 ./minishell
-13639 ttys010    0:00.20 /bin/zsh -il
-13645 ttys012    0:00.10 /bin/zsh -il
-       8
-  PID TTY           TIME CMD
-13512 ttys002    0:00.14 -zsh
- 1880 ttys010    0:00.06 ./minishell
-13639 ttys010    0:00.20 /bin/zsh -il
-13645 ttys012    0:00.10 /bin/zsh -il
-
-
-[32mminishell >> [0m[32mminishell >> [0m
-
-[32mminishell >> [0m[32mminishell >> [0m
-
-[32mminishell >> [0m[32mminishell >> [0m
-
-[32mminishell >> [0m[32mminishell >> [0m
-
-[32mminishell >> [0m[32mminishell >> [0m
-
-[32mminishell >> [0m[32mminishell >> [0m
-
-[32mminishell >> [0m[32mminishell >> [0m
-
-[32mminishell >> [0m[32mminishell >> [0m
-
-[32mminishell >> [0m[32mminishell >> [0m
-
-[32mminishell >> [0m[32mminishell >> [0m
-
-[32mminishell >> [0m[32mminishell >> [0m  PID TTY           TIME CMD
-13512 ttys002    0:00.14 -zsh
- 2760 ttys012    0:00.03 ./minishell
- 2867 ttys012    0:00.00 ./minishell
-13645 ttys012    0:00.16 /bin/zsh -il
-  PID TTY           TIME CMD
- 2945 ttys001    0:00.47 /bin/zsh -il
- 3025 ttys001    0:00.01 bash
-13512 ttys002    0:00.14 -zsh
- 2760 ttys012    0:00.03 ./minishell
- 2867 ttys012    0:29.69 ./minishell
-13645 ttys012    0:00.16 /bin/zsh -il
+Makefile
+includes
+libs
+minishell
+out
+output
+src
+test
+testat

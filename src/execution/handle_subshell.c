@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   handle_subshell.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/27 15:04:14 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/10 00:13:43 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/11 07:05:15 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	execute_subshell(t_shell *shell, t_node *node)
 	if (node->io && !node->l_node)
 	{
 		if (!handle_redirections(node->io))
-			return ;//for msg error !!
+			return ;
 		return ;
 	}
 	pid = fork();
