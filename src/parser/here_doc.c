@@ -27,19 +27,11 @@ static void	convert_here_doc(t_token *token)
 	token->type = FILE;
 }
 
-int	here_doc_handler(t_shell *shell, t_token *token)
+static void	read_here_doc(t_shell *shell, char *limiter, int has_quote, int fds[2])
 {
 	char	*str;
-	char	*limiter;
-	int		fds[2];
-	int		has_quote;
 
-	if (ft_pipe(fds))
-		return (1);
-	has_quote = ft_strchr(token->content, '\'') || ft_strchr(token->content, '"');
-	convert_here_doc(token);
-	token->fd = fds[0];
-	limiter = remove_quotes(shell, token);
+	close(fds[0]);
 	while (1)
 	{
 		str = readline("here_doc> ");
@@ -53,5 +45,30 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 		ft_putstr_fd(str, fds[1]);
 		ft_putstr_fd("\n", fds[1]);
 	}
-	return (close(fds[1]), 0);
+	close(fds[1]);
+	exit(EXIT_SUCCESS);
+}
+
+int	here_doc_handler(t_shell *shell, t_token *token)
+{
+	char	*limiter;
+	int		fds[2];
+	int		has_quote;
+	pid_t	pid;
+	int		status;
+
+	if (ft_pipe(fds))
+		return (1);
+	has_quote = ft_strchr(token->content, '\'') || ft_strchr(token->content, '"');
+	convert_here_doc(token);
+	token->fd = fds[0];
+	limiter = remove_quotes(shell, token);
+	pid = fork();
+	if (pid == -1)
+		return (close(fds[1]), close(fds[0]), 1);
+	if (pid == 0)
+		read_here_doc(shell, limiter, has_quote, fds);
+	close(fds[1]);
+	waitpid(pid, &status, 0);
+	return (0);
 }

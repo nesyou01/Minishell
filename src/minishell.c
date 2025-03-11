@@ -24,7 +24,7 @@ static void	minishell(t_shell *shell)
 	char			*str;
 	t_node			*node;
 
-	while (!shell->exit)
+	while (1337)
 	{
 		str = readline("minishell $> ");
 		if (!str)
@@ -48,7 +48,7 @@ int	main(int argc, char **argv, char **env)
 	if (argc != 1)
 		return (ft_perror("usage => ./minishell"), 1);
 	env_init(&shell, env);
-	shell.exit = 0;
+	signals_listener(0);
 	minishell(&shell);
 	return (0);
 }
