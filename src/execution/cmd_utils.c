@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/11 03:13:33 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/11 04:43:21 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static char	*check_absolute_or_relative(char *cmd)
 			ft_putstr_fd("minishell: ", 2);
 			ft_putstr_fd(cmd, 2);
 			ft_putstr_fd(": is a directory\n", 2);
-			return (NULL);
+			return (NULL);//ft_exit(shell, node, 126);
 		}
 		if (!access(cmd, X_OK | F_OK))
 			return (cmd);
@@ -87,13 +87,6 @@ char	*ft_get_fullpath(t_command *p_cmd, t_shell *shell)
 	path = check_absolute_or_relative(p_cmd->cmd);
 	if (path)
 		return (path);
-	// if (is_directory(p_cmd->cmd))
-	// {
-	// 	ft_putstr_fd("minishell: ", 2);
-	// 	ft_putstr_fd(p_cmd->cmd, 2);
-	// 	ft_putstr_fd(": is a directory\n", 2);
-	// 	return (NULL);
-	// }
 	env_path = get_path_from_env(shell, p_cmd->envp);
 	paths = ft_split(shell, env_path, ':');
 	path = get_cmd_path(shell, paths, p_cmd->cmd);
