@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/12 00:10:38 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/12 00:15:07 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ static int	is_valid_file(t_token *token)
 
 int	syntax_validator(t_shell *shell, t_token *token)
 {
-	int	here_doc;
+	int	status;
 
 	while (token)
 	{
@@ -81,10 +81,10 @@ int	syntax_validator(t_shell *shell, t_token *token)
 				return (ft_perror2("Syntax error near", token->content), 1);
 		if (token->type == HERE_DOC_LIMITER)
 		{
-			here_doc = here_doc_handler(shell, token);
-			if (here_doc == 99)
+			status = here_doc_handler(shell, token);
+			if (status == 99)
 				return (1);
-			else
+			else if (status)
 				return (ft_perror("here_doc failed!"), 1);
 		}
 		token = token->next;
