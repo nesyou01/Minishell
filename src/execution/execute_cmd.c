@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/12 23:34:31 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/12 23:48:02 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,36 +14,36 @@
 
 int	is_builtin(t_command *p_cmd)
 {
-	if (!ft_strcmp(p_cmd->argv[0], "cd"))
+	if (!ft_strcmp2(p_cmd->cmd, "cd"))
 		return (1);
-	if (!ft_strcmp(p_cmd->argv[0], "echo"))
+	if (!ft_strcmp2(p_cmd->cmd, "echo"))
 		return (1);
-	if (!ft_strcmp(p_cmd->argv[0], "export"))
+	if (!ft_strcmp2(p_cmd->cmd, "export"))
 		return (1);
-	if (!ft_strcmp(p_cmd->argv[0], "unset"))
+	if (!ft_strcmp2(p_cmd->cmd, "unset"))
 		return (1);
-	if (!ft_strcmp(p_cmd->argv[0], "env"))
+	if (!ft_strcmp2(p_cmd->cmd, "env"))
 		return (1);
-	if (!ft_strcmp(p_cmd->argv[0], "exit"))
+	if (!ft_strcmp2(p_cmd->cmd, "exit"))
 		return (1);
 	return (0);
 }
 
 void	execute_builtin(t_shell *shell, t_command *p_cmd)
 {
-	if (!ft_strcmp(p_cmd->argv[0], "cd"))
+	if (!ft_strcmp2(p_cmd->argv[0], "cd"))
 		ft_cd(shell, p_cmd);
-	else if (!ft_strcmp(p_cmd->argv[0], "echo"))
+	else if (!ft_strcmp2(p_cmd->argv[0], "echo"))
 		ft_echo(shell, p_cmd);//done
-	else if (!ft_strcmp(p_cmd->argv[0], "export"))
+	else if (!ft_strcmp2(p_cmd->argv[0], "export"))
 		ft_export(shell, p_cmd);//done
-	else if (!ft_strcmp(p_cmd->argv[0], "unset"))
+	else if (!ft_strcmp2(p_cmd->argv[0], "unset"))
 		ft_unset(shell, p_cmd);//done
-	else if (!ft_strcmp(p_cmd->argv[0], "env"))
+	else if (!ft_strcmp2(p_cmd->argv[0], "env"))
 		ft_env(shell);//done
-	else if (!ft_strcmp(p_cmd->argv[0], "pwd"))
+	else if (!ft_strcmp2(p_cmd->argv[0], "pwd"))
 		ft_pwd(shell, p_cmd);//todo
-	// else if (!ft_strcmp(p_cmd->argv[0], "exit"))
+	// else if (!ft_strcmp2(p_cmd->argv[0], "exit"))
 	// 	builtin_exit(shell, ...);
 }
 
