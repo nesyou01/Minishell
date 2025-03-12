@@ -6,44 +6,46 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/11 05:30:17 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/11 23:39:57 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	is_builtin(char *cmd)
+int	is_builtin(t_command *p_cmd)
 {
-	if (!ft_strcmp(cmd, "cd"))
+	if (!ft_strcmp(p_cmd->argv[0], "cd"))
 		return (1);
-	if (!ft_strcmp(cmd, "echo"))
+	if (!ft_strcmp(p_cmd->argv[0], "echo"))
 		return (1);
-	if (!ft_strcmp(cmd, "export"))
+	if (!ft_strcmp(p_cmd->argv[0], "export"))
 		return (1);
-	if (!ft_strcmp(cmd, "unset"))
+	if (!ft_strcmp(p_cmd->argv[0], "unset"))
 		return (1);
-	if (!ft_strcmp(cmd, "env"))
+	if (!ft_strcmp(p_cmd->argv[0], "env"))
 		return (1);
-	if (!ft_strcmp(cmd, "exit"))
+	if (!ft_strcmp(p_cmd->argv[0], "exit"))
 		return (1);
 	return (0);
 }
 
-// void	execute_builtin(t_shell *shell, t_node *node)
-// {
-// 	if (ft_strcmp(node->content, "cd") == 0)
-// 		ft_cd(shell, node); 
-// 	else if (!ft_strcmp(node->content, "echo"))
-// 		ft_echo(shell, node);
-// 	else if (ft_strcmp(node->content, "export") == 0)
-// 		ft_export(shell, node);
-// 	else if (ft_strcmp(node->content, "unset") == 0)
-// 		ft_unset(shell, node);
-// 	else if (ft_strcmp(node->content, "env") == 0)
-// 		ft_env(shell);
-// 	else if (ft_strcmp(node->content, "exit") == 0)
-// 		ft_exit(shell);
-// }
+void	execute_builtin(t_shell *shell, t_command *p_cmd)
+{
+	if (!ft_strcmp(p_cmd->argv[0], "cd"))
+		ft_cd(shell, p_cmd);
+	else if (!ft_strcmp(p_cmd->argv[0], "echo"))
+		ft_echo(shell, p_cmd);//done
+	else if (!ft_strcmp(p_cmd->argv[0], "export"))
+		ft_export(shell, p_cmd);//done
+	else if (!ft_strcmp(p_cmd->argv[0], "unset"))
+		ft_unset(shell, p_cmd);//done
+	else if (!ft_strcmp(p_cmd->argv[0], "env"))
+		ft_env(shell);//done
+	else if (!ft_strcmp(p_cmd->argv[0], "pwd"))
+		ft_pwd(shell);//todo
+	// else if (!ft_strcmp(p_cmd->argv[0], "exit"))
+	// 	builtin_exit(shell, ...);
+}
 
 static void	handle_dot_command(t_shell *shell, t_node *node, t_command *p_cmd)
 {
@@ -108,7 +110,7 @@ void	execute_external(t_shell *shell, t_node *node)
 	int		status;
 	t_command	*p_cmd;
 
-	ft_expand_node_vars(shell, node);
+	// ft_expand_node_vars(shell, node);--->already call this function  in execute tree !!
 	pid = fork();
 	if (pid == -1)
 	{

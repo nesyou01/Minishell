@@ -2,13 +2,18 @@
 
 void	execute_tree(t_shell *shell, t_node *node)
 {
+	t_command	*p_cmd;
+
 	if (!node)
 		return;
 	if (node->type == COMMAND || node->type == EMPTY_CMD)
 	{
-		// if (is_builtin(node->content))
-		// 	execute_builtin(shell, node);
-		// else
+		if (!ft_expand_node_vars(shell, node))
+			return ;
+		p_cmd = ft_parse_command(shell, node);
+		if (is_builtin(p_cmd))
+			execute_builtin(shell, p_cmd);
+		else
 			execute_external(shell, node);
 	}
 	else if (node->type == PIPE)
