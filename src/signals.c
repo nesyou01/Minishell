@@ -2,16 +2,27 @@
 
 static void	on_new_prompt(int signal) {
 	(void) signal;
+
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
 }
 
-void	signals_listener(t_shell *shell)
+static void	on_exit(int signal) {
+	(void) signal;
+
+	printf("\n");
+	exit(99);
+}
+
+void	signals_listener(int action)
 {
-	rl_catch_signals = 0;
-	if (signal(SIGINT, on_new_prompt) == SIG_ERR
-		|| signal(SIGQUIT, SIG_IGN) == SIG_ERR)
-		ft_error(shell, NULL, "signal failed", 99);
+	signal(SIGQUIT, SIG_IGN);
+	if (action == 0)
+		signal(SIGINT, on_new_prompt);
+	else if (action == 1)
+		signal(SIGINT, on_exit);
+	else if (action == 2)
+		signal(SIGINT, SIG_IGN);
 }
