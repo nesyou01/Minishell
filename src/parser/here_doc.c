@@ -47,7 +47,7 @@ static void	read_here_doc(t_shell *shell, char *limiter, int has_quote, int fds[
 		ft_putstr_fd("\n", fds[1]);
 	}
 	close(fds[1]);
-	exit(EXIT_SUCCESS);
+	ft_exit(shell, NULL, EXIT_SUCCESS);
 }
 
 int	here_doc_handler(t_shell *shell, t_token *token)
