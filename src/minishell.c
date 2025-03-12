@@ -8,7 +8,7 @@ void	execute_tree(t_shell *shell, t_node *node)
 		return;
 	if (node->type == COMMAND || node->type == EMPTY_CMD)
 	{
-		if (!ft_expand_node_vars(shell, node))
+		if (ft_expand_node_vars(shell, node))
 			return ;
 		p_cmd = ft_parse_command(shell, node);
 		if (is_builtin(p_cmd))

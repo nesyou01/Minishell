@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/11 23:39:57 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/12 23:34:31 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	execute_builtin(t_shell *shell, t_command *p_cmd)
 	else if (!ft_strcmp(p_cmd->argv[0], "env"))
 		ft_env(shell);//done
 	else if (!ft_strcmp(p_cmd->argv[0], "pwd"))
-		ft_pwd(shell);//todo
+		ft_pwd(shell, p_cmd);//todo
 	// else if (!ft_strcmp(p_cmd->argv[0], "exit"))
 	// 	builtin_exit(shell, ...);
 }

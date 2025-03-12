@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:39:30 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/12 02:55:37 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/03/12 23:35:58 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,6 @@ int	ft_pwd(t_shell *shell, t_command *parse_cmd)
 {
 	char	cwd[PATH_MAX];
 
-	cwd[PATH_MAX] = getenv("PWD");
-	if (cwd)
-	{
-		printf("%s\n", cwd);
-		return (0);
-	}
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		printf("%s\n", cwd);
