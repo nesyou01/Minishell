@@ -22,3 +22,48 @@ Test with (echo hello; echo world) and check if both commands run.
 ####$__kithanga___hna !!!
 
 ---------------------------------------------------------
+declare -x a
+declare -x b="yassine"
+declare -x x="a b"
+bash-3.2$ export $x="yassine"
+bash-3.2$ export y=$x
+bash-3.2$ echo $y
+a b
+bash-3.2$ 
+---------------------------------------------------------
+bash-3.2$ exit 23 fkf fkf  dldgnkd g
+exit
+bash: exit: too many arguments
+bash-3.2$ echo $?
+1
+bash-3.2$ 
+---------------------------------------------------------
+bash-3.2$ exit  | exit fkfkf
+bash: exit: fkfkf: numeric argument required
+bash-3.2$ echo $?
+255
+bash-3.2$ exit 12 | exit
+bash-3.2$ echo $?
+0
+bash-3.2$ exit 12 | exit 245
+bash-3.2$ echo $?
+245
+bash-3.2$ 
+---------------------------------------------------------
+bash-3.2$ exit leehwak 2 7 8 9
+exit
+bash: exit: leehwak: numeric argument required
+bash-3.2$ echo $?
+255
+bash-3.2$ 
+---------------------------------------------------------
+bash-3.2$ exit 9223372036854775807 32 42
+exit
+bash: exit: too many arguments
+bash-3.2$ exit 9223372036854775808 32 42
+exit
+bash: exit: 9223372036854775808: numeric argument required
+➜  ~ echo $?
+255
+➜  ~
+---------------------------------------------------------

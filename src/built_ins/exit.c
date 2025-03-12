@@ -1,36 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pwd.c                                              :+:      :+:    :+:   */
+/*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/10 20:39:30 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/12 02:55:37 by ael-gady         ###   ########.fr       */
+/*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
+/*   Updated: 2025/03/12 03:21:43 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_pwd(t_shell *shell, t_command *parse_cmd)
+int	ft_builtin_exit(t_shell *shell, t_command *parse_cmd)
 {
-	char	cwd[PATH_MAX];
-
-	cwd[PATH_MAX] = getenv("PWD");
-	if (cwd)
-	{
-		printf("%s\n", cwd);
-		return (0);
-	}
-	if (getcwd(cwd, sizeof(cwd)) != NULL)
-	{
-		printf("%s\n", cwd);
-		free(cwd);
-		return (0);
-	}
-	else
-	{
-		perror("pwd : ");
-		return (1);
-	}
+	// if (parse_cmd->argv[1])
 }
