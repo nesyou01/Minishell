@@ -32,6 +32,7 @@ static void	read_here_doc(t_shell *shell, char *limiter, int has_quote, int fds[
 	char	*str;
 
 	close(fds[0]);
+	signals_listener(1);
 	while (1)
 	{
 		str = readline("here_doc> ");
@@ -68,7 +69,9 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 		return (close(fds[1]), close(fds[0]), 1);
 	if (pid == 0)
 		read_here_doc(shell, limiter, has_quote, fds);
+	signals_listener(2);
 	close(fds[1]);
 	waitpid(pid, &status, 0);
-	return (0);
+	signals_listener(0);
+	return (WEXITSTATUS(status));
 }
