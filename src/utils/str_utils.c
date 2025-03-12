@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/16 11:12:30 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/07 23:52:50 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/12 23:46:19 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,4 +50,14 @@ int	ft_strcmp(char *s1, char *s2)
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 		i++;
 	return (s1[i] - s2[i]);
+}
+
+int	ft_strcmp2(char *s1, char *s2)
+{
+	int		i;
+
+	i = 0;
+	while (s1[i] && s2[i] && ft_tolower(s1[i]) == ft_tolower(s2[i]))
+		i++;
+	return (ft_tolower(s1[i]) - ft_tolower(s2[i]));
 }
