@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/12 23:48:02 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/03/13 00:08:44 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 int	is_builtin(t_command *p_cmd)
 {
+	if (!p_cmd)
+		return (0);
 	if (!ft_strcmp2(p_cmd->cmd, "cd"))
 		return (1);
 	if (!ft_strcmp2(p_cmd->cmd, "echo"))

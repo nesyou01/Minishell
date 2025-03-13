@@ -10,7 +10,7 @@ void	execute_tree(t_shell *shell, t_node *node)
 	{
 		if (ft_expand_node_vars(shell, node))
 			return ;
-		p_cmd = ft_parse_command(shell, node);
+		p_cmd = ft_parse_command(shell, node); // TODO: pass it to execute_external instead of parsing again
 		if (is_builtin(p_cmd))
 			execute_builtin(shell, p_cmd);
 		else
