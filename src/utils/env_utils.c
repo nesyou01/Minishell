@@ -49,6 +49,8 @@ t_env	*ft_parse_env(t_shell *shell, char *str, char *key)
 	value = ft_strchr(str, '=');
 	if (value)
 		result->value = ft_strdup_globale(shell, value + 1);
+	else
+		result->value = NULL;
 	if (!key)
 		result->key = ft_get_env_key(shell, str);
 	else
