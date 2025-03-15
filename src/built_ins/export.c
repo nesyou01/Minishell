@@ -20,7 +20,7 @@ static void	print_env(t_shell *shell)
 	while (env)
 	{
 		if (env->value)
-			printf("declare -x %s=%s\n", env->key, env->value);
+			printf("declare -x %s=\"%s\"\n", env->key, env->value);
 		else
 			printf("declare -x %s\n", env->key);
 		env = env->next;
