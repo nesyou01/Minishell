@@ -30,3 +30,10 @@ void	env_init(t_shell *shell, char **env)
 		env++;
 	}
 }
+
+int	ft_any_not_tty()
+{
+	if (!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO) || !isatty(STDERR_FILENO))
+		return (ft_perror("In/Out not connected to a terminal"), 1);
+	return (0);
+}
