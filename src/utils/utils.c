@@ -14,13 +14,8 @@
 
 void	ft_perror(char *msg)
 {
-	char	*error;
-
 	if (msg && *msg)
-	{
-		ft_putstr_fd(msg, 2);
-		ft_putstr_fd("\n", 2);
-	}
+		ft_putendl_fd(msg, 2);
 }
 
 void	ft_perror2(char *msg, char *end)

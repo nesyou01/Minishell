@@ -92,6 +92,7 @@ void		ft_perror(char *msg);
 void		ft_perror2(char *msg, char *end);
 char		*ft_strjoin_globale(t_shell *shell, char const *s1, char const *s2);
 
+int			ft_any_not_tty();
 
 void		signals_listener(int action);
 

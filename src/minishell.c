@@ -52,6 +52,8 @@ int	main(int argc, char **argv, char **env)
 	(void) argv;
 	if (argc != 1)
 		return (ft_perror("usage => ./minishell"), 1);
+	if (ft_any_not_tty())
+		return (1);
 	env_init(&shell, env);
 	signals_listener(0);
 	minishell(&shell);

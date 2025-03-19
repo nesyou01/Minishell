@@ -1,13 +1,0 @@
-[?2004hminishell $> ls
-[?2004lMakefile
-includes
-libs
-ls
-minishell
-out
-out2
-output
-src
-test
-testat
-[?2004hminishell $> [?2004l
