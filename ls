@@ -1,0 +1,10 @@
+Makefile
+includes
+libs
+ls
+minishell
+out
+output
+src
+test
+testat

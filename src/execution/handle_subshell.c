@@ -33,6 +33,8 @@ void	execute_subshell(t_shell *shell, t_node *node)
 		if (node->io && !handle_redirections(node->io))
 			ft_exit(shell, node, EXIT_FAILURE);
 		execute_tree(shell, node->l_node);
+		// Set exit_status of the left node to the subshell node to fix commands like (ls) && pwd 
+		node->exit_status = node->l_node->exit_status;
 		ft_exit(shell, node, node->exit_status);
 	}
 	else
