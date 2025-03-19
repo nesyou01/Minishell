@@ -21,19 +21,29 @@ int	is_directory(char *path)
 	return (0);
 }
 
+static void	excute_error(char *cmd, char *str)
+{
+	ft_putstr_fd("minishell: ", 2);
+	ft_putstr_fd(cmd, 2);
+	ft_putendl_fd(str, 2);
+}
+
 static char	*check_absolute_or_relative(t_shell *shell , t_node *node, char *cmd)
 {
-	if (!ft_strcmp(cmd, ".") || !ft_strcmp(cmd, "..") || !ft_strncmp(cmd, "./", 2) || !ft_strncmp(cmd, "/", 1))
+	// Check if the command has /; If so it should be excuted if the path excutable
+	if (ft_strchr(cmd, '/'))
 	{
 		if (is_directory(cmd))
 		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd(cmd, 2);
-			ft_putstr_fd(": is a directory\n", 2);
+			excute_error(cmd, ": is a directory");
 			ft_exit(shell, node, 126);
 		}
-		if (!access(cmd, X_OK | F_OK))
+		// The command can be excuted
+		if (!access(cmd, X_OK))
 			return (cmd);
+		// The command not found or cannot be excuted
+		excute_error(cmd, ": No such file or directory");
+		ft_exit(shell, node, 127);
 	}
 	return (NULL);
 }
