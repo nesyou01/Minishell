@@ -38,9 +38,15 @@ static void	read_and_merge(t_shell *shell, t_token *head, t_token *last, char **
 
 static int	should_merge(t_token *last, t_token *head)
 {
-	return ((ft_repeat_count(head, PARENTHESES_START)
-		!= ft_repeat_count(head, PARENTHESES_END)
-		|| (last->type == PIPE || last->type == AND || last->type == OR)));
+	return (last->type == PIPE || last->type == AND || last->type == OR);
+}
+
+static int	is_valid_end(t_token *token)
+{
+	t_token		*last;
+
+	last = ft_last_token(token);
+	return (last == NULL || last->type == PARENTHESES_END || last->type < 100);
 }
 
 t_node	*ft_parser(t_shell *shell, char **str)
@@ -58,7 +64,8 @@ t_node	*ft_parser(t_shell *shell, char **str)
 	ft_merge_args_with_cmd(shell, token);
 	if (syntax_validator(shell, token))
 		return (NULL);
-	if (ft_repeat_count(token, PARENTHESES_START) != ft_repeat_count(token, PARENTHESES_END))
+	if (ft_repeat_count(token, PARENTHESES_START)
+		!= ft_repeat_count(token, PARENTHESES_END) || !is_valid_end(token))
 		return (ft_perror2("syntax error near", "EOF"), NULL);
 	node = ft_tokens_to_nodes(shell, token);
 	ft_tree_builder(shell, &node);
