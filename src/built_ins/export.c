@@ -66,8 +66,8 @@ static int	handle_env(t_shell *shell, char *key_value)
 	t_env	*env;
 	char	*key;
 
-	if (*key_value == '-' && key_value[1])
-		return (ft_perror2("invalid options", key_value), 1);
+	if (!*key_value)
+		return (0);
 	key = ft_get_env_key(shell, key_value);
 	if (!ft_is_valid_key(key))
 		return (ft_perror2("invalid identifier", key), 1);
@@ -76,13 +76,27 @@ static int	handle_env(t_shell *shell, char *key_value)
 	return (0);
 }
 
+static int	should_print(char **argv)
+{
+	int		i;
+
+	i = 1;
+	while (argv[i])
+	{
+		if (argv[i] && argv[i][0])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	ft_export(t_shell *shell, t_command *cmd)
 {
 	int		is_fail;
 	int		i;
 
 	i = 1;
-	if (!cmd->argv[i])
+	if (should_print(cmd->argv))
 		return (print_env(shell), 1);
 	is_fail = 0;
 	while (cmd->argv[i])
