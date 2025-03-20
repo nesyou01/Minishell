@@ -37,7 +37,7 @@ static int	ft_get_token_end(char *str)
 
 	i = 0;
 	first = ft_strchr(SEPECIAL_CHARS, *str);
-	while (str[i] && str[i] != ' '
+	while (str[i] &&  !ft_isspace(str[i])
 		&& (!ft_strchr(SEPECIAL_CHARS, str[i]) == !first))
 	{
 		if (str[i] == '(' || str[i] == ')')
@@ -62,7 +62,7 @@ t_token	*ft_split_tokens(t_shell *shell, char *str)
 	lst = NULL;
 	while (str[i])
 	{
-		while (str[i] == ' ')
+		while (ft_isspace(str[i]))
 			i++;
 		if (!str[i])
 			break ;
@@ -70,8 +70,6 @@ t_token	*ft_split_tokens(t_shell *shell, char *str)
 		content = ft_substr(shell, str, i, end);
 		ft_add_token_last(&lst, ft_new_token(shell, content));
 		i += end;
-		while (str[i] == ' ')
-			i++;
 	}
 	return (lst);
 }

@@ -2,7 +2,7 @@
 # define DEFS_H
 # include "../libs/libft/libft.h"
 
-# define SEPECIAL_CHARS "<>|&() "
+# define SEPECIAL_CHARS "<>|&()"
 # define UNKNOWN -1
 # define OUT_REDIRECTER 1
 # define IN_REDIRECTER 2
