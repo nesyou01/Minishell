@@ -99,8 +99,7 @@ void	exec_child(t_shell *shell, t_node *node)
 	path = ft_get_fullpath(shell, node, p_cmd);
 	if (!path)
 	{
-		if (!is_directory(p_cmd->cmd))
-			ft_perror("command not found!");
+		ft_perror("command not found!");
 		ft_exit(shell, node, 127);
 	}
 	exec_command(shell, node, path, p_cmd);

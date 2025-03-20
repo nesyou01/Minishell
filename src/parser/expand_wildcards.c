@@ -14,13 +14,13 @@
 
 static int	ft_match(char *str, char *pattern, char *filter)
 {
-	if (!*pattern && !*str)
-		return (1);
+	if (!*pattern)
+		return (!*str);
 	if (*filter == '2') {
-		while (*str) {
-			if (ft_match(str, pattern + 1, filter + 1))
+		while (*str)
+		{
+			if (ft_match(str++, pattern + 1, filter + 1))
 				return (1);
-			str++;
 		}
 		return (ft_match(str, pattern + 1, filter + 1));
 	}

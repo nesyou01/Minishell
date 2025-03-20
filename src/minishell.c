@@ -5,7 +5,7 @@ void	execute_tree(t_shell *shell, t_node *node)
 	t_command	*p_cmd;
 
 	if (!node)
-		return;
+		return ;
 	if (node->type == COMMAND || node->type == EMPTY_CMD)
 	{
 		if (ft_expand_node_vars(shell, node))
