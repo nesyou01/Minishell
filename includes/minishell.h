@@ -45,6 +45,7 @@ char		**ft_lst_to_array(t_shell *shell, t_list *lst);
 void		ft_exit(t_shell *shell, t_node *node, int status);
 char		**ft_split(t_shell *shell, char const *s, char c);
 int			ft_strcmp2(char *s1, char *s2);
+int			ft_isspace(char c);
 
 
 // PARSING

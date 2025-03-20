@@ -156,7 +156,7 @@ void	ft_retokenize(t_node *node)
 					node->filter[i++] = '0';
 				continue ;
 			}
-			else if (node->content[i] == ' ')
+			else if (ft_isspace(node->content[i]))
 					node->filter[i] = ' ';
 			else if (node->content[i] == '*')
 					node->filter[i] = '2';

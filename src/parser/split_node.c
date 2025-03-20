@@ -30,6 +30,11 @@ static int	ft_get_quote_end(char *str, char quote, int start)
 	return (i);
 }
 
+int	ft_isspace(char c)
+{
+	return (c == ' ' || (c >= 9 && c <= 13));
+}
+
 static int	ft_get_token_end(char *str)
 {
 	int		i;
@@ -37,7 +42,7 @@ static int	ft_get_token_end(char *str)
 
 	i = 0;
 	first = ft_strchr(SEPECIAL_CHARS, *str);
-	while (str[i] && str[i] != ' '
+	while (str[i] && !ft_isspace(str[i])
 		&& (!ft_strchr(SEPECIAL_CHARS, str[i]) == !first))
 	{
 		if (str[i] == '(' || str[i] == ')')
@@ -64,7 +69,7 @@ t_list	*ft_split_node(t_shell *shell, t_node *node)
 		return (NULL);
 	while (1)
 	{
-		if (node->filter[i] == ' ')
+		if (ft_isspace(node->filter[i]))
 			i++;
 		end = ft_get_token_end(node->filter + i);
 		content = ft_substr(shell, node->content, i, end);

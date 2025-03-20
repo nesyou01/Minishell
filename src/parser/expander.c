@@ -106,7 +106,7 @@ static int	expand_node_vars(t_shell *shell, t_node *node)
 		{
 			if (node->content[i] == '*')
 				node->filter = ft_strjoin(shell, node->filter, "2");
-			else if (node->content[i] == ' ')
+			else if (ft_isspace(node->content[i]))
 				node->filter = ft_strjoin(shell, node->filter, " ");
 			else
 				node->filter = ft_strjoin(shell, node->filter, "0");
