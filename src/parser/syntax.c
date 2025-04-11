@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/11 20:21:44 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:31:07 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,9 +66,10 @@ static int	is_valid_file(t_token *token)
 		|| token->next->type == HERE_DOC_LIMITER));
 }
 
-int	syntax_validator(t_shell *shell, t_token *token)
+
+static int	syntax_validator1(t_shell *shell, t_token *token)
 {
-	int	status;
+	int		status;
 
 	while (token)
 	{
@@ -79,6 +80,19 @@ int	syntax_validator(t_shell *shell, t_token *token)
 				return (ft_perror2("Syntax error near", "<<"), 1);
 		if (!is_valid_parentheses(token) || !is_valid_operator(token) || !is_valid_file(token))
 				return (ft_perror2("Syntax error near", token->content), 1);
+		token = token->next;
+	}
+	return (0);
+}
+
+int	syntax_validator(t_shell *shell, t_token *token)
+{
+	int		first;
+	int		status;
+
+	first = syntax_validator1(shell, token);
+	while (token)
+	{
 		if (token->type == HERE_DOC_LIMITER)
 		{
 			status = here_doc_handler(shell, token);
@@ -89,5 +103,5 @@ int	syntax_validator(t_shell *shell, t_token *token)
 		}
 		token = token->next;
 	}
-	return (0);
+	return (first);
 }
