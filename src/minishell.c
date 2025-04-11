@@ -10,11 +10,11 @@ void	execute_tree(t_shell *shell, t_node *node)
 	{
 		if (ft_expand_node_vars(shell, node))
 			return ;
-		p_cmd = ft_parse_command(shell, node); // TODO: pass it to execute_external instead of parsing again
-		if (p_cmd->cmd && is_builtin(p_cmd))
+		p_cmd = ft_parse_command(shell, node);
+		if (p_cmd && is_builtin(p_cmd))
 			execute_builtin(shell, p_cmd);
 		else
-			execute_external(shell, node);
+			execute_external(shell, node, p_cmd);
 	}
 	else if (node->type == PIPE)
 		execute_pipe(shell, node);
