@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/11 14:46:55 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 15:08:50 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	execute_builtin(t_shell *shell, t_command *p_cmd)
 	else if (!ft_strcmp2(p_cmd->argv[0], "unset"))
 		ft_unset(shell, p_cmd);//done
 	else if (!ft_strcmp2(p_cmd->argv[0], "env"))
-		ft_env(shell);//done
+		ft_env(shell, p_cmd);//done
 	else if (!ft_strcmp2(p_cmd->argv[0], "pwd"))
 		ft_pwd(shell, p_cmd);//todo
 	// else if (!ft_strcmp2(p_cmd->argv[0], "exit"))

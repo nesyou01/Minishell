@@ -121,7 +121,7 @@ int			ft_export(t_shell *shell, t_command *cmd);
 int			ft_unset(t_shell *shell, t_command *cmd);
 int			ft_pwd(t_shell *shell, t_command *parse_cmd);
 int			ft_cd(t_shell *shell, t_command *parse_cmd);
-void		ft_env(t_shell *shell);
+int			ft_env(t_shell *shell, t_command *cmd);
 int			ft_builtin_exit(t_shell *shell, t_command *parse_cmd);
 
 #endif
