@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/11 20:09:29 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:13:48 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,20 +51,6 @@ void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 	// 	builtin_exit(shell, ...);
 }
 
-static void	handle_dot_command(t_shell *shell, t_node *node, t_command *p_cmd)
-{
-	if (!ft_strcmp(p_cmd->cmd, "."))
-	{
-		if (!p_cmd->argv[1])
-		{
-			ft_putstr_fd("minishell: .: filename argument required\n", 2);
-			ft_putstr_fd(".: usage: . filename [arguments]\n", 2);
-			ft_exit(shell, node, 2);
-		}
-		ft_exit(shell, node, EXIT_SUCCESS);
-	}
-}
-
 static void	double_dot_cmd(t_shell *shell, t_node *node, t_command *p_cmd)
 {
 	if (!ft_strcmp(p_cmd->cmd, ".."))
@@ -94,7 +80,6 @@ void	exec_child(t_shell *shell, t_node *node, t_command *p_cmd)
 		ft_exit(shell, node, EXIT_FAILURE);
 	if (!p_cmd || !p_cmd->argv[0])
 		ft_exit(shell, node, EXIT_SUCCESS);
-	handle_dot_command(shell, node, p_cmd);
 	double_dot_cmd(shell, node, p_cmd);
 	path = ft_get_fullpath(shell, node, p_cmd);
 	if (!path)
