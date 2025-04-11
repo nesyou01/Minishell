@@ -46,6 +46,7 @@ void		ft_exit(t_shell *shell, t_node *node, int status);
 char		**ft_split(t_shell *shell, char const *s, char c);
 int			ft_strcmp2(char *s1, char *s2);
 int			ft_isspace(char c);
+void		ft_perror3(char *msg, char *middle, char *end);
 
 
 // PARSING
@@ -100,7 +101,7 @@ void		signals_listener(int action);
 // EX
 void		execute_tree(t_shell *shell, t_node *node);
 int			is_builtin(t_command *p_cmd);
-void		execute_builtin(t_shell *shell, t_command *p_cmd);
+void		execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd);
 void		execute_external(t_shell *shell, t_node *node, t_command *p_cmd);
 void		execute_pipe(t_shell *shell, t_node *node);
 void		execute_and(t_shell *shell, t_node *node);
