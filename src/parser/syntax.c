@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/12 00:15:07 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:21:44 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ int	syntax_validator(t_shell *shell, t_token *token)
 			status = here_doc_handler(shell, token);
 			if (status == 99)
 				return (1);
-			else if (status)
+			if (status)
 				return (ft_perror("here_doc failed!"), 1);
 		}
 		token = token->next;
