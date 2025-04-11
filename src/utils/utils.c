@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:26 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/10 00:09:41 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 14:56:56 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,7 @@
 
 void	ft_perror(char *msg)
 {
-	if (msg && *msg)
-		ft_putendl_fd(msg, 2);
+	ft_putendl_fd(msg, 2);
 }
 
 void	ft_perror2(char *msg, char *end)
@@ -35,5 +34,5 @@ void	ft_perror2(char *msg, char *end)
 void	ft_error(t_shell *shell, t_node *node, char *msg, int status)
 {
 	perror(msg);
-	ft_exit(shell, node, 1);
+	ft_exit(shell, node, status);
 }
