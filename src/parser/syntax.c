@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/11 20:31:07 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:40:26 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,8 @@ static int	is_valid_file(t_token *token)
 }
 
 
-static int	syntax_validator1(t_shell *shell, t_token *token)
+static int	syntax_validator1(t_token *token)
 {
-	int		status;
-
 	while (token)
 	{
 		if (!is_valid_quotes(token->content))
@@ -90,7 +88,7 @@ int	syntax_validator(t_shell *shell, t_token *token)
 	int		first;
 	int		status;
 
-	first = syntax_validator1(shell, token);
+	first = syntax_validator1(token);
 	while (token)
 	{
 		if (token->type == HERE_DOC_LIMITER)
