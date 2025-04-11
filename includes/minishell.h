@@ -101,7 +101,7 @@ void		signals_listener(int action);
 void		execute_tree(t_shell *shell, t_node *node);
 int			is_builtin(t_command *p_cmd);
 void		execute_builtin(t_shell *shell, t_command *p_cmd);
-void		execute_external(t_shell *shell, t_node *node);
+void		execute_external(t_shell *shell, t_node *node, t_command *p_cmd);
 void		execute_pipe(t_shell *shell, t_node *node);
 void		execute_and(t_shell *shell, t_node *node);
 void		execute_or(t_shell *shell, t_node *node);

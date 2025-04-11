@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/13 00:08:44 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 14:46:55 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,13 +105,11 @@ void	exec_child(t_shell *shell, t_node *node)
 	exec_command(shell, node, path, p_cmd);
 }
 
-void	execute_external(t_shell *shell, t_node *node)
+void	execute_external(t_shell *shell, t_node *node, t_command *p_cmd)
 {
 	pid_t	pid;
 	int		status;
-	t_command	*p_cmd;
 
-	// ft_expand_node_vars(shell, node);--->already call this function  in execute tree !!
 	pid = fork();
 	if (pid == -1)
 	{
