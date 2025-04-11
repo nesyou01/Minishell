@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/11 20:13:48 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:26:02 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	exec_child(t_shell *shell, t_node *node, t_command *p_cmd)
 	path = ft_get_fullpath(shell, node, p_cmd);
 	if (!path)
 	{
-		ft_perror3("minishell", p_cmd->cmd, "command not found");
+		ft_perror2(p_cmd->cmd, "command not found");
 		ft_exit(shell, node, 127);
 	}
 	exec_command(shell, node, path, p_cmd);

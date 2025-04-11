@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:05:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/11 20:06:22 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:26:09 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	open_file(t_file *io)
 	fd = open(io->path, flags, 0644);
 	io->fd = fd;
 	if (fd == -1)
-		ft_perror3("minishell", io->path, strerror(errno));
+		ft_perror2(io->path, strerror(errno));
 	return (fd);
 }
 

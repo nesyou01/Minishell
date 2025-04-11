@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/11 20:13:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:26:29 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@ static char	*check_absolute_or_relative(t_shell *shell , t_node *node, char *cmd
 	{
 		if (is_directory(cmd))
 		{
-			ft_perror3("minishell", cmd, "is a directory");
+			ft_perror2(cmd, "is a directory");
 			ft_exit(shell, node, 126);
 		}
 		// The command can be excuted
 		if (!access(cmd, X_OK))
 			return (cmd);
 		// The command not found or cannot be excuted
-		ft_perror3("minishell",cmd, "No such file or directory");
+		ft_perror2(cmd, "No such file or directory");
 		ft_exit(shell, node, 127);
 	}
 	return (NULL);
