@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/11 20:26:02 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:41:09 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 	if (!ft_strcmp2(p_cmd->argv[0], "cd"))
 		ft_cd(shell, p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "echo"))
-		ft_echo(shell, p_cmd);//done
+		ft_echo(p_cmd);//done
 	else if (!ft_strcmp2(p_cmd->argv[0], "export"))
 		ft_export(shell, p_cmd);//done
 	else if (!ft_strcmp2(p_cmd->argv[0], "unset"))
