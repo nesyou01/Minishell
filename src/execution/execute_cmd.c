@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/11 20:00:46 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:09:29 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,14 +86,12 @@ static void	exec_command(t_shell *shell, t_node *node, char *path,
 	}
 }
 
-void	exec_child(t_shell *shell, t_node *node)
+void	exec_child(t_shell *shell, t_node *node, t_command *p_cmd)
 {
-	t_command	*p_cmd;
 	char		*path;
 
 	if (node->io && !handle_redirections(node->io))
 		ft_exit(shell, node, EXIT_FAILURE);
-	p_cmd = ft_parse_command(shell, node);
 	if (!p_cmd || !p_cmd->argv[0])
 		ft_exit(shell, node, EXIT_SUCCESS);
 	handle_dot_command(shell, node, p_cmd);
@@ -101,7 +99,7 @@ void	exec_child(t_shell *shell, t_node *node)
 	path = ft_get_fullpath(shell, node, p_cmd);
 	if (!path)
 	{
-		ft_perror("command not found!");
+		ft_perror3("minishell", p_cmd->cmd, "command not found");
 		ft_exit(shell, node, 127);
 	}
 	exec_command(shell, node, path, p_cmd);
@@ -120,7 +118,7 @@ void	execute_external(t_shell *shell, t_node *node, t_command *p_cmd)
 		ft_exit(shell, node, EXIT_FAILURE);
 	}
 	if (!pid)
-		exec_child(shell, node);
+		exec_child(shell, node, p_cmd);
 	else
 	{
 		if (waitpid(pid, &status, 0) == -1)
