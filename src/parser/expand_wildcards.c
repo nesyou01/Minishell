@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/12 00:41:12 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/12 15:10:24 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,28 @@
 
 static int	ft_match(char *str, char *pattern, char *filter)
 {
-	if (!*pattern)
-		return (!*str);
-	if (*filter == '2') {
-		while (*str)
+	int	x;
+	int	y;
+	int	x_last;
+
+	x = 0;
+	y = 0;
+	x_last = -1;
+	while (str[x] || filter[y] == '2')
+	{
+		if (filter[y] == '2')
 		{
-			if (ft_match(str++, pattern + 1, filter + 1))
-				return (1);
+			x_last = x;
+			y++;
 		}
-		return (ft_match(str, pattern + 1, filter + 1));
+		else if (str[x] == pattern[y])
+			(x++, y++);
+		else if (x_last != -1)
+			x = ++x_last;
+		else
+			break ;
 	}
-	if (*pattern == *str)
-		return (ft_match(str + 1, pattern + 1, filter + 1));
-	return (0);
+	return (!str[x] && !pattern[y]);
 }
 
 static int	ft_match_pattern(char *file, char *pattern, char *filter)
