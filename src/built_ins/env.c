@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:44 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/11 15:10:42 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/12 11:59:55 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,6 @@ int	ft_env(t_shell *shell, t_command *cmd)
 	{
 		if (tmp->value)
 			printf("%s=%s\n", tmp->key, tmp->value);
-		else
-			printf("%s=\n", tmp->key);
 		tmp = tmp->next;
 	}
 	return (0);
