@@ -6,23 +6,24 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:44 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/12 23:38:09 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/12 11:59:55 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	ft_env(t_shell *shell)
+int	ft_env(t_shell *shell, t_command *cmd)
 {
 	t_env	*tmp;
 
+	if (cmd->argv[1])
+		return (ft_perror2("env", "Args/Params not supported!"), 1);
 	tmp = shell->env;
 	while (tmp)
 	{
 		if (tmp->value)
 			printf("%s=%s\n", tmp->key, tmp->value);
-		else
-			printf("%s=\n", tmp->key);
 		tmp = tmp->next;
 	}
+	return (0);
 }
