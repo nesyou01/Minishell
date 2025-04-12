@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/11 14:46:55 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/12 15:33:35 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	is_builtin(t_command *p_cmd)
 	return (0);
 }
 
-void	execute_builtin(t_shell *shell, t_command *p_cmd)
+void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 {
 	if (!ft_strcmp2(p_cmd->argv[0], "cd"))
 		ft_cd(shell, p_cmd);
@@ -45,8 +45,8 @@ void	execute_builtin(t_shell *shell, t_command *p_cmd)
 		ft_env(shell);//done
 	else if (!ft_strcmp2(p_cmd->argv[0], "pwd"))
 		ft_pwd(shell, p_cmd);//todo
-	// else if (!ft_strcmp2(p_cmd->argv[0], "exit"))
-	// 	builtin_exit(shell, ...);
+	else if (!ft_strcmp2(p_cmd->argv[0], "exit"))
+		ft_builtin_exit(shell, node, p_cmd);
 }
 
 static void	handle_dot_command(t_shell *shell, t_node *node, t_command *p_cmd)
@@ -114,7 +114,7 @@ void	execute_external(t_shell *shell, t_node *node, t_command *p_cmd)
 	if (pid == -1)
 	{
 		perror("minishell: failed fork");
-		node->exit_status = 1;
+		exit_status(1, 1);
 		ft_exit(shell, node, EXIT_FAILURE);
 	}
 	if (!pid)
@@ -124,13 +124,13 @@ void	execute_external(t_shell *shell, t_node *node, t_command *p_cmd)
 		if (waitpid(pid, &status, 0) == -1)
 		{
 			perror("minishell: failed waitpid");
-			node->exit_status = 1;
+			exit_status(1, 1);
 			return ;
 		}
 		if (WIFEXITED(status))
-			node->exit_status = WEXITSTATUS(status);
+			exit_status(1, WEXITSTATUS(status));
 		else
-			node->exit_status = 1;
+			exit_status(1, 1);
 	}
 }
 
