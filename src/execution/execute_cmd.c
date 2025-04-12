@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/25 14:18:25 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/12 15:54:45 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/12 16:01:04 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,15 +38,15 @@ void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 	if (!ft_strcmp2(p_cmd->argv[0], "cd"))
 		ft_cd(shell, p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "echo"))
-		ft_echo(p_cmd);//done
+		ft_echo(p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "export"))
-		ft_export(shell, p_cmd);//done
+		ft_export(shell, p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "unset"))
-		ft_unset(shell, p_cmd);//done
+		ft_unset(shell, p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "env"))
-		ft_env(shell, p_cmd);//done
+		ft_env(shell, p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "pwd"))
-		ft_pwd(shell, p_cmd);//todo
+		ft_pwd(shell, p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "exit"))
 		exit(0);
 	node->exit_status = 0;
