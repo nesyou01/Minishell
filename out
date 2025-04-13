@@ -12,3 +12,8 @@ outfile
 output
 src
 testat
+  PID TTY           TIME CMD
+93024 ttys002    0:00.38 /bin/zsh -il
+95475 ttys004    0:00.29 /bin/zsh -il
+99501 ttys004    0:00.11 ./minishell
+99561 ttys004    0:00.03 ./minishell
