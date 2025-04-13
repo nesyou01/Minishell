@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/12 20:09:17 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/13 09:21:52 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,18 @@ int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd)
 	long long exit_code; 
 
 	if (!cmd->argv[1])
-		exit(node->exit_status);
+		ft_exit(shell, node, exit_status(0, 0));
 
 	if (!is_numeric(cmd->argv[1]))
 	{
 		exit_error("numeric argument required", cmd->argv[1], 1);
-		exit(255);
+		ft_exit(shell, node, 255);
 	}
 	exit_code = ft_atoll(cmd->argv[1]);
 	if ((exit_code > LLONG_MAX) || (exit_code < LLONG_MIN))
 	{
 		exit_error("numeric argument required", cmd->argv[1], 1);
-		exit(255);
+		ft_exit(shell, node, 255);
 	}
 	if (cmd->argv[2])
 	{
@@ -89,4 +89,5 @@ int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd)
 		return (1);
 	}
 	ft_exit(shell, node, (unsigned char)exit_code);
+	return (0);
 }
