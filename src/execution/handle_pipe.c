@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/26 11:19:27 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/12 18:42:00 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/13 09:17:22 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ static void	left_child(t_shell *shell, t_node *node, int *pipe_fd)
 		(close(pipe_fd[1]), ft_error(shell, node, "dup2 failed", 1));
 	close(pipe_fd[1]);
 	execute_tree(shell, node->l_node);
-	exit_status(1, exit_status(0, 0)); // Save status before exit
+	exit_status(1, exit_status(0, 0));
 	ft_exit(shell, node, exit_status(0, 0));
 }
 
@@ -76,7 +76,7 @@ static void	right_child(t_shell *shell, t_node *node, int *pipe_fd)
 		(close(pipe_fd[0]), ft_error(shell, node, "dup2 failed", 1));
 	close(pipe_fd[0]);
 	execute_tree(shell, node->r_node);
-	exit_status(1, exit_status(0, 0)); // Save status before exit
+	exit_status(1, exit_status(0, 0));
 	ft_exit(shell, node, exit_status(0, 0));
 }
 
