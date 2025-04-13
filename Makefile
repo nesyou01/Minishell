@@ -10,7 +10,8 @@ SRC = src/minishell.c src/utils/utils.c src/built_ins/env.c src/utils/malloc_uti
 		src/utils/lst_utils.c src/parser/wildcard_utils.c src/parser/here_doc.c src/parser/env_utils.c \
 		src/execution/handle_pipe.c       src/execution/logical_operator.c  src/execution/exit_status.c  src/built_ins/exit.c \
 		src/execution/execute_cmd.c       src/execution/handle_subshell.c   src/execution/redirections.c src/execution/cmd_utils.c \
-		src/signals.c src/utils/ft_split.c src/built_ins/echo.c src/built_ins/cd.c src/built_ins/pwd.c
+		src/signals.c src/utils/ft_split.c src/built_ins/echo.c src/built_ins/cd.c src/built_ins/pwd.c src/built_ins/exit.c \
+		src/execution/exit_status.c
 
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
