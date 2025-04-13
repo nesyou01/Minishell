@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/13 12:13:32 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/13 18:34:49 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,6 +139,25 @@ void	ft_remove_quotes(t_shell *shell, t_node *node)
 	}
 }
 
+static void	retokinize_export(t_shell *shell, t_node *node)
+{
+	int		i;
+	t_list	*lst;
+
+	if (!ft_strchr(node->filter, '2'))
+		return ;
+	lst = ft_split_node(shell, node);
+	i = 0;
+	while (node->content[i])
+	{
+		if (node->filter[i] == ' ')
+			lst = lst->next;
+		if (node->filter[i] == '2' && ft_strchr(lst->content, '='))
+			node->filter[i] = '0';
+		i++;
+	}
+}
+
 int	ft_expand_node_vars(t_shell *shell, t_node *node)
 {
 	int	fail;
@@ -148,6 +167,7 @@ int	ft_expand_node_vars(t_shell *shell, t_node *node)
 	fail = expand_node_vars(shell, node);
 	if (fail)
 		return (1);
+	retokinize_export(shell, node);
 	if (ft_strchr(node->content, '*'))
 		fail = ft_wildcard_handler(shell, node);
 	if (node->filter && ft_strchr(node->filter, '1'))
