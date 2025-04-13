@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/13 11:42:01 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/13 12:10:06 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static int	expand_var(t_shell *shell, t_node *node, int start)
 	char	*start_str;
 	char	*end_str;
 	size_t	len;
+	char	c;
 
 	if (!start)
 		start_str = NULL;
@@ -33,7 +34,11 @@ static int	expand_var(t_shell *shell, t_node *node, int start)
 	node->content = ft_strjoin(shell,
 			ft_strjoin(shell, start_str, expanded), end_str);
 	len = ft_safe_strlen(expanded);
-	node->filter = ft_strjoin(shell, node->filter, ft_repeat(shell, len, '1'));
+	if (node->content && start - 1 >= 0 && node->content[start - 1] == '=')
+		c = '0';
+	else
+		c = '1';
+	node->filter = ft_strjoin(shell, node->filter, ft_repeat(shell, len, c));
 	return (len);
 }
 
