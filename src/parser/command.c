@@ -7,6 +7,8 @@ t_command	*ft_parse_command(t_shell *shell, t_node *node)
 
 	if (node->type != COMMAND)
 		return (NULL);
+	// printf("=> %s\n", node->content);
+	// printf("=> %s\n", node->filter);
 	argv = ft_lst_to_array(shell, ft_split_node(shell, node));
 	result = ft_malloc(shell, sizeof(t_command));
 	result->envp = ft_get_all_env(shell);
