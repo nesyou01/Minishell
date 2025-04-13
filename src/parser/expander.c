@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/13 18:41:35 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/13 19:39:14 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,17 +142,26 @@ static void	retokinize_export(t_shell *shell, t_node *node)
 {
 	int		i;
 	t_list	*lst;
+	int		is_key;
 
-	if (!ft_strchr(node->filter, '2'))
-		return ;
+	// if (!ft_strchr(node->filter, '2'))
+	// 	return ;
 	lst = ft_split_node(shell, node);
+	is_key = 1;
 	i = 0;
 	while (node->content[i])
 	{
 		if (node->filter[i] == ' ')
+		{
 			lst = lst->next;
+			is_key = 1;
+		}
+		if (node->content[i] == '=')
+			is_key = 0;
 		if (node->filter[i] == '2' && ft_strchr(lst->content, '='))
 			node->filter[i] = '0';
+		if (is_key && node->filter[i] == '0' && node->content[i] == ' ')
+			node->filter[i] = ' ';
 		i++;
 	}
 }
@@ -166,8 +175,6 @@ int	ft_expand_node_vars(t_shell *shell, t_node *node)
 	fail = expand_node_vars(shell, node);
 	if (fail)
 		return (1);
-	if (ft_strnstr2(node->content, "export", 6))
-		retokinize_export(shell, node);
 	if (ft_strchr(node->content, '*'))
 		fail = ft_wildcard_handler(shell, node);
 	if (node->filter && ft_strchr(node->filter, '1'))
@@ -175,6 +182,8 @@ int	ft_expand_node_vars(t_shell *shell, t_node *node)
 		ft_retokenize(node);
 		fail = ft_wildcard_handler(shell, node);
 	}
+	if (ft_strnstr2(node->content, "export", 6))
+		retokinize_export(shell, node);
 	if (!(node->content[0]) && !node->quotes_expanded)
 		node->content = NULL;
 	return (fail);
