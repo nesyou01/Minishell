@@ -5,8 +5,6 @@ void	execute_subshell(t_shell *shell, t_node *node)
 	pid_t	pid;
 	int		status;
 
-	if (!handle_redirections(node->io))
-		return ;
 	pid = fork();
 	if (pid == -1)
 		ft_error(shell, node, "failed fork !", 17);

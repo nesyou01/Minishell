@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/13 09:21:52 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/13 12:15:29 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ static int	is_numeric(const char *str)
 
 int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd)
 {
-	long long exit_code; 
+	long long exit_code;
 
 	if (!cmd->argv[1])
 		ft_exit(shell, node, exit_status(0, 0));
