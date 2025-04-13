@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/12 15:10:24 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/13 16:29:28 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -165,8 +165,6 @@ void	ft_retokenize(t_node *node)
 					node->filter[i++] = '0';
 				continue ;
 			}
-			else if (ft_isspace(node->content[i]))
-					node->filter[i] = ' ';
 			else if (node->content[i] == '*')
 					node->filter[i] = '2';
 			else

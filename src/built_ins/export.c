@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:38 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/12 16:27:15 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/13 19:24:49 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static int	handle_env(t_shell *shell, char *key_value)
 		return (0);
 	key = ft_get_env_key(shell, key_value);
 	if (!ft_is_valid_key(key))
-		return (ft_perror2("invalid identifier", key), 1);
+		return (ft_perror3("export", key_value, "not a valid identifier"), 1);
 	env = ft_get_env(shell->env, key);
 	set_env(shell, env, key_value, key);
 	return (0);
