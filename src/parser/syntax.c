@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/12 00:15:07 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:40:26 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,9 @@ static int	is_valid_file(t_token *token)
 		|| token->next->type == HERE_DOC_LIMITER));
 }
 
-int	syntax_validator(t_shell *shell, t_token *token)
-{
-	int	status;
 
+static int	syntax_validator1(t_token *token)
+{
 	while (token)
 	{
 		if (!is_valid_quotes(token->content))
@@ -79,15 +78,28 @@ int	syntax_validator(t_shell *shell, t_token *token)
 				return (ft_perror2("Syntax error near", "<<"), 1);
 		if (!is_valid_parentheses(token) || !is_valid_operator(token) || !is_valid_file(token))
 				return (ft_perror2("Syntax error near", token->content), 1);
+		token = token->next;
+	}
+	return (0);
+}
+
+int	syntax_validator(t_shell *shell, t_token *token)
+{
+	int		first;
+	int		status;
+
+	first = syntax_validator1(token);
+	while (token)
+	{
 		if (token->type == HERE_DOC_LIMITER)
 		{
 			status = here_doc_handler(shell, token);
 			if (status == 99)
 				return (1);
-			else if (status)
+			if (status)
 				return (ft_perror("here_doc failed!"), 1);
 		}
 		token = token->next;
 	}
-	return (0);
+	return (first);
 }

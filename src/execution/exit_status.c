@@ -1,29 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cd.c                                               :+:      :+:    :+:   */
+/*   exit_status.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/12 21:37:47 by ael-gady         ###   ########.fr       */
+/*   Created: 2025/04/12 15:20:44 by ael-gady          #+#    #+#             */
+/*   Updated: 2025/04/12 15:22:34 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_cd(t_shell *shell, t_command *parse_cmd)
+int	exit_status(int action, int value)
 {
-	char	*dir;
+	static int	status = 0;
 
-	(void) shell;
-	dir = parse_cmd->argv[1];
-	if (!dir || ft_strcmp(dir, "~"))
-		dir = getenv("HOME");
-	if(chdir(dir) == -1)
-	{
-		perror("failed chdir ! ");
-		return (1);
-	}
-	return (0);
+	if (action == 0)
+		return (status);
+	else if (action == 1)
+		status = value;
+	return (status);
 }

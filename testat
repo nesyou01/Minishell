@@ -66,6 +66,29 @@ bash: exit: 9223372036854775808: numeric argument required
 ➜  ~ echo $?
 255
 ➜  ~
----------------------------------------------------------
+-----------------------------------------------------------------
+➜  p git:(abde) ✗ while true;
+do;
+lsof -c minishell
+sleep 1
+clear
+done;
+|
+|
+minishell $> << EOF
+here_doc> ^C
+minishell $> 
 
-	
+--> lsof -p n_ps
+
+minishell 67803 ael-gady  txt    REG    1,4  1572480 1152921500312412808 /usr/lib/dyld
+minishell 67803 ael-gady    0u   CHR   16,3  0t67055                 677 /dev/ttys003
+minishell 67803 ael-gady    1u   CHR   16,3  0t67055                 677 /dev/ttys003
+minishell 67803 ael-gady    2u   CHR   16,3  0t67055                 677 /dev/ttys003
+minishell 67803 ael-gady    4r   REG    1,4        0            51328268 /private/tmp/.heredo
+
+-------------------------------------------------------------------
+top + ^\ doesn't work !!
+-------------------------------------------------------------------
+minishell $> ls > $kk --> segfault
+----------------------------------------------------------------

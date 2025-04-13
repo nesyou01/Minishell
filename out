@@ -1,61 +1,14 @@
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.10 bash
-15013 ttys004    0:00.22 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-18979 ttys004    0:00.70 ./minishell
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.10 bash
-15013 ttys004    0:00.22 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-18979 ttys004    0:00.73 ./minishell
-19475 ttys004    0:00.02 ./minishell
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.11 bash
-15013 ttys004    0:00.22 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-18979 ttys004    0:00.84 ./minishell
-19533 ttys004    0:00.02 ./minishell
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.11 bash
-15013 ttys004    0:00.22 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-18979 ttys004    0:00.84 ./minishell
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.11 bash
-15013 ttys004    0:00.22 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-18979 ttys004    0:00.87 ./minishell
-19549 ttys004    0:00.02 ./minishell
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.11 bash
-15013 ttys004    0:00.22 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-18979 ttys004    0:01.04 ./minishell
-19567 ttys004    0:00.02 ./minishell
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.11 bash
-15013 ttys004    0:00.23 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.11 bash
-15013 ttys004    0:00.23 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-19747 ttys004    0:00.09 ./minishell
-19751 ttys004    0:00.02 ./minishell
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.11 bash
-15013 ttys004    0:00.23 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-19747 ttys004    0:00.18 ./minishell
-19770 ttys004    0:00.02 ./minishell
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.11 bash
-15013 ttys004    0:00.23 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-19747 ttys004    0:00.23 ./minishell
-  PID TTY           TIME CMD
-14425 ttys003    0:00.01 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-14452 ttys003    0:00.11 bash
-15013 ttys004    0:00.23 /bin/bash --init-file /Applications/Visual Studio Code.app/Contents/Resources/app/out/vs/workbench/contrib/terminal/common/scripts/shellIntegration-bash.sh
-19747 ttys004    0:00.27 ./minishell
-19797 ttys004    0:00.03 ./minishell
+Makefile
+fiel
+file
+includes
+lCHifile
+libs
+ls
+minishell
+oufile
+out
+outfile
+output
+src
+testat

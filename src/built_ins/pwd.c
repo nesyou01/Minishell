@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:39:30 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/12 23:35:58 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/11 20:42:06 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ int	ft_pwd(t_shell *shell, t_command *parse_cmd)
 {
 	char	cwd[PATH_MAX];
 
+	(void) shell;
+	(void) parse_cmd;
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 	{
 		printf("%s\n", cwd);
