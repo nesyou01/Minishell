@@ -12,12 +12,13 @@ SRC = src/minishell.c src/utils/utils.c src/built_ins/env.c src/utils/malloc_uti
 		src/execution/execute_cmd.c       src/execution/handle_subshell.c   src/execution/redirections.c src/execution/cmd_utils.c \
 		src/signals.c src/utils/ft_split.c src/built_ins/echo.c src/built_ins/cd.c src/built_ins/pwd.c src/utils/ft_strnstr2.c
 
+
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
 CFLAGS =  -g -fsanitize=address #-Wall -Werror -Wextra
 LIBFT = libs/libft/libft.a
 HEADERS = includes/minishell.h includes/defs.h
-READLINE = /mnt/homes/ylagmah/.brew/opt/readline
+READLINE = /mnt/homes/ael-gady/.brew/opt/readline
 
 
 ${NAME}: ${LIBFT} ${SRC_OBJS}
