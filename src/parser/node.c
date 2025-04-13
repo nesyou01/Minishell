@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   node.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/13 20:47:39 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/13 21:28:56 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	redirection_handler(t_shell *shell, t_token *token, t_file **io)
 	file = ft_new_file(shell, token->next);
 	file->path = next->content;
 	file->type = token->type;
-	file->is_ambiguous = !next || lst->next;
+	file->is_ambiguous = !next || !lst || lst->next;
 	ft_add_file_last(io, file);
 	return (0);
 }
