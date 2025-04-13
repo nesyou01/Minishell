@@ -46,6 +46,8 @@ void		ft_exit(t_shell *shell, t_node *node, int status);
 char		**ft_split(t_shell *shell, char const *s, char c);
 int			ft_strcmp2(char *s1, char *s2);
 int			ft_isspace(char c);
+char		*ft_strnstr2(const char *haystack, const char *needle, size_t len);
+void		ft_perror3(char *first, char *middle, char *end);
 
 
 // PARSING
