@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/11 05:28:52 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/11 20:26:29 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,6 @@ int	is_directory(char *path)
 	return (0);
 }
 
-static void	excute_error(char *cmd, char *str)
-{
-	ft_putstr_fd("minishell: ", 2);
-	ft_putstr_fd(cmd, 2);
-	ft_putendl_fd(str, 2);
-}
-
 static char	*check_absolute_or_relative(t_shell *shell , t_node *node, char *cmd)
 {
 	// Check if the command has /; If so it should be excuted if the path excutable
@@ -35,14 +28,14 @@ static char	*check_absolute_or_relative(t_shell *shell , t_node *node, char *cmd
 	{
 		if (is_directory(cmd))
 		{
-			excute_error(cmd, ": is a directory");
+			ft_perror2(cmd, "is a directory");
 			ft_exit(shell, node, 126);
 		}
 		// The command can be excuted
 		if (!access(cmd, X_OK))
 			return (cmd);
 		// The command not found or cannot be excuted
-		excute_error(cmd, ": No such file or directory");
+		ft_perror2(cmd, "No such file or directory");
 		ft_exit(shell, node, 127);
 	}
 	return (NULL);

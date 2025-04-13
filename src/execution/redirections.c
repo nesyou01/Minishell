@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:05:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/03/11 07:19:31 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/11 20:26:09 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	open_file(t_file *io)
 	fd = open(io->path, flags, 0644);
 	io->fd = fd;
 	if (fd == -1)
-		ft_perror("minishell: No such file or directory");
+		ft_perror2(io->path, strerror(errno));
 	return (fd);
 }
 
