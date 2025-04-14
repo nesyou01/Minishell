@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/19 13:30:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/13 16:29:28 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/14 16:57:04 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,7 +147,7 @@ static int	is_quote_and_has_end(char *str)
 	return (ft_strchr(str + 1, *str) != NULL);
 }
 
-void	ft_retokenize(t_node *node)
+void	ft_retokenize(t_node *node, int is_export)
 {
 	int		i;
 	char	c;
@@ -166,7 +166,9 @@ void	ft_retokenize(t_node *node)
 				continue ;
 			}
 			else if (node->content[i] == '*')
-					node->filter[i] = '2';
+				node->filter[i] = '2';
+			else if (!is_export && ft_isspace(node->content[i]))
+				node->filter[i] = ' ';
 			else
 				node->filter[i] = '0';
 		}

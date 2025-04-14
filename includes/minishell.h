@@ -82,7 +82,7 @@ int			ft_isvalid_var(char c);
 void		ft_sort(t_list *lst);
 t_file		*ft_add_file_last(t_file **lst, t_file *new);
 t_file		*ft_last_file(t_file *lst);
-void		ft_retokenize(t_node *node);
+void		ft_retokenize(t_node *node, int is_export);
 t_token		*ft_last_token(t_token *lst);
 int			here_doc_handler(t_shell *shell, t_token *token);
 void		ft_remove_quotes(t_shell *shell, t_node *node);
@@ -112,7 +112,6 @@ void		execute_subshell(t_shell *shell, t_node *node);
 int			handle_redirections(t_file *io);
 void		execute_logical(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
-char		*ft_get_path(t_shell *shell, t_env *env, char *content);
 
 
 char		*ft_get_fullpath(t_shell *shell, t_node *node, t_command *p_cmd);

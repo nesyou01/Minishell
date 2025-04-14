@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/14 16:30:47 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/14 17:01:41 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,8 +144,6 @@ static void	retokinize_export(t_shell *shell, t_node *node)
 	t_list	*lst;
 	int		is_key;
 
-	// if (!ft_strchr(node->filter, '2'))
-	// 	return ;
 	lst = ft_split_node(shell, node);
 	is_key = 1;
 	i = 0;
@@ -169,6 +167,7 @@ static void	retokinize_export(t_shell *shell, t_node *node)
 int	ft_expand_node_vars(t_shell *shell, t_node *node)
 {
 	int	fail;
+	int	is_export;
 
 	if (node->type >= 100 || node->type == EMPTY_CMD)
 		return (0);
@@ -181,9 +180,10 @@ int	ft_expand_node_vars(t_shell *shell, t_node *node)
 		fail = ft_wildcard_handler(shell, node);
 	if (node->filter && ft_strchr(node->filter, '1'))
 	{
-		ft_retokenize(node);
+		is_export = ft_strnstr2(node->content, "export", 6) != NULL;
+		ft_retokenize(node, is_export);
 		fail = ft_wildcard_handler(shell, node);
-		if (ft_strnstr2(node->content, "export", 6))
+		if (is_export)
 			retokinize_export(shell, node);
 	}
 	if (!(node->content[0]) && !node->quotes_expanded)
