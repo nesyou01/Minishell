@@ -3,6 +3,7 @@
 static void	on_new_prompt(int signal) {
 	(void) signal;
 
+	exit_status(1, 1);
 	printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);

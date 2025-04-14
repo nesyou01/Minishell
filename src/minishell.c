@@ -34,10 +34,12 @@ static void	minishell(t_shell *shell)
 		str = readline("minishell $> ");
 		if (!str)
 			break;
+		signals_listener(2);
 		ft_add_cmd_garbage(shell, str);
 		node = ft_parser(shell, &str);
 		if (node)
 			execute_tree(shell, node);
+		signals_listener(0);
 		if (*str)
 			add_history(str);
 		ft_clean_cmd(shell, node);
