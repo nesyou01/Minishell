@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/25 15:10:20 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:57:55 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ static int	ft_get_quote_end(char *str, char quote, int start)
 	{
 		if (str[i] == quote)
 			quotes++;
-		if (quotes % 2 == 0 && ft_strchr(SEPECIAL_CHARS, str[i]))
+		if (quotes % 2 == 0
+			&& (ft_strchr(SEPECIAL_CHARS, str[i]) || ft_isspace(str[i])))
 			break ;
 		i++;
 	}
