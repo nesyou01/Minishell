@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/11 20:26:29 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:42:03 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ int	is_directory(char *path)
 
 static char	*check_absolute_or_relative(t_shell *shell , t_node *node, char *cmd)
 {
-	// Check if the command has /; If so it should be excuted if the path excutable
 	if (ft_strchr(cmd, '/'))
 	{
 		if (is_directory(cmd))
@@ -31,10 +30,8 @@ static char	*check_absolute_or_relative(t_shell *shell , t_node *node, char *cmd
 			ft_perror2(cmd, "is a directory");
 			ft_exit(shell, node, 126);
 		}
-		// The command can be excuted
 		if (!access(cmd, X_OK))
 			return (cmd);
-		// The command not found or cannot be excuted
 		ft_perror2(cmd, "No such file or directory");
 		ft_exit(shell, node, 127);
 	}

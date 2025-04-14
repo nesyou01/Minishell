@@ -60,16 +60,9 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-// typedef struct s_fd_tty
-// {
-// 	int	fd0;
-// 	int	fd1;
-// 	int	fd2;
-// } t_fd_tty;
-
 typedef struct s_shell
 {
-	// t_fd_tty	tty;
+	int			fds[3];
 	t_env		*env;
 	t_list		*globale_garbage;
 	t_list		*cmd_garbage;

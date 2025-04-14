@@ -29,7 +29,7 @@ static void	minishell(t_shell *shell)
 	char			*str;
 	t_node			*node;
 
-	while (1337)
+	while (69)
 	{
 		str = readline("minishell $> ");
 		if (!str)
@@ -56,6 +56,10 @@ int	main(int argc, char **argv, char **env)
 		return (1);
 	if (env_init(&shell, env))
 		return (ft_perror("no env!"), 1);
+	//save tty !
+	// shell.fds[0] = dup(0);
+	// shell.fds[0] = dup(1);
+	// shell.fds[0] = dup(2);
 	signals_listener(0);
 	minishell(&shell);
 	return (0);
