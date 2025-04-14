@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:31 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:27:44 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/14 14:02:22 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ static int	get_token_type(t_token *token)
 		return (HERE_DOC);
 	if (!ft_strcmp(token->content, ">>"))
 		return (OUT_APPEND_REDIRECTER);
-	if (!ft_strcmp(token->content, "$?"))
-		return (STATUS_CODE);
 	if (!ft_strcmp(token->content, "("))
 		return (PARENTHESES_START);
 	if (!ft_strcmp(token->content, ")"))

@@ -9,7 +9,6 @@
 # define HERE_DOC 3 
 # define OUT_APPEND_REDIRECTER 4 
 # define PIPE 105
-# define STATUS_CODE 6
 # define FILE 7
 # define COMMAND 9
 # define ARGUMENT 10
