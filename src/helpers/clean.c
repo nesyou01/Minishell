@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   clean.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:28:02 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/14 15:31:18 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/14 20:09:41 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,5 @@ void	ft_exit(t_shell *shell, t_node *node, int status)
 	exit_status(1, status);
 	ft_close_all(node);
 	ft_clean_all(shell, node);
-	// (close(shell->fds[0]), close(shell->fds[1]), close(shell->fds[2]));
 	exit(status);
 }
