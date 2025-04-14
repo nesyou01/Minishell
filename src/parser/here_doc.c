@@ -73,5 +73,8 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 	close(fds[1]);
 	waitpid(pid, &status, 0);
 	signals_listener(0);
-	return (WEXITSTATUS(status));
+	status = WEXITSTATUS(status);
+	if (status)
+		close(fds[0]);
+	return (status);
 }
