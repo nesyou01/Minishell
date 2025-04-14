@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/14 14:21:48 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/14 17:57:30 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*join_all(t_shell *shell, char *s1, t_env *env, char *s3)
 	char	*result;
 
 	if (env)
-		result = ft_strjoin(shell, s1, env->value);
+		result = ft_strjoin(shell, s1, ft_trim_var(shell, env->value));
 	else
 		result = s1;
 	result = ft_strjoin(shell, result, s3);

@@ -125,6 +125,7 @@ int			ft_pwd(t_shell *shell, t_command *parse_cmd);
 int			ft_cd(t_shell *shell, t_command *parse_cmd);
 int			ft_env(t_shell *shell, t_command *cmd);
 int			ft_builtin_exit(t_shell *shell, t_node *node, t_command *parse_cmd);
+char		*ft_trim_var(t_shell *shell, char *old);
 
 int			exit_status(int action, int value);
 
