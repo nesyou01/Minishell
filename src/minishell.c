@@ -54,12 +54,7 @@ int	main(int argc, char **argv, char **env)
 		return (ft_perror("usage => ./minishell"), 1);
 	if (ft_any_not_tty())
 		return (1);
-	if (env_init(&shell, env))
-		return (ft_perror("no env!"), 1);
-	//save tty !
-	// shell.fds[0] = dup(0);
-	// shell.fds[0] = dup(1);
-	// shell.fds[0] = dup(2);
+	env_init(&shell, env);
 	signals_listener(0);
 	minishell(&shell);
 	return (0);

@@ -6,21 +6,21 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:36 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/11 14:58:48 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/14 19:56:46 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	env_init(t_shell *shell, char **env)
+void	env_init(t_shell *shell, char **env)
 {
 	t_env	*last;
 
-	if (!env || !*env)
-		return (1);
 	shell->env = NULL;
 	shell->cmd_garbage = NULL;
 	shell->globale_garbage = NULL;
+	if (!env || !*env)
+		return ;
 	shell->env = ft_parse_env(shell, *env, NULL);
 	env++;
 	while (*env)
@@ -29,7 +29,7 @@ int	env_init(t_shell *shell, char **env)
 		last->next = ft_parse_env(shell, *env, NULL);
 		env++;
 	}
-	return (0);
+	return ;
 }
 
 int	ft_any_not_tty()

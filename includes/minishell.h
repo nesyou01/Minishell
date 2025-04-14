@@ -16,7 +16,7 @@
 # include <signal.h>//for strerror
 # include <sys/stat.h>//for stat
 
-int		env_init(t_shell *shell, char **env);
+void		env_init(t_shell *shell, char **env);
 
 
 t_env		*ft_parse_env(t_shell *shell, char *str, char *key);
