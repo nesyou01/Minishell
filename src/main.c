@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:39:49 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 12:43:01 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:40:29 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,5 @@ int	main(int argc, char **argv, char **env)
 		return (1);
 	env_init(&shell, env);
 	signals_listener(0);
-	minishell(&shell);
-	return (0);
+	return (minishell(&shell));
 }

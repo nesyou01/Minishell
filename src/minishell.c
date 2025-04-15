@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:39:33 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 12:40:11 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:42:06 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	execute_tree(t_shell *shell, t_node *node)
 		execute_subshell(shell, node);
 }
 
-void	minishell(t_shell *shell)
+int	minishell(t_shell *shell)
 {
 	char			*str;
 	t_node			*node;
@@ -57,4 +57,6 @@ void	minishell(t_shell *shell)
 		ft_clean_cmd(shell, node);
 	}
 	ft_clean_all(shell, NULL);
+	printf("exit\n");
+	return (exit_status(0, 0));
 }

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 13:58:26 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:40:39 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # include <sys/stat.h>
 # include "./defs.h"
 
-void		minishell(t_shell *shell);
+int			minishell(t_shell *shell);
 void		execute_tree(t_shell *shell, t_node *node);
 
 
