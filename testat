@@ -113,3 +113,16 @@ minishell $> env  | grep PWD
 PWD=/mnt/homes/ael-gady/Desktop/minipush
 minishell $> 
 ------------------------------------------------------------------
+minishell $> mkdir -p 1/2/3/
+minishell $> cd 1/2/3/
+minishell $> pwd
+/mnt/homes/ael-gady/Desktop/minipush/1/2/3
+
+&& -> ➜  minipush git:(main) rm -rf 1 
+
+minishell $> pwd
+pwd: .: No such file or directory
+minishell $> cd ..
+cd: error retrieving current directory: No such file or directory
+minishell $> 
+------------------------------------------------------------------
