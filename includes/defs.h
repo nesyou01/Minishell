@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:10 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 14:44:18 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:48:21 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 # define HERE_DOC 3 
 # define OUT_APPEND_REDIRECTER 4 
 # define PIPE 105
-# define FILE 100
+# define FILE 7
 # define COMMAND 9
 # define ARGUMENT 10
 # define HERE_DOC_LIMITER 12
