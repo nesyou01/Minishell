@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 11:29:09 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 11:38:45 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ static char	*get_target_directory(t_shell *shell, t_command *cmd)
 	if (!dir || ft_strcmp(dir, "~") == 0)
 	{
 		env_val = ft_get_env_value(shell, "HOME");
+		if (!env_val)
+			env_val = getenv("HOME");
 		if (!env_val)
 			ft_perror2("cd", "HOME not set");
 		return (env_val);
