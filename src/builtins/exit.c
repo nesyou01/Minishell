@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 14:07:34 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:12:28 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd)
 	ft_putendl_fd("exit", 1);
 	if (!cmd->argv[1])
 		ft_exit(shell, node, exit_status(0, 0));
-
 	if (!is_numeric(cmd->argv[1]) || !ft_str_to_ll(cmd->argv[1], &exit_code))
 	{
 		ft_perror3("exit", cmd->argv[1], "numeric argument required");

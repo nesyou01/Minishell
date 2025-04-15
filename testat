@@ -120,9 +120,69 @@ minishell $> pwd
 
 && -> ➜  minipush git:(main) rm -rf 1 
 
+
+---- OLDPWD!!!
+
+
 minishell $> pwd
 pwd: .: No such file or directory
 minishell $> cd ..
 cd: error retrieving current directory: No such file or directory
+minishell $> 
+------------------------------------------------------------------
+minishell $> ls > f | cat f
+Makefile
+f
+includes
+libs
+minishell
+src
+testat
+minishell $> 
+
+VS
+
+bash-3.2$ ls > f | cat f
+bash-3.2$ cat f
+Makefile
+f
+includes
+libs
+minishell
+src
+testat
+------------------------------------------------------------------
+minishell $> cd /
+minishell $> pwd
+/
+minishell $> cd -
+/mnt/homes/ael-gady/Desktop/minipush
+minishell $> unset OLDPWD
+minishell $> cd /
+minishell $> pwd
+/
+minishell $> cd -
+/mnt/homes/ael-gady/Desktop/minipush
+minishell $> env | grep PWD
+PWD=/mnt/homes/ael-gady/Desktop/minipush
+OLDPWD=/
+minishell $> unset OLDPWD
+minishell $> env | grep PWD
+PWD=/mnt/homes/ael-gady/Desktop/minipush
+minishell $> cd /
+minishell $> cd -
+/mnt/homes/ael-gady/Desktop/minipush
+minishell $> env | grep PWD
+PWD=/mnt/homes/ael-gady/Desktop/minipush
+OLDPWD=/
+minishell $> 
+------------------------------------------------------------------
+top (Ctr-\)
+------------------------------------------------------------------
+minishell $> echo ad > *
+minishell: ambiguous redirect
+			--------------leaks problem !! -----------------
+minishell $> echo ajsd > *
+minishell: ambiguous redirect
 minishell $> 
 ------------------------------------------------------------------

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 14:09:07 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 15:21:04 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ static int	update_pwd_env(t_shell *shell, t_command *cmd, const char *oldpwd)
 	{
 		ft_perror3("cd", "error retrieving current directory", strerror(errno));
 		if (ft_strcmp(cmd->argv[1], "..") || ft_strcmp(cmd->argv[1], "."))
+		{
 			ft_add_env(shell, ft_strjoin(shell, "PWD+=/", cmd->argv[1]));
+		}
 		return (1);
 	}
 	ft_add_env(shell, ft_strjoin(shell, "OLDPWD=", oldpwd));
