@@ -16,6 +16,8 @@ int	is_builtin(t_command *p_cmd)
 		return (1);
 	if (!ft_strcmp2(p_cmd->cmd, "exit"))
 		return (1);
+	if (!ft_strcmp2(p_cmd->cmd, "pwd"))
+		return (1);
 	return (0);
 }
 
