@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/14 17:01:41 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 13:01:55 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ static int	expand_var(t_shell *shell, t_node *node, int start)
 	char	*expanded;
 	char	*start_str;
 	char	*end_str;
-	size_t	len;
 
 	if (!start)
 		start_str = NULL;
@@ -32,36 +31,9 @@ static int	expand_var(t_shell *shell, t_node *node, int start)
 			ft_strlen(node->content) - end);
 	node->content = ft_strjoin(shell,
 			ft_strjoin(shell, start_str, expanded), end_str);
-	len = ft_safe_strlen(expanded);
-	node->filter = ft_strjoin(shell, node->filter, ft_repeat(shell, len, '1'));
-	return (len);
-}
-
-static int	remove_double_quotes(t_shell *shell, t_node *node, int start)
-{
-	char	*start_str;
-	char	*end;
-	char	*middle;
-	char	*expanded;
-	size_t	len;
-
-	node->quotes_expanded = 1;
-	if (!start)
-		start_str = NULL;
-	else
-		start_str = ft_substr(shell, node->content, 0, start);
-	end = ft_strchr(node->content + start + 1, '"');
-	if (end)
-		end++;
-	middle = ft_substr(shell, node->content, start + 1,
-			ft_safe_strlen(node->content) - ft_safe_strlen(start_str)
-			- ft_safe_strlen(end) - 2);
-	expanded = ft_expand_all_vars(shell, middle);
-	node->content = ft_strjoin(shell,
-			ft_strjoin(shell, start_str, expanded), end);
-	len = ft_safe_strlen(expanded);
-	node->filter = ft_strjoin(shell, node->filter, ft_repeat(shell, len, '0'));
-	return (len);
+	node->filter = ft_strjoin(shell, node->filter,
+			ft_repeat(shell, ft_safe_strlen(expanded), '1'));
+	return (ft_safe_strlen(expanded));
 }
 
 static int	remove_single_quotes(t_shell *shell, t_node *node, int start)
@@ -136,31 +108,6 @@ void	ft_remove_quotes(t_shell *shell, t_node *node)
 				node->filter = ft_strjoin(shell, node->filter, "0");
 			i++;
 		}
-	}
-}
-static void	retokinize_export(t_shell *shell, t_node *node)
-{
-	int		i;
-	t_list	*lst;
-	int		is_key;
-
-	lst = ft_split_node(shell, node);
-	is_key = 1;
-	i = 0;
-	while (node->content[i])
-	{
-		if (node->filter[i] == ' ')
-		{
-			lst = lst->next;
-			is_key = 1;
-		}
-		if (node->content[i] == '=')
-			is_key = 0;
-		if (node->filter[i] == '2' && ft_strchr(lst->content, '='))
-			node->filter[i] = '0';
-		if (is_key && node->filter[i] == '0' && node->content[i] == ' ')
-			node->filter[i] = ' ';
-		i++;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:05:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/11 20:26:09 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 13:15:26 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ int	handle_redirections(t_file *io)
 		if (fd == -1)
 			return (0);
 		if ((io->type == IN_REDIRECTER && !redirect_fd(fd, STDIN_FILENO))
-			|| ((io->type == OUT_REDIRECTER || io->type == OUT_APPEND_REDIRECTER)
+			|| ((io->type == OUT_REDIRECTER
+					|| io->type == OUT_APPEND_REDIRECTER)
 				&& !redirect_fd(fd, STDOUT_FILENO)))
 			return (0);
 		io = io->next;

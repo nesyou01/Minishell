@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   here_doc.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 12:56:45 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/15 12:56:46 by ylagmah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 static char	*remove_quotes(t_shell *shell, t_token *token)
@@ -27,7 +39,8 @@ static void	convert_here_doc(t_token *token)
 	token->type = FILE;
 }
 
-static void	read_here_doc(t_shell *shell, char *limiter, int has_quote, int fds[2])
+static void	read_here_doc(t_shell *shell,
+	char *limiter, int has_quote, int fds[2])
 {
 	char	*str;
 
@@ -60,7 +73,8 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 
 	if (ft_pipe(fds))
 		return (1);
-	has_quote = ft_strchr(token->content, '\'') || ft_strchr(token->content, '"');
+	has_quote = ft_strchr(token->content, '\'')
+		|| ft_strchr(token->content, '"');
 	convert_here_doc(token);
 	token->fd = fds[0];
 	limiter = remove_quotes(shell, token);

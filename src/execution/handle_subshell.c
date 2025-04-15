@@ -13,13 +13,13 @@ void	execute_subshell(t_shell *shell, t_node *node)
 		if (node->io && !handle_redirections(node->io))
 			ft_exit(shell, node, EXIT_FAILURE);
 		execute_tree(shell, node->l_node);
-		ft_exit(shell, node, exit_status(0, 0));// Set exit_status of the left node to the subshell node to fix commands like (ls) && pwd
+		ft_exit(shell, node, exit_status(0, 0));
 	}
 	else
 	{
 		waitpid(pid, &status, 0);
-		if (WIFEXITED(status))//The WIFEXITED macro checks if the child exited normally (e.g., by calling exit or returning from main).
-			exit_status(1, WEXITSTATUS(status));// extracts the actual exit code of the child process.
+		if (WIFEXITED(status))
+			exit_status(1, WEXITSTATUS(status));
 		else
 			exit_status(1, 1);
 	}

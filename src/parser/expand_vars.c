@@ -6,30 +6,11 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/14 17:57:30 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 13:13:44 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	ft_isvalid_var(char c)
-{
-	return (ft_isalnum(c) || c == '_');
-}
-
-int	get_var_end(char *s)
-{
-	int	i;
-
-	i = 1;
-	if (s[i] == '?')
-		return (i);
-	while (s[i] && ft_isvalid_var(s[i]))
-		i++;
-	if (s[i])
-		i--;
-	return (i);
-}
 
 static char	*join_all(t_shell *shell, char *s1, t_env *env, char *s3)
 {
@@ -45,7 +26,8 @@ static char	*join_all(t_shell *shell, char *s1, t_env *env, char *s3)
 
 static char	*join_status_code(t_shell *shell, char *start, char *end)
 {
-	return (ft_strjoin(shell, ft_strjoin(shell, start, ft_itoa(shell, exit_status(0, 0))), end));
+	return (ft_strjoin(shell, ft_strjoin(shell,
+				start, ft_itoa(shell, exit_status(0, 0))), end));
 }
 
 static char	*expand_var(t_shell *shell, char *str, char *sign)

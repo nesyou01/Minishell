@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:02 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/10 04:31:09 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 12:56:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,3 @@ t_file	*ft_add_file_last(t_file **lst, t_file *new)
 	last->next = new;
 	return (new);
 }
-
