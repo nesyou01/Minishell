@@ -6,13 +6,13 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/14 14:00:31 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 12:55:06 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void set_io_to_node(t_node *node, t_file **io)
+static void	set_io_to_node(t_node *node, t_file **io)
 {
 	if (!node)
 		return ;
@@ -79,7 +79,7 @@ t_node	*ft_tokens_to_nodes(t_shell *shell, t_token *token)
 				return (NULL);
 			set_io_to_node(tmp, &io);
 		}
-		if((!token->next || token->next->type >= 100) && !tmp)
+		if ((!token->next || token->next->type >= 100) && !tmp)
 			add_empty_node(&head, shell, &io);
 		if (token->type >= 100 && token->type != PARENTHESES_END)
 			tmp = NULL;

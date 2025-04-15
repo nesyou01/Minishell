@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 12:39:33 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/15 12:40:11 by ylagmah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 void	execute_tree(t_shell *shell, t_node *node)
@@ -24,7 +36,7 @@ void	execute_tree(t_shell *shell, t_node *node)
 		execute_subshell(shell, node);
 }
 
-static void	minishell(t_shell *shell)
+void	minishell(t_shell *shell)
 {
 	char			*str;
 	t_node			*node;
@@ -33,7 +45,7 @@ static void	minishell(t_shell *shell)
 	{
 		str = readline("minishell $> ");
 		if (!str)
-			break;
+			break ;
 		signals_listener(2);
 		ft_add_cmd_garbage(shell, str);
 		node = ft_parser(shell, &str);
@@ -45,19 +57,4 @@ static void	minishell(t_shell *shell)
 		ft_clean_cmd(shell, node);
 	}
 	ft_clean_all(shell, NULL);
-}
-
-int	main(int argc, char **argv, char **env)
-{
-	t_shell	shell;
-
-	(void) argv;
-	if (argc != 1)
-		return (ft_perror("usage => ./minishell"), 1);
-	if (ft_any_not_tty())
-		return (1);
-	env_init(&shell, env);
-	signals_listener(0);
-	minishell(&shell);
-	return (0);
 }

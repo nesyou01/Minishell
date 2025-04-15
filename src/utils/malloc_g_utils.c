@@ -1,41 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils2.c                                       :+:      :+:    :+:   */
+/*   malloc_g_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 11:35:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 12:50:20 by ylagmah          ###   ########.fr       */
+/*   Created: 2025/04/15 12:49:05 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/15 12:49:21 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_get_env_value(t_shell *shell, char *key)
+void	*ft_malloc_globale(t_shell *shell, size_t size)
 {
-	t_env	*env;
+	void	*result;
 
-	env = ft_get_env(shell->env, key);
-	if (!env)
-		return (NULL);
-	return (env->value);
-}
-
-static int	is_all_alnum(char *str)
-{
-	while (*str)
-	{
-		if (!ft_isalnum(*str) && *str != '_')
-			return (0);
-		str++;
-	}
-	return (1);
-}
-
-int	ft_is_valid_key(char *str)
-{
-	return (str && *str
-		&& is_all_alnum(str)
-		&& (ft_isalpha(*str) || *str == '_'));
+	result = malloc(size);
+	if (!result)
+		return (malloc_error(shell), NULL);
+	ft_add_garbage(&(shell->globale_garbage), shell, result);
+	return (result);
 }

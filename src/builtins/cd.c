@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 12:24:14 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 12:48:04 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ static char	*get_target_directory(t_shell *shell, t_command *cmd)
 	}
 	return (dir);
 }
-
 
 int	ft_cd(t_shell *shell, t_command *cmd)
 {

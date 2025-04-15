@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   trim_var.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 12:50:38 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/15 12:50:39 by ylagmah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
 
 static size_t	total_size(char *old)
@@ -24,7 +36,7 @@ static size_t	total_size(char *old)
 
 char	*ft_trim_var(t_shell *shell, char *old)
 {
-	char 	*result;
+	char	*result;
 	size_t	i;
 	size_t	x;
 

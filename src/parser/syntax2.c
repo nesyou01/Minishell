@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env_utils2.c                                       :+:      :+:    :+:   */
+/*   syntax2.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/24 11:35:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 12:50:20 by ylagmah          ###   ########.fr       */
+/*   Created: 2025/04/15 12:51:28 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/15 12:51:45 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char	*ft_get_env_value(t_shell *shell, char *key)
+int	is_valid_quotes(char *str)
 {
-	t_env	*env;
+	char	c;
 
-	env = ft_get_env(shell->env, key);
-	if (!env)
-		return (NULL);
-	return (env->value);
-}
-
-static int	is_all_alnum(char *str)
-{
+	if (!str)
+		return (1);
 	while (*str)
 	{
-		if (!ft_isalnum(*str) && *str != '_')
-			return (0);
-		str++;
+		if (*str == '\'' || *str == '"')
+		{
+			c = *str;
+			str++;
+			while (*str && *str != c)
+				str++;
+			if (*str == c)
+				str++;
+			else
+				return (0);
+		}
+		else
+			str++;
 	}
 	return (1);
-}
-
-int	ft_is_valid_key(char *str)
-{
-	return (str && *str
-		&& is_all_alnum(str)
-		&& (ft_isalpha(*str) || *str == '_'));
 }

@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/24 09:53:41 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/13 18:40:52 by ylagmah          ###   ########.fr       */
+/*   Created: 2025/04/15 12:49:47 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/15 12:49:49 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ char	*ft_strnstr2(const char *haystack, const char *needle, size_t len)
 	i = 0;
 	while (i < len && haystack[i])
 	{
-		while (haystack[i + y] && ft_tolower(haystack[i + y]) == needle[y] && i + y < len)
+		while (haystack[i + y]
+			&& ft_tolower(haystack[i + y]) == needle[y] && i + y < len)
 			y++;
 		if (!needle[y])
 			return ((char *)((haystack + i)));

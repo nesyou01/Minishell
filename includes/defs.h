@@ -1,5 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   defs.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 12:37:10 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/15 12:43:39 by ylagmah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DEFS_H
 # define DEFS_H
+
 # include "../libs/libft/libft.h"
 
 # define SEPECIAL_CHARS "<>|&()"
@@ -9,7 +22,7 @@
 # define HERE_DOC 3 
 # define OUT_APPEND_REDIRECTER 4 
 # define PIPE 105
-# define FILE 7
+# define FILE 100
 # define COMMAND 9
 # define ARGUMENT 10
 # define HERE_DOC_LIMITER 12
@@ -33,7 +46,7 @@ typedef struct s_file
 {
 	int				fd;
 	int				type;
-	int				is_ambiguous; // try this in bash: > *
+	int				is_ambiguous;
 	char			*path;
 	struct s_file	*next;
 }	t_file;
@@ -45,7 +58,6 @@ typedef struct s_node
 	int				quotes_expanded;
 	char			*content;
 	char			*filter;
-	int				exit_status;//add this attribute for setting the process shell's exit status
 	t_file			*io;
 	struct s_node	*next;
 	struct s_node	*prev;

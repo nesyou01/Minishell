@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:36 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/14 19:56:46 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 12:39:07 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,9 +32,11 @@ void	env_init(t_shell *shell, char **env)
 	return ;
 }
 
-int	ft_any_not_tty()
+int	ft_any_not_tty(void)
 {
-	if (!isatty(STDIN_FILENO) || !isatty(STDOUT_FILENO) || !isatty(STDERR_FILENO))
+	if (!isatty(STDIN_FILENO)
+		|| !isatty(STDOUT_FILENO)
+		|| !isatty(STDERR_FILENO))
 		return (ft_perror("In/Out not connected to a terminal"), 1);
 	return (0);
 }

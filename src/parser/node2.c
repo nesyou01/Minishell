@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:56 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/10 20:56:28 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 12:54:25 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ static void	or_and_handler(t_shell *shell,
 	}
 }
 
-static void	par_end_handler(t_shell *shell, t_node **op, t_node **cmd, t_node *node)
+static void	par_end_handler(t_shell *shell,
+	t_node **op, t_node **cmd, t_node *node)
 {
 	t_node	*tmp;
 
@@ -92,13 +93,4 @@ void	ft_tree_builder(t_shell *shell, t_node **node)
 	move_lst(&op, &cmd);
 	*node = cmd;
 	ft_to_tree(cmd);
-}
-
-t_node	*ft_head_node(t_node *node)
-{
-	if (!node)
-		return (NULL);
-	while (node->prev)
-		node = node->prev;
-	return (node);
 }

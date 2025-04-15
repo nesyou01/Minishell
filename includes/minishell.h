@@ -1,23 +1,38 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/15 12:55:42 by ylagmah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef MINISHELL_H
 # define MINISHELL_H
 
-# include <unistd.h>//for write, execve, read,
-# include <stdlib.h>//malloc
-# include <sys/wait.h>//wait
-# include <fcntl.h>//for system call open,
-# include <sys/types.h>//pid_t
-# include <errno.h>//for errno
+# include <unistd.h>
+# include <stdlib.h>
+# include <sys/wait.h>
+# include <fcntl.h>
+# include <sys/types.h>
+# include <errno.h>
 # include <stdio.h>
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <dirent.h>
+# include <string.h>
+# include <signal.h>
+# include <sys/stat.h>
 # include "./defs.h"
-# include <string.h>//for strerror
-# include <signal.h>//for strerror
-# include <sys/stat.h>//for stat
+
+void		minishell(t_shell *shell);
+void		execute_tree(t_shell *shell, t_node *node);
+
 
 void		env_init(t_shell *shell, char **env);
-
 
 t_env		*ft_parse_env(t_shell *shell, char *str, char *key);
 t_env		*ft_last_env(t_env *env);
@@ -49,9 +64,9 @@ int			ft_isspace(char c);
 char		*ft_strnstr2(const char *haystack, const char *needle, size_t len);
 void		ft_perror3(char *first, char *middle, char *end);
 char		*ft_itoa(t_shell *shell, int n);
+int			is_valid_quotes(char *str);
+void		malloc_error(t_shell *shell);
 
-
-// PARSING
 t_node		*ft_parser(t_shell *shell, char **str);
 t_token		*ft_split_tokens(t_shell *shell, char *str);
 int			ft_tokenize(t_token *lst);
@@ -90,18 +105,15 @@ int			ft_repeat_count(t_token *head, int type);
 t_node		*ft_head_node(t_node *node);
 int			ft_is_valid_key(char *str);
 
-
 void		ft_error(t_shell *shell, t_node *node, char *msg, int status);
 void		ft_perror(char *msg);
 void		ft_perror2(char *msg, char *end);
 char		*ft_strjoin_globale(t_shell *shell, char const *s1, char const *s2);
 
-int			ft_any_not_tty();
+int			ft_any_not_tty(void);
 
 void		signals_listener(int action);
 
-// EX
-void		execute_tree(t_shell *shell, t_node *node);
 int			is_builtin(t_command *p_cmd);
 void		execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd);
 void		execute_external(t_shell *shell, t_node *node, t_command *p_cmd);
@@ -113,7 +125,6 @@ int			handle_redirections(t_file *io);
 void		execute_logical(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
 int			ft_add_env(t_shell *shell, char *key_value);
-
 
 char		*ft_get_fullpath(t_shell *shell, t_node *node, t_command *p_cmd);
 char		*get_cmd_path(t_shell *shell, char **paths, char *cmd);
