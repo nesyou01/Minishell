@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:07:50 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 16:26:08 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:20:26 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static void	on_new_prompt(int signal)
 	rl_redisplay();
 }
 
-static void	on_exit(int signal)
+static void	ft_onexit(int signal)
 {
 	(void) signal;
 	printf("\n");
@@ -35,7 +35,7 @@ void	signals_listener(int action)
 	if (action == 0)
 		signal(SIGINT, on_new_prompt);
 	else if (action == 1)
-		signal(SIGINT, on_exit);
+		signal(SIGINT, ft_onexit);
 	else if (action == 2)
 		signal(SIGINT, SIG_IGN);
 }
