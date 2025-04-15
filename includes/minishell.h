@@ -112,6 +112,7 @@ void		execute_subshell(t_shell *shell, t_node *node);
 int			handle_redirections(t_file *io);
 void		execute_logical(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
+int			ft_add_env(t_shell *shell, char *key_value);
 
 
 char		*ft_get_fullpath(t_shell *shell, t_node *node, t_command *p_cmd);

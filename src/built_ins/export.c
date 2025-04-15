@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:38 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/13 19:24:49 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 11:22:39 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	set_env(t_shell *shell, t_env *env, char *key_value, char *key)
 	}
 }
 
-static int	handle_env(t_shell *shell, char *key_value)
+int	ft_add_env(t_shell *shell, char *key_value)
 {
 	t_env	*env;
 	char	*key;
@@ -102,9 +102,9 @@ int	ft_export(t_shell *shell, t_command *cmd)
 	while (cmd->argv[i])
 	{
 		if (!is_fail)
-			is_fail = handle_env(shell, cmd->argv[i++]);
+			is_fail = ft_add_env(shell, cmd->argv[i++]);
 		else
-			handle_env(shell, cmd->argv[i++]);
+			ft_add_env(shell, cmd->argv[i++]);
 	}
 	return (is_fail);
 }
