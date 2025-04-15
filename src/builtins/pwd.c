@@ -6,18 +6,17 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:39:30 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 12:19:04 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 12:27:58 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	ft_pwd(t_shell *shell, t_command *parse_cmd)
+int	ft_pwd(t_shell *shell, t_command *cmd)
 {
 	char	*path;
 
-	(void) shell;
-	(void) parse_cmd;
+	(void) cmd;
 	path = getcwd(NULL, 0);
 	if (!path)
 	{
