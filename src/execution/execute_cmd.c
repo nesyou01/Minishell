@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 13:55:17 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 18:54:08 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void	double_dot_cmd(t_shell *shell, t_node *node, t_command *p_cmd)
 {
 	if (!ft_strcmp(p_cmd->cmd, ".."))
 	{
-		ft_putstr_fd("minishell: ..: command not found\n", 2);
+		ft_perror("command not found");
 		ft_exit(shell, node, 127);
 	}
 }
@@ -28,7 +28,7 @@ static void	exec_command(t_shell *shell, t_node *node, char *path,
 		ft_exit(shell, node, 127);
 	if (execve(path, p_cmd->argv, p_cmd->envp) == -1)
 	{
-		ft_perror("minishell: execve failed");
+		ft_perror("execve failed");
 		ft_exit(shell, node, 127);
 	}
 }
@@ -47,6 +47,7 @@ void	exec_child(t_shell *shell, t_node *node, t_command *p_cmd)
 		ft_perror2(p_cmd->cmd, "command not found");
 		ft_exit(shell, node, 127);
 	}
+	signals_listener(3);
 	exec_command(shell, node, path, p_cmd);
 }
 
@@ -58,7 +59,7 @@ void	execute_external(t_shell *shell, t_node *node, t_command *p_cmd)
 	pid = fork();
 	if (pid == -1)
 	{
-		perror("minishell: failed fork");
+		ft_perror("failed fork");
 		exit_status(1, 1);
 		ft_exit(shell, node, EXIT_FAILURE);
 	}
@@ -67,14 +68,10 @@ void	execute_external(t_shell *shell, t_node *node, t_command *p_cmd)
 	else
 	{
 		if (waitpid(pid, &status, 0) == -1)
-		{
-			perror("minishell: failed waitpid");
-			exit_status(1, 1);
-			return ;
-		}
+			return (exit_status(1, 1), ft_perror("failed waitpid"));
 		if (WIFEXITED(status))
 			exit_status(1, WEXITSTATUS(status));
 		else
-			exit_status(1, 1);
+			(printf("\n"), exit_status(1, 130));
 	}
 }
