@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/14 19:14:13 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/15 06:02:40 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,6 @@ static void exit_error(char *msg, char *arg, int use_arg)
 	}
 	write(2, msg, ft_strlen(msg));
 	write(2, "\n", 1);
-}
-
-long long	ft_atoll(char *digit)
-{
-	int			i;
-	long long	res;
-	int			sign;
-
-	i = 0;
-	sign = 1;
-	if (digit[i] && (digit[i] == '-' || digit[i] == '+'))
-	{
-		if (digit [i] == '-')
-			sign = -1;
-		i++;
-	}
-	res = 0;
-	while (digit[i] && ft_isdigit(digit[i]))
-	{
-		res = res * 10 + (digit[i] - '0');
-		i++;
-	}
-	return (res * sign);
 }
 
 static int	is_numeric(const char *str)
@@ -65,37 +42,64 @@ static int	is_numeric(const char *str)
 	return (1);
 }
 
+static int	ft_parse_sign(const char **str)
+{
+	int	sign;
+
+	sign = 1;
+	if (**str == '+' || **str == '-')
+	{
+		if (**str == '-')
+			sign = -1;
+		(*str)++;
+	}
+	return (sign);
+}
+
+int	ft_str_to_ll(const char *str, long long *result)
+{
+	long long	tmp;
+	int		sign;
+
+	tmp = 0;
+	*result = 0;
+	if (!str || !*str)
+		return (0);
+	sign = ft_parse_sign(&str);
+	if (!*str)
+		return (0);
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		if ((sign == 1 && tmp > (LLONG_MAX - (*str - '0')) / 10)
+			|| (sign == -1 && tmp > ((unsigned long long)LLONG_MAX + 1
+			- (*str - '0')) / 10))
+			return (0);
+		tmp = tmp * 10 + (*str++ - '0');
+	}
+	*result = tmp * sign;
+	return (1);
+}
+
 int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd)
 {
 	long long exit_code;
 
+	ft_putendl_fd("exit", 1);
 	if (!cmd->argv[1])
 		ft_exit(shell, node, exit_status(0, 0));
 
-	if (!is_numeric(cmd->argv[1]))
+	if (!is_numeric(cmd->argv[1]) || !ft_str_to_ll(cmd->argv[1], &exit_code))
 	{
 		exit_error("numeric argument required", cmd->argv[1], 1);
 		ft_exit(shell, node, 255);
 	}
-	exit_code = ft_atoll(cmd->argv[1]);
-	if ((exit_code > LLONG_MAX) || (exit_code < LLONG_MIN))
-	{
-		exit_error("numeric argument required", cmd->argv[1], 1);
-		ft_exit(shell, node, 255);
-	}
-	// if ((cmd->argv[1][0] != '-' && ft_strlen(cmd->argv[1]) > 19) || 
-	// (cmd->argv[1][0] == '-' && strlen(cmd->argv) > 20) || 
-	// (ft_strcmp(cmd->argv[1], "9223372036854775808") == 0) || 
-	// (ft_strcmp(cmd->argv[1], "-9223372036854775809") >= 0))
-	// {
-	// 	exit_error("numeric argument required", cmd->argv[1], 1);
-	// 	ft_exit(shell, node, 255);
-	// }
 	if (cmd->argv[2])
 	{
 		exit_error("too many arguments", NULL, 0);
 		return (1);
 	}
-	ft_exit(shell, node, (unsigned char)exit_code);
+	ft_exit(shell, node, exit_code % 256);
 	return (0);
 }
