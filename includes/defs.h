@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:10 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 12:43:39 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:44:18 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ typedef struct s_env
 
 typedef struct s_shell
 {
-	int			fds[3];
 	t_env		*env;
 	t_list		*globale_garbage;
 	t_list		*cmd_garbage;
