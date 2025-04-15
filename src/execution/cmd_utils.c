@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/14 14:42:03 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/15 13:57:19 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	is_directory(char *path)
 	return (0);
 }
 
-static char	*check_absolute_or_relative(t_shell *shell , t_node *node, char *cmd)
+static char	*check_absolute_or_relative(t_shell *shell,
+	t_node *node, char *cmd)
 {
 	if (ft_strchr(cmd, '/'))
 	{

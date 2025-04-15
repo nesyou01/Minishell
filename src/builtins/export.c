@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:38 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 11:22:39 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 13:58:48 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,40 +24,6 @@ static void	print_env(t_shell *shell)
 		else
 			printf("declare -x %s\n", env->key);
 		env = env->next;
-	}
-}
-
-static int	is_concat(char *key_value)
-{
-	while (*key_value && *key_value != '=')
-	{
-		if (*key_value == '+')
-			return (1);
-		key_value++;
-	}
-	return (0);
-}
-
-static void	set_env(t_shell *shell, t_env *env, char *key_value, char *key)
-{
-	t_env	*last;
-	char	*value;
-
-	if (!env)
-	{
-		last = ft_last_env(shell->env);
-		last->next = ft_parse_env(shell, key_value, key);
-	}
-	else
-	{
-		value = ft_strchr(key_value, '=');
-		if (value)
-		{
-			if (is_concat(key_value))
-				env->value = ft_strjoin_globale(shell, env->value, value + 1);
-			else
-				env->value = ft_strdup_globale(shell, value + 1);
-		}
 	}
 }
 

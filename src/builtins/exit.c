@@ -6,29 +6,17 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 12:47:14 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 14:07:34 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static void exit_error(char *msg, char *arg, int use_arg)
-{
-	const char *prefix = "minishell: exit: ";
-	write(2, prefix, ft_strlen(prefix));
-	if (use_arg && arg)
-	{
-		write(2, arg, ft_strlen(arg));
-		write(2, ": ", 2);
-	}
-	write(2, msg, ft_strlen(msg));
-	write(2, "\n", 1);
-}
-
 static int	is_numeric(const char *str)
 {
-	int i = 0;
+	int	i;
 
+	i = 0;
 	if (!str || !str[0])
 		return (0);
 	if (str[0] == '+' || str[0] == '-')
@@ -59,7 +47,7 @@ static int	ft_parse_sign(const char **str)
 int	ft_str_to_ll(const char *str, long long *result)
 {
 	long long	tmp;
-	int		sign;
+	int			sign;
 
 	tmp = 0;
 	*result = 0;
@@ -84,7 +72,7 @@ int	ft_str_to_ll(const char *str, long long *result)
 
 int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd)
 {
-	long long exit_code;
+	long long	exit_code;
 
 	ft_putendl_fd("exit", 1);
 	if (!cmd->argv[1])
@@ -92,12 +80,12 @@ int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd)
 
 	if (!is_numeric(cmd->argv[1]) || !ft_str_to_ll(cmd->argv[1], &exit_code))
 	{
-		exit_error("numeric argument required", cmd->argv[1], 1);
+		ft_perror3("exit", cmd->argv[1], "numeric argument required");
 		ft_exit(shell, node, 255);
 	}
 	if (cmd->argv[2])
 	{
-		exit_error("too many arguments", NULL, 0);
+		ft_perror2("exit", "too many arguments");
 		return (1);
 	}
 	ft_exit(shell, node, exit_code % 256);

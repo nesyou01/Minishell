@@ -1,55 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   execute_cmd.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 13:51:15 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/15 13:55:17 by ylagmah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../../includes/minishell.h"
-
-int	is_builtin(t_command *p_cmd)
-{
-	if (!p_cmd)
-		return (0);
-	if (!ft_strcmp2(p_cmd->cmd, "cd"))
-		return (1);
-	if (!ft_strcmp2(p_cmd->cmd, "echo"))
-		return (1);
-	if (!ft_strcmp2(p_cmd->cmd, "export"))
-		return (1);
-	if (!ft_strcmp2(p_cmd->cmd, "unset"))
-		return (1);
-	if (!ft_strcmp2(p_cmd->cmd, "env"))
-		return (1);
-	if (!ft_strcmp2(p_cmd->cmd, "exit"))
-		return (1);
-	if (!ft_strcmp2(p_cmd->cmd, "pwd"))
-		return (1);
-	return (0);
-}
-
-void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
-{
-	int	fd;
-	int	status;
-
-	fd = dup(1);
-	if (fd == -1)
-		ft_error(shell, node, "failed dup", 1);
-	if (!handle_redirections(node->io))
-		return ;
-	if (!ft_strcmp2(p_cmd->argv[0], "cd"))
-		status = ft_cd(shell, p_cmd);
-	else if (!ft_strcmp2(p_cmd->argv[0], "echo"))
-		status = ft_echo(p_cmd);
-	else if (!ft_strcmp2(p_cmd->argv[0], "export"))
-		status = ft_export(shell, p_cmd);
-	else if (!ft_strcmp2(p_cmd->argv[0], "unset"))
-		status = ft_unset(shell, p_cmd);
-	else if (!ft_strcmp2(p_cmd->argv[0], "env"))
-		status = ft_env(shell, p_cmd);
-	else if (!ft_strcmp2(p_cmd->argv[0], "pwd"))
-		status = ft_pwd(shell, p_cmd);
-	else if (!ft_strcmp2(p_cmd->argv[0], "exit"))
-		status = ft_builtin_exit(shell, node, p_cmd);
-	if (dup2(fd, 1) == -1)
-		ft_error(shell, node, "failed dup", 1);
-	(exit_status(1, status), close(fd));
-}
-
 
 static void	double_dot_cmd(t_shell *shell, t_node *node, t_command *p_cmd)
 {
@@ -117,4 +78,3 @@ void	execute_external(t_shell *shell, t_node *node, t_command *p_cmd)
 			exit_status(1, 1);
 	}
 }
-

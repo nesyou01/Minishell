@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signals.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/15 14:07:50 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/15 14:08:00 by ylagmah          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../includes/minishell.h"
 
 static void	on_new_prompt(int signal)
 {
 	(void) signal;
-
 	exit_status(1, 1);
 	printf("\n");
 	rl_on_new_line();
@@ -14,7 +25,6 @@ static void	on_new_prompt(int signal)
 static void	on_exit(int signal)
 {
 	(void) signal;
-
 	printf("\n");
 	exit(99);
 }
