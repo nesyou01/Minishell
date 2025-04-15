@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 15:27:39 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/15 18:58:40 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,11 @@ int	is_builtin(t_command *p_cmd)
 		|| !ft_strcmp2(p_cmd->cmd, "pwd"));
 }
 
+static void	set_error()
+{
+	exit_status(1, 1);
+}
+
 void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 {
 	int	fd;
@@ -35,7 +40,7 @@ void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 	if (fd == -1)
 		ft_error(shell, node, "failed dup", 1);
 	if (!handle_redirections(node->io))
-		return ;
+		return (set_error());
 	if (!ft_strcmp2(p_cmd->argv[0], "cd"))
 		status = ft_cd(shell, p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "echo"))
