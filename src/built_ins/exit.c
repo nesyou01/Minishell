@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/13 12:15:29 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/14 19:14:13 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,14 @@ int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd)
 		exit_error("numeric argument required", cmd->argv[1], 1);
 		ft_exit(shell, node, 255);
 	}
+	// if ((cmd->argv[1][0] != '-' && ft_strlen(cmd->argv[1]) > 19) || 
+	// (cmd->argv[1][0] == '-' && strlen(cmd->argv) > 20) || 
+	// (ft_strcmp(cmd->argv[1], "9223372036854775808") == 0) || 
+	// (ft_strcmp(cmd->argv[1], "-9223372036854775809") >= 0))
+	// {
+	// 	exit_error("numeric argument required", cmd->argv[1], 1);
+	// 	ft_exit(shell, node, 255);
+	// }
 	if (cmd->argv[2])
 	{
 		exit_error("too many arguments", NULL, 0);

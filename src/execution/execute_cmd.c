@@ -43,10 +43,9 @@ void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 		status = ft_pwd(shell, p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "exit"))
 		status = ft_builtin_exit(shell, node, p_cmd);
-	exit_status(1, status);
 	if (dup2(fd, 1) == -1)
 		ft_error(shell, node, "failed dup", 1);
-	close(fd);
+	(exit_status(1, status), close(fd));
 }
 
 

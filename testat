@@ -103,3 +103,13 @@ bash-3.2$ echo $?
 1
 bash-3.2$ 
 ------------------------------------------------------------------
+minishell $> pwd
+/mnt/homes/ael-gady/Desktop/minipush
+minishell $> cd src/
+minishell $> env | OLDPWD
+minishell: OLDPWD: command not found
+minishell $> env | grep OLDPWD
+minishell $> env  | grep PWD
+PWD=/mnt/homes/ael-gady/Desktop/minipush
+minishell $> 
+------------------------------------------------------------------

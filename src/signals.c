@@ -1,6 +1,7 @@
 #include "../includes/minishell.h"
 
-static void	on_new_prompt(int signal) {
+static void	on_new_prompt(int signal)
+{
 	(void) signal;
 
 	exit_status(1, 1);
@@ -10,7 +11,8 @@ static void	on_new_prompt(int signal) {
 	rl_redisplay();
 }
 
-static void	on_exit(int signal) {
+static void	on_exit(int signal)
+{
 	(void) signal;
 
 	printf("\n");

@@ -47,10 +47,16 @@ static void	minishell(t_shell *shell)
 	ft_clean_all(shell, NULL);
 }
 
+void	f()
+{
+	system("leaks minishell");
+}
+
 int	main(int argc, char **argv, char **env)
 {
 	t_shell	shell;
 
+	// atexit(f);
 	(void) argv;
 	if (argc != 1)
 		return (ft_perror("usage => ./minishell"), 1);
