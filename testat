@@ -185,4 +185,10 @@ minishell: ambiguous redirect
 minishell $> echo ajsd > *
 minishell: ambiguous redirect
 minishell $> 
-
+------------------------------------------------------------------
+echo -n hello > file
+------------------------------------------------------------------
+➜  minipush git:(main) ✗ env -i ./minishell
+minishell $> env
+minishell $> 
+------------------------------------------------------------------

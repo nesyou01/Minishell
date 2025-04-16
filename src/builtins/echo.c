@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:09:10 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 14:09:21 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/16 16:49:08 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ int	ft_echo(t_command *cmd)
 	}
 	while (cmd->argv[i])
 	{
-		printf("%s", cmd->argv[i++]);
+		ft_putstr_fd(cmd->argv[i++], 1);
 		if (cmd->argv[i])
-			printf(" ");
+			ft_putstr_fd(" ", 1);
 	}
 	if (!n_flag)
-		printf("\n");
+		ft_putstr_fd("\n", 1);
 	return (0);
 }
