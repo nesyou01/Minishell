@@ -181,8 +181,8 @@ top (Ctr-\)
 ------------------------------------------------------------------
 minishell $> echo ad > *
 minishell: ambiguous redirect
-			--------------leaks problem !! -----------------
+		----------- leaks problem !! ------------
 minishell $> echo ajsd > *
 minishell: ambiguous redirect
 minishell $> 
-------------------------------------------------------------------
+

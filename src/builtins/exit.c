@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 15:12:28 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:20:22 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,7 @@ int	ft_str_to_ll(const char *str, long long *result)
 		if (!ft_isdigit(*str))
 			return (0);
 		if ((sign == 1 && tmp > (LLONG_MAX - (*str - '0')) / 10)
-			|| (sign == -1 && tmp > ((unsigned long long)LLONG_MAX + 1
-			- (*str - '0')) / 10))
+			|| (sign == -1 && tmp > (LLONG_MIN + (*str - '0')) / 10))
 			return (0);
 		tmp = tmp * 10 + (*str++ - '0');
 	}

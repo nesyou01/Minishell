@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 15:21:04 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/16 15:05:09 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int	count_arguments(char **argv)
 static int	update_pwd_env(t_shell *shell, t_command *cmd, const char *oldpwd)
 {
 	char	cwd[PATH_MAX];
-	char	*new_var;
 
 	if (getcwd(cwd, sizeof(cwd)) == NULL)
 	{

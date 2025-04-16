@@ -3,23 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 18:54:08 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/16 15:24:32 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static void	double_dot_cmd(t_shell *shell, t_node *node, t_command *p_cmd)
-{
-	if (!ft_strcmp(p_cmd->cmd, ".."))
-	{
-		ft_perror("command not found");
-		ft_exit(shell, node, 127);
-	}
-}
 
 static void	exec_command(t_shell *shell, t_node *node, char *path,
 						t_command *p_cmd)
