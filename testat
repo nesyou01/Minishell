@@ -192,3 +192,41 @@ echo -n hello > file
 minishell $> env
 minishell $> 
 ------------------------------------------------------------------
+minishell $> $l $p $f $g $D $F
+minishell: : command not found
+------------------------------------------------------------------
+minishell $> echo -n dhkddujkd < OneFile
+dhkddujkdminishell $> dhkddujkd
+minishell: dhkddujkd: command not found
+minishell $> exit
+------------------------------------------------------------------
+minishell $> exit | exit 100
+exit
+------------------------------------------------------------------
+(ctrl-quite)
+minishell $> cat
+^\^\^\^\^\
+------------------------------------------------------------------
+(bash-3.2$ touch .heredoc_tmp
+bash-3.2$ chmod 000 .heredoc_tmp
+bash-3.2$c
+minishell $> cat << l
+minishell: here_doc failed!
+------------------------------------------
+➜  minipush git:(main) ✗ env -i ./minishell 
+minishell $> env
+PWD=/mnt/homes/ael-gady/Desktop/minipush
+minishell $> exit
+➜  minipush git:(main) ✗ env -i bash
+
+The default interactive shell is now zsh.
+To update your account to use zsh, please run `chsh -s /bin/zsh`.
+For more details, please visit https://support.apple.com/kb/HT208050.
+bash-3.2$ env
+PWD=/mnt/homes/ael-gady/Desktop/minipush
+SHLVL=1
+_=/usr/bin/env
+bash-3.2$ 
+bash-3.2$ echo $PATH
+/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.
+------------------------------------------
