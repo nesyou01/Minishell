@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:36 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 12:39:07 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/16 17:53:55 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,27 @@
 void	env_init(t_shell *shell, char **env)
 {
 	t_env	*last;
+	char	*path;
 
 	shell->env = NULL;
 	shell->cmd_garbage = NULL;
 	shell->globale_garbage = NULL;
-	if (!env || !*env)
-		return ;
-	shell->env = ft_parse_env(shell, *env, NULL);
-	env++;
-	while (*env)
+	if (env && *env)
 	{
-		last = ft_last_env(shell->env);
-		last->next = ft_parse_env(shell, *env, NULL);
+		shell->env = ft_parse_env(shell, *env, NULL);
 		env++;
+		while (*env)
+		{
+			last = ft_last_env(shell->env);
+			last->next = ft_parse_env(shell, *env, NULL);
+			env++;
+		}
+	}
+	path = getcwd(NULL, 0);
+	if (path)
+	{
+		ft_add_env(shell, ft_strjoin(shell, "PWD=", path));
+		free(path);
 	}
 	return ;
 }

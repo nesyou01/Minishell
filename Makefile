@@ -16,10 +16,10 @@ SRC = src/main.c src/minishell.c src/utils/utils.c src/builtins/env.c src/utils/
 
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
-CFLAGS = -Wall -Werror -Wextra  #-g -fsanitize=address
+CFLAGS = -Wall -Werror -Wextra  -g -fsanitize=address
 LIBFT = libs/libft/libft.a
 HEADERS = includes/minishell.h includes/defs.h
-READLINE = /mnt/homes/ael-gady/.brew/opt/readline
+READLINE = /mnt/homes/ylagmah/.brew/opt/readline
 
 
 ${NAME}: ${LIBFT} ${SRC_OBJS}

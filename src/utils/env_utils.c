@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/14 17:56:03 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/16 17:52:45 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,8 @@ t_env	*ft_last_env(t_env *env)
 {
 	t_env	*tmp;
 
+	if (!env)
+		return (NULL);
 	tmp = env;
 	while (tmp->next)
 		tmp = tmp->next;

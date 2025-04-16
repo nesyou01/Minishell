@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:13:59 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 13:58:51 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/16 17:52:19 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,10 @@ void	set_env(t_shell *shell, t_env *env, char *key_value, char *key)
 	if (!env)
 	{
 		last = ft_last_env(shell->env);
-		last->next = ft_parse_env(shell, key_value, key);
+		if (last)
+			last->next = ft_parse_env(shell, key_value, key);
+		else
+			shell->env = ft_parse_env(shell, key_value, key);
 	}
 	else
 	{
