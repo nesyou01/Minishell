@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:39:49 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 09:24:50 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 09:33:59 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	main(int argc, char **argv, char **env)
 	if (ft_any_not_tty())
 		return (1);
 	if (tcgetattr(STDIN_FILENO, &initial) < 0)
-		return (1);
+		return (2);
 	env_init(&shell, env);
 	return (minishell(&shell, &initial));
 }

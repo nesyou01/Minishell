@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 09:17:04 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 09:40:40 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,6 @@ void	execute_external(t_shell *shell, t_node *node, t_command *p_cmd)
 		if (WIFEXITED(status))
 			exit_status(1, WEXITSTATUS(status));
 		else
-			(printf("\n"), exit_status(1, 130));
+			(printf("\n"), exit_status(1, 128 + WTERMSIG(status)));
 	}
 }
