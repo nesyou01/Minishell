@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 08:40:20 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 09:24:38 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,10 @@
 # include <string.h>
 # include <signal.h>
 # include <sys/stat.h>
+#include <termios.h>
 # include "./defs.h"
 
-int			minishell(t_shell *shell);
+int			minishell(t_shell *shell, struct termios *in);
 void		execute_tree(t_shell *shell, t_node *node);
 
 void		env_init(t_shell *shell, char **env);

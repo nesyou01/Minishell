@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:39:33 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 08:57:44 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 09:26:39 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ void	execute_tree(t_shell *shell, t_node *node)
 		execute_subshell(shell, node);
 }
 
-int	minishell(t_shell *shell)
+int	minishell(t_shell *shell, struct termios *in)
 {
 	char			*str;
 	t_node			*node;
@@ -55,6 +55,8 @@ int	minishell(t_shell *shell)
 		if (*str)
 			add_history(str);
 		ft_clean_cmd(shell, node);
+		if (tcsetattr(STDIN_FILENO, TCSANOW, in) < 0)
+			break ;
 	}
 	ft_clean_all(shell, NULL);
 	printf("exit\n");
