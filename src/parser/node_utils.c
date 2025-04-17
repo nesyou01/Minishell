@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:22 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/06 02:11:04 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 05:45:24 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,6 @@ t_node	*ft_new_node(t_shell *shell, t_token *token)
 	list->r_node = NULL;
 	list->io = NULL;
 	list->taken = 0;
-	list->quotes_expanded = 0;
 	return (list);
 }
 
@@ -70,13 +69,11 @@ t_node	*ft_dup_node(t_shell *shell, t_node *node)
 	list = (t_node *) ft_malloc(shell, sizeof(t_node));
 	list->content = ft_strdup(shell, node->content);
 	list->type = node->type;
-	list->quotes_expanded = node->quotes_expanded;
 	list->next = NULL;
 	list->prev = NULL;
 	list->io = node->io;
 	list->l_node = NULL;
 	list->r_node = NULL;
-	list->quotes_expanded = node->quotes_expanded;
 	list->taken = 0;
 	return (list);
 }

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:10 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 14:48:21 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 05:45:16 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,6 @@ typedef struct s_node
 {
 	int				type;
 	int				taken;
-	int				quotes_expanded;
 	char			*content;
 	char			*filter;
 	t_file			*io;

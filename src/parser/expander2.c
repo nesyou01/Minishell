@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:58:28 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 13:03:58 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 05:45:26 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	remove_double_quotes(t_shell *shell, t_node *node, int start)
 	char	*expanded;
 	size_t	len;
 
-	node->quotes_expanded = 1;
 	if (!start)
 		start_str = NULL;
 	else
