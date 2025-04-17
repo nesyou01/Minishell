@@ -6,29 +6,11 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 07:59:48 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 13:43:10 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static int	ft_get_quote_end(char *str, char quote, int start)
-{
-	int	i;
-	int	quotes;
-
-	quotes = 1;
-	i = start + quotes;
-	while (str[i])
-	{
-		if (str[i] == quote)
-			quotes++;
-		if (quotes % 2 == 0 && ft_strchr(SEPECIAL_CHARS, str[i]))
-			break ;
-		i++;
-	}
-	return (i);
-}
 
 int	ft_isspace(char c)
 {
