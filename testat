@@ -230,3 +230,34 @@ bash-3.2$
 bash-3.2$ echo $PATH
 /usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:.
 ------------------------------------------
+bash-3.2$ cd *
+Makefile   includes/  libs/      minishell  src/       testat     
+bash-3.2$ cd *
+Makefile   includes/  libs/      minishell  src/       testat     
+bash-3.2$ cd *
+Makefile   includes/  libs/      minishell  src/       testat     
+bash-3.2$ cd *
+bash: cd: Makefile: Not a directory
+bash-3.2$ 
+------------------------------------------
+minishell $> ls (.)
+minishell: .: command not found
+------------------------------------------
+
+minishell $> ls (ls)
+Makefile        f               includes        libs            minishell       src             testat
+minishell $> 
+
+------------------------------------------
+minishell $> ls | (cat && wc -l >< f)
+Makefile
+f
+includes
+libs
+minishell
+src
+testat
+wc: ><: open: No such file or directory
+       1 f
+       1 total
+------------------------------------------
