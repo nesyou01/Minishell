@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:03:47 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 18:19:11 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 08:31:36 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ t_list	*read_dir(t_shell *shell, DIR *dir, char *pattern, char *filter)
 		if (!dr)
 			break ;
 		if (ft_match_pattern(dr->d_name, pattern, filter))
-			ft_lstadd_back(&lst, ft_lstnew(shell, dr->d_name));
+			ft_lstadd_back(&lst, ft_lstnew(shell, ft_strdup(shell, dr->d_name)));
 	}
 	ft_sort(lst);
 	closedir(dir);
