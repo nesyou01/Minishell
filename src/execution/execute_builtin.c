@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/16 23:01:41 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:22:45 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@ void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 	else if (!ft_strcmp2(p_cmd->argv[0], "pwd"))
 		status = ft_pwd(shell, p_cmd);
 	else
-		status = ft_builtin_exit(shell, node, p_cmd);
+		status = ft_builtin_exit(shell, node, p_cmd, fds);
 	reset_tty(shell, node, fds);
 	exit_status(1, status);
 	(close(fds[0]), close(fds[1]), close(fds[2]));

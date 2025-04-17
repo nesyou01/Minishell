@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 09:24:38 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 11:19:12 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,7 +143,7 @@ int			ft_unset(t_shell *shell, t_command *cmd);
 int			ft_pwd(t_shell *shell, t_command *parse_cmd);
 int			ft_cd(t_shell *shell, t_command *parse_cmd);
 int			ft_env(t_shell *shell, t_command *cmd);
-int			ft_builtin_exit(t_shell *shell, t_node *node, t_command *parse_cmd);
+int			ft_builtin_exit(t_shell *shell, t_node *node, t_command *parse_cmd, int *fd);
 char		*ft_trim_var(t_shell *shell, char *old);
 
 int			exit_status(int action, int value);

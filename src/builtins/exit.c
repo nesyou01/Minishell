@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/16 16:30:57 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:28:01 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,23 +69,31 @@ int	ft_str_to_ll(const char *str, long long *result)
 	return (1);
 }
 
-int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd)
+static void	ft_close_exit(t_shell *shell, t_node *node, int *fd, int status)
+{
+	close(fd[0]);
+	close(fd[1]);
+	close(fd[2]);
+	ft_exit(shell, node, status);
+}
+
+int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd, int *fd)
 {
 	long long	exit_code;
 
 	ft_putendl_fd("exit", 1);
 	if (!cmd->argv[1])
-		ft_exit(shell, node, exit_status(0, 0));
+		ft_close_exit(shell, node, fd, exit_status(0,0));
 	if (!is_numeric(cmd->argv[1]) || !ft_str_to_ll(cmd->argv[1], &exit_code))
 	{
 		ft_perror3("exit", cmd->argv[1], "numeric argument required");
-		ft_exit(shell, node, 255);
+		ft_close_exit(shell, node, fd, 255);
 	}
 	if (cmd->argv[2])
 	{
 		ft_perror2("exit", "too many arguments");
 		return (1);
 	}
-	ft_exit(shell, node, exit_code % 256);
+	ft_close_exit(shell, node, fd, exit_code % 256);
 	return (0);
 }
