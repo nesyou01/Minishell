@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 06:16:31 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 06:22:25 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,6 +130,7 @@ void		execute_logical(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
 int			ft_add_env(t_shell *shell, char *key_value);
 void		set_env(t_shell *shell, t_env *env, char *key_value, char *key);
+void		ft_trim_node(t_shell *shell, t_node *node);
 
 char		*ft_get_fullpath(t_shell *shell, t_node *node, t_command *p_cmd);
 char		*get_cmd_path(t_shell *shell, char **paths, char *cmd);
