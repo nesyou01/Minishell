@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:50:38 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 06:42:01 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 07:58:09 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,7 @@ static size_t	total_size(t_node *node)
 		i++;
 	while (node->filter[i])
 	{
-		if (!ft_isspace(node->filter[i]))
-			size++;
+		size++;
 		i++;
 	}
 	return (size);
@@ -57,11 +56,8 @@ void	ft_trim_node(t_shell *shell, t_node *node)
 		i++;
 	while (node->filter[i])
 	{
-		if (!ft_isspace(node->filter[i++]))
-		{
-			result[x] = node->content[i - 1];
-			filter[x++] = node->filter[i - 1];
-		}
+		result[x] = node->content[i - 1];
+		filter[x++] = node->filter[i - 1];
 	}
 	set_all(filter, result, node, x);
 }

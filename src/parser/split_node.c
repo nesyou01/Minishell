@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 07:43:12 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 07:59:48 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,10 @@ static int	get_next_break(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (ft_isspace(str[i]) || str[i] == 'E')
+		if (str[i] == 'E')
 			return (i + 1);
+		if (ft_isspace(str[i]))
+			return (i);
 		i++;
 	}
 	return (i);
