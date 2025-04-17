@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/17 11:28:01 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/17 11:33:49 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,8 @@ int	ft_builtin_exit(t_shell *shell, t_node *node, t_command *cmd, int *fd)
 {
 	long long	exit_code;
 
-	ft_putendl_fd("exit", 1);
+	if (isatty(STDIN_FILENO))
+		ft_putendl_fd("exit", fd[1]);
 	if (!cmd->argv[1])
 		ft_close_exit(shell, node, fd, exit_status(0,0));
 	if (!is_numeric(cmd->argv[1]) || !ft_str_to_ll(cmd->argv[1], &exit_code))
