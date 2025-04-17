@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   trim_node.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:50:38 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 07:58:09 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 13:32:27 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,4 +61,3 @@ void	ft_trim_node(t_shell *shell, t_node *node)
 	}
 	set_all(filter, result, node, x);
 }
-

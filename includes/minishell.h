@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 11:19:12 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/17 13:35:44 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # include <string.h>
 # include <signal.h>
 # include <sys/stat.h>
-#include <termios.h>
+# include <termios.h>
 # include "./defs.h"
 
 int			minishell(t_shell *shell, struct termios *in);
@@ -66,7 +66,7 @@ void		ft_perror3(char *first, char *middle, char *end);
 char		*ft_itoa(t_shell *shell, int n);
 int			is_valid_quotes(char *str);
 void		malloc_error(t_shell *shell);
-int			remove_double_quotes(t_shell *shell, t_node *node, int start, int expand);
+int			remove_double_quotes(t_shell *sh, t_node *nd, int start, int expd);
 void		retokinize_export(t_shell *shell, t_node *node);
 int			ft_match_pattern(char *file, char *pattern, char *filter);
 t_list		*read_dir(t_shell *shell, DIR *dir, char *pattern, char *filter);
@@ -108,7 +108,8 @@ void		ft_remove_quotes(t_shell *shell, t_node *node, int expand);
 int			ft_repeat_count(t_token *head, int type);
 t_node		*ft_head_node(t_node *node);
 int			ft_is_valid_key(char *str);
-size_t		set_quotes_filter(t_shell *shell, t_node *node, char *str, int is_empty);
+size_t		set_quotes_filter(t_shell *shell, t_node *node,
+				char *str, int is_empty);
 
 void		ft_error(t_shell *shell, t_node *node, char *msg, int status);
 void		ft_perror(char *msg);
@@ -143,7 +144,8 @@ int			ft_unset(t_shell *shell, t_command *cmd);
 int			ft_pwd(t_shell *shell, t_command *parse_cmd);
 int			ft_cd(t_shell *shell, t_command *parse_cmd);
 int			ft_env(t_shell *shell, t_command *cmd);
-int			ft_builtin_exit(t_shell *shell, t_node *node, t_command *parse_cmd, int *fd);
+int			ft_builtin_exit(t_shell *shell, t_node *node,
+				t_command *parse_cmd, int *fd);
 char		*ft_trim_var(t_shell *shell, char *old);
 
 int			exit_status(int action, int value);
