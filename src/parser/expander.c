@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 07:54:47 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 08:41:30 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static int	expand_node_vars(t_shell *shell, t_node *node)
 	while (node->content[i])
 	{
 		if (node->content[i] == '"')
-			i += remove_double_quotes(shell, node, i);
+			i += remove_double_quotes(shell, node, i, 1);
 		else if (node->content[i] == '\'')
 			i += remove_single_quotes(shell, node, i);
 		else if (node->content[i] == '$')
@@ -88,7 +88,7 @@ static int	expand_node_vars(t_shell *shell, t_node *node)
 	return (0);
 }
 
-void	ft_remove_quotes(t_shell *shell, t_node *node)
+void	ft_remove_quotes(t_shell *shell, t_node *node, int expand)
 {
 	int		i;
 
@@ -97,7 +97,7 @@ void	ft_remove_quotes(t_shell *shell, t_node *node)
 	while (node->content[i])
 	{
 		if (node->content[i] == '"')
-			i += remove_double_quotes(shell, node, i);
+			i += remove_double_quotes(shell, node, i, expand);
 		else if (node->content[i] == '\'')
 			i += remove_single_quotes(shell, node, i);
 		else

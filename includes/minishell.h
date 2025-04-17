@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 06:22:25 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 08:40:20 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void		ft_perror3(char *first, char *middle, char *end);
 char		*ft_itoa(t_shell *shell, int n);
 int			is_valid_quotes(char *str);
 void		malloc_error(t_shell *shell);
-int			remove_double_quotes(t_shell *shell, t_node *node, int start);
+int			remove_double_quotes(t_shell *shell, t_node *node, int start, int expand);
 void		retokinize_export(t_shell *shell, t_node *node);
 int			ft_match_pattern(char *file, char *pattern, char *filter);
 t_list		*read_dir(t_shell *shell, DIR *dir, char *pattern, char *filter);
@@ -103,7 +103,7 @@ t_file		*ft_last_file(t_file *lst);
 void		ft_retokenize(t_node *node, int is_export);
 t_token		*ft_last_token(t_token *lst);
 int			here_doc_handler(t_shell *shell, t_token *token);
-void		ft_remove_quotes(t_shell *shell, t_node *node);
+void		ft_remove_quotes(t_shell *shell, t_node *node, int expand);
 int			ft_repeat_count(t_token *head, int type);
 t_node		*ft_head_node(t_node *node);
 int			ft_is_valid_key(char *str);

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:58:28 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 06:17:00 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 08:40:05 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ size_t	set_quotes_filter(t_shell *shell, t_node *node, char *str, int is_empty)
 	return (len);
 }
 
-int	remove_double_quotes(t_shell *shell, t_node *node, int start)
+int	remove_double_quotes(t_shell *shell, t_node *node, int start, int expand)
 {
 	char	*start_str;
 	char	*end;
@@ -44,7 +44,9 @@ int	remove_double_quotes(t_shell *shell, t_node *node, int start)
 	middle = ft_substr(shell, node->content, start + 1,
 			ft_safe_strlen(node->content) - ft_safe_strlen(start_str)
 			- ft_safe_strlen(end) - 2);
-	expanded = ft_expand_all_vars(shell, middle);
+	expanded = middle;
+	if (expand)
+		expanded = ft_expand_all_vars(shell, middle);
 	is_empty = !*expanded;
 	if (is_empty)
 		expanded = " ";

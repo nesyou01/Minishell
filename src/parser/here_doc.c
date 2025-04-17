@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:56:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 12:56:46 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 08:45:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@ static char	*remove_quotes(t_shell *shell, t_token *token)
 	t_node	*node;
 
 	node = ft_new_node(shell, token);
-	ft_remove_quotes(shell, node);
-	return (ft_expand_all_vars(shell, node->content));
+	ft_remove_quotes(shell, node, 0);
+	return (node->content);
 }
 
 static int	ft_pipe(int fds[2])
@@ -43,18 +43,19 @@ static void	read_here_doc(t_shell *shell,
 	char *limiter, int has_quote, int fds[2])
 {
 	char	*str;
+	char	*input;
 
 	close(fds[0]);
 	signals_listener(1);
 	while (1)
 	{
-		str = readline("here_doc> ");
-		if (!str)
+		input = readline("here_doc> ");
+		if (!input)
 			break ;
-		ft_add_cmd_garbage(shell, str);
+		ft_add_cmd_garbage(shell, input);
 		if (!has_quote)
-			str = ft_expand_all_vars(shell, str);
-		if (ft_strcmp(str, limiter) == 0)
+			str = ft_expand_all_vars(shell, input);
+		if (ft_strcmp(limiter, input) == 0)
 			break ;
 		ft_putstr_fd(str, fds[1]);
 		ft_putstr_fd("\n", fds[1]);
