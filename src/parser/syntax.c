@@ -6,29 +6,17 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 16:26:12 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 14:30:49 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	is_valid_parentheses(t_token *token)
-{
-	if (token->type == PARENTHESES_START)
-		return (token->next && (token->next->type == COMMAND
-				|| is_redirection(token->next) || token->next->type == HERE_DOC
-				|| token->next->type == PARENTHESES_START));
-	if (token->type == PARENTHESES_END)
-		return (!token->next || (token->next->type != PARENTHESES_START
-				&& token->next->type != COMMAND));
-	return (258);
-}
-
 static int	is_valid_operator(t_token *token)
 {
 	if (token->type < 100 || token->type == PARENTHESES_START
 		|| token->type == PARENTHESES_END)
-		return (258);
+		return (1);
 	return (token->prev && token->prev->type != PIPE
 		&& token->prev->type != AND && token->prev->type != OR);
 }
@@ -36,9 +24,18 @@ static int	is_valid_operator(t_token *token)
 static int	is_valid_file(t_token *token)
 {
 	if (token->type != HERE_DOC && !is_redirection(token))
-		return (258);
+		return (1);
 	return (token->next && (token->next->type == FILE
 			|| token->next->type == HERE_DOC_LIMITER));
+}
+
+static int	is_valid_cmd(t_token *token)
+{
+	if (token->type == COMMAND
+		|| token->type == FILE
+		|| token->type == HERE_DOC_LIMITER)
+		return (!token->next || token->next->type != PARENTHESES_START);
+	return (1);
 }
 
 static int	syntax_validator1(t_token *token)
@@ -51,7 +48,9 @@ static int	syntax_validator1(t_token *token)
 			&& (!token->next || token->next->type != HERE_DOC_LIMITER))
 			return (ft_perror2("Syntax error near", "<<"), 258);
 		if (!is_valid_parentheses(token)
-			|| !is_valid_operator(token) || !is_valid_file(token))
+			|| !is_valid_operator(token)
+			|| !is_valid_file(token)
+			|| !is_valid_cmd(token))
 			return (ft_perror2("Syntax error near", token->content), 258);
 		token = token->next;
 	}
