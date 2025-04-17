@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/13 21:27:16 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 07:43:12 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,22 +35,15 @@ int	ft_isspace(char c)
 	return (c == ' ' || (c >= 9 && c <= 13));
 }
 
-static int	ft_get_token_end(char *str)
+static int	get_next_break(char *str)
 {
 	int		i;
-	char	*first;
 
 	i = 0;
-	first = ft_strchr(SEPECIAL_CHARS, *str);
-	while (str[i] && !ft_isspace(str[i])
-		&& (!ft_strchr(SEPECIAL_CHARS, str[i]) == !first))
+	while (str[i])
 	{
-		if (str[i] == '(' || str[i] == ')')
-			return (1);
-		if (str[i] == '\'')
-			return (ft_get_quote_end(str, '\'', i));
-		if (str[i] == '"')
-			return (ft_get_quote_end(str, '"', i));
+		if (ft_isspace(str[i]) || str[i] == 'E')
+			return (i + 1);
 		i++;
 	}
 	return (i);
@@ -67,16 +60,19 @@ t_list	*ft_split_node(t_shell *shell, t_node *node)
 	lst = NULL;
 	if (!node || !node->content)
 		return (NULL);
-	while (1)
+	while (node->filter[i])
 	{
 		if (ft_isspace(node->filter[i]))
 			i++;
-		end = ft_get_token_end(node->filter + i);
-		content = ft_substr(shell, node->content, i, end);
-		ft_lstadd_back(&lst, ft_lstnew(shell, content));
-		i += end;
-		if (!node->filter[i])
-			break ;
+		if (node->filter[i] == 'E')
+			(ft_lstadd_back(&lst, ft_lstnew(shell, ft_strdup(shell, ""))), i++);
+		else
+		{
+			end = get_next_break(node->filter + i);
+			content = ft_substr(shell, node->content, i, end);
+			ft_lstadd_back(&lst, ft_lstnew(shell, content));
+			i += end;
+		}
 	}
 	return (lst);
 }
