@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 05:45:20 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 06:17:26 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ static int	remove_single_quotes(t_shell *shell, t_node *node, int start)
 	char	*start_str;
 	char	*end;
 	char	*middle;
-	size_t	len;
+	int		is_empty;
 
 	if (!start)
 		start_str = NULL;
@@ -53,11 +53,11 @@ static int	remove_single_quotes(t_shell *shell, t_node *node, int start)
 	middle = ft_substr(shell, node->content, start + 1,
 			ft_safe_strlen(node->content)
 			- ft_safe_strlen(start_str) - ft_safe_strlen(end) - 2);
+	if (is_empty)
+		middle = " ";
 	node->content = ft_strjoin(shell,
 			ft_strjoin(shell, start_str, middle), end);
-	len = ft_safe_strlen(middle);
-	node->filter = ft_strjoin(shell, node->filter, ft_repeat(shell, len, '0'));
-	return (len);
+	return (set_quotes_filter(shell, node, middle, is_empty));
 }
 
 static int	expand_node_vars(t_shell *shell, t_node *node)

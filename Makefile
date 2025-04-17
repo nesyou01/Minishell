@@ -16,7 +16,7 @@ SRC = src/main.c src/minishell.c src/utils/utils.c src/builtins/env.c src/utils/
 
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
-CFLAGS = # -Wall -Werror -Wextra -g -fsanitize=address
+CFLAGS = -g -fsanitize=address  # -Wall -Werror -Wextra 
 LIBFT = libs/libft/libft.a
 HEADERS = includes/minishell.h includes/defs.h
 READLINE = /mnt/homes/ylagmah/.brew/opt/readline

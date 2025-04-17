@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:39:33 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 05:45:42 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 06:01:32 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,12 @@ void	execute_tree(t_shell *shell, t_node *node)
 	{
 		if (ft_expand_node_vars(shell, node))
 			return ;
+		while (node)
+		{
+			printf("-> |%s|\n", node->content);
+			printf("-> |%s|\n", node->filter);
+			node = node->next;
+		}
 		p_cmd = ft_parse_command(shell, node);
 		if (p_cmd && p_cmd->cmd && is_builtin(p_cmd))
 			execute_builtin(shell, node, p_cmd);

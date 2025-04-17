@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 15:00:31 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/17 06:16:31 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,6 +107,7 @@ void		ft_remove_quotes(t_shell *shell, t_node *node);
 int			ft_repeat_count(t_token *head, int type);
 t_node		*ft_head_node(t_node *node);
 int			ft_is_valid_key(char *str);
+size_t		set_quotes_filter(t_shell *shell, t_node *node, char *str, int is_empty);
 
 void		ft_error(t_shell *shell, t_node *node, char *msg, int status);
 void		ft_perror(char *msg);

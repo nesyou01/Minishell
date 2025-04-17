@@ -6,11 +6,25 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:58:28 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 05:45:26 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 06:17:00 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+size_t	set_quotes_filter(t_shell *shell, t_node *node, char *str, int is_empty)
+{
+	size_t	len;
+	char	c;
+
+	len = ft_safe_strlen(str);
+	if (is_empty)
+		c = 'E';
+	else
+		c = '0';
+	node->filter = ft_strjoin(shell, node->filter, ft_repeat(shell, len, c));
+	return (len);
+}
 
 int	remove_double_quotes(t_shell *shell, t_node *node, int start)
 {
@@ -18,7 +32,7 @@ int	remove_double_quotes(t_shell *shell, t_node *node, int start)
 	char	*end;
 	char	*middle;
 	char	*expanded;
-	size_t	len;
+	int		is_empty;
 
 	if (!start)
 		start_str = NULL;
@@ -31,11 +45,12 @@ int	remove_double_quotes(t_shell *shell, t_node *node, int start)
 			ft_safe_strlen(node->content) - ft_safe_strlen(start_str)
 			- ft_safe_strlen(end) - 2);
 	expanded = ft_expand_all_vars(shell, middle);
+	is_empty = !*expanded;
+	if (is_empty)
+		expanded = " ";
 	node->content = ft_strjoin(shell,
 			ft_strjoin(shell, start_str, expanded), end);
-	len = ft_safe_strlen(expanded);
-	node->filter = ft_strjoin(shell, node->filter, ft_repeat(shell, len, '0'));
-	return (len);
+	return (set_quotes_filter(shell, node, expanded, is_empty));
 }
 
 void	retokinize_export(t_shell *shell, t_node *node)
