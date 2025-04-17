@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmd.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/16 15:24:32 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/17 08:59:48 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	exec_child(t_shell *shell, t_node *node, t_command *p_cmd)
 		ft_perror2(p_cmd->cmd, "command not found");
 		ft_exit(shell, node, 127);
 	}
-	signals_listener(3);
 	exec_command(shell, node, path, p_cmd);
 }
 

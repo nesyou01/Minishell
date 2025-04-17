@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:39:33 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 07:26:35 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 08:57:44 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ int	minishell(t_shell *shell)
 
 	while (69)
 	{
+		signals_listener(0);
 		str = readline("minishell $> ");
 		if (!str)
 			break ;
@@ -51,7 +52,6 @@ int	minishell(t_shell *shell)
 		node = ft_parser(shell, &str);
 		if (node)
 			execute_tree(shell, node);
-		signals_listener(0);
 		if (*str)
 			add_history(str);
 		ft_clean_cmd(shell, node);

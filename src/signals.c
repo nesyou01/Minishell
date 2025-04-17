@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 14:07:50 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 18:52:53 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 08:59:51 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,4 @@ void	signals_listener(int action)
 		signal(SIGINT, ft_onexit);
 	else if (action == 2)
 		signal(SIGINT, SIG_IGN);
-	else if (action == 3)
-		signal(SIGINT, SIG_ERR);
 }
