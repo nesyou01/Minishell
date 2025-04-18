@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:56:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 14:59:50 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 22:29:04 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ static void	convert_here_doc(t_token *token)
 {
 	token->prev->type = IN_REDIRECTER;
 	token->type = FILE;
-	token->expand = !ft_strchr(token->content, '\'')
-		&& !ft_strchr(token->content, '"');
+	token->expand = (!ft_strchr(token->content, '\'')
+			&& !ft_strchr(token->content, '"'));
 }
 
 static void	read_here_doc(t_shell *shell, char *limiter, int fds[2])

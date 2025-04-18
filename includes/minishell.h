@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 15:31:02 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 22:15:04 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ void		malloc_error(t_shell *shell);
 int			remove_double_quotes(t_shell *sh, t_node *nd, int start, int expd);
 int			ft_match_pattern(char *file, char *pattern, char *filter);
 t_list		*read_dir(t_shell *shell, DIR *dir, char *pattern, char *filter);
+int			is_valid_start(t_token *token);
 
 t_node		*ft_parser(t_shell *shell, char *str);
 t_token		*ft_split_tokens(t_shell *shell, char *str);

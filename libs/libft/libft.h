@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 21:19:40 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 15:23:30 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 22:29:43 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+
 # ifndef BUFFER_SIZE
 #  define BUFFER_SIZE 1337
 # endif
@@ -62,6 +63,5 @@ char	*ft_strjoin_line(char *s1, char *s2, size_t s2len);
 char	*ft_get_line(char **holder);
 char	*ft_strdup_line(char *s1);
 char	*ft_read_next_line(int fd, char **holder);
-
 
 #endif

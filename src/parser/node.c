@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 12:55:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 22:29:23 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	redirection_handler(t_shell *shell, t_token *token, t_file **io)
 	file = ft_new_file(shell, token->next);
 	file->path = next->content;
 	file->type = token->type;
-	file->is_ambiguous = !next || !lst || lst->next;
+	file->is_ambiguous = (!next || !lst || lst->next);
 	ft_add_file_last(io, file);
 	return (0);
 }

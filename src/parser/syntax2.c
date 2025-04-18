@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:51:28 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 14:30:53 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 22:26:17 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,14 +37,59 @@ int	is_valid_quotes(char *str)
 	return (1);
 }
 
+static int	has_start(t_token *token)
+{
+	int	ignore;
+
+	ignore = 0;
+	token = token->prev;
+	while (token)
+	{
+		if (token->type == PARENTHESES_END)
+			ignore++;
+		if (token->type == PARENTHESES_START)
+		{
+			if (!ignore)
+				return (1);
+			ignore--;
+		}
+		token = token->prev;
+	}
+	return (0);
+}
+
+static int	has_end(t_token *token)
+{
+	int	ignore;
+
+	ignore = 0;
+	token = token->next;
+	while (token)
+	{
+		if (token->type == PARENTHESES_START)
+			ignore++;
+		if (token->type == PARENTHESES_END)
+		{
+			if (!ignore)
+				return (1);
+			ignore--;
+		}
+		token = token->next;
+	}
+	return (0);
+}
+
 int	is_valid_parentheses(t_token *token)
 {
 	if (token->type == PARENTHESES_START)
-		return (token->next && (token->next->type == COMMAND
-				|| is_redirection(token->next) || token->next->type == HERE_DOC
-				|| token->next->type == PARENTHESES_START));
+		return ((token->next && (token->next->type == COMMAND
+					|| is_redirection(token->next)
+					|| token->next->type == HERE_DOC
+					|| token->next->type == PARENTHESES_START))
+			&& has_end(token));
 	if (token->type == PARENTHESES_END)
-		return (!token->next || (token->next->type != PARENTHESES_START
-				&& token->next->type != COMMAND));
+		return ((!token->next || (token->next->type != PARENTHESES_START
+					&& token->next->type != COMMAND))
+			&& has_start(token));
 	return (1);
 }
