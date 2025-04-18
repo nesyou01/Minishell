@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 14:31:01 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 18:14:09 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,6 +116,7 @@ void		ft_perror(char *msg);
 void		ft_perror2(char *msg, char *end);
 char		*ft_strjoin_globale(t_shell *shell, char const *s1, char const *s2);
 int			is_valid_parentheses(t_token *token);
+char		*remove_empty(t_shell *shell, t_node *node, int from, int until);
 
 int			ft_any_not_tty(void);
 

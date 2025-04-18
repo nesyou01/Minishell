@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:56:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 08:45:57 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 18:15:46 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ static char	*remove_quotes(t_shell *shell, t_token *token)
 
 	node = ft_new_node(shell, token);
 	ft_remove_quotes(shell, node, 0);
-	return (node->content);
+	return (remove_empty(shell, node, 0, ft_strlen(node->content)));
 }
 
 static int	ft_pipe(int fds[2])
@@ -53,6 +53,7 @@ static void	read_here_doc(t_shell *shell,
 		if (!input)
 			break ;
 		ft_add_cmd_garbage(shell, input);
+		str = input;
 		if (!has_quote)
 			str = ft_expand_all_vars(shell, input);
 		if (ft_strcmp(limiter, input) == 0)

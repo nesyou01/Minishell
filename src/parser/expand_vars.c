@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 13:13:44 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/17 18:16:19 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,8 @@ char	*ft_expand_all_vars(t_shell *shell,	char *str)
 		sign = ft_strchr(sign, '$');
 		if (!sign)
 			return (str);
-		if (sign[1] == '?' || (!ft_isdigit(sign[1]) && ft_isvalid_var(sign[1])))
+		if (!sign[1] || sign[1] == '?'
+			|| (!ft_isdigit(sign[1]) && ft_isvalid_var(sign[1])))
 		{
 			str = expand_var(shell, str, sign);
 			sign = str;
