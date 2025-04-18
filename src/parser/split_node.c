@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 18:16:10 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 10:18:32 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ char	*remove_empty(t_shell *shell, t_node *node, int from, int until)
 			len++;
 		i++;
 	}
-	str = ft_malloc(shell, len);
+	str = ft_malloc(shell, (len + 1) * sizeof(char));
 	i = from;
 	while (i < until)
 	{
