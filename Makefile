@@ -29,7 +29,7 @@ all: ${NAME}
 
 bonus: all
 
-${LIBFT}:
+${LIBFT}: libs/libft/libft.h
 	@make -C libs/libft all
 
 src/%.o: src/%.c ${HEADERS}
