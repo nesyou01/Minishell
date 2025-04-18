@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 20:16:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2024/11/01 15:43:00 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 14:33:38 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	int	i;
-
 	if (!s)
 		return ;
-	i = 0;
-	while (s[i])
-	{
-		ft_putchar_fd (s[i], fd);
-		i++;
-	}
+	write(fd, s, ft_strlen(s));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 11:22:45 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/18 14:34:21 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ int	is_builtin(t_command *p_cmd)
 		|| !ft_strcmp2(p_cmd->cmd, "echo")
 		|| !ft_strcmp2(p_cmd->cmd, "export")
 		|| !ft_strcmp2(p_cmd->cmd, "unset")
-		|| !ft_strcmp2(p_cmd->cmd, "env")
 		|| !ft_strcmp2(p_cmd->cmd, "env")
 		|| !ft_strcmp2(p_cmd->cmd, "exit")
 		|| !ft_strcmp2(p_cmd->cmd, "pwd"));
