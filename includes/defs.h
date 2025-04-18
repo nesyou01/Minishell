@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:10 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 12:42:51 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 14:47:21 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ typedef struct s_token
 {
 	int				type;
 	int				fd;
+	int				expand;
 	char			*content;
 	struct s_token	*next;
 	struct s_token	*prev;
@@ -48,6 +49,7 @@ typedef struct s_file
 	int				fd;
 	int				type;
 	int				is_ambiguous;
+	int				expand;
 	char			*path;
 	struct s_file	*next;
 }	t_file;

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:56:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 10:49:20 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 14:49:13 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,12 +39,12 @@ static void	convert_here_doc(t_token *token)
 {
 	token->prev->type = IN_REDIRECTER;
 	token->type = FILE;
+	token->expand = !ft_strchr(token->content, '\'')
+		&& !ft_strchr(token->content, '"');
 }
 
-static void	read_here_doc(t_shell *shell,
-	char *limiter, int has_quote, int fds[2])
+static void	read_here_doc(t_shell *shell, char *limiter, int fds[2])
 {
-	char	*str;
 	char	*input;
 
 	close(fds[0]);
@@ -55,12 +55,9 @@ static void	read_here_doc(t_shell *shell,
 		if (!input)
 			break ;
 		ft_add_cmd_garbage(shell, input);
-		str = input;
-		if (!has_quote)
-			str = ft_expand_all_vars(shell, input);
 		if (ft_strcmp(limiter, input) == 0)
 			break ;
-		ft_putstr_fd(str, fds[1]);
+		ft_putstr_fd(input, fds[1]);
 		ft_putstr_fd("\n", fds[1]);
 	}
 	close(fds[1]);
@@ -71,14 +68,11 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 {
 	char	*limiter;
 	int		fds[2];
-	int		has_quote;
 	pid_t	pid;
 	int		status;
 
 	if (ft_pipe(fds))
 		return (1);
-	has_quote = ft_strchr(token->content, '\'')
-		|| ft_strchr(token->content, '"');
 	convert_here_doc(token);
 	token->fd = fds[0];
 	limiter = remove_quotes(shell, token);
@@ -86,7 +80,7 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 	if (pid == -1)
 		return (close(fds[1]), close(fds[0]), 1);
 	if (pid == 0)
-		read_here_doc(shell, limiter, has_quote, fds);
+		read_here_doc(shell, limiter, fds);
 	close(fds[1]);
 	waitpid(pid, &status, 0);
 	status = WEXITSTATUS(status);
