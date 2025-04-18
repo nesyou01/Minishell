@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 22:13:25 by ylagmah           #+#    #+#             */
-/*   Updated: 2024/11/12 21:03:34 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 15:20:09 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@ char	*ft_strchr(const char *s, int c)
 {
 	int	i;
 
+	if (!s)
+		return (NULL);
 	i = 0;
 	while (s[i])
 	{
@@ -23,7 +25,5 @@ char	*ft_strchr(const char *s, int c)
 			return ((char *)((s + i)));
 		i++;
 	}
-	if (s[i] == (char)c)
-		return ((char *)s + i);
 	return (NULL);
 }

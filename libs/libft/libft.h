@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 21:19:40 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 11:37:09 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 15:23:30 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ typedef struct s_list
 	void			*content;
 	struct s_list	*next;
 }	t_list;
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1337
+# endif
 
 int		ft_isalpha(int c);
 int		ft_isdigit(int c);
@@ -32,8 +35,6 @@ void	*ft_memset(void *b, int c, size_t len);
 void	ft_bzero(void *s, size_t n);
 void	*ft_memcpy(void *dst, const void *src, size_t n);
 void	*ft_memmove(void *dst, const void *src, size_t len);
-size_t	ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t	ft_strlcat(char *dst, const char *src, size_t dstsize);
 int		ft_toupper(int c);
 int		ft_tolower(int c);
 char	*ft_strchr(const char *s, int c);
@@ -55,5 +56,12 @@ void	ft_lstadd_back(t_list **lst, t_list *new);
 void	ft_lstdelone(t_list *lst, void (*del)(void *));
 void	ft_lstclear(t_list **lst, void (*del)(void *));
 void	ft_lstiter(t_list *lst, void (*f)(void *));
+
+char	*get_next_line(int fd);
+char	*ft_strjoin_line(char *s1, char *s2, size_t s2len);
+char	*ft_get_line(char **holder);
+char	*ft_strdup_line(char *s1);
+char	*ft_read_next_line(int fd, char **holder);
+
 
 #endif

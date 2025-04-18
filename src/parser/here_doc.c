@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:56:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 14:49:13 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 14:59:50 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,15 +23,15 @@ static char	*remove_quotes(t_shell *shell, t_token *token)
 	return (remove_empty(shell, node, 0, ft_strlen(node->content)));
 }
 
-static int	ft_pipe(int fds[2])
+int	ft_pipe(int fds[2], const char *path)
 {
-	fds[1] = open("/tmp/.heredoc_tmp", O_RDWR | O_CREAT | O_TRUNC, 0644);
+	fds[1] = open(path, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (fds[1] == -1)
 		return (1);
-	fds[0] = open("/tmp/.heredoc_tmp", O_RDONLY);
+	fds[0] = open(path, O_RDONLY);
 	if (fds[0] == -1)
 		return (close(fds[1]), 1);
-	unlink("/tmp/.heredoc_tmp");
+	unlink(path);
 	return (0);
 }
 
@@ -71,7 +71,7 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 	pid_t	pid;
 	int		status;
 
-	if (ft_pipe(fds))
+	if (ft_pipe(fds, "/tmp/.here_doc"))
 		return (1);
 	convert_here_doc(token);
 	token->fd = fds[0];

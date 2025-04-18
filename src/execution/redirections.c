@@ -6,13 +6,13 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:05:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 13:15:26 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 15:36:12 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	open_file(t_file *io)
+static int	open_files(t_file *io)
 {
 	int	fd;
 	int	flags;
@@ -33,7 +33,7 @@ int	open_file(t_file *io)
 	return (fd);
 }
 
-int	redirect_fd(int old_fd, int new_fd)
+static int	redirect_fd(int old_fd, int new_fd)
 {
 	if (dup2(old_fd, new_fd) == -1)
 	{
@@ -45,16 +45,39 @@ int	redirect_fd(int old_fd, int new_fd)
 	return (1);
 }
 
-int	handle_redirections(t_file *io)
+static int	handle_here_doc(t_shell *shell, t_file *io)
+{
+	int		fds[2];
+	char	*line;
+
+	if (!io->expand)
+		return (io->fd);
+	if (ft_pipe(fds, "/tmp/.mini_tmp"))
+		return (-1);
+	while (1)
+	{
+		line = get_next_line(io->fd);
+		if (!line)
+			break ;
+		line = ft_expand_all_vars(shell, line);
+		write(fds[1], line, ft_strlen(line));
+	}
+	close(io->fd);
+	close(fds[1]);
+	io->fd = fds[0];
+	return (io->fd);
+}
+
+int	handle_redirections(t_shell *shell, t_file *io)
 {
 	int	fd;
 
 	while (io)
 	{
 		if (io->fd == -1)
-			fd = open_file(io);
+			fd = open_files(io);
 		else
-			fd = io->fd;
+			fd = handle_here_doc(shell, io);
 		if (fd == -1)
 			return (0);
 		if ((io->type == IN_REDIRECTER && !redirect_fd(fd, STDIN_FILENO))

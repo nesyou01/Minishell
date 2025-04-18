@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 14:34:21 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 15:31:10 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 	int	status;
 
 	save_tty(shell, node, fds);
-	if (!handle_redirections(node->io))
+	if (!handle_redirections(shell, node->io))
 		return (set_error());
 	if (!ft_strcmp2(p_cmd->argv[0], "cd"))
 		status = ft_cd(shell, p_cmd);

@@ -1,18 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/10/23 11:50:43 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 15:26:42 by ylagmah          ###   ########.fr       */
+/*   Created: 2024/11/15 14:06:43 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/18 15:33:44 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/minishell.h"
+#include "libft.h"
 
-static size_t	ft_strlcat_o(char *dst, const char *src, size_t dstsize)
+char	*ft_strdup_line(char *s1)
+{
+	char	*result;
+	size_t	size;
+	size_t	i;
+
+	if (!s1)
+		return (NULL);
+	i = 0;
+	size = ft_strlen(s1);
+	if (size == 0)
+		return (NULL);
+	result = (char *) malloc((size + 1) * sizeof(char));
+	if (!result)
+		return (NULL);
+	while (i < size)
+	{
+		result[i] = s1[i];
+		i++;
+	}
+	result[i] = '\0';
+	return (result);
+}
+
+static size_t	ft_strlcat(char *dst, char *src, size_t dstsize)
 {
 	size_t	dst_len;
 	size_t	i;
@@ -34,7 +58,7 @@ static size_t	ft_strlcat_o(char *dst, const char *src, size_t dstsize)
 	return (dst_len + src_len);
 }
 
-size_t	ft_strlcpy_o(char *dst, const char *src, size_t dstsize)
+static size_t	ft_strlcpy(char *dst, char *src, size_t dstsize)
 {
 	size_t	i;
 	size_t	src_len;
@@ -52,46 +76,25 @@ size_t	ft_strlcpy_o(char *dst, const char *src, size_t dstsize)
 	return (src_len);
 }
 
-char	*ft_strjoin(t_shell *shell, char const *s1, char const *s2)
+char	*ft_strjoin_line(char *s1, char *s2, size_t s2len)
 {
 	char	*result;
 	size_t	s1len;
-	size_t	s2len;
 	size_t	dstsize;
 
 	if (!s1 && !s2)
 		return (NULL);
 	if (!s1)
-		return (ft_strdup(shell, s2));
+		return (ft_strdup_line(s2));
 	if (!s2)
-		return (ft_strdup(shell, s1));
+		return (s1);
 	s1len = ft_strlen(s1);
-	s2len = ft_strlen(s2);
 	dstsize = s1len + s2len + 1;
-	result = (char *) ft_malloc(shell, dstsize);
-	ft_strlcpy_o(result, s1, s1len + 1);
-	ft_strlcat_o(result, s2, dstsize);
-	return (result);
-}
-
-char	*ft_strjoin_globale(t_shell *shell, char const *s1, char const *s2)
-{
-	char	*result;
-	size_t	s1len;
-	size_t	s2len;
-	size_t	dstsize;
-
-	if (!s1 && !s2)
+	result = (char *) malloc(dstsize * sizeof(char));
+	if (!result)
 		return (NULL);
-	if (!s1)
-		return (ft_strdup_globale(shell, s2));
-	if (!s2)
-		return (ft_strdup_globale(shell, s1));
-	s1len = ft_strlen(s1);
-	s2len = ft_strlen(s2);
-	dstsize = s1len + s2len + 1;
-	result = (char *) ft_malloc_globale(shell, dstsize);
-	ft_strlcpy_o(result, s1, s1len + 1);
-	ft_strlcat_o(result, s2, dstsize);
+	ft_strlcpy(result, s1, s1len + 1);
+	ft_strlcat(result, s2, dstsize);
+	free(s1);
 	return (result);
 }

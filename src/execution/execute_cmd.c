@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 10:52:51 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 15:31:15 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	exec_child(t_shell *shell, t_node *node, t_command *p_cmd)
 {
 	char		*path;
 
-	if (node->io && !handle_redirections(node->io))
+	if (node->io && !handle_redirections(shell, node->io))
 		ft_exit(shell, node, EXIT_FAILURE);
 	if (!p_cmd || !p_cmd->argv[0])
 		ft_exit(shell, node, EXIT_SUCCESS);

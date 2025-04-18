@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 12:36:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 15:31:02 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,8 @@ t_node		*ft_head_node(t_node *node);
 int			ft_is_valid_key(char *str);
 size_t		set_quotes_filter(t_shell *shell, t_node *node,
 				char *str, int is_empty);
+int			ft_pipe(int fds[2], const char *path);
+size_t		ft_strlcpy_o(char *dst, const char *src, size_t dstsize);
 
 void		ft_error(t_shell *shell, t_node *node, char *msg, int status);
 void		ft_perror(char *msg);
@@ -129,7 +131,7 @@ void		execute_pipe(t_shell *shell, t_node *node);
 void		execute_and(t_shell *shell, t_node *node);
 void		execute_or(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
-int			handle_redirections(t_file *io);
+int			handle_redirections(t_shell *shell, t_file *io);
 void		execute_logical(t_shell *shell, t_node *node);
 void		execute_subshell(t_shell *shell, t_node *node);
 int			ft_add_env(t_shell *shell, char *key_value);

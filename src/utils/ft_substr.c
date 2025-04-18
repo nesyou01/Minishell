@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 11:56:23 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/02/13 16:26:38 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 15:27:09 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,6 @@ char	*ft_substr(t_shell *shell, char const *s,
 	if (startlen < len)
 		len = startlen;
 	result = (char *) ft_malloc (shell, (len + 1) * sizeof(char));
-	ft_strlcpy(result, s + start, len + 1);
+	ft_strlcpy_o(result, s + start, len + 1);
 	return (result);
 }
