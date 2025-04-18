@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:56:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 18:15:46 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 10:49:20 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static char	*remove_quotes(t_shell *shell, t_token *token)
 	t_node	*node;
 
 	node = ft_new_node(shell, token);
+	if (node->content[0] == '$' && ft_is_quote(node->content[1]))
+		node->content = ft_strdup(shell, node->content + 1);
 	ft_remove_quotes(shell, node, 0);
 	return (remove_empty(shell, node, 0, ft_strlen(node->content)));
 }

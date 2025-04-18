@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 18:14:09 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 10:47:50 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int			is_valid_parentheses(t_token *token);
 char		*remove_empty(t_shell *shell, t_node *node, int from, int until);
 
 int			ft_any_not_tty(void);
+int			ft_is_quote(char c);
 
 void		signals_listener(int action);
 
