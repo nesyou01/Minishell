@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:05:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/18 15:55:11 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/18 20:29:17 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,6 @@ static int	redirect_fd(int old_fd, int new_fd)
 		ft_perror("dup2 failed");
 		return (0);
 	}
-	close(old_fd);
 	return (1);
 }
 

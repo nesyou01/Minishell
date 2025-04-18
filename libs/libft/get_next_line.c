@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:06:49 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 15:23:51 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 20:26:28 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ char	*get_next_line(int fd)
 	static char	*holder;
 	char		*result;
 
-	if (BUFFER_SIZE <= 0 || fd < 0 || fd > OPEN_MAX)
+	if (BUFFER_SIZE <= 0 || fd < 0)
 		return (NULL);
 	result = ft_read_next_line(fd, &holder);
 	if (!result && holder)
