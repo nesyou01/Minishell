@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:58:28 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 08:40:05 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 12:30:49 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,32 +53,6 @@ int	remove_double_quotes(t_shell *shell, t_node *node, int start, int expand)
 	node->content = ft_strjoin(shell,
 			ft_strjoin(shell, start_str, expanded), end);
 	return (set_quotes_filter(shell, node, expanded, is_empty));
-}
-
-void	retokinize_export(t_shell *shell, t_node *node)
-{
-	int		i;
-	t_list	*lst;
-	int		is_key;
-
-	lst = ft_split_node(shell, node);
-	is_key = 1;
-	i = 0;
-	while (node->content[i])
-	{
-		if (node->filter[i] == ' ')
-		{
-			lst = lst->next;
-			is_key = 1;
-		}
-		if (node->content[i] == '=')
-			is_key = 0;
-		if (node->filter[i] == '2' && ft_strchr(lst->content, '='))
-			node->filter[i] = '0';
-		if (is_key && node->filter[i] == '0' && node->content[i] == ' ')
-			node->filter[i] = ' ';
-		i++;
-	}
 }
 
 static int	is_quote_and_has_end(char *str)

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:39:33 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 13:31:26 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 12:36:19 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	minishell(t_shell *shell, struct termios *in)
 			break ;
 		signals_listener(2);
 		ft_add_cmd_garbage(shell, str);
-		node = ft_parser(shell, &str);
+		node = ft_parser(shell, str);
 		if (node)
 			execute_tree(shell, node);
 		if (*str)

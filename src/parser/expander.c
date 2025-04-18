@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 13:42:49 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 12:31:05 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,24 +115,18 @@ void	ft_remove_quotes(t_shell *shell, t_node *node, int expand)
 int	ft_expand_node_vars(t_shell *shell, t_node *node)
 {
 	int	fail;
-	int	is_export;
 
 	if (node->type >= 100 || node->type == EMPTY_CMD)
 		return (0);
 	fail = expand_node_vars(shell, node);
 	if (fail)
 		return (1);
-	if (ft_strnstr2(node->content, "export", 6))
-		retokinize_export(shell, node);
 	if (ft_strchr(node->content, '*'))
 		fail = ft_wildcard_handler(shell, node);
 	if (node->filter && ft_strchr(node->filter, '1'))
 	{
-		is_export = ft_strnstr2(node->content, "export", 6) != NULL;
-		ft_retokenize(node, is_export);
+		ft_retokenize(node, 0);
 		fail = ft_wildcard_handler(shell, node);
-		if (is_export)
-			retokinize_export(shell, node);
 	}
 	if (!fail && node && node->content)
 		ft_trim_node(shell, node);
