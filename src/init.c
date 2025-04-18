@@ -6,16 +6,29 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:36 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/16 17:53:55 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 12:41:51 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+static void	default_vars(t_shell *shell)
+{
+	char	*path;
+
+	path = getcwd(NULL, 0);
+	if (path)
+	{
+		ft_add_env(shell, ft_strjoin(shell, "PWD=", path));
+		free(path);
+	}
+	if (!ft_get_env(shell->env, "PATH"))
+		ft_add_env(shell, ft_strjoin(shell, "PATH=", DEFAULT_PATH));
+}
+
 void	env_init(t_shell *shell, char **env)
 {
 	t_env	*last;
-	char	*path;
 
 	shell->env = NULL;
 	shell->cmd_garbage = NULL;
@@ -31,12 +44,7 @@ void	env_init(t_shell *shell, char **env)
 			env++;
 		}
 	}
-	path = getcwd(NULL, 0);
-	if (path)
-	{
-		ft_add_env(shell, ft_strjoin(shell, "PWD=", path));
-		free(path);
-	}
+	default_vars(shell);
 	return ;
 }
 

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:10 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 05:45:16 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 12:42:51 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define OR 116
 # define EMPTY_CMD 21 
 # define SUB_SHELL 22
+# define DEFAULT_PATH "/usr/gnu/bin:/usr/local/bin:/bin:/usr/bin:."
 
 typedef struct s_token
 {
