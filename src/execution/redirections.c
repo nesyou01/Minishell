@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:05:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/18 20:29:17 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 20:46:06 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,11 +36,7 @@ static int	open_files(t_file *io)
 static int	redirect_fd(int old_fd, int new_fd)
 {
 	if (dup2(old_fd, new_fd) == -1)
-	{
-		close(old_fd);
-		ft_perror("dup2 failed");
-		return (0);
-	}
+		return (ft_perror("dup2 failed"), 0);
 	return (1);
 }
 
