@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 14:30:49 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 11:29:48 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,8 @@ static int	syntax_validator1(t_token *token)
 	{
 		if (!is_valid_quotes(token->content))
 			return (ft_perror("Unclosed quotes"), 258);
-		if (token->type == HERE_DOC
-			&& (!token->next || token->next->type != HERE_DOC_LIMITER))
-			return (ft_perror2("Syntax error near", "<<"), 258);
 		if (!is_valid_parentheses(token)
 			|| !is_valid_operator(token)
-			|| !is_valid_file(token)
 			|| !is_valid_cmd(token))
 			return (ft_perror2("Syntax error near", token->content), 258);
 		token = token->next;
@@ -66,6 +62,8 @@ int	syntax_validator(t_shell *shell, t_token *token)
 	status = 0;
 	while (token)
 	{
+		if (!is_valid_file(token))
+			return (ft_perror2("Syntax error near", token->content), 258);
 		if (token->type == HERE_DOC_LIMITER)
 		{
 			status = here_doc_handler(shell, token);
