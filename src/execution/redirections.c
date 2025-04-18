@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   redirections.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:05:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/18 15:36:12 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/18 15:55:11 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ static int	handle_here_doc(t_shell *shell, t_file *io)
 {
 	int		fds[2];
 	char	*line;
+	char	*tmp;
 
 	if (!io->expand)
 		return (io->fd);
@@ -59,8 +60,9 @@ static int	handle_here_doc(t_shell *shell, t_file *io)
 		line = get_next_line(io->fd);
 		if (!line)
 			break ;
-		line = ft_expand_all_vars(shell, line);
-		write(fds[1], line, ft_strlen(line));
+		tmp = ft_expand_all_vars(shell, line);
+		free(line);
+		ft_putstr_fd(tmp, fds[1]);
 	}
 	close(io->fd);
 	close(fds[1]);
