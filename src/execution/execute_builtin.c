@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 15:31:10 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/19 03:05:32 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ static void	save_tty(t_shell *shell, t_node *node, int *fds)
 		ft_error(shell, node, "failed dup", 1);
 	}
 	fds[2] = dup(2);
-	if (fds[1] == -1)
+	if (fds[2] == -1)
 	{
 		(close(fds[0]), close(fds[1]));
 		ft_error(shell, node, "failed dup", 1);
