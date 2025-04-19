@@ -6,23 +6,11 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/17 12:02:02 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/19 18:31:12 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-static int	count_arguments(char **argv)
-{
-	int	count;
-
-	count = 0;
-	if (!argv)
-		return (0);
-	while (argv[count])
-		count++;
-	return (count);
-}
 
 static int	update_pwd_env(t_shell *shell, t_command *cmd, const char *oldpwd)
 {
@@ -46,11 +34,7 @@ int	ft_cd(t_shell *shell, t_command *cmd)
 {
 	char	old_pwd[PATH_MAX];
 	char	*target_dir;
-	int		arg_count;
 
-	arg_count = count_arguments(cmd->argv);
-	if (arg_count > 2)
-		return (ft_perror2("cd", "too many arguments"), 1);
 	target_dir = cmd->argv[1];
 	if (!target_dir)
 		return (ft_perror2("cd", "with only a relative or absolute path"), 1);
