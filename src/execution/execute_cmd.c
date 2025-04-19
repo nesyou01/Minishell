@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 20:49:42 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/19 20:18:27 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void	exec_command(t_shell *shell, t_node *node, char *path,
 		ft_exit(shell, node, 127);
 	if (execve(path, p_cmd->argv, p_cmd->envp) == -1)
 	{
-		ft_perror("execve failed");
+		ft_perror2(path, strerror(errno));
 		ft_exit(shell, node, 127);
 	}
 }

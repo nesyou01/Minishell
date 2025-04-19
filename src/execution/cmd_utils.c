@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 13:57:19 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/19 20:20:23 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ static char	*check_absolute_or_relative(t_shell *shell,
 			ft_perror2(cmd, "is a directory");
 			ft_exit(shell, node, 126);
 		}
-		if (!access(cmd, X_OK))
+		if (!access(cmd, F_OK))
 			return (cmd);
 		ft_perror2(cmd, "No such file or directory");
 		ft_exit(shell, node, 127);
