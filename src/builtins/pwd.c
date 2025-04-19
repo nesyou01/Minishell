@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:39:30 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/15 15:22:24 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/19 20:13:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	ft_pwd(t_shell *shell, t_command *cmd)
 	if (!path)
 	{
 		path = ft_get_env_value(shell, "PWD");
-		printf("%s\n", path);
+		if (path)
+			printf("%s\n", path);
 		return (0);
 	}
 	printf("%s\n", path);
