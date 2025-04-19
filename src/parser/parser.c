@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/21 13:11:18 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 21:16:08 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/19 02:44:49 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,6 @@ static t_token	*parse_all(t_shell *shell, char *str)
 	ft_tokenize(token);
 	ft_merge_tokens(shell, &token);
 	return (token);
-}
-
-static int	is_valid_end(t_token *token)
-{
-	t_token		*last;
-
-	last = ft_last_token(token);
-	return (last == NULL || last->type == PARENTHESES_END || last->type < 100);
 }
 
 t_node	*ft_parser(t_shell *shell, char *str)
