@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 22:16:08 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/19 20:28:52 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,9 @@ static int	is_valid_operator(t_token *token)
 		|| token->type == PARENTHESES_END)
 		return (1);
 	return (token->prev && token->prev->type != PIPE
-		&& token->prev->type != AND && token->prev->type != OR);
+		&& token->prev->type != AND && token->prev->type != OR
+		&& token->next
+		&& (token->next->type == PARENTHESES_START || token->next->type < 100));
 }
 
 static int	is_valid_file(t_token *token)
