@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:38 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/19 22:01:27 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/15 13:58:48 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,8 @@ int	ft_add_env(t_shell *shell, char *key_value)
 	t_env	*env;
 	char	*key;
 
+	if (!*key_value)
+		return (0);
 	key = ft_get_env_key(shell, key_value);
 	if (!ft_is_valid_key(key))
 		return (ft_perror3("export", key_value, "not a valid identifier"), 1);
@@ -40,13 +42,27 @@ int	ft_add_env(t_shell *shell, char *key_value)
 	return (0);
 }
 
+static int	should_print(char **argv)
+{
+	int		i;
+
+	i = 1;
+	while (argv[i])
+	{
+		if (argv[i] && argv[i][0])
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 int	ft_export(t_shell *shell, t_command *cmd)
 {
 	int		is_fail;
 	int		i;
 
 	i = 1;
-	if (!cmd->argv[1])
+	if (should_print(cmd->argv))
 		return (print_env(shell), 1);
 	is_fail = 0;
 	while (cmd->argv[i])

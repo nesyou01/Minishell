@@ -1,0 +1,49 @@
+minishell $> cd /bin/
+minishell $> unset PATH
+minishell $> ls
+minishell: ls: command not found
+minishell $> pwd
+/bin
+minishell $> /bin/ls
+----------------------------------
+minishell: ./a.out: Permission denied
+minishell $> echo $?
+127
+minishell $> 
+--------------------------------
+minishell $> export x="a b"
+minishell $> export y=$x
+minishell $> echo $?
+0
+minishell $> echo $y
+a
+minishell $> 
+--------------------------------
+file leak : 
+minishell $> cat << '
+minishell: Unclosed quotes
+here_doc> clear
+here_doc> clear
+here_doc> 
+minishell $> 
+minishell $> 
+minishell $> 
+minishell $> 
+minishell $> 
+minishell $> 
+minishell $> cat << '
+minishell: Unclosed quotes
+here_doc> 
+minishell $> 
+minishell $> 
+minishell $> cat << '
+minishell: Unclosed quotes
+here_doc> 
+minishell $> 
+minishell $> 
+minishell $> 
+minishell $> 
+--------------------------------
+minishell $> (exit 100 || cat)
+exit
+--------------------------------

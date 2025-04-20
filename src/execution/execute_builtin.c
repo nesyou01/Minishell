@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_builtin.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/19 03:05:32 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/20 02:58:14 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,9 +73,9 @@ void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 	int	fds[3];
 	int	status;
 
-	save_tty(shell, node, fds);
 	if (!handle_redirections(shell, node->io))
 		return (set_error());
+	save_tty(shell, node, fds);
 	if (!ft_strcmp2(p_cmd->argv[0], "cd"))
 		status = ft_cd(shell, p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "echo"))
