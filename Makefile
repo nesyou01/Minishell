@@ -19,7 +19,7 @@ CC = cc
 CFLAGS = -g -fsanitize=address # -Wall -Werror -Wextra
 LIBFT = libs/libft/libft.a
 HEADERS = includes/minishell.h includes/defs.h
-READLINE = /mnt/homes/ylagmah/.brew/opt/readline
+READLINE = /mnt/homes/ael-gady/.brew/opt/readline
 
 
 ${NAME}: ${LIBFT} ${SRC_OBJS}

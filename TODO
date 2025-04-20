@@ -1,41 +1,13 @@
-minishell: ./a.out: Permission denied
-minishell $> echo $?
-127
-minishell $> 
---------------------------------
-minishell $> export x="a b"
-minishell $> export y=$x
-minishell $> echo $?
-0
-minishell $> echo $y
-a
-minishell $> 
---------------------------------
-file leak : 
-minishell $> cat << '
-minishell: Unclosed quotes
-here_doc> clear
-here_doc> clear
-here_doc> 
-minishell $> 
-minishell $> 
-minishell $> 
-minishell $> 
-minishell $> 
-minishell $> 
-minishell $> cat << '
-minishell: Unclosed quotes
-here_doc> 
-minishell $> 
-minishell $> 
-minishell $> cat << '
-minishell: Unclosed quotes
-here_doc> 
-minishell $> 
-minishell $> 
-minishell $> 
-minishell $> 
---------------------------------
-minishell $> (exit 100 || cat)
-exit
---------------------------------
+-----------------------------------------------
+minishell $> cat <<a >>>out | <<b
+here_doc> a
+here_doc> b
+cat: >>>: No such file or directory
+cat: out: No such file or directory
+-----------------------------------------------
+minishell $> echo hola <<< bonjour
+hola <<< bonjour
+-----------------------------------------------
+echo hola > a > b > c 
+-----------------------------------------------
+

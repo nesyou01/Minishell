@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/20 02:58:14 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/21 00:50:56 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ int	is_builtin(t_command *p_cmd)
 		|| !ft_strcmp2(p_cmd->cmd, "pwd"));
 }
 
-static void	set_error(void)
+static void	set_error(int *fds)
 {
+	(close(fds[0]), close(fds[1]), close(fds[2]));
 	exit_status(1, 1);
 }
 
@@ -73,9 +74,9 @@ void	execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd)
 	int	fds[3];
 	int	status;
 
-	if (!handle_redirections(shell, node->io))
-		return (set_error());
 	save_tty(shell, node, fds);
+	if (!handle_redirections(shell, node->io))
+		return (set_error(fds));
 	if (!ft_strcmp2(p_cmd->argv[0], "cd"))
 		status = ft_cd(shell, p_cmd);
 	else if (!ft_strcmp2(p_cmd->argv[0], "echo"))
