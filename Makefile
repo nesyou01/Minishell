@@ -12,14 +12,14 @@ SRC = src/main.c src/minishell.c src/utils/utils.c src/builtins/env.c src/utils/
 		src/execution/execute_cmd.c src/execution/handle_subshell.c src/execution/redirections.c src/execution/cmd_utils.c \
 		src/signals.c src/utils/ft_split.c src/builtins/echo.c src/builtins/cd.c src/builtins/pwd.c src/utils/ft_strnstr2.c \
 		src/utils/ft_itoa.c src/parser/trim_var.c src/utils/malloc_g_utils.c src/parser/syntax2.c src/parser/node3.c src/parser/expander2.c \
-		src/parser/filter.c src/parser/var_utils.c src/execution/execute_builtin.c
+		src/parser/filter.c src/parser/var_utils.c src/execution/execute_builtin.c src/parser/expander3.c
 
 SRC_OBJS = ${SRC:.c=.o}
 CC = cc
-CFLAGS = -Wall -Werror -Wextra 
+CFLAGS = -g -fsanitize=address # -Wall -Werror -Wextra
 LIBFT = libs/libft/libft.a
 HEADERS = includes/minishell.h includes/defs.h
-READLINE = /mnt/homes/ael-gady/.brew/opt/readline
+READLINE = /mnt/homes/ylagmah/.brew/opt/readline
 
 
 ${NAME}: ${LIBFT} ${SRC_OBJS}
