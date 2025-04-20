@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/20 03:16:52 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/20 04:42:52 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,39 @@ char	*get_cmd_path(t_shell *shell, char **paths, char *cmd)
 	return (NULL);
 }
 
+char	*get_path_from_env(t_shell *shell, char **envp)
+{
+	int	i;
+
+	i = 0;
+	while (envp[i])
+	{
+		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
+			return (ft_strdup(shell, envp[i] + 5));
+		i++;
+	}
+	return (NULL);
+}
+
+static char	*get_executable_from_cwd(t_shell *shell, t_command *p_cmd)
+{
+	char	cwd[PATH_MAX];
+	char	*tmp;
+	char	*fullpath;
+
+	if (!getcwd(cwd, sizeof(cwd)))
+		return (NULL);
+	tmp = ft_strjoin(shell, cwd, "/");
+	if (!tmp)
+		return (NULL);
+	fullpath = ft_strjoin(shell, tmp, p_cmd->cmd);
+	if (!fullpath)
+		return (NULL);
+	if (!access(fullpath, X_OK) && !is_directory(fullpath))
+		return (fullpath);
+	return (NULL);
+}
+
 char	*ft_get_fullpath(t_shell *shell, t_node *node, t_command *p_cmd)
 {
 	char	*path;
@@ -74,7 +107,9 @@ char	*ft_get_fullpath(t_shell *shell, t_node *node, t_command *p_cmd)
 	path = check_absolute_or_relative(shell, node, p_cmd->cmd);
 	if (path)
 		return (path);
-	env_path = ft_get_env_value(shell, "PATH");
+	env_path = get_path_from_env(shell, p_cmd->envp);
+	if (!env_path || !*env_path)
+		return(get_executable_from_cwd(shell, p_cmd));
 	paths = ft_split(shell, env_path, ':');
 	path = get_cmd_path(shell, paths, p_cmd->cmd);
 	return (path);
