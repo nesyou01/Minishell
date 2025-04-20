@@ -6,20 +6,11 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/20 04:47:10 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/20 06:33:23 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-int	is_directory(char *path)
-{
-	struct stat	path_stat;
-
-	if (stat(path, &path_stat) == 0 && S_ISDIR(path_stat.st_mode))
-		return (1);
-	return (0);
-}
 
 static char	*check_absolute_or_relative(t_shell *shell,
 	t_node *node, char *cmd)

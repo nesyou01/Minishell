@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 22:15:04 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/20 06:34:01 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,5 +154,6 @@ int			ft_builtin_exit(t_shell *shell, t_node *node,
 char		*ft_trim_var(t_shell *shell, char *old);
 
 int			exit_status(int action, int value);
+int			is_directory(char *path);
 
 #endif
