@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/19 21:36:51 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/20 03:16:52 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,6 @@ char	*get_cmd_path(t_shell *shell, char **paths, char *cmd)
 	return (NULL);
 }
 
-char	*get_path_from_env(t_shell *shell, char **envp)
-{
-	int	i;
-
-	i = 0;
-	while (envp[i])
-	{
-		if (ft_strncmp(envp[i], "PATH=", 5) == 0)
-			return (ft_strdup(shell, envp[i] + 5));
-		i++;
-	}
-	return (NULL);
-}
-
 char	*ft_get_fullpath(t_shell *shell, t_node *node, t_command *p_cmd)
 {
 	char	*path;
@@ -88,7 +74,7 @@ char	*ft_get_fullpath(t_shell *shell, t_node *node, t_command *p_cmd)
 	path = check_absolute_or_relative(shell, node, p_cmd->cmd);
 	if (path)
 		return (path);
-	env_path = get_path_from_env(shell, p_cmd->envp);
+	env_path = ft_get_env_value(shell, "PATH");
 	paths = ft_split(shell, env_path, ':');
 	path = get_cmd_path(shell, paths, p_cmd->cmd);
 	return (path);
