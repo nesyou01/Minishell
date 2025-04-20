@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/20 04:42:52 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/20 04:47:10 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ char	*ft_get_fullpath(t_shell *shell, t_node *node, t_command *p_cmd)
 		return (path);
 	env_path = get_path_from_env(shell, p_cmd->envp);
 	if (!env_path || !*env_path)
-		return(get_executable_from_cwd(shell, p_cmd));
+		return (get_executable_from_cwd(shell, p_cmd));
 	paths = ft_split(shell, env_path, ':');
 	path = get_cmd_path(shell, paths, p_cmd->cmd);
 	return (path);
