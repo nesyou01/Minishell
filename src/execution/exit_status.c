@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/12 15:20:44 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/20 06:33:34 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/20 06:39:14 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	exit_status(int action, int value)
 		status = value;
 	return (status);
 }
+
 int	is_directory(char *path)
 {
 	struct stat	path_stat;
