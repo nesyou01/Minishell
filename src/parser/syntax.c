@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/19 20:28:52 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/20 03:21:02 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	syntax_validator1(t_token *token)
 	while (token)
 	{
 		if (!is_valid_quotes(token->content))
-			return (ft_perror("Unclosed quotes"), 258);
+			return (ft_perror("Unclosed quotes"), 9);
 		if (!is_valid_parentheses(token)
 			|| !is_valid_operator(token)
 			|| !is_valid_cmd(token))
@@ -61,6 +61,8 @@ int	syntax_validator(t_shell *shell, t_token *token)
 	int		status;
 
 	first = syntax_validator1(token);
+	if (first == 9)
+		return (258);
 	status = 0;
 	while (token)
 	{

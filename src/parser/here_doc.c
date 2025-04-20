@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:56:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 22:29:04 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/20 03:23:28 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,5 @@ int	here_doc_handler(t_shell *shell, t_token *token)
 	close(fds[1]);
 	waitpid(pid, &status, 0);
 	status = WEXITSTATUS(status);
-	if (status)
-		close(fds[0]);
 	return (status);
 }
