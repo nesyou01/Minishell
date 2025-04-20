@@ -6,7 +6,7 @@
 /*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 13:51:15 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/19 21:38:19 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/20 03:29:55 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,12 @@ static void	exec_command(t_shell *shell, t_node *node, char *path,
 	if (execve(path, p_cmd->argv, p_cmd->envp) == -1)
 	{
 		ft_perror2(path, strerror(errno));
-		ft_exit(shell, node, 127);
+		if (errno == ENOENT)
+            ft_exit(shell, node, 127);
+        else if (errno == EACCES)
+            ft_exit(shell, node, 126);
+        else
+            ft_exit(shell, node, 1);
 	}
 }
 
