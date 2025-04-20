@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:05:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/18 20:46:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 00:08:22 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,8 @@ static int	handle_here_doc(t_shell *shell, t_file *io)
 		if (!line)
 			break ;
 		tmp = ft_expand_all_vars(shell, line);
-		free(line);
 		ft_putstr_fd(tmp, fds[1]);
+		free(line);
 	}
 	close(io->fd);
 	close(fds[1]);
