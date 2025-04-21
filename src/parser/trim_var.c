@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:50:38 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/15 12:50:39 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 01:34:00 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ char	*ft_trim_var(t_shell *shell, char *old)
 	size_t	i;
 	size_t	x;
 
+	if (!old)
+		return (NULL);
 	i = 0;
 	x = 0;
 	result = ft_malloc(shell, total_size(old) + 1);
