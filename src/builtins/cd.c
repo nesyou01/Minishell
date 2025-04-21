@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/21 19:38:17 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 21:16:51 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int	ft_cd(t_shell *shell, t_command *cmd)
 	old_pwd = getcwd(NULL, 0);
 	if (old_pwd)
 		ft_add_cmd_garbage(shell, old_pwd);
-	if (!old_pwd)
-		ft_memset(old_pwd, 0, sizeof(old_pwd));
 	if (chdir(target_dir) == -1)
 		return (ft_perror3("cd", target_dir, strerror(errno)), 1);
 	return (update_pwd_env(shell, cmd, old_pwd));
