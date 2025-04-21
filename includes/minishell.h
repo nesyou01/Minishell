@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/21 20:07:13 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 22:54:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ int			ft_match_pattern(char *file, char *pattern, char *filter);
 t_list		*read_dir(t_shell *shell, DIR *dir, char *pattern, char *filter);
 int			is_valid_start(t_token *token);
 void		add_quotes(t_shell *shell, t_node *node);
+t_node		*ft_new_node_str(t_shell *shell, char *str);
 
 t_node		*ft_parser(t_shell *shell, char *str);
 t_token		*ft_split_tokens(t_shell *shell, char *str);
@@ -96,7 +97,7 @@ t_command	*ft_parse_command(t_shell *shell, t_node *node);
 char		*ft_expand_all_vars(t_shell *shell,	char *str);
 int			get_var_end(char *s);
 int			ft_wildcard_handler(t_shell *shell, t_node *node);
-int			ft_expand_node_vars(t_shell *shell, t_node *node);
+int			ft_expand_node(t_shell *shell, t_node *node);
 char		*ft_join_all(t_shell *shell, t_list *item);
 int			ft_isvalid_var(char c);
 void		ft_sort(t_list *lst);

@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:02 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 14:47:38 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 22:48:27 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ t_file	*ft_new_file(t_shell *shell, t_token *token)
 	file = (t_file *) ft_malloc(shell, sizeof(t_file));
 	file->path = token->content;
 	file->fd = token->fd;
-	file->is_ambiguous = 0;
 	file->expand = token->expand;
 	file->type = token->prev->type;
 	file->next = NULL;

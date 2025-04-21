@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:39:33 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/20 22:39:44 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/21 22:53:23 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	execute_tree(t_shell *shell, t_node *node)
 		return ;
 	if (node->type == COMMAND || node->type == EMPTY_CMD)
 	{
-		if (ft_expand_node_vars(shell, node))
+		if (ft_expand_node(shell, node))
 			return ;
 		p_cmd = ft_parse_command(shell, node);
 		if (p_cmd && p_cmd->cmd && is_builtin(p_cmd))

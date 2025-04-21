@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:22 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 05:45:24 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 23:01:37 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,23 @@ t_node	*ft_new_node(t_shell *shell, t_token *token)
 		list->type = EMPTY_CMD;
 	}
 	list->next = NULL;
+	list->prev = NULL;
+	list->l_node = NULL;
+	list->r_node = NULL;
+	list->io = NULL;
+	list->taken = 0;
+	return (list);
+}
+
+t_node	*ft_new_node_str(t_shell *shell, char *str)
+{
+	t_node	*list;
+
+	list = (t_node *) ft_malloc(shell, sizeof(t_node));
+	list->content = str;
+	list->type = EMPTY_CMD;
+	list->next = NULL;
+	list->filter = NULL;
 	list->prev = NULL;
 	list->l_node = NULL;
 	list->r_node = NULL;

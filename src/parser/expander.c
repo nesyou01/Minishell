@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/21 01:49:56 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 23:02:06 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,12 +117,10 @@ void	ft_remove_quotes(t_shell *shell, t_node *node, int expand)
 	}
 }
 
-int	ft_expand_node_vars(t_shell *shell, t_node *node)
+int	ft_expand_node(t_shell *shell, t_node *node)
 {
 	int	fail;
 
-	if (node->type >= 100 || node->type == EMPTY_CMD)
-		return (0);
 	add_quotes(shell, node);
 	fail = expand_node_vars(shell, node);
 	if (fail)

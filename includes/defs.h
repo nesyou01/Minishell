@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:10 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 14:47:21 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 22:48:16 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ typedef struct s_file
 {
 	int				fd;
 	int				type;
-	int				is_ambiguous;
 	int				expand;
 	char			*path;
 	struct s_file	*next;

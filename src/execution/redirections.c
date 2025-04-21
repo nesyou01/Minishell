@@ -6,20 +6,27 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:05:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/21 00:08:22 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 23:04:12 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	open_files(t_file *io)
+static int	open_files(t_shell *shell, t_file *io)
 {
-	int	fd;
-	int	flags;
-
+	int		fd;
+	int		flags;
+	t_node	*expanded;
 	flags = 0;
-	if (io->is_ambiguous)
+	t_list	*splitted;
+
+	expanded = ft_new_node_str(shell, io->path);
+	if (ft_expand_node(shell, expanded))
+		return (-1);
+	splitted = ft_split_node(shell, expanded);
+	if (!expanded || !splitted || splitted->next)
 		return (ft_perror("ambiguous redirect"), -1);
+	io->path = remove_empty(shell, expanded, 0, ft_strlen(expanded->content));
 	if (io->type == OUT_APPEND_REDIRECTER)
 		flags = O_WRONLY | O_CREAT | O_APPEND;
 	else if (io->type == OUT_REDIRECTER)
@@ -72,7 +79,7 @@ int	handle_redirections(t_shell *shell, t_file *io)
 	while (io)
 	{
 		if (io->fd == -1)
-			fd = open_files(io);
+			fd = open_files(shell, io);
 		else
 			fd = handle_here_doc(shell, io);
 		if (fd == -1)

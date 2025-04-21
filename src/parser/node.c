@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:08 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 22:29:23 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 22:51:47 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,18 +34,11 @@ static t_node	*new_node(t_shell *shell, t_token *token, t_file **io)
 
 static int	redirection_handler(t_shell *shell, t_token *token, t_file **io)
 {
-	t_node	*next;
-	t_list	*lst;
 	t_file	*file;
 
-	next = ft_new_node(shell, token->next);
-	if (ft_expand_node_vars(shell, next))
-		return (1);
-	lst = ft_split_node(shell, next);
 	file = ft_new_file(shell, token->next);
-	file->path = next->content;
+	file->path = token->next->content;
 	file->type = token->type;
-	file->is_ambiguous = (!next || !lst || lst->next);
 	ft_add_file_last(io, file);
 	return (0);
 }
