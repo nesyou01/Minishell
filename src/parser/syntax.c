@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/20 03:21:02 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 01:26:57 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,10 +25,9 @@ static int	is_valid_operator(t_token *token)
 
 static int	is_valid_file(t_token *token)
 {
-	if (token->type != HERE_DOC && !is_redirection(token))
+	if (!is_redirection(token))
 		return (1);
-	return (token->next && (token->next->type == FILE
-			|| token->next->type == HERE_DOC_LIMITER));
+	return (token->next && token->next->type == FILE);
 }
 
 static int	is_valid_cmd(t_token *token)
@@ -46,7 +45,8 @@ static int	syntax_validator1(t_token *token)
 	{
 		if (!is_valid_quotes(token->content))
 			return (ft_perror("Unclosed quotes"), 9);
-		if (!is_valid_parentheses(token)
+		if (!is_valid_file(token)
+			|| !is_valid_parentheses(token)
 			|| !is_valid_operator(token)
 			|| !is_valid_cmd(token))
 			return (ft_perror2("Syntax error near", token->content), 258);
@@ -66,10 +66,10 @@ int	syntax_validator(t_shell *shell, t_token *token)
 	status = 0;
 	while (token)
 	{
-		if (!is_valid_file(token))
-			return (ft_perror2("Syntax error near", token->content), 258);
 		if (token->type == HERE_DOC_LIMITER)
 		{
+			if (!token->next || token->next->type != HERE_DOC_LIMITER)
+				return (ft_perror2("Syntax error near", token->content), 258);
 			status = here_doc_handler(shell, token);
 			if (status == 99)
 				return (1);
