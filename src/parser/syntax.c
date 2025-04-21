@@ -6,13 +6,13 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/21 19:59:20 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 20:07:05 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	is_valid_operator(t_token *token)
+int	is_valid_operator(t_token *token)
 {
 	if (token->type < 100 || token->type == PARENTHESES_START
 		|| token->type == PARENTHESES_END)
@@ -30,7 +30,7 @@ int	is_valid_file(t_token *token)
 	return (token->next && token->next->type == FILE);
 }
 
-static int	is_valid_cmd(t_token *token)
+int	is_valid_cmd(t_token *token)
 {
 	if (token->type == COMMAND
 		|| token->type == FILE

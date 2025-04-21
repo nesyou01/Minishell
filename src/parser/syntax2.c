@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:51:28 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/21 19:59:30 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 20:06:21 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,10 @@ int	is_valid_parentheses(t_token *token)
 
 int	is_valid_here_doc(t_token *token)
 {
+	if (!is_valid_parentheses(token)
+		|| !is_valid_operator(token)
+		|| !is_valid_cmd(token))
+		return (0);
 	if (!is_valid_file(token))
 		return (ft_perror2("Syntax error near", token->content), 0);
 	if (token->type != HERE_DOC)

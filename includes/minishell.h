@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/21 19:57:33 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 20:07:13 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,6 +114,8 @@ size_t		set_quotes_filter(t_shell *shell, t_node *node,
 int			ft_pipe(int fds[2], const char *path);
 size_t		ft_strlcpy_o(char *dst, const char *src, size_t dstsize);
 int			is_valid_file(t_token *token);
+int			is_valid_operator(t_token *token);
+int			is_valid_cmd(t_token *token);
 
 void		ft_error(t_shell *shell, t_node *node, char *msg, int status);
 void		ft_perror(char *msg);
