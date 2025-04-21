@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/21 19:28:51 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 19:33:13 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,16 @@ char	*get_path_from_env(t_shell *shell, char **envp)
 
 static char	*get_executable_from_cwd(t_shell *shell, t_command *p_cmd)
 {
-	char	cwd[PATH_MAX];
+	char	*cwd;
 	char	*tmp;
 	char	*fullpath;
 
-	if (!getcwd(cwd, sizeof(cwd)))
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
 		return (NULL);
+	ft_add_cmd_garbage(shell, cwd);
 	tmp = ft_strjoin(shell, cwd, "/");
-	if (!tmp)
-		return (NULL);
 	fullpath = ft_strjoin(shell, tmp, p_cmd->cmd);
-	if (!fullpath)
-		return (NULL);
 	if (!access(fullpath, F_OK) && !is_directory(fullpath))
 		return (fullpath);
 	return (NULL);
