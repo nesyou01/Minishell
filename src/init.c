@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:36 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 12:41:51 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 19:39:14 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static void	default_vars(t_shell *shell)
 	path = getcwd(NULL, 0);
 	if (path)
 	{
+		ft_add_cmd_garbage(shell, path);
 		ft_add_env(shell, ft_strjoin(shell, "PWD=", path));
-		free(path);
 	}
 	if (!ft_get_env(shell->env, "PATH"))
 		ft_add_env(shell, ft_strjoin(shell, "PATH=", DEFAULT_PATH));

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/20 22:41:21 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:38:17 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,17 @@
 
 static int	update_pwd_env(t_shell *shell, t_command *cmd, const char *oldpwd)
 {
-	char	cwd[PATH_MAX];
+	char	*cwd;
 
-	if (getcwd(cwd, sizeof(cwd)) == NULL)
+	cwd = getcwd(NULL, 0);
+	if (!cwd)
 	{
 		ft_perror3("cd", "error retrieving current directory", strerror(errno));
 		if (ft_strcmp(cmd->argv[1], "..") || ft_strcmp(cmd->argv[1], "."))
 			ft_add_env(shell, ft_strjoin(shell, "PWD+=/", cmd->argv[1]));
 		return (1);
 	}
+	ft_add_cmd_garbage(shell, cwd);
 	ft_add_env(shell, ft_strjoin(shell, "OLDPWD=", oldpwd));
 	ft_add_env(shell, ft_strjoin(shell, "PWD=", cwd));
 	return (0);
@@ -30,13 +32,16 @@ static int	update_pwd_env(t_shell *shell, t_command *cmd, const char *oldpwd)
 
 int	ft_cd(t_shell *shell, t_command *cmd)
 {
-	char	old_pwd[PATH_MAX];
+	char	*old_pwd;
 	char	*target_dir;
 
 	target_dir = cmd->argv[1];
 	if (!target_dir)
 		return (ft_perror2("cd", "with only a relative or absolute path"), 1);
-	if (getcwd(old_pwd, sizeof(old_pwd)) == NULL)
+	old_pwd = getcwd(NULL, 0);
+	if (old_pwd)
+		ft_add_cmd_garbage(shell, old_pwd);
+	if (!old_pwd)
 		ft_memset(old_pwd, 0, sizeof(old_pwd));
 	if (chdir(target_dir) == -1)
 		return (ft_perror3("cd", target_dir, strerror(errno)), 1);
