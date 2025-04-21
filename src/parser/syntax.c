@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/31 14:32:13 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/21 02:06:44 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 18:38:25 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,7 @@ int	syntax_validator(t_shell *shell, t_token *token)
 	{
 		if (token->type == HERE_DOC)
 		{
-			if (!token->next)
-				return (ft_perror2("Syntax error near", token->content), 258);
-			if (token->next->type != HERE_DOC_LIMITER)
+			if (!is_valid_here_doc(token))
 				return (258);
 			status = here_doc_handler(shell, token->next);
 			if (status == 99)

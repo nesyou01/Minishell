@@ -6,12 +6,11 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 21:19:59 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/20 21:20:40 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 18:39:14 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
 
 static int	next_space(char *str, int i)
 {
@@ -24,7 +23,7 @@ static int	next_space(char *str, int i)
 	return (i);
 }
 
-static void	set_quotes(t_shell *shell, t_node *node, int start, int end)
+static void	set_quotes(t_shell *shell, t_node *node, size_t start, size_t end)
 {
 	char		*result;
 	size_t		i;
@@ -60,9 +59,9 @@ static int	contains_sign(char *str, int i, int end)
 
 void	add_quotes(t_shell *shell, t_node *node)
 {
-	int	i;
-	int	start;
-	int	end;
+	size_t	i;
+	size_t	start;
+	size_t	end;
 
 	if (!node->content || !ft_strchr(node->content, '='))
 		return ;

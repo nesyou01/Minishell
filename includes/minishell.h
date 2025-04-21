@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/15 12:37:51 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/20 21:20:34 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/21 18:38:38 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,6 +125,7 @@ int			ft_any_not_tty(void);
 int			ft_is_quote(char c);
 
 void		signals_listener(int action);
+int			is_valid_here_doc(t_token *token);
 
 int			is_builtin(t_command *p_cmd);
 void		execute_builtin(t_shell *shell, t_node *node, t_command *p_cmd);
