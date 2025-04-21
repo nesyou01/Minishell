@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cmd_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/20 06:33:23 by ael-gady         ###   ########.fr       */
+/*   Updated: 2025/04/21 19:28:51 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ char	*get_cmd_path(t_shell *shell, char **paths, char *cmd)
 		executable = ft_strjoin(shell, tmp, cmd);
 		if (!executable)
 			return (NULL);
-		if (!access(executable, X_OK) && !is_directory(executable))
+		if (!access(executable, F_OK) && !is_directory(executable))
 			return (executable);
 		i++;
 	}
@@ -82,7 +82,7 @@ static char	*get_executable_from_cwd(t_shell *shell, t_command *p_cmd)
 	fullpath = ft_strjoin(shell, tmp, p_cmd->cmd);
 	if (!fullpath)
 		return (NULL);
-	if (!access(fullpath, X_OK) && !is_directory(fullpath))
+	if (!access(fullpath, F_OK) && !is_directory(fullpath))
 		return (fullpath);
 	return (NULL);
 }
