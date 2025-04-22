@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/20 21:19:59 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/21 18:39:14 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 02:07:23 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,9 @@ void	add_quotes(t_shell *shell, t_node *node)
 	size_t	start;
 	size_t	end;
 
-	if (!node->content || !ft_strchr(node->content, '='))
+	if (!node || !node->content || !ft_strchr(node->content, '='))
+		return ;
+	if (!ft_strnstr2(node->content, "export", 6))
 		return ;
 	i = 0;
 	start = 0;
