@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/10 20:39:30 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/22 01:08:21 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 01:25:10 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,13 @@ int	ft_pwd(t_shell *shell, t_command *cmd)
 
 	(void) cmd;
 	path = _pwd(shell, 1, NULL);
-	printf("%s\n", path);
+	if (path)
+		printf("%s\n", path);
+	else
+	{
+		ft_perror3("pwd", "error retrieving current directory: \
+getcwd: cannot access parent directories", strerror(errno));
+		return (1);
+	}
 	return (0);
 }

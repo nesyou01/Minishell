@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:35:36 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/22 01:02:17 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 01:24:38 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,9 @@
 
 static void	default_vars(t_shell *shell)
 {
-	_pwd(shell, 1, NULL);
+	if (!_pwd(shell, 1, NULL))
+		ft_perror3("minishell-init", "error retrieving current \
+directory: getcwd: cannot access parent directories", strerror(errno));
 	if (!ft_get_env(shell->env, "PATH"))
 		ft_add_env(shell, ft_strjoin(shell, "PATH=", DEFAULT_PATH));
 }
