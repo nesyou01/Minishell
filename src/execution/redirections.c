@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/11 07:05:33 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/21 23:04:12 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 01:13:17 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	open_files(t_shell *shell, t_file *io)
 	int		fd;
 	int		flags;
 	t_node	*expanded;
-	flags = 0;
 	t_list	*splitted;
 
+	flags = 0;
 	expanded = ft_new_node_str(shell, io->path);
 	if (ft_expand_node(shell, expanded))
 		return (-1);

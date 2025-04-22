@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/01 15:07:32 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/21 19:33:13 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 01:05:19 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,10 +74,9 @@ static char	*get_executable_from_cwd(t_shell *shell, t_command *p_cmd)
 	char	*tmp;
 	char	*fullpath;
 
-	cwd = getcwd(NULL, 0);
+	cwd = _pwd(shell, 0, NULL);
 	if (!cwd)
 		return (NULL);
-	ft_add_cmd_garbage(shell, cwd);
 	tmp = ft_strjoin(shell, cwd, "/");
 	fullpath = ft_strjoin(shell, tmp, p_cmd->cmd);
 	if (!access(fullpath, F_OK) && !is_directory(fullpath))

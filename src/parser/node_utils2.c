@@ -1,29 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   malloc_g_utils.c                                   :+:      :+:    :+:   */
+/*   node_utils2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/15 12:49:05 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/22 01:11:31 by ylagmah          ###   ########.fr       */
+/*   Created: 2025/04/22 01:12:17 by ylagmah           #+#    #+#             */
+/*   Updated: 2025/04/22 01:12:55 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void	*ft_malloc_globale(t_shell *shell, size_t size)
+t_node	*ft_new_node_str(t_shell *shell, char *str)
 {
-	void	*result;
+	t_node	*list;
 
-	result = malloc(size);
-	if (!result)
-		return (malloc_error(shell), NULL);
-	ft_add_garbage(&(shell->globale_garbage), shell, result);
-	return (result);
-}
-
-void	ft_add_globale_garbage(t_shell *shell, void *ptr)
-{
-	ft_add_garbage(&(shell->globale_garbage), shell, ptr);
+	list = (t_node *) ft_malloc(shell, sizeof(t_node));
+	list->content = str;
+	list->type = EMPTY_CMD;
+	list->next = NULL;
+	list->filter = NULL;
+	list->prev = NULL;
+	list->l_node = NULL;
+	list->r_node = NULL;
+	list->io = NULL;
+	list->taken = 0;
+	return (list);
 }
