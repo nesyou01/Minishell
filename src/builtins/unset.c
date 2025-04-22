@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/24 11:34:35 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/03/10 23:44:15 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:34:10 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static int	unset_var(t_shell *shell, char *key)
 	t_env	*tmp;
 
 	if (*key == '-' && key[1])
-		return (ft_perror2("invalid options", key), 1);
+		return (ft_perror3("unset", key, "invalid options"), 1);
 	if (!ft_is_valid_key(key))
-		return (ft_perror2("invalid identifier", key), 1);
+		return (ft_perror3("unset", key, "not a valid identifier"), 1);
 	tmp = ft_get_env(shell->env, key);
 	if (!tmp)
 		return (0);
