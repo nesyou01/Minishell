@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/12 02:59:28 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/22 02:53:41 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 08:43:12 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,43 +30,33 @@ static int	is_numeric(const char *str)
 	return (1);
 }
 
-static int	ft_parse_sign(const char **str)
+int	ft_str_to_ll(char *str, long long *result)
 {
-	int	sign;
-
-	sign = 1;
-	if (**str == '+' || **str == '-')
-	{
-		if (**str == '-')
-			sign = -1;
-		(*str)++;
-	}
-	return (sign);
-}
-
-int	ft_str_to_ll(const char *str, long long *result)
-{
-	long long	tmp;
 	int			sign;
+	long long	res;
+	long long	tmp;
+	int			i;
 
-	tmp = 0;
 	*result = 0;
-	if (!str || !*str)
-		return (0);
-	sign = ft_parse_sign(&str);
-	if (!*str)
-		return (0);
-	while (*str)
+	res = 0;
+	tmp = 0;
+	sign = 1;
+	i = 0;
+	if (str[0] == '-' && ft_strcmp(str, "-9223372036854775808") == 0)
 	{
-		if (!ft_isdigit(*str))
-			return (0);
-		if ((sign == 1 && tmp > (LLONG_MAX - (*str - '0')) / 10)
-			|| (sign == -1 && tmp > (-(LLONG_MIN + (*str - '0'))) / 10))
-			return (0);
-		tmp = tmp * 10 + (*str++ - '0');
+		*result = LLONG_MIN;
+		return (1);
 	}
-	*result = tmp * sign;
-	return (1);
+	if (str[i] == '+' || str[i] == '-')
+		sign = 44 - str[i++];
+	while (str[i] && ft_isdigit(str[i]))
+	{
+		tmp = res * 10 + (str[i++] - '0');
+		if (tmp < res)
+			return (0);
+		res = tmp;
+	}
+	return (*result = res * sign, 1);
 }
 
 static void	ft_close_exit(t_shell *shell, t_node *node, int *fd, int status)

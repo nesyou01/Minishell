@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
+/*   By: ael-gady <ael-gady@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/22 05:26:49 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 06:56:38 by ael-gady         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int	update_pwd_env(t_shell *shell, t_command *cmd, const char *oldpwd)
 			cwd = _pwd(shell, 0, NULL);
 			if (cwd)
 				_pwd(shell, 1, ft_strjoin(shell, cwd,
-					ft_strjoin(shell, "/", cmd->argv[1])));
+						ft_strjoin(shell, "/", cmd->argv[1])));
 			else
 				_pwd(shell, 1, ft_strjoin(shell, cwd, cmd->argv[1]));
 		}
