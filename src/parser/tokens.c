@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:45 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/22 15:16:11 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 15:20:39 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ static int	ft_get_token_end(char *str)
 	i = 0;
 	first = ft_strchr(SEPECIAL_CHARS, *str);
 	while (str[i] && !ft_isspace(str[i])
-		&& ((first && str[i] == *str)
+		&& ((first && str[i] == *str && i < 2)
 		|| (!ft_strchr(SEPECIAL_CHARS, str[i]) && !first)))
 	{
 		if (str[i] == '(' || str[i] == ')')
