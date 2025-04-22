@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 14:06:49 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/22 04:46:12 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 05:06:50 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,7 @@ char	*ft_read_next_line(int fd, char **holder)
 	ssize_t		read_bytes;
 	char		*buffer;
 
+	read_bytes = 0;
 	buffer = (char *) malloc((((size_t) BUFFER_SIZE) + 1) * sizeof(char));
 	if (!buffer)
 		return (NULL);

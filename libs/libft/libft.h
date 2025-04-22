@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/21 21:19:40 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/22 04:50:17 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 05:04:29 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ typedef struct s_list
 }	t_list;
 
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1337
+#  define BUFFER_SIZE 30
 # endif
 
 int		ft_isalpha(int c);
