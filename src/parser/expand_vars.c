@@ -6,21 +6,25 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/17 18:16:19 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 01:57:42 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static char	*join_all(t_shell *shell, char *s1, t_env *env, char *s3)
+static char	*join_all(t_shell *shell, char *s1, t_env *env, int trim)
 {
 	char	*result;
 
 	if (env)
-		result = ft_strjoin(shell, s1, ft_trim_var(shell, env->value));
+	{
+		if (trim)
+			result = ft_strjoin(shell, s1, ft_trim_var(shell, env->value));
+		else
+			result = ft_strjoin(shell, s1, env->value);
+	}
 	else
 		result = s1;
-	result = ft_strjoin(shell, result, s3);
 	return (result);
 }
 
@@ -30,7 +34,7 @@ static char	*join_status_code(t_shell *shell, char *start, char *end)
 				start, ft_itoa(shell, exit_status(0, 0))), end));
 }
 
-static char	*expand_var(t_shell *shell, char *str, char *sign)
+static char	*expand_var(t_shell *shell, char *str, char *sign, int trim)
 {
 	size_t			total;
 	char			*start;
@@ -49,10 +53,10 @@ static char	*expand_var(t_shell *shell, char *str, char *sign)
 	if (sign[1] == '?')
 		return (join_status_code(shell, start, end));
 	env = ft_get_env(shell->env, ft_substr(shell, sign, 1, i));
-	return (join_all(shell, start, env, end));
+	return (ft_strjoin(shell, join_all(shell, start, env, trim), end));
 }
 
-char	*ft_expand_all_vars(t_shell *shell,	char *str)
+char	*ft_expand_all_vars(t_shell *shell,	char *str, int trim)
 {
 	char			*sign;
 
@@ -65,7 +69,7 @@ char	*ft_expand_all_vars(t_shell *shell,	char *str)
 		if (!sign[1] || sign[1] == '?'
 			|| (!ft_isdigit(sign[1]) && ft_isvalid_var(sign[1])))
 		{
-			str = expand_var(shell, str, sign);
+			str = expand_var(shell, str, sign, trim);
 			sign = str;
 		}
 		else

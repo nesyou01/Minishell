@@ -6,13 +6,13 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:27:00 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/21 23:02:06 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 02:02:09 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-static int	expand_var(t_shell *shell, t_node *node, int start)
+static int	expand_var(t_shell *shell, t_node *node, int start, int trim)
 {
 	int		end;
 	char	*var;
@@ -31,7 +31,7 @@ static int	expand_var(t_shell *shell, t_node *node, int start)
 		node->filter = ft_strjoin(shell, node->filter, "0");
 		return (1);
 	}
-	expanded = ft_expand_all_vars(shell, var);
+	expanded = ft_expand_all_vars(shell, var, trim);
 	end_str = ft_substr(shell, node->content, end,
 			ft_strlen(node->content) - end);
 	node->content = ft_strjoin(shell,
@@ -79,7 +79,7 @@ static int	expand_node_vars(t_shell *shell, t_node *node)
 		else if (node->content[i] == '\'')
 			i += remove_single_quotes(shell, node, i);
 		else if (node->content[i] == '$')
-			i += expand_var(shell, node, i);
+			i += expand_var(shell, node, i, 1);
 		else
 		{
 			if (node->content[i] == '*')
