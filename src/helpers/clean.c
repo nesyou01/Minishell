@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/13 16:28:02 by ylagmah           #+#    #+#             */
-/*   Updated: 2025/04/18 20:32:56 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 04:59:56 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ void	ft_close_all(t_node *node)
 		while (tmp)
 		{
 			if (tmp->fd != -1)
+			{
 				close(tmp->fd);
+				tmp->fd = -1;
+			}
 			tmp = tmp->next;
 		}
 		node = node->next;
