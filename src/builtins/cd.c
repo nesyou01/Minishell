@@ -6,7 +6,7 @@
 /*   By: ylagmah <ylagmah@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/09 02:32:13 by ael-gady          #+#    #+#             */
-/*   Updated: 2025/04/22 01:13:48 by ylagmah          ###   ########.fr       */
+/*   Updated: 2025/04/22 05:26:49 by ylagmah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,14 @@ static int	update_pwd_env(t_shell *shell, t_command *cmd, const char *oldpwd)
 	{
 		ft_perror3("cd", "error retrieving current directory", strerror(errno));
 		if (ft_strcmp(cmd->argv[1], "..") || ft_strcmp(cmd->argv[1], "."))
-			_pwd(shell, 1, ft_strjoin(shell, "PWD=",
-					ft_strjoin(shell, _pwd(shell, 0, NULL),
-						ft_strjoin(shell, "/", cmd->argv[1]))));
+		{
+			cwd = _pwd(shell, 0, NULL);
+			if (cwd)
+				_pwd(shell, 1, ft_strjoin(shell, cwd,
+					ft_strjoin(shell, "/", cmd->argv[1])));
+			else
+				_pwd(shell, 1, ft_strjoin(shell, cwd, cmd->argv[1]));
+		}
 		return (1);
 	}
 	ft_add_env(shell, ft_strjoin(shell, "OLDPWD=", oldpwd));
